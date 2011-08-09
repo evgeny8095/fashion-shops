@@ -10,10 +10,11 @@
 
 @interface ItemsViewController : UIViewController{
     IBOutlet UILabel *itemLabel;
+    NSDictionary *itemDict;
 }
 
 @property (nonatomic, retain) IBOutlet UILabel *itemLabel;
 
--(IBAction)goToItem1;
+-(IBAction)gotoItem:(id)sender;
 
 @end

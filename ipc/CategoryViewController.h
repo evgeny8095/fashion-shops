@@ -10,12 +10,11 @@
 
 @interface CategoryViewController : UIViewController{
     IBOutlet UINavigationController *navController;
-    IBOutlet UILabel *cateLabel;
+    NSDictionary *categoryDict;
 }
 
 @property (nonatomic, retain) IBOutlet UINavigationController *navController;
-@property (nonatomic, retain) IBOutlet UILabel *cateLabel;
 
--(IBAction)gotoCategory1;
+-(IBAction)gotoCategory:(id)sender;
 -(IBAction)goBack;
 @end

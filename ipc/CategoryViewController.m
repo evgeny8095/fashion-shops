@@ -11,15 +11,21 @@
 
 @implementation CategoryViewController
 
-@synthesize navController, cateLabel;
+@synthesize navController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+
     }
     return self;
+}
+
+- (void)dealloc
+{
+    [categoryDict release];
+    [super dealloc];
 }
 
 - (void)didReceiveMemoryWarning
@@ -36,6 +42,34 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    NSArray *categoryLabel = [[NSArray alloc] initWithObjects:@"Thoi trang nu", @"Nu Trang", @"Cong So", @"Do tam", @"Phu trang", @"Trang phuc bau", @"Eye Wear", @"Foot Wear", nil];
+    NSArray *categoryImage = [[NSArray alloc] initWithObjects:@"image1.png", @"image2.png", @"image3.png", @"image4.png", @"image5.png", @"image6.png", @"image7.png", @"image8.png", nil];
+    categoryDict = [[NSDictionary alloc] initWithObjects:categoryImage forKeys:categoryLabel];
+    
+    [categoryLabel release];
+    [categoryImage release];
+    NSInteger x = 225;
+    NSInteger y = 200;
+    for (id key in categoryDict){
+        UIButton *catButton = [[UIButton alloc] initWithFrame:CGRectMake(x, y, 128, 128)];
+        UILabel *catLabel = [[UILabel alloc] initWithFrame:CGRectMake(x, y+133, 128, 15)];
+        [catLabel setText:key];
+        UIImage *catButtonImage = [UIImage imageNamed:[categoryDict objectForKey:key]];
+        [catButton addTarget:self action:@selector(gotoCategory:) forControlEvents:UIControlEventTouchUpInside];
+        [catButton setImage:catButtonImage forState:normal];
+        [catButton setTitle:key forState:normal];
+        [catButton setTitleColor:[UIColor blackColor] forState:normal];
+        [catButtonImage release];
+        [self.view addSubview:catButton];
+        [self.view addSubview:catLabel];
+        [catButton release];
+        [catLabel release];
+        x = x + 20 + 128;
+        if (x > 700){
+            x = 225;
+            y = y + 40 + 128; 
+        }            
+    }
 }
 
 - (void)viewDidUnload
@@ -57,14 +91,16 @@
 	[UIView setAnimationTransition:transition forView:self.view cache:YES];
 }
 
-- (IBAction)gotoCategory1{
+- (IBAction)gotoCategory:(id)sender{
+    NSString *title = ((UIButton *) sender).titleLabel.text;
+    
     navController = [[UINavigationController alloc] init];
     
     [navController.view setFrame:CGRectMake(0, 0, 1024, 748)];
     
     CatalogueViewController *catalogueViewController = [[CatalogueViewController alloc] init];
     
-    catalogueViewController.navigationItem.title = cateLabel.text;
+    catalogueViewController.navigationItem.title = title;
     
     catalogueViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Category" style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
     

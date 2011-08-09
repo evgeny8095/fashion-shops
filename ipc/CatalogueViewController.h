@@ -10,10 +10,13 @@
 
 @interface CatalogueViewController : UIViewController{
     IBOutlet UILabel *catelogueLabel;
+    NSDictionary *catelogueDict;
+    IBOutlet UIScrollView *scrollView;
 }
 
 @property (nonatomic, retain) IBOutlet UILabel *catelogueLabel;
+@property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
 
--(IBAction)goToCatalogue1;
+-(IBAction)gotoCatalogue:(id)sender;
 
 @end
