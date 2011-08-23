@@ -48,11 +48,12 @@
         UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(x, y, 308, 100)];
         [button addTarget:self action:@selector(gotoSubCatalogue:) forControlEvents:UIControlEventTouchUpInside];
         [button setImage:image forState:normal];
+        [button setTitle:[subCategoryArray objectAtIndex:i] forState:normal];
         [image release];
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(x, y+80, 308, 20)];
         [label setText:[subCategoryArray objectAtIndex:i]];
-        [label setAlpha:0.7];
-        [label setTextAlignment:UITextAlignmentRight];
+        [label setAlpha:0.5];
+        [label setTextAlignment:UITextAlignmentLeft];
         [scrollView addSubview:button];
         [scrollView addSubview:label];
         [button release];
@@ -75,7 +76,7 @@
     scrollView.contentSize = CGSizeMake(scrollWidth, 700);
     scrollView.showsHorizontalScrollIndicator = YES;
     scrollView.showsVerticalScrollIndicator = NO;
-    scrollView.backgroundColor = [UIColor orangeColor];
+    scrollView.backgroundColor = [UIColor grayColor];
     [self.view addSubview:scrollView];
     [subCategoryArray release];
     [subImageArray release];
@@ -97,16 +98,12 @@
 -(IBAction)gotoSubCatalogue:(id)sender{
     NSString *title = ((UIButton *) sender).titleLabel.text;
     
-    //ItemsViewController *itemsViewController = [[ItemsViewController alloc] init];
     ProductSliderViewController *productSliderViewController = [[ProductSliderViewController alloc] init];
-    
-    //itemsViewController.navigationItem.title = title;
+
     productSliderViewController.navigationItem.title = title;
-    
-    //[self.navigationController pushViewController:itemsViewController animated:YES];
+
     [self.navigationController pushViewController:productSliderViewController animated:YES];
-    
-    //[itemsViewController release];
+
     [productSliderViewController release];
 }
 
