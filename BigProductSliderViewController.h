@@ -8,9 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BigProductSliderViewController : UIViewController{
-    UIScrollView *productBigSlider;
-}
+@interface BigProductSliderViewController : UIViewController
 
--(void)revealDetails:(id)sender;
 @end

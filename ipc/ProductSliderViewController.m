@@ -64,7 +64,7 @@
         UIButton *smallButton = [[UIButton alloc] initWithFrame:CGRectMake(sx, sy, 225, 290)];
         [smallButton setImage:image forState:normal];
         [smallButton setTitle:[productArray objectAtIndex:i] forState:normal];
-        [smallButton addTarget:self action:@selector(swapViewSmallToBig:) forControlEvents:UIControlEventTouchUpInside];
+        [smallButton addTarget:self action:@selector(gotoProductDetails:) forControlEvents:UIControlEventTouchUpInside];
         [productSmallSlider addSubview:smallButton];
         [smallButton release];
         
@@ -115,6 +115,10 @@
 - (IBAction)swapViewBigToSmall:(id)sender{
     [productBigSlider removeFromSuperview];
     [self.view addSubview:productSmallSlider];
+}
+
+- (IBAction)gotoProductDetails:(id)sender{
+    
 }
 
 @end

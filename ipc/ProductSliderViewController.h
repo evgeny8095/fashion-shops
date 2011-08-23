@@ -15,5 +15,6 @@
 }
 -(IBAction)swapViewSmallToBig:(id)sender;
 -(IBAction)swapViewBigToSmall:(id)sender;
+- (IBAction)gotoProductDetails:(id)sender;
 
 @end
