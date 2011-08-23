@@ -12,5 +12,6 @@
     UIScrollView *productBigSlider;
 }
 
--(void)revealDetails:(id)sender;
+- (void)revealDetails:(id)sender;
+- (void)gotoDetails:(id)sender;
 @end

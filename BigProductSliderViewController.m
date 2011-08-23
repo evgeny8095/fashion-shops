@@ -7,6 +7,7 @@
 //
 
 #import "BigProductSliderViewController.h"
+#import "ProductsDetailsSliderViewController.h"
 
 @implementation BigProductSliderViewController
 
@@ -44,23 +45,30 @@
     for (NSInteger i = 0; i < productArray.count; i++) {
         //image
         UIImage *image = [UIImage imageNamed:[imageArray objectAtIndex:i]];
-        NSInteger px = bx + (1024-image.size.width)/2;
         
+        ProductsDetailsSliderViewController *bigView = [[ProductsDetailsSliderViewController alloc] initWithImage:image hasName:[productArray objectAtIndex:i] hasPrice:@"$1000" hasDesc:@"san pham mau"];
+
+        [bigView.view setFrame:CGRectMake(bx, 0, 1024, 655)];
+        
+        [productBigSlider addSubview:bigView.view];
+        //[bigView release];
+        
+        //NSInteger px = bx + (1024-image.size.width)/2;        
         //big slider
-        UIButton *bigButton = [[UIButton alloc] initWithFrame:CGRectMake(px, by, image.size.width, image.size.height)];
+        //UIButton *bigButton = [[UIButton alloc] initWithFrame:CGRectMake(px, by, image.size.width, image.size.height)];
         //[bigButton setImage:image forState:normal];
-        [bigButton setBackgroundImage:image forState:normal];
-        [image release];
+        //[bigButton setBackgroundImage:image forState:normal];
+        //[image release];
         //[bigButton setTitle:[productArray objectAtIndex:i] forState:normal];
-        [bigButton addTarget:self action:@selector(revealDetails:) forControlEvents:UIControlEventTouchUpInside];
-        [productBigSlider addSubview:bigButton];
-        [bigButton release];
+        //[bigButton addTarget:self action:@selector(revealDetails:) forControlEvents:UIControlEventTouchUpInside];
+        //[productBigSlider addSubview:bigButton];
+        //[bigButton release];
         
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(bx+522, 40, 100, 40)];
-        [label setText:[productArray objectAtIndex:i]];
-        [label setHidden:YES];
-        [productBigSlider addSubview:label];
-        [label release];
+        //UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(bx+522, 40, 100, 40)];
+        //[label setText:[productArray objectAtIndex:i]];
+        //[label setHidden:YES];
+        //[productBigSlider addSubview:label];
+        //[label release];
         
         bx = bx + 1024;
     }
@@ -89,7 +97,10 @@
     NSInteger nx = (NSInteger) button.frame.origin.x % 1024;
     NSInteger px = button.frame.origin.x-nx;
     NSInteger margin = (512-button.frame.size.width)/2;
-    [button setFrame:CGRectMake(px+margin, 0, button.frame.size.width, button.frame.size.height)];
+    [button setFrame:CGRectMake(px+margin, 0, button.frame.size.width, button.frame.size.height)];    
+}
+
+- (void)gotoDetails:(id)sender{
     
 }
 

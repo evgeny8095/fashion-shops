@@ -43,7 +43,7 @@
     [bigButton setImage:bigHomeImage forState:normal];
     [bigHomeImage release];
     UILabel *bigLable = [[UILabel alloc] initWithFrame:CGRectMake(0, 659, 512, 40)];
-    [bigLable setText:@"BO SUU TAP"];
+    [bigLable setText:@"COLLECTIONS"];
     [bigLable setTextAlignment:UITextAlignmentCenter];
     [bigLable setFont:[UIFont systemFontOfSize:30.0]];
     [bigLable setTextColor:[UIColor whiteColor]];
@@ -58,11 +58,11 @@
     
     UIButton *smallButton1 = [[UIButton alloc] initWithFrame:CGRectMake(512, 44, 256, 327.5)];
     [smallButton1 setImage:smallHomeImage1 forState:normal];
-    [smallButton1 setTitle:@"SP MOI" forState:normal];
+    [smallButton1 setTitle:@"NEW ARRIVAL" forState:normal];
     [smallButton1 addTarget:self action:@selector(gotoCategory:) forControlEvents:UIControlEventTouchUpInside];
     [smallHomeImage1 release];
     UILabel *smallLable1 = [[UILabel alloc] initWithFrame:CGRectMake(512, 331.5, 256, 40)];
-    [smallLable1 setText:@"SP Moi"];
+    [smallLable1 setText:@"NEW ARRIVAL"];
     [smallLable1 setTextAlignment:UITextAlignmentCenter];
     [smallLable1 setFont:[UIFont systemFontOfSize:30.0]];
     [smallLable1 setTextColor:[UIColor whiteColor]];
@@ -84,11 +84,11 @@
     
     UIButton *smallButton3 = [[UIButton alloc] initWithFrame:CGRectMake(512, 371.5, 256, 327.5)];
     [smallButton3 setImage:smallHomeImage3 forState:normal];
-    [smallButton3 setTitle:@"TT NU" forState:normal];
+    [smallButton3 setTitle:@"FEMALE" forState:normal];
     [smallHomeImage3 release];
     [smallButton3 addTarget:self action:@selector(gotoCategory:) forControlEvents:UIControlEventTouchUpInside];
     UILabel *smallLable3 = [[UILabel alloc] initWithFrame:CGRectMake(512, 659, 256, 40)];
-    [smallLable3 setText:@"TT Nu"];
+    [smallLable3 setText:@"FEMALE"];
     [smallLable3 setTextAlignment:UITextAlignmentCenter];
     [smallLable3 setFont:[UIFont systemFontOfSize:30.0]];
     [smallLable3 setTextColor:[UIColor whiteColor]];
@@ -97,11 +97,11 @@
     
     UIButton *smallButton4 = [[UIButton alloc] initWithFrame:CGRectMake(768, 371.4, 256, 327.5)];
     [smallButton4 setImage:smallHomeImage4 forState:normal];
-    [smallButton4 setTitle:@"TT NAM" forState:normal];
+    [smallButton4 setTitle:@"MALE" forState:normal];
     [smallHomeImage4 release];
     [smallButton4 addTarget:self action:@selector(gotoCategory:) forControlEvents:UIControlEventTouchUpInside];
     UILabel *smallLable4 = [[UILabel alloc] initWithFrame:CGRectMake(768, 659, 256, 40)];
-    [smallLable4 setText:@"TT Nam"];
+    [smallLable4 setText:@"MALE"];
     [smallLable4 setTextAlignment:UITextAlignmentCenter];
     [smallLable4 setFont:[UIFont systemFontOfSize:30.0]];
     [smallLable4 setTextColor:[UIColor whiteColor]];

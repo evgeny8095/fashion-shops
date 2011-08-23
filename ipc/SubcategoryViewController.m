@@ -34,34 +34,38 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    NSArray *subCategoryArray = [[NSArray alloc] initWithObjects:@"All", @"Somi", @"Thun", @"Do Tam", @"Ao Kieu", @"Quan Short", @"Vay Dam", @"Jean", @"Underwear", @"Cavat Khan", @"Quan Tay", @"The Thao", @"Dam Bau", @"Mat Kinh", @"Trang Suc", @"Phu Kien", @"Vi bop", @"Dong Ho", @"Tui Sach", @"Thac Lung", nil];
-    NSArray *subImageArray = [[NSArray alloc] initWithObjects:@"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", nil];
+    NSArray *subCategoryArray = [[NSArray alloc] initWithObjects:@"  All", @"  Somi", @"  Thun", @"  Do Tam", @"  Ao Kieu", @"  Quan Short", @"  Vay Dam", @"  Jean", @"  Underwear", @"  Cavat Khan", @"  Quan Tay", @"  The Thao", @"  Dam Bau", @"  Mat Kinh", @"  Trang Suc", @"  Phu Kien", @"  Vi bop", @"  Dong Ho", @"  Tui Sach", @"  Thac Lung", nil];
+    NSArray *subImageArray = [[NSArray alloc] initWithObjects:@"sub_category1.png", @"sub_category2.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", nil];
     
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.view.frame];
     
     BOOL overLoad = NO;
     NSInteger x = 25;
-    NSInteger y = 25;
+    NSInteger y = 45;
     NSInteger scrollWidth = 0;
     for (NSInteger i = 0; i < subCategoryArray.count; i++) {
         UIImage *image = [UIImage imageNamed:[subImageArray objectAtIndex:i]];
         UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(x, y, 308, 100)];
         [button addTarget:self action:@selector(gotoSubCatalogue:) forControlEvents:UIControlEventTouchUpInside];
         [button setImage:image forState:normal];
+        [button setTitle:[subCategoryArray objectAtIndex:i] forState:normal];
         [image release];
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(x, y+80, 308, 20)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(x, y+100, 308, 30)];
         [label setText:[subCategoryArray objectAtIndex:i]];
-        [label setAlpha:0.7];
-        [label setTextAlignment:UITextAlignmentRight];
+        //[label setAlpha:0.7];
+        [label setTextAlignment:UITextAlignmentLeft];
+        [label setBackgroundColor:[UIColor blackColor]];
+        [label setTextColor:[UIColor whiteColor]];
+        [label setFont:[UIFont fontWithName: @"Helvetica" size: 32]];
         [scrollView addSubview:button];
         [scrollView addSubview:label];
         [button release];
         [label release];
         
-        y = y + 25 + 100;
+        y = y + 45 + 100;
         overLoad = YES;
         if (y > 600){
-            y = 25;
+            y = 45;
             x = x + 308 + 25;
             overLoad = NO;
         }
@@ -75,7 +79,7 @@
     scrollView.contentSize = CGSizeMake(scrollWidth, 700);
     scrollView.showsHorizontalScrollIndicator = YES;
     scrollView.showsVerticalScrollIndicator = NO;
-    scrollView.backgroundColor = [UIColor orangeColor];
+    scrollView.backgroundColor = [UIColor grayColor];
     [self.view addSubview:scrollView];
     [subCategoryArray release];
     [subImageArray release];
@@ -97,16 +101,12 @@
 -(IBAction)gotoSubCatalogue:(id)sender{
     NSString *title = ((UIButton *) sender).titleLabel.text;
     
-    //ItemsViewController *itemsViewController = [[ItemsViewController alloc] init];
     ProductSliderViewController *productSliderViewController = [[ProductSliderViewController alloc] init];
     
-    //itemsViewController.navigationItem.title = title;
     productSliderViewController.navigationItem.title = title;
     
-    //[self.navigationController pushViewController:itemsViewController animated:YES];
     [self.navigationController pushViewController:productSliderViewController animated:YES];
     
-    //[itemsViewController release];
     [productSliderViewController release];
 }
 
