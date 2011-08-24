@@ -7,6 +7,8 @@
 //
 
 #import "ProductsDetailsSliderViewController.h"
+#import "WebViewController.h"
+#import "SubcategoryViewController.h"
 
 @implementation ProductsDetailsSliderViewController
 @synthesize image;
@@ -73,6 +75,13 @@ bool mode = YES;
     [labelDesc setText:desc];
     [labelDesc setHidden:YES];
     [self.view addSubview:labelDesc];
+    
+    buy = [[UIButton alloc] initWithFrame:CGRectMake(900, 600, 50, 30)];
+    [buy addTarget:self action:@selector(gotoShop:) forControlEvents:UIControlEventTouchUpInside];
+    [buy setHidden:YES];
+    [buy setBackgroundColor:[UIColor blackColor]];
+    [buy setTitle:@"Buy" forState:normal];
+    [self.view addSubview:buy];
 }
 
 - (void)viewDidUnload
@@ -98,6 +107,7 @@ bool mode = YES;
         [labelName setHidden:NO];
         [labelPrice setHidden:NO];
         [labelDesc setHidden:NO];
+        [buy setHidden:NO];
         mode = NO;
     }else{
         NSInteger margin = 512-(button.frame.size.width/2);
@@ -105,8 +115,23 @@ bool mode = YES;
         [labelName setHidden:YES];
         [labelPrice setHidden:YES];
         [labelDesc setHidden:YES];
+        [buy setHidden:YES];
         mode = YES;
     }
+}
+
+- (void)buy:(id)sender{
+    
+}
+
+- (IBAction)gotoShop:(id)sender{
+    WebViewController *webViewController = [[WebViewController alloc] init];
+    [webViewController.navigationController setTitle:@"Web"];
+//    UIViewController *topVC = (UIViewController *)self.parentViewController.navigationController.delegate;
+//	[topVC.navigationController pushViewController:webViewController animated:YES];
+//    [self.parentViewController.parentViewController.navigationController pushViewController:webViewController animated:YES];
+//    [webViewController release];
+    
 }
 
 @end

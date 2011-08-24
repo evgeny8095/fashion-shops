@@ -19,6 +19,7 @@
     UILabel *labelName;
     UILabel *labelPrice;
     UILabel *labelDesc;
+    NSString *url;
 }
 
 @property (nonatomic, retain) UIImage *image;
@@ -28,5 +29,7 @@
 
 - (id)initWithImage:(UIImage *)imagex hasName:(NSString *)strName hasPrice:(NSString *)strPrice hasDesc:(NSString *)strDesc;
 - (void)revealDetails:(id)sender;
+- (void)buy:(id)sender;
+- (IBAction)gotoShop:(id)sender;
 
 @end

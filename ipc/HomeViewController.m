@@ -148,6 +148,7 @@
     NSString *title = ((UIButton *) sender).titleLabel.text;
     
     navController = [[UINavigationController alloc] init];
+    navController.delegate=self;
     
     [navController.view setFrame:CGRectMake(0, 0, 1024, 748)];
     
@@ -180,5 +181,14 @@
 	[UIView setAnimationTransition:transition forView:self.view cache:YES];
     [UIView commitAnimations];
 }
+
+
+//- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
+//    NSLog(@"didshow");
+//}
+
+//- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
+//    NSLog(@"didshow");
+//}
 
 @end

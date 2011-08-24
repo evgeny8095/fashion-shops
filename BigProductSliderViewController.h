@@ -8,10 +8,26 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BigProductSliderViewController : UIViewController{
+@interface BigProductSliderViewController : UIViewController <UIScrollViewDelegate>{
     UIScrollView *productBigSlider;
+    UIScrollView *scrollView;
+	UIPageControl *pageControl;
+    NSMutableArray *viewControllers;
+    NSArray *productArray;
+    NSArray *imageArray;
+    BOOL pageControlUsed;
+    NSInteger numberOfPages;
+    NSInteger cpage;
 }
+
+@property (nonatomic, retain) IBOutlet UIScrollView *productBigSlider;
+@property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, retain) IBOutlet UIPageControl *pageControl;
+
+@property (nonatomic, retain) NSMutableArray *viewControllers;
 
 - (void)revealDetails:(id)sender;
 - (void)gotoDetails:(id)sender;
+- (IBAction)changePage:(id)sender;
+- (id)initWithPage:(int)page;
 @end

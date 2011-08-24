@@ -30,6 +30,8 @@
 		5A9C86B613E8032800DC35C9 /* SubcategoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A9C86B413E8032800DC35C9 /* SubcategoryViewController.xib */; };
 		5ABE446613E2B25E00D94130 /* 2308.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5ABE446513E2B25E00D94130 /* 2308.jpg */; };
 		5AD6E88114048CD500620CAA /* sub_category3.png in Resources */ = {isa = PBXBuildFile; fileRef = 5AD6E88014048CD500620CAA /* sub_category3.png */; };
+		5AD6E88E1404E7D300620CAA /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD6E88C1404E7D200620CAA /* WebViewController.m */; };
+		5AD6E88F1404E7D300620CAA /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5AD6E88D1404E7D300620CAA /* WebViewController.xib */; };
 		5ADB147414036173009628FC /* BigProductSliderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ADB147214036173009628FC /* BigProductSliderViewController.m */; };
 		5ADB147514036173009628FC /* BigProductSliderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5ADB147314036173009628FC /* BigProductSliderViewController.xib */; };
 		5ADB1479140381DE009628FC /* ProductsDetailsSliderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ADB1477140381DE009628FC /* ProductsDetailsSliderViewController.m */; };
@@ -104,6 +106,9 @@
 		5A9C86B413E8032800DC35C9 /* SubcategoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubcategoryViewController.xib; sourceTree = "<group>"; };
 		5ABE446513E2B25E00D94130 /* 2308.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2308.jpg; sourceTree = "<group>"; };
 		5AD6E88014048CD500620CAA /* sub_category3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sub_category3.png; sourceTree = "<group>"; };
+		5AD6E88B1404E7D100620CAA /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		5AD6E88C1404E7D200620CAA /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
+		5AD6E88D1404E7D300620CAA /* WebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebViewController.xib; sourceTree = "<group>"; };
 		5ADB147114036173009628FC /* BigProductSliderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BigProductSliderViewController.h; path = ../BigProductSliderViewController.h; sourceTree = "<group>"; };
 		5ADB147214036173009628FC /* BigProductSliderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BigProductSliderViewController.m; path = ../BigProductSliderViewController.m; sourceTree = "<group>"; };
 		5ADB147314036173009628FC /* BigProductSliderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BigProductSliderViewController.xib; path = ../BigProductSliderViewController.xib; sourceTree = "<group>"; };
@@ -229,6 +234,9 @@
 				5ADB1476140381DE009628FC /* ProductsDetailsSliderViewController.h */,
 				5ADB1477140381DE009628FC /* ProductsDetailsSliderViewController.m */,
 				5ADB1478140381DE009628FC /* ProductsDetailsSliderViewController.xib */,
+				5AD6E88B1404E7D100620CAA /* WebViewController.h */,
+				5AD6E88C1404E7D200620CAA /* WebViewController.m */,
+				5AD6E88D1404E7D300620CAA /* WebViewController.xib */,
 				5AF4040913DD6F310023E887 /* CategoryViewController.h */,
 				5AF4040A13DD6F310023E887 /* CategoryViewController.m */,
 				5AF4040B13DD6F310023E887 /* CategoryViewController.xib */,
@@ -390,6 +398,7 @@
 				5ADB147C14038DDE009628FC /* san_pham1a.png in Resources */,
 				5ADB14821403BAE3009628FC /* sub_category2.png in Resources */,
 				5AD6E88114048CD500620CAA /* sub_category3.png in Resources */,
+				5AD6E88F1404E7D300620CAA /* WebViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,6 +445,7 @@
 				5AF9528513E8EFE800BF9D87 /* ProductSliderViewController.m in Sources */,
 				5ADB147414036173009628FC /* BigProductSliderViewController.m in Sources */,
 				5ADB1479140381DE009628FC /* ProductsDetailsSliderViewController.m in Sources */,
+				5AD6E88E1404E7D300620CAA /* WebViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

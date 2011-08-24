@@ -65,6 +65,7 @@
         UIButton *smallButton = [[UIButton alloc] initWithFrame:CGRectMake(sx, sy, 225, 290)];
         [smallButton setImage:image forState:normal];
         [smallButton setTitle:self.navigationItem.title forState:normal];
+        [smallButton setTag:i];
         [smallButton addTarget:self action:@selector(gotoProductDetails:) forControlEvents:UIControlEventTouchUpInside];
         [productSmallSlider addSubview:smallButton];
         [smallButton release];
@@ -120,11 +121,12 @@
 
 - (IBAction)gotoProductDetails:(id)sender{
     NSString *title = ((UIButton *) sender).titleLabel.text;
+    NSInteger page = ((UIButton *) sender).tag;
     
-    BigProductSliderViewController *bigProductSliderViewController = [[BigProductSliderViewController alloc] init];
+    BigProductSliderViewController *bigProductSliderViewController = [[BigProductSliderViewController alloc] initWithPage:page];
     
     bigProductSliderViewController.navigationItem.title = title;
-    bigProductSliderViewController.navigationController.navigationBar.backItem.title = @"All";
+    [bigProductSliderViewController.navigationItem.backBarButtonItem setTitle:@"ALL"];
     
     [self.navigationController pushViewController:bigProductSliderViewController animated:YES];
     
