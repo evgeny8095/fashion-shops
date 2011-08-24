@@ -37,6 +37,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
     // The left big button
     UIImage *bigHomeImage = [UIImage imageNamed:@"big_home.jpg"];
     UIButton *bigButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 44, 512, 655)];
@@ -152,27 +153,32 @@
     
     [navController.navigationBar setBarStyle:UIBarStyleBlack];
     
-    //CatalogueViewController *catalogueViewController = [[CatalogueViewController alloc] init];
     SubcategoryViewController *subCategoryViewController = [[SubcategoryViewController alloc] init];
     
-    //catalogueViewController.navigationItem.title = title;
     subCategoryViewController.navigationItem.title = title;
     
-    //catalogueViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"HOME" style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
     subCategoryViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"HOME" style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
     
-    //[navController pushViewController:catalogueViewController animated:YES];
     [navController pushViewController:subCategoryViewController animated:YES];
     
     [self.view addSubview:navController.view];
     
-    //[catalogueViewController release];
+    [self flipForDuration:0.75 withAnimation:UIViewAnimationTransitionFlipFromLeft];
+    
     [subCategoryViewController release];
 }
 
 -(IBAction)goBack{
     [navController.view removeFromSuperview];
+    [self flipForDuration:0.75 withAnimation:UIViewAnimationTransitionFlipFromRight];
     [navController release];
+}
+
+- (void)flipForDuration:(NSTimeInterval)time withAnimation:(UIViewAnimationTransition)transition{
+    [UIView beginAnimations:Nil context:NULL];
+	[UIView setAnimationDuration:time];
+	[UIView setAnimationTransition:transition forView:self.view cache:YES];
+    [UIView commitAnimations];
 }
 
 @end

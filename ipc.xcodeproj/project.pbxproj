@@ -29,6 +29,7 @@
 		5A9C86B513E8032800DC35C9 /* SubcategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9C86B313E8032800DC35C9 /* SubcategoryViewController.m */; };
 		5A9C86B613E8032800DC35C9 /* SubcategoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A9C86B413E8032800DC35C9 /* SubcategoryViewController.xib */; };
 		5ABE446613E2B25E00D94130 /* 2308.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5ABE446513E2B25E00D94130 /* 2308.jpg */; };
+		5AD6E88114048CD500620CAA /* sub_category3.png in Resources */ = {isa = PBXBuildFile; fileRef = 5AD6E88014048CD500620CAA /* sub_category3.png */; };
 		5ADB147414036173009628FC /* BigProductSliderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ADB147214036173009628FC /* BigProductSliderViewController.m */; };
 		5ADB147514036173009628FC /* BigProductSliderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5ADB147314036173009628FC /* BigProductSliderViewController.xib */; };
 		5ADB1479140381DE009628FC /* ProductsDetailsSliderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ADB1477140381DE009628FC /* ProductsDetailsSliderViewController.m */; };
@@ -102,6 +103,7 @@
 		5A9C86B313E8032800DC35C9 /* SubcategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubcategoryViewController.m; sourceTree = "<group>"; };
 		5A9C86B413E8032800DC35C9 /* SubcategoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubcategoryViewController.xib; sourceTree = "<group>"; };
 		5ABE446513E2B25E00D94130 /* 2308.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2308.jpg; sourceTree = "<group>"; };
+		5AD6E88014048CD500620CAA /* sub_category3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sub_category3.png; sourceTree = "<group>"; };
 		5ADB147114036173009628FC /* BigProductSliderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BigProductSliderViewController.h; path = ../BigProductSliderViewController.h; sourceTree = "<group>"; };
 		5ADB147214036173009628FC /* BigProductSliderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BigProductSliderViewController.m; path = ../BigProductSliderViewController.m; sourceTree = "<group>"; };
 		5ADB147314036173009628FC /* BigProductSliderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BigProductSliderViewController.xib; path = ../BigProductSliderViewController.xib; sourceTree = "<group>"; };
@@ -262,6 +264,7 @@
 				5AF9528713E8F9F500BF9D87 /* san_pham1.jpg */,
 				5AF9527F13E8E80700BF9D87 /* sub_category1.png */,
 				5ADB14811403BAE3009628FC /* sub_category2.png */,
+				5AD6E88014048CD500620CAA /* sub_category3.png */,
 				5A9C86AE13E7F49200DC35C9 /* small_home4.jpg */,
 				5A9C86AC13E7F3FE00DC35C9 /* small_home3.jpg */,
 				5A9C86B013E7F54900DC35C9 /* small_home2.jpg */,
@@ -386,6 +389,7 @@
 				5ADB147A140381DE009628FC /* ProductsDetailsSliderViewController.xib in Resources */,
 				5ADB147C14038DDE009628FC /* san_pham1a.png in Resources */,
 				5ADB14821403BAE3009628FC /* sub_category2.png in Resources */,
+				5AD6E88114048CD500620CAA /* sub_category3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

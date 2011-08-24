@@ -12,4 +12,6 @@
 
 @property (nonatomic, retain) IBOutlet UINavigationController *navController;
 
+- (void)flipForDuration:(NSTimeInterval)time withAnimation:(UIViewAnimationTransition)transition;
+
 @end

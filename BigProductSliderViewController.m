@@ -40,7 +40,7 @@
     productBigSlider = [[UIScrollView alloc] initWithFrame:self.view.frame];
     
     NSInteger bx = 0;
-    NSInteger by = 0;
+    //NSInteger by = 0;
     NSInteger bigSliderWidth;
     for (NSInteger i = 0; i < productArray.count; i++) {
         //image
