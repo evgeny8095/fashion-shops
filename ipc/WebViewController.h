@@ -11,9 +11,11 @@
 @interface WebViewController : UIViewController{
     UIWebView *webView;
     UITextView *addressBar;
+    NSString *stringUrl;
 }
 
-//-(void)goBack:(id)sender;
-//-(void)goForward:(id)sender;
+@property (nonatomic, retain) NSString *stringUrl;
+
+- (id)initWithStringURL:(NSString *)curl;
 
 @end

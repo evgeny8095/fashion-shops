@@ -9,6 +9,7 @@
 #import "WebViewController.h"
 
 @implementation WebViewController
+@synthesize stringUrl;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -16,6 +17,15 @@
     if (self) {
         // Custom initialization
         
+    }
+    return self;
+}
+
+- (id)initWithStringURL:(NSString *)curl
+{
+    self = [super initWithNibName:nil bundle:nil];
+    if (self) {
+        self.stringUrl = curl;
     }
     return self;
 }
@@ -33,17 +43,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    NSString *urlAddress = @"http://www.google.com";
-    
-    NSURL *url = [NSURL URLWithString:urlAddress];
+    // Do any additional setup after loading the view from its nib.    
+    NSURL *url = [NSURL URLWithString:stringUrl];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
-    webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, 1024, 655)];
-    addressBar = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 1024, 44)];
+    webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 20, 1024, 655)];
+    addressBar = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 1024, 20)];
     [addressBar setEditable:NO];
     [webView loadRequest:request];
-    [addressBar setText:urlAddress];
+    [addressBar setText:stringUrl];
     [self.view addSubview:webView];
     [self.view addSubview:addressBar];
 }

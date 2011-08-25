@@ -38,6 +38,9 @@
     NSArray *productArray = [[NSArray alloc] initWithObjects:@"San Pham 1",@"San Pham 2", @"San Pham 3", @"San Pham 4", @"San Pham 5", @"San Pham 6", @"San Pham 7", @"San Pham 8", @"San Pham 9", @"San Pham 1", @"San Pham 1", @"San Pham 1", @"San Pham 1", @"San Pham 1", @"San Pham 1", @"San Pham 10", @"San Pham 11", @"San Pham 12", @"San Pham 13", @"San Pham 14", @"San Pham 15", @"San Pham 16", @"San Pham 17", @"San Pham 18", @"San Pham 19", @"San Pham 20", @"San Pham 21", @"San Pham 22", @"San Pham 23", @"San Pham 24", @"San Pham 25", @"San Pham 26", @"San Pham 27", @"San Pham 28", @"San Pham 29", @"San Pham 30", @"San Pham 31", @"San Pham 32", @"San Pham 33", @"San Pham 34", @"San Pham 35", @"San Pham 36", @"San Pham 37", @"San Pham 38", @"San Pham 39", @"San Pham 40", @"San Pham 41", @"San Pham 42", @"San Pham 43", @"San Pham 44", nil];
     NSArray *imageArray = [[NSArray alloc] initWithObjects:@"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", nil];
     
+    totalItem = [productArray count];
+    //[self.navigationController setDelegate:self];
+    
     productSmallSlider = [[UIScrollView alloc] initWithFrame:self.view.frame];
     productBigSlider = [[UIScrollView alloc] initWithFrame:self.view.frame];
     //productDetailSlider = [[UIScrollView alloc] init];
@@ -124,7 +127,7 @@
     NSInteger page = ((UIButton *) sender).tag;
     
     BigProductSliderViewController *bigProductSliderViewController = [[BigProductSliderViewController alloc] initWithPage:page];
-    
+    bigProductSliderViewController.delegate = self;
     bigProductSliderViewController.navigationItem.title = title;
     [bigProductSliderViewController.navigationItem.backBarButtonItem setTitle:@"ALL"];
     
@@ -132,5 +135,16 @@
     
     [bigProductSliderViewController release];
 }
+
+#pragma mark Big....Delegate Method
+-(void)finishSomething:(UIViewController *)sender withItemNumber:(NSInteger)number{
+    NSInteger page = number/8;
+    [productSmallSlider scrollRectToVisible:CGRectMake(1024*page, 0, 1024, 655) animated:NO];
+}
+
+//#pragma mark navigation delegate method
+//- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
+//    [productSmallSlider scrollRectToVisible:CGRectMake(0, 0, 1024, 655) animated:NO];
+//}
 
 @end

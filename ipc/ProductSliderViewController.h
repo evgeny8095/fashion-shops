@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BigProductSliderViewController.h"
 
-@interface ProductSliderViewController : UIViewController{
+@interface ProductSliderViewController : UIViewController <BigProductSliderViewControllerDelegate>{
     UIScrollView *productSmallSlider;
     UIScrollView *productBigSlider;
     // UIScrollView *productDetailSlider;
+    NSInteger totalItem;
 }
 -(IBAction)swapViewSmallToBig:(id)sender;
 -(IBAction)swapViewBigToSmall:(id)sender;

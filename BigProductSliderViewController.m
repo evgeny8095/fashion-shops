@@ -8,6 +8,7 @@
 
 #import "BigProductSliderViewController.h"
 #import "ProductsDetailsSliderViewController.h"
+#import "WebViewController.h"
 
 @interface BigProductSliderViewController (PrivateMethods)
 - (void)loadScrollViewWithPage:(int)page;
@@ -15,7 +16,7 @@
 @end
 
 @implementation BigProductSliderViewController
-@synthesize productBigSlider, scrollView, pageControl, viewControllers;
+@synthesize productBigSlider, scrollView, pageControl, viewControllers, delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -30,7 +31,8 @@
 {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
-        cpage = page;  
+        cpage = page;
+        viewMode = YES;
     }
     return self;
 }
@@ -63,7 +65,7 @@
     self.viewControllers = controllers;
     [controllers release];
     
-    productBigSlider = [[UIScrollView alloc] initWithFrame:self.view.frame];
+    //productBigSlider = [[UIScrollView alloc] initWithFrame:self.view.frame];
     scrollView = [[UIScrollView alloc] initWithFrame:self.view.frame];
     
     // a page is the width of the scroll view
@@ -72,6 +74,7 @@
     scrollView.showsHorizontalScrollIndicator = NO;
     scrollView.showsVerticalScrollIndicator = NO;
     scrollView.scrollsToTop = NO;
+    scrollView.backgroundColor=[UIColor grayColor];
     scrollView.delegate = self;
     
     pageControl.currentPage = 0;
@@ -149,10 +152,13 @@
     if ((NSNull *)controller == [NSNull null])
     {
         UIImage *image = [UIImage imageNamed:[imageArray objectAtIndex:page]];
-        controller = [[ProductsDetailsSliderViewController alloc] initWithImage:image hasName:[productArray objectAtIndex:page] hasPrice:@"$1000" hasDesc:@"san pham mau"];
+        controller = [[ProductsDetailsSliderViewController alloc] initWithImage:image hasName:[productArray objectAtIndex:page] hasPrice:@"$1000" hasDesc:@"san pham mau" inPosition:page withMode:viewMode];
+        controller.delegate = self;
         [image release];
         [viewControllers replaceObjectAtIndex:page withObject:controller];
         [controller release];
+    }else{
+        [controller changeViewMode:viewMode];
     }
     
     // add the controller's view to the scroll view
@@ -163,11 +169,12 @@
         frame.origin.y = 0;
         controller.view.frame = frame;
         [scrollView addSubview:controller.view];
-//        
+        
 //        NSDictionary *numberItem = [self.contentList objectAtIndex:page];
 //        controller.numberImage.image = [UIImage imageNamed:[numberItem valueForKey:ImageKey]];
 //        controller.numberTitle.text = [numberItem valueForKey:NameKey];
     }
+
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)sender
@@ -185,12 +192,19 @@
     CGFloat pageWidth = scrollView.frame.size.width;
     int page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
     pageControl.currentPage = page;
+    [delegate finishSomething:self withItemNumber:page];
     
     // load the visible page and the page on either side of it (to avoid flashes when the user starts scrolling)
-    [self loadScrollViewWithPage:page - 1];
-    [self loadScrollViewWithPage:page];
-    [self loadScrollViewWithPage:page + 1];
-    self.navigationItem.title = [productArray objectAtIndex:page];
+    if(page!=numberOfPages)
+    {
+        [self loadScrollViewWithPage:page - 1];
+        [self loadScrollViewWithPage:page];
+        [self loadScrollViewWithPage:page + 1];
+        self.navigationItem.title = [productArray objectAtIndex:page];
+        cpage = page;
+    }
+    
+    
     
     // A possible optimization would be to unload the views+controllers which are no longer visible
 }
@@ -207,5 +221,18 @@
     pageControlUsed = NO;
 }
 
+#pragma mark Product..Delegate
+-(void) finishSomething:(UIViewController *)sender withURL:(NSString *)url
+{
+    WebViewController *webViewController = [[WebViewController alloc] initWithStringURL:url];
+    [webViewController.navigationController setTitle:@"Web"];
+
+    [self.navigationController pushViewController:webViewController animated:YES];
+    [webViewController release];
+}
+
+-(void) changeMode:(UIViewController *)sender withMode:(BOOL)modeToChange{
+    viewMode = modeToChange;
+}
 
 @end

@@ -7,8 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ProductsDetailsSliderViewController.h"
 
-@interface BigProductSliderViewController : UIViewController <UIScrollViewDelegate>{
+@protocol BigProductSliderViewControllerDelegate <NSObject>
+
+- (void) finishSomething:(UIViewController *)sender withItemNumber:(NSInteger)number;
+
+@end
+
+@interface BigProductSliderViewController : UIViewController <UIScrollViewDelegate, ProductsDetailsSliderViewControllerDelegate>{
     UIScrollView *productBigSlider;
     UIScrollView *scrollView;
 	UIPageControl *pageControl;
@@ -18,13 +25,16 @@
     BOOL pageControlUsed;
     NSInteger numberOfPages;
     NSInteger cpage;
+    BOOL viewMode;
+    id<BigProductSliderViewControllerDelegate> delegate;
+    
 }
 
 @property (nonatomic, retain) IBOutlet UIScrollView *productBigSlider;
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, retain) IBOutlet UIPageControl *pageControl;
-
 @property (nonatomic, retain) NSMutableArray *viewControllers;
+@property (nonatomic, retain) id<BigProductSliderViewControllerDelegate> delegate;
 
 - (void)revealDetails:(id)sender;
 - (void)gotoDetails:(id)sender;

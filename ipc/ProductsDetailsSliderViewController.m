@@ -15,17 +15,17 @@
 @synthesize name;
 @synthesize price;
 @synthesize desc;
+@synthesize delegate;
 
-bool mode = YES;
-
-
-- (id)initWithImage:(UIImage *)imagex hasName:(NSString *)strName hasPrice:(NSString *)strPrice hasDesc:(NSString *)strDesc{
+- (id)initWithImage:(UIImage *)imagex hasName:(NSString *)strName hasPrice:(NSString *)strPrice hasDesc:(NSString *)strDesc inPosition:(NSInteger)position withMode:(BOOL)cmode{
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
         self.image = imagex;
         self.name = strName;
         self.price = strPrice;
         self.desc = strDesc;
+        cPosition = position;
+        mode = cmode;
     }
 
     return self;
@@ -78,7 +78,7 @@ bool mode = YES;
     
     buy = [[UIButton alloc] initWithFrame:CGRectMake(900, 600, 50, 30)];
     [buy addTarget:self action:@selector(gotoShop:) forControlEvents:UIControlEventTouchUpInside];
-    [buy setHidden:YES];
+    //[buy setHidden:YES];
     [buy setBackgroundColor:[UIColor blackColor]];
     [buy setTitle:@"Buy" forState:normal];
     [self.view addSubview:buy];
@@ -106,7 +106,7 @@ bool mode = YES;
         [thisButton setFrame:CGRectMake(px+margin, 0, thisButton.frame.size.width, thisButton.frame.size.height)];
         [labelName setHidden:NO];
         [labelPrice setHidden:NO];
-        [labelDesc setHidden:NO];
+        //[labelDesc setHidden:NO];
         [buy setHidden:NO];
         mode = NO;
     }else{
@@ -115,8 +115,28 @@ bool mode = YES;
         [labelName setHidden:YES];
         [labelPrice setHidden:YES];
         [labelDesc setHidden:YES];
-        [buy setHidden:YES];
+        //[buy setHidden:YES];
         mode = YES;
+    }
+    [delegate changeMode:self withMode:mode];
+}
+
+- (void)changeViewMode:(BOOL)cmode{
+    if(cmode){
+        NSInteger margin = 512-(button.frame.size.width/2);
+        [button setFrame:CGRectMake(margin, 0, button.frame.size.width, button.frame.size.height)];
+        [labelName setHidden:YES];
+        [labelPrice setHidden:YES];
+        [labelDesc setHidden:YES];
+    }else{
+        NSInteger nx = (NSInteger) button.frame.origin.x % 1024;
+        NSInteger px = button.frame.origin.x-nx;
+        NSInteger margin = (512-button.frame.size.width)/2;
+        [button setFrame:CGRectMake(px+margin, 0, button.frame.size.width, button.frame.size.height)];
+        [labelName setHidden:NO];
+        [labelPrice setHidden:NO];
+        [labelDesc setHidden:NO];
+        //[buy setHidden:NO];
     }
 }
 
@@ -125,13 +145,7 @@ bool mode = YES;
 }
 
 - (IBAction)gotoShop:(id)sender{
-    WebViewController *webViewController = [[WebViewController alloc] init];
-    [webViewController.navigationController setTitle:@"Web"];
-//    UIViewController *topVC = (UIViewController *)self.parentViewController.navigationController.delegate;
-//	[topVC.navigationController pushViewController:webViewController animated:YES];
-//    [self.parentViewController.parentViewController.navigationController pushViewController:webViewController animated:YES];
-//    [webViewController release];
-    
+    [delegate finishSomething:self withURL:@"http://www.ongsoft.com"];
 }
 
 @end
