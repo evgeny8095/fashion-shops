@@ -20,10 +20,17 @@
     BOOL pageControlUsed;
     NSArray *imageArray;
     NSArray *imageURL;
+    NSInteger sex;
+    NSInteger sub;
 }
+
+@property (nonatomic, retain) NSMutableArray *buttons;
+@property (nonatomic, assign) NSInteger sex;
+@property (nonatomic, assign) NSInteger sub;
+
 -(IBAction)swapViewSmallToBig:(id)sender;
 -(IBAction)swapViewBigToSmall:(id)sender;
 - (IBAction)gotoProductDetails:(id)sender;
-@property (nonatomic, retain) NSMutableArray *buttons;
+
 
 @end

@@ -61,6 +61,7 @@
     [smallButton1 setImage:smallHomeImage1 forState:normal];
     [smallButton1 setTitle:@"NEW ARRIVAL" forState:normal];
     [smallButton1 addTarget:self action:@selector(gotoCategory:) forControlEvents:UIControlEventTouchUpInside];
+    [smallButton1 setTag:1];
     [smallHomeImage1 release];
     UILabel *smallLable1 = [[UILabel alloc] initWithFrame:CGRectMake(512, 331.5, 256, 40)];
     [smallLable1 setText:@"NEW ARRIVAL"];
@@ -75,6 +76,7 @@
     [smallButton2 setTitle:@"SALE" forState:normal];
     [smallHomeImage2 release];
     [smallButton2 addTarget:self action:@selector(gotoCategory:) forControlEvents:UIControlEventTouchUpInside];
+    [smallButton2 setTag:2];
     UILabel *smallLable2 = [[UILabel alloc] initWithFrame:CGRectMake(768, 331.5, 256, 40)];
     [smallLable2 setText:@"SALE"];
     [smallLable2 setTextAlignment:UITextAlignmentCenter];
@@ -86,6 +88,7 @@
     UIButton *smallButton3 = [[UIButton alloc] initWithFrame:CGRectMake(512, 371.5, 256, 327.5)];
     [smallButton3 setImage:smallHomeImage3 forState:normal];
     [smallButton3 setTitle:@"FEMALE" forState:normal];
+    [smallButton3 setTag:2];
     [smallHomeImage3 release];
     [smallButton3 addTarget:self action:@selector(gotoCategory:) forControlEvents:UIControlEventTouchUpInside];
     UILabel *smallLable3 = [[UILabel alloc] initWithFrame:CGRectMake(512, 659, 256, 40)];
@@ -99,6 +102,7 @@
     UIButton *smallButton4 = [[UIButton alloc] initWithFrame:CGRectMake(768, 371.4, 256, 327.5)];
     [smallButton4 setImage:smallHomeImage4 forState:normal];
     [smallButton4 setTitle:@"MALE" forState:normal];
+    [smallButton4 setTag:1];
     [smallHomeImage4 release];
     [smallButton4 addTarget:self action:@selector(gotoCategory:) forControlEvents:UIControlEventTouchUpInside];
     UILabel *smallLable4 = [[UILabel alloc] initWithFrame:CGRectMake(768, 659, 256, 40)];
@@ -146,6 +150,7 @@
 
 - (IBAction)gotoCategory:(id)sender{
     NSString *title = ((UIButton *) sender).titleLabel.text;
+    NSInteger sex =  ((UIButton *) sender).tag;
     
     navController = [[UINavigationController alloc] init];
     navController.delegate=self;
@@ -157,6 +162,7 @@
     SubcategoryViewController *subCategoryViewController = [[SubcategoryViewController alloc] init];
     
     subCategoryViewController.navigationItem.title = title;
+    subCategoryViewController.sex = sex;
     
     subCategoryViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"HOME" style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
     

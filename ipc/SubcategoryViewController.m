@@ -11,6 +11,7 @@
 #import "WebViewController.h"
 
 @implementation SubcategoryViewController
+@synthesize sex;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,8 +36,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    NSArray *subCategoryArray = [[NSArray alloc] initWithObjects:@"  ALL", @"  SOMI", @"  Thun", @"  Do Tam", @"  Ao Kieu", @"  Quan Short", @"  Vay Dam", @"  Jean", @"  Underwear", @"  Cavat Khan", @"  Quan Tay", @"  The Thao", @"  Dam Bau", @"  Mat Kinh", @"  Trang Suc", @"  Phu Kien", @"  Vi bop", @"  Dong Ho", @"  Tui Sach", @"  Thac Lung", nil];
-    NSArray *subImageArray = [[NSArray alloc] initWithObjects:@"sub_category1.png", @"sub_category2.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", nil];
+    NSArray *subCategoryArray = [[NSArray alloc] initWithObjects:@"  ALL", @"  SOMI", @"  THUN", @"  DO TAM", @"  AO KIEU", @"  QUAN SHORT", @"  VAY DAM", @"  QUAN JEAN", @"  UNDERWARE", @"  CARAVAT", @"  QUAN TAY", @"  THE THAO", @"  MAT KINH", @"  PHU KIEN", @"  TUI SACH", @"  DONG HO", nil];
+    NSArray *subImageArray = [[NSArray alloc] initWithObjects:@"sub_category1.png", @"sub_category2.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", nil];
     
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.view.frame];
     
@@ -49,6 +50,7 @@
         UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(x, y, 308, 100)];
         [button addTarget:self action:@selector(gotoSubCatalogue:) forControlEvents:UIControlEventTouchUpInside];
         [button setImage:image forState:normal];
+        [button setTag:i];
         [button setTitle:[subCategoryArray objectAtIndex:i] forState:normal];
         [image release];
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(x, y+100, 308, 30)];
@@ -101,9 +103,11 @@
 
 -(IBAction)gotoSubCatalogue:(id)sender{
     NSString *title = ((UIButton *) sender).titleLabel.text;
+    NSInteger sub = ((UIButton *) sender).tag;
     
     ProductSliderViewController *productSliderViewController = [[ProductSliderViewController alloc] init];
-    
+    productSliderViewController.sex = sex;
+    productSliderViewController.sub = sub;
     productSliderViewController.navigationItem.title = title;
     
     [self.navigationController pushViewController:productSliderViewController animated:YES];

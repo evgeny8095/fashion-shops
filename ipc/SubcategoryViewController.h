@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SubcategoryViewController : UIViewController
+@interface SubcategoryViewController : UIViewController{
+    NSInteger sex;
+}
+
+@property (nonatomic, assign) NSInteger sex;
 
 -(IBAction)gotoSubCatalogue:(id)sender;
 

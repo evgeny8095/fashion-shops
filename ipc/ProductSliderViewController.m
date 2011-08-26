@@ -16,7 +16,7 @@
 @end
 
 @implementation ProductSliderViewController
-@synthesize buttons;
+@synthesize buttons, sex, sub;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -42,9 +42,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    NSArray *productArray = [[NSArray alloc] initWithObjects:@"San Pham 1",@"San Pham 2", @"San Pham 3", @"San Pham 4", @"San Pham 5", @"San Pham 6", @"San Pham 7", @"San Pham 8", @"San Pham 9", @"San Pham 1", @"San Pham 1", @"San Pham 1", @"San Pham 1", @"San Pham 1", @"San Pham 1", @"San Pham 10", @"San Pham 11", @"San Pham 12", @"San Pham 13", @"San Pham 14", @"San Pham 15", @"San Pham 16", @"San Pham 17", @"San Pham 18", @"San Pham 19", @"San Pham 20", @"San Pham 21", @"San Pham 22", @"San Pham 23", @"San Pham 24", @"San Pham 25", @"San Pham 26", @"San Pham 27", @"San Pham 28", @"San Pham 29", @"San Pham 30", @"San Pham 31", @"San Pham 32", @"San Pham 33", @"San Pham 34", @"San Pham 35", @"San Pham 36", @"San Pham 37", @"San Pham 38", @"San Pham 39", @"San Pham 40", @"San Pham 41", @"San Pham 42", @"San Pham 43", @"San Pham 44", nil];
-    imageArray = [[NSArray alloc] initWithObjects:@"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", nil];
-    imageURL = [[NSArray alloc] initWithObjects:@"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", @"http://f.cl.ly/items/1n141M1l32300A1c1z1G/san_pham1a.png", nil];
+    NSArray *productArray = [[NSArray alloc] initWithObjects:@"San Pham 1",@"San Pham 2", @"San Pham 3", @"San Pham 4", @"San Pham 5", @"San Pham 6", @"San Pham 7", @"San Pham 8", @"San Pham 9", @"San Pham 10", nil];
+    imageArray = [[NSArray alloc] initWithObjects:@"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", nil];
+    imageURL = [[NSArray alloc] initWithObjects:@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/", nil];
     
     totalItem = [productArray count];
     //[self.navigationController setDelegate:self];
@@ -130,9 +130,13 @@
     NSString *title = ((UIButton *) sender).titleLabel.text;
     NSInteger page = ((UIButton *) sender).tag;
     
+    
     BigProductSliderViewController *bigProductSliderViewController = [[BigProductSliderViewController alloc] initWithPage:page];
     bigProductSliderViewController.delegate = self;
     bigProductSliderViewController.navigationItem.title = title;
+    bigProductSliderViewController.sex = sex;
+    bigProductSliderViewController.sub = sub;
+    bigProductSliderViewController.item = page;
     [bigProductSliderViewController.navigationItem.backBarButtonItem setTitle:@"ALL"];
     
     [self.navigationController pushViewController:bigProductSliderViewController animated:YES];
@@ -161,7 +165,16 @@
         if ([[button imageView] image] == NULL) {
             //UIImage *image = [UIImage imageNamed:[imageArray objectAtIndex:i]];
             AsyncImageView *asyncImage = [[[AsyncImageView alloc] init] autorelease];
-            NSURL* url = [NSURL URLWithString:[imageURL objectAtIndex:i]];
+            
+            NSString *sexFolder = sex == 1 ? @"m" : @"f";
+            NSString *subFolder = [[NSString alloc] initWithFormat:@"%i/%i.png", sub, i+1];
+            NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@/%@", [imageURL objectAtIndex:i], sexFolder, subFolder];
+            [sexFolder release];
+            [subFolder release];
+            
+            NSURL* url = [NSURL URLWithString:urlPath];
+            [urlPath release];
+            
             [asyncImage loadImageFromURL:url forButton:button];
         }        
     }
