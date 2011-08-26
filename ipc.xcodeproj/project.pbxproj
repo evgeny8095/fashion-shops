@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		5A6DBB1514077FA800B51DB9 /* asyncimageview.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A6DBB1314077FA700B51DB9 /* asyncimageview.m */; };
+		5A6DBB1A1407A0E800B51DB9 /* BigProductSliderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A6DBB171407A0E700B51DB9 /* BigProductSliderViewController.m */; };
+		5A6DBB1B1407A0E800B51DB9 /* BigProductSliderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A6DBB181407A0E700B51DB9 /* BigProductSliderViewController.xib */; };
 		5A971E3913DD6256008A19BE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A971E3813DD6256008A19BE /* UIKit.framework */; };
 		5A971E3B13DD6256008A19BE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A971E3A13DD6256008A19BE /* Foundation.framework */; };
 		5A971E3D13DD6256008A19BE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A971E3C13DD6256008A19BE /* CoreGraphics.framework */; };
@@ -33,8 +35,6 @@
 		5AD6E88114048CD500620CAA /* sub_category3.png in Resources */ = {isa = PBXBuildFile; fileRef = 5AD6E88014048CD500620CAA /* sub_category3.png */; };
 		5AD6E88E1404E7D300620CAA /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD6E88C1404E7D200620CAA /* WebViewController.m */; };
 		5AD6E88F1404E7D300620CAA /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5AD6E88D1404E7D300620CAA /* WebViewController.xib */; };
-		5ADB147414036173009628FC /* BigProductSliderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ADB147214036173009628FC /* BigProductSliderViewController.m */; };
-		5ADB147514036173009628FC /* BigProductSliderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5ADB147314036173009628FC /* BigProductSliderViewController.xib */; };
 		5ADB1479140381DE009628FC /* ProductsDetailsSliderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ADB1477140381DE009628FC /* ProductsDetailsSliderViewController.m */; };
 		5ADB147A140381DE009628FC /* ProductsDetailsSliderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5ADB1478140381DE009628FC /* ProductsDetailsSliderViewController.xib */; };
 		5ADB147C14038DDE009628FC /* san_pham1a.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ADB147B14038DDE009628FC /* san_pham1a.png */; };
@@ -81,6 +81,9 @@
 /* Begin PBXFileReference section */
 		5A6DBB1314077FA700B51DB9 /* asyncimageview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = asyncimageview.m; sourceTree = "<group>"; };
 		5A6DBB1414077FA700B51DB9 /* asyncimageview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asyncimageview.h; sourceTree = "<group>"; };
+		5A6DBB171407A0E700B51DB9 /* BigProductSliderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BigProductSliderViewController.m; sourceTree = "<group>"; };
+		5A6DBB181407A0E700B51DB9 /* BigProductSliderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BigProductSliderViewController.xib; sourceTree = "<group>"; };
+		5A6DBB191407A0E700B51DB9 /* BigProductSliderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BigProductSliderViewController.h; sourceTree = "<group>"; };
 		5A971E3413DD6256008A19BE /* ipc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ipc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A971E3813DD6256008A19BE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5A971E3A13DD6256008A19BE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -112,9 +115,6 @@
 		5AD6E88B1404E7D100620CAA /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		5AD6E88C1404E7D200620CAA /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		5AD6E88D1404E7D300620CAA /* WebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebViewController.xib; sourceTree = "<group>"; };
-		5ADB147114036173009628FC /* BigProductSliderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BigProductSliderViewController.h; path = ../BigProductSliderViewController.h; sourceTree = "<group>"; };
-		5ADB147214036173009628FC /* BigProductSliderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BigProductSliderViewController.m; path = ../BigProductSliderViewController.m; sourceTree = "<group>"; };
-		5ADB147314036173009628FC /* BigProductSliderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BigProductSliderViewController.xib; path = ../BigProductSliderViewController.xib; sourceTree = "<group>"; };
 		5ADB1476140381DE009628FC /* ProductsDetailsSliderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductsDetailsSliderViewController.h; sourceTree = "<group>"; };
 		5ADB1477140381DE009628FC /* ProductsDetailsSliderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductsDetailsSliderViewController.m; sourceTree = "<group>"; };
 		5ADB1478140381DE009628FC /* ProductsDetailsSliderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductsDetailsSliderViewController.xib; sourceTree = "<group>"; };
@@ -231,9 +231,9 @@
 				5AF9528213E8EFE800BF9D87 /* ProductSliderViewController.h */,
 				5AF9528313E8EFE800BF9D87 /* ProductSliderViewController.m */,
 				5AF9528413E8EFE800BF9D87 /* ProductSliderViewController.xib */,
-				5ADB147114036173009628FC /* BigProductSliderViewController.h */,
-				5ADB147214036173009628FC /* BigProductSliderViewController.m */,
-				5ADB147314036173009628FC /* BigProductSliderViewController.xib */,
+				5A6DBB171407A0E700B51DB9 /* BigProductSliderViewController.m */,
+				5A6DBB181407A0E700B51DB9 /* BigProductSliderViewController.xib */,
+				5A6DBB191407A0E700B51DB9 /* BigProductSliderViewController.h */,
 				5ADB1476140381DE009628FC /* ProductsDetailsSliderViewController.h */,
 				5ADB1477140381DE009628FC /* ProductsDetailsSliderViewController.m */,
 				5ADB1478140381DE009628FC /* ProductsDetailsSliderViewController.xib */,
@@ -398,12 +398,12 @@
 				5AF9528013E8E80700BF9D87 /* sub_category1.png in Resources */,
 				5AF9528613E8EFE800BF9D87 /* ProductSliderViewController.xib in Resources */,
 				5AF9528813E8F9F500BF9D87 /* san_pham1.jpg in Resources */,
-				5ADB147514036173009628FC /* BigProductSliderViewController.xib in Resources */,
 				5ADB147A140381DE009628FC /* ProductsDetailsSliderViewController.xib in Resources */,
 				5ADB147C14038DDE009628FC /* san_pham1a.png in Resources */,
 				5ADB14821403BAE3009628FC /* sub_category2.png in Resources */,
 				5AD6E88114048CD500620CAA /* sub_category3.png in Resources */,
 				5AD6E88F1404E7D300620CAA /* WebViewController.xib in Resources */,
+				5A6DBB1B1407A0E800B51DB9 /* BigProductSliderViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,10 +448,10 @@
 				5AF53EBC13E63F5B0031E56C /* HomeViewController.m in Sources */,
 				5A9C86B513E8032800DC35C9 /* SubcategoryViewController.m in Sources */,
 				5AF9528513E8EFE800BF9D87 /* ProductSliderViewController.m in Sources */,
-				5ADB147414036173009628FC /* BigProductSliderViewController.m in Sources */,
 				5ADB1479140381DE009628FC /* ProductsDetailsSliderViewController.m in Sources */,
 				5AD6E88E1404E7D300620CAA /* WebViewController.m in Sources */,
 				5A6DBB1514077FA800B51DB9 /* asyncimageview.m in Sources */,
+				5A6DBB1A1407A0E800B51DB9 /* BigProductSliderViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
