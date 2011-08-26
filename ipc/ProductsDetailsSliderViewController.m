@@ -12,15 +12,18 @@
 
 @implementation ProductsDetailsSliderViewController
 @synthesize image;
+@synthesize imageStr;
 @synthesize name;
 @synthesize price;
 @synthesize desc;
 @synthesize delegate;
 
-- (id)initWithImage:(UIImage *)imagex hasName:(NSString *)strName hasPrice:(NSString *)strPrice hasDesc:(NSString *)strDesc inPosition:(NSInteger)position withMode:(BOOL)cmode{
+- (id)initWithImage:(NSString *)strImg hasName:(NSString *)strName hasPrice:(NSString *)strPrice hasDesc:(NSString *)strDesc inPosition:(NSInteger)position withMode:(BOOL)cmode{
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
-        self.image = imagex;
+        //UIImage *imagex = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:strImg]]];
+        self.imageStr = strImg;
+        //[imagex release];
         self.name = strName;
         self.price = strPrice;
         self.desc = strDesc;
@@ -54,10 +57,13 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    CGFloat x = (1024-image.size.width)/2;
-    button = [[UIButton alloc] initWithFrame:CGRectMake(x, 0, image.size.width, image.size.height)];
+    NSURL *curl = [NSURL URLWithString:imageStr];
+    NSURLRequest* request = [NSURLRequest requestWithURL:curl cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
+    connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
+    button = [[UIButton alloc] initWithFrame:CGRectMake(256, 0, 512, 655)];
     [button addTarget:self action:@selector(revealDetails:) forControlEvents:UIControlEventTouchUpInside];
-    [button setImage:image forState:normal];
+    
     [self.view addSubview:button];
     
     NSLog(@"name: %@", self.name);
@@ -106,7 +112,7 @@
         [thisButton setFrame:CGRectMake(px+margin, 0, thisButton.frame.size.width, thisButton.frame.size.height)];
         [labelName setHidden:NO];
         [labelPrice setHidden:NO];
-        //[labelDesc setHidden:NO];
+        [labelDesc setHidden:NO];
         [buy setHidden:NO];
         mode = NO;
     }else{
@@ -115,7 +121,7 @@
         [labelName setHidden:YES];
         [labelPrice setHidden:YES];
         [labelDesc setHidden:YES];
-        //[buy setHidden:YES];
+        [buy setHidden:NO];
         mode = YES;
     }
     [delegate changeMode:self withMode:mode];
@@ -146,6 +152,36 @@
 
 - (IBAction)gotoShop:(id)sender{
     [delegate finishSomething:self withURL:@"http://www.ongsoft.com"];
+}
+
+//the URL connection calls this repeatedly as data arrives
+- (void)connection:(NSURLConnection *)theConnection didReceiveData:(NSData *)incrementalData {
+	if (data==nil) { data = [[NSMutableData alloc] initWithCapacity:2048]; } 
+	[data appendData:incrementalData];
+}
+
+//the URL connection calls this once all the data has downloaded
+- (void)connectionDidFinishLoading:(NSURLConnection*)theConnection {
+	[connection release];
+	connection=nil;
+	
+    
+	UIImage *imagex = [UIImage imageWithData:data];
+    if (mode) {
+        [button setImage:imagex forState:normal];
+        NSInteger margin = 512-(button.frame.size.width/2);
+        [button setFrame:CGRectMake(margin, 0, button.frame.size.width, button.frame.size.height)];
+    }else{
+        [button setImage:imagex forState:normal];
+        NSInteger nx = (NSInteger) button.frame.origin.x % 1024;
+        NSInteger px = button.frame.origin.x-nx;
+        NSInteger margin = (512-button.frame.size.width)/2;
+        [button setFrame:CGRectMake(px+margin, 0, button.frame.size.width, button.frame.size.height)];
+    }
+    
+    [imagex retain];
+	[data release]; //don't need this any more, its in the UIImageView now
+	data=nil;
 }
 
 @end

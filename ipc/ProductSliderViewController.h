@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "BigProductSliderViewController.h"
+#import "asyncimageview.h"
 
 @interface ProductSliderViewController : UIViewController <UIScrollViewDelegate, BigProductSliderViewControllerDelegate>{
     UIScrollView *productSmallSlider;
@@ -18,6 +19,7 @@
     UIPageControl *pageControl;
     BOOL pageControlUsed;
     NSArray *imageArray;
+    NSArray *imageURL;
 }
 -(IBAction)swapViewSmallToBig:(id)sender;
 -(IBAction)swapViewBigToSmall:(id)sender;

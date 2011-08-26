@@ -35,7 +35,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    NSArray *subCategoryArray = [[NSArray alloc] initWithObjects:@"  All", @"  Somi", @"  Thun", @"  Do Tam", @"  Ao Kieu", @"  Quan Short", @"  Vay Dam", @"  Jean", @"  Underwear", @"  Cavat Khan", @"  Quan Tay", @"  The Thao", @"  Dam Bau", @"  Mat Kinh", @"  Trang Suc", @"  Phu Kien", @"  Vi bop", @"  Dong Ho", @"  Tui Sach", @"  Thac Lung", nil];
+    NSArray *subCategoryArray = [[NSArray alloc] initWithObjects:@"  ALL", @"  SOMI", @"  Thun", @"  Do Tam", @"  Ao Kieu", @"  Quan Short", @"  Vay Dam", @"  Jean", @"  Underwear", @"  Cavat Khan", @"  Quan Tay", @"  The Thao", @"  Dam Bau", @"  Mat Kinh", @"  Trang Suc", @"  Phu Kien", @"  Vi bop", @"  Dong Ho", @"  Tui Sach", @"  Thac Lung", nil];
     NSArray *subImageArray = [[NSArray alloc] initWithObjects:@"sub_category1.png", @"sub_category2.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", nil];
     
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.view.frame];

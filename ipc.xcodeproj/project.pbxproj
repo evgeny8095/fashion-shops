@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A6DBB1514077FA800B51DB9 /* asyncimageview.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A6DBB1314077FA700B51DB9 /* asyncimageview.m */; };
 		5A971E3913DD6256008A19BE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A971E3813DD6256008A19BE /* UIKit.framework */; };
 		5A971E3B13DD6256008A19BE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A971E3A13DD6256008A19BE /* Foundation.framework */; };
 		5A971E3D13DD6256008A19BE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A971E3C13DD6256008A19BE /* CoreGraphics.framework */; };
@@ -78,6 +79,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5A6DBB1314077FA700B51DB9 /* asyncimageview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = asyncimageview.m; sourceTree = "<group>"; };
+		5A6DBB1414077FA700B51DB9 /* asyncimageview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asyncimageview.h; sourceTree = "<group>"; };
 		5A971E3413DD6256008A19BE /* ipc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ipc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A971E3813DD6256008A19BE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5A971E3A13DD6256008A19BE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -234,6 +237,8 @@
 				5ADB1476140381DE009628FC /* ProductsDetailsSliderViewController.h */,
 				5ADB1477140381DE009628FC /* ProductsDetailsSliderViewController.m */,
 				5ADB1478140381DE009628FC /* ProductsDetailsSliderViewController.xib */,
+				5A6DBB1414077FA700B51DB9 /* asyncimageview.h */,
+				5A6DBB1314077FA700B51DB9 /* asyncimageview.m */,
 				5AD6E88B1404E7D100620CAA /* WebViewController.h */,
 				5AD6E88C1404E7D200620CAA /* WebViewController.m */,
 				5AD6E88D1404E7D300620CAA /* WebViewController.xib */,
@@ -446,6 +451,7 @@
 				5ADB147414036173009628FC /* BigProductSliderViewController.m in Sources */,
 				5ADB1479140381DE009628FC /* ProductsDetailsSliderViewController.m in Sources */,
 				5AD6E88E1404E7D300620CAA /* WebViewController.m in Sources */,
+				5A6DBB1514077FA800B51DB9 /* asyncimageview.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

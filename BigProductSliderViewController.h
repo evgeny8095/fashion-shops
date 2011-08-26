@@ -22,6 +22,7 @@
     NSMutableArray *viewControllers;
     NSArray *productArray;
     NSArray *imageArray;
+    NSArray *imageURL;
     BOOL pageControlUsed;
     NSInteger numberOfPages;
     NSInteger cpage;
