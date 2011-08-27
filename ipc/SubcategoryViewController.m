@@ -36,8 +36,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    NSArray *subCategoryArray = [[NSArray alloc] initWithObjects:@"  ALL", @"  SOMI", @"  THUN", @"  DO TAM", @"  AO KIEU", @"  QUAN SHORT", @"  VAY DAM", @"  QUAN JEAN", @"  UNDERWARE", @"  CARAVAT", @"  QUAN TAY", @"  THE THAO", @"  MAT KINH", @"  PHU KIEN", @"  TUI SACH", @"  DONG HO", nil];
-    NSArray *subImageArray = [[NSArray alloc] initWithObjects:@"sub_category1.png", @"sub_category2.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", @"sub_category1.png", nil];
+    NSArray *subCategoryArray = [[NSArray alloc] initWithObjects:@"  ALL", @"  SHIRT", @"  T-SHIRT", @"  SWIMWEAR", @"  DESIGNED SHIRT", @"  SHORT", @"  SKIRT", @"  JEAN", @"  UNDERWARE", @"  CRAVAT", @"  TROUSER", @"  SPORT", @"  EYESWEAR", @"  ACCESSORY", @"  BAG", @"  WATCH", nil];
+    NSArray *subImageArray = [[NSArray alloc] initWithObjects:@"sub_category1.png", @"sub_category2.png", @"sub_category3.png", @"sub_category4.png", @"sub_category5.png", @"sub_category6.png", @"sub_category7.png", @"sub_category8.png", @"sub_category9.png", @"sub_category10.png", @"sub_category11.png", @"sub_category12.png", @"sub_category13.png", @"sub_category14.png", @"sub_category15.png", @"sub_category16.png", nil];
     
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.view.frame];
     
