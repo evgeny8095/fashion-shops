@@ -45,37 +45,36 @@
     NSArray *productArray = [[NSArray alloc] initWithObjects:@"San Pham 1",@"San Pham 2", @"San Pham 3", @"San Pham 4", @"San Pham 5", @"San Pham 6", @"San Pham 7", @"San Pham 8", @"San Pham 9", @"San Pham 10", nil];
     imageArray = [[NSArray alloc] initWithObjects:@"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", nil];
     imageURL = [[NSArray alloc] initWithObjects:@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/", nil];
+    baseURL = @"http://www.ongsoft.com/ipc/";
     
     totalItem = [productArray count];
-    //[self.navigationController setDelegate:self];
     
     productSmallSlider = [[UIScrollView alloc] initWithFrame:self.view.frame];
-    productBigSlider = [[UIScrollView alloc] initWithFrame:self.view.frame];
-    //productDetailSlider = [[UIScrollView alloc] init];
     
-    NSInteger sx = 25, bx = 0;
-    NSInteger sy = 25; //by = 0;
-    NSInteger smallSliderWidth, bigSliderWidth;
+    NSInteger sx = 0;
+    NSInteger sy = 0;
+    NSInteger smallSliderWidth;
+    NSInteger smallImageWidth = 327;
+    NSInteger smallImageHeight = 255;
     
     NSMutableArray *tempButtons = [[NSMutableArray alloc] init];
     for (unsigned i = 0; i < totalItem; i++)
     {
         //small slider
-        UIButton *smallButton = [[UIButton alloc] initWithFrame:CGRectMake(sx, sy, 225, 290)];
-        //[smallButton setImage:image forState:normal];
-        [smallButton setTitle:self.navigationItem.title forState:normal];
+        UIButton *smallButton = [[UIButton alloc] initWithFrame:CGRectMake(sx, sy, smallImageHeight, smallImageWidth)];
         [smallButton setTag:i];
+        [smallButton setBackgroundColor:[UIColor whiteColor]];
         [smallButton addTarget:self action:@selector(gotoProductDetails:) forControlEvents:UIControlEventTouchUpInside];
-        //[productSmallSlider addSubview:smallButton];
         
-        sy = sy + 25 + 290;
+        sy = sy + 1 + smallImageWidth;
         if (sy > 600){
-            sy = 25;
-            sx = sx + 225 + 25;
+            sy = 0;
+            sx = sx + smallImageHeight + 1;
         }
-        if (i % 8 == 7) {
-            sx = sx + 25;
-        }
+//        if (i % 8 == 7) {
+//            //sx = sx + 2;
+//            sx=sx;
+//        }
 		[tempButtons addObject:smallButton];
         [smallButton release];
     }
@@ -87,16 +86,12 @@
     }
 
     smallSliderWidth = (totalItem/8+1)*1024;
-    bigSliderWidth = bx;
     productSmallSlider.pagingEnabled = YES;
     productSmallSlider.contentSize = CGSizeMake(smallSliderWidth, 655);
     productSmallSlider.backgroundColor = [UIColor grayColor];
     productSmallSlider.showsHorizontalScrollIndicator = YES;
     productSmallSlider.showsVerticalScrollIndicator = NO;
     productSmallSlider.delegate=self;
-    
-    productBigSlider.pagingEnabled = YES;
-    productBigSlider.contentSize = CGSizeMake(bigSliderWidth, 655);
     
     [self.view addSubview:productSmallSlider];
     [self loadScrollViewWithPage:0];
@@ -114,16 +109,6 @@
 {
     // Return YES for supported orientations
 	return YES;
-}
-
-- (IBAction)swapViewSmallToBig:(id)sender{
-    [productSmallSlider removeFromSuperview];
-    [self.view addSubview:productBigSlider];
-}
-
-- (IBAction)swapViewBigToSmall:(id)sender{
-    [productBigSlider removeFromSuperview];
-    [self.view addSubview:productSmallSlider];
 }
 
 - (IBAction)gotoProductDetails:(id)sender{
@@ -163,12 +148,11 @@
     for (NSInteger i = offset; i < items; i++) {
         UIButton *button = [buttons objectAtIndex:i];
         if ([[button imageView] image] == NULL) {
-            //UIImage *image = [UIImage imageNamed:[imageArray objectAtIndex:i]];
             AsyncImageView *asyncImage = [[[AsyncImageView alloc] init] autorelease];
             
             NSString *sexFolder = sex == 1 ? @"m" : @"f";
             NSString *subFolder = [[NSString alloc] initWithFormat:@"%i/%i.png", sub, i+1];
-            NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@/%@", [imageURL objectAtIndex:i], sexFolder, subFolder];
+            NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@/%@", baseURL, sexFolder, subFolder];
             [sexFolder release];
             [subFolder release];
             

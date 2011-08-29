@@ -23,6 +23,7 @@
     NSArray *productArray;
     NSArray *imageArray;
     NSArray *imageURL;
+    NSString *baseURL;
     BOOL pageControlUsed;
     NSInteger numberOfPages;
     NSInteger cpage;

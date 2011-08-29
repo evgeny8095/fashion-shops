@@ -56,12 +56,33 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.    
+    // Do any additional setup after loading the view from its nib. 
+    UIImage *loading1 = [UIImage imageNamed:@"loading1.gif"];
+    UIImage *loading2 = [UIImage imageNamed:@"loading2.gif"];
+    UIImage *loading3 = [UIImage imageNamed:@"loading3.gif"];
+    UIImage *loading4 = [UIImage imageNamed:@"loading4.gif"];
+    UIImage *loading5 = [UIImage imageNamed:@"loading5.gif"];
+    UIImage *loading6 = [UIImage imageNamed:@"loading6.gif"];
+    NSArray *animationLoading = [[NSArray alloc] initWithObjects:loading1, loading2, loading3, loading4, loading5, loading6, nil];
+    [loading1 release];
+    [loading2 release];
+    [loading3 release];
+    [loading4 release];
+    [loading5 release];
+    [loading6 release];
+    
     NSURL *curl = [NSURL URLWithString:imageStr];
     NSURLRequest* request = [NSURLRequest requestWithURL:curl cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
     connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
     
+    loading = [[UIImageView alloc] initWithFrame:CGRectMake(479, 295, 66, 66)];
+    loading.animationImages = animationLoading;
+    [loading setAnimationDuration:1];
+    [loading startAnimating];
+    [self.view addSubview:loading];
+    
     button = [[UIButton alloc] initWithFrame:CGRectMake(256, 0, 512, 655)];
+    [animationLoading release];
     [button addTarget:self action:@selector(revealDetails:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:button];
@@ -105,7 +126,7 @@
 
 - (void)revealDetails:(id)sender{
         UIButton *thisButton = (UIButton *) sender;
-    if(mode){        
+    if(mode){
         NSInteger nx = (NSInteger) thisButton.frame.origin.x % 1024;
         NSInteger px = thisButton.frame.origin.x-nx;
         NSInteger margin = (512-button.frame.size.width)/2;
@@ -129,12 +150,14 @@
 
 - (void)changeViewMode:(BOOL)cmode{
     if(cmode){
+        [loading setFrame:CGRectMake(479, 295, 66, 66)];
         NSInteger margin = 512-(button.frame.size.width/2);
         [button setFrame:CGRectMake(margin, 0, button.frame.size.width, button.frame.size.height)];
         [labelName setHidden:YES];
         [labelPrice setHidden:YES];
         [labelDesc setHidden:YES];
     }else{
+        [loading setFrame:CGRectMake(223, 295, 66, 66)];
         NSInteger nx = (NSInteger) button.frame.origin.x % 1024;
         NSInteger px = button.frame.origin.x-nx;
         NSInteger margin = (512-button.frame.size.width)/2;
@@ -167,6 +190,7 @@
 	
     
 	UIImage *imagex = [UIImage imageWithData:data];
+    [loading setHidden:YES];
     if (mode) {
         [button setImage:imagex forState:normal];
         NSInteger margin = 512-(button.frame.size.width/2);

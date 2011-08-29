@@ -53,6 +53,8 @@
 	data=nil;
     
     [cbutton setImage:image forState:normal];
+    CGFloat padding = 10.0;
+    [cbutton setImageEdgeInsets:UIEdgeInsetsMake(padding, padding, padding, padding)];
     //[delegate imageLoadedSuccess:self];
 }
 

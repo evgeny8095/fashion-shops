@@ -38,6 +38,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    //search
+//    UISearchBar searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(900, 20, 100, 44)];
+    
     // The left big button
     UIImage *bigHomeImage = [UIImage imageNamed:@"big_home.jpg"];
     UIButton *bigButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 44, 512, 655)];

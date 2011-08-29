@@ -12,14 +12,13 @@
 
 @interface ProductSliderViewController : UIViewController <UIScrollViewDelegate, BigProductSliderViewControllerDelegate>{
     UIScrollView *productSmallSlider;
-    UIScrollView *productBigSlider;
-    // UIScrollView *productDetailSlider;
     NSInteger totalItem;
     NSMutableArray *buttons;
     UIPageControl *pageControl;
     BOOL pageControlUsed;
     NSArray *imageArray;
     NSArray *imageURL;
+    NSString *baseURL;
     NSInteger sex;
     NSInteger sub;
 }
@@ -28,8 +27,6 @@
 @property (nonatomic, assign) NSInteger sex;
 @property (nonatomic, assign) NSInteger sub;
 
--(IBAction)swapViewSmallToBig:(id)sender;
--(IBAction)swapViewBigToSmall:(id)sender;
 - (IBAction)gotoProductDetails:(id)sender;
 
 

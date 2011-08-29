@@ -55,6 +55,7 @@
     productArray = [[NSArray alloc] initWithObjects:@"San Pham 1",@"San Pham 2", @"San Pham 3", @"San Pham 4", @"San Pham 5", @"San Pham 6", @"San Pham 7", @"San Pham 8", @"San Pham 9", @"San Pham 10", nil];
     imageArray = [[NSArray alloc] initWithObjects:@"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", nil];
     imageURL = [[NSArray alloc] initWithObjects:@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/", nil];
+    baseURL = @"http://www.ongsoft.com/ipc/";
     
     numberOfPages = [productArray count];
     
@@ -133,11 +134,13 @@
     {
         NSString *sexFolder = sex == 1 ? @"m" : @"f";
         NSString *subFolder = [[NSString alloc] initWithFormat:@"%i/%i.png", sub, page+1];
-        NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@/%@", [imageURL objectAtIndex:page], sexFolder, subFolder];
+        NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@/%@", baseURL, sexFolder, subFolder];
         [sexFolder release];
         [subFolder release];
+        
         controller = [[ProductsDetailsSliderViewController alloc] initWithImage:urlPath hasName:[productArray objectAtIndex:page] hasPrice:@"$1000" hasDesc:@"san pham mau" inPosition:page withMode:viewMode];
         [urlPath release];
+        
         controller.delegate = self;
         [viewControllers replaceObjectAtIndex:page withObject:controller];
         [controller release];
@@ -183,9 +186,6 @@
         self.navigationItem.title = [productArray objectAtIndex:page];
         cpage = page;
     }
-    
-    
-    
     // A possible optimization would be to unload the views+controllers which are no longer visible
 }
 

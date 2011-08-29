@@ -33,6 +33,7 @@
     BOOL mode;
     NSURLConnection* connection;
     NSMutableData* data;
+    UIImageView *loading;
 }
 
 @property (nonatomic, retain) UIImage *image;
