@@ -178,7 +178,7 @@
     [delegate finishSomething:self withItemNumber:page];
     
     // load the visible page and the page on either side of it (to avoid flashes when the user starts scrolling)
-    if(page!=numberOfPages)
+    if(page < numberOfPages && page > 0)
     {
         [self loadScrollViewWithPage:page - 1];
         [self loadScrollViewWithPage:page];
