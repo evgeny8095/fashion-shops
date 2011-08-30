@@ -9,6 +9,7 @@
 #import "ProductSliderViewController.h"
 #import "BigProductSliderViewController.h"
 #import "asyncimageview.h"
+#import "MyPopOverView.h"
 
 @interface ProductSliderViewController (PrivateMethods)
 - (void)loadScrollViewWithPage:(int)page;
@@ -16,7 +17,7 @@
 @end
 
 @implementation ProductSliderViewController
-@synthesize buttons, sex, sub;
+@synthesize buttons, sex, sub, myPopOver, popoverController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,6 +29,11 @@
     return self;
 }
 
+- (void)dealloc{
+    [popoverController dismissPopoverAnimated:NO];
+    [super dealloc];
+}
+
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
@@ -37,7 +43,20 @@
 }
 
 - (void)filterProductList:(id)sender{
-    
+    if(![popoverController isPopoverVisible]){
+		myPopOver = [[MyPopOverView alloc] initWithNibName:@"MyPopOverView" bundle:nil];
+		popoverController = [[UIPopoverController alloc] initWithContentViewController:myPopOver];
+        
+        
+		[popoverController setPopoverContentSize:CGSizeMake(250.0f, 200.0f)];
+		[popoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+		
+		// Or use the following line to display it from a given rectangle
+        //		[popoverController presentPopoverFromRect:CGRectMake(10, 10, 100, 100) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+	}else{
+		[popoverController dismissPopoverAnimated:YES];
+	}
+
 }
 
 #pragma mark - View lifecycle
@@ -46,18 +65,21 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    productArray = [[NSArray alloc] initWithObjects:@"San Pham 1",@"San Pham 2", @"San Pham 3", @"San Pham 4", @"San Pham 5", @"San Pham 6", @"San Pham 7", @"San Pham 8", @"San Pham 9", @"San Pham 10", nil];
+    productArray = [[NSArray alloc] initWithObjects:@"Simple Product 1",@"Simple Product 2", @"Simple Product 3", @"Simple Product 4", @"Simple Product 5", @"Simple Product 6", @"Simple Product 7", @"Simple Product 8", @"Simple Product 9", @"Simple Product 10", nil];
     imageArray = [[NSArray alloc] initWithObjects:@"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", nil];
     imageURL = [[NSArray alloc] initWithObjects:@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/", nil];
     baseURL = @"http://www.ongsoft.com/ipc/";
-    
+
     //refine button
-    UIBarButtonItem *filterButton = [[ UIBarButtonItem alloc] initWithTitle:@"Show by" style:UIBarButtonItemStylePlain target:self action:@selector(filterProductList:)];
+    UIBarButtonItem *filterButton = [[ UIBarButtonItem alloc] initWithTitle:@"Show Option" style:UIBarButtonItemStylePlain target:self action:@selector(filterProductList:)];
     self.navigationItem.rightBarButtonItem = filterButton;
     [filterButton release];
     
     
     totalItem = [productArray count];
+    if(sub == 0){
+        totalItem = [productArray count]*15;
+    }
     
     productSmallSlider = [[UIScrollView alloc] initWithFrame:self.view.frame];
     
@@ -155,22 +177,46 @@
     NSInteger items = truePage*8;
     items = items > totalItem ? totalItem : items;
     NSInteger offset = page*8;
-    for (NSInteger i = offset; i < items; i++) {
-        UIButton *button = [buttons objectAtIndex:i];
-        if ([[button imageView] image] == NULL) {
-            AsyncImageView *asyncImage = [[[AsyncImageView alloc] init] autorelease];
-            
-            NSString *sexFolder = sex == 1 ? @"m" : @"f";
-            NSString *subFolder = [[NSString alloc] initWithFormat:@"%i/%i.png", sub, i+1];
-            NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@/%@", baseURL, sexFolder, subFolder];
-            [sexFolder release];
-            [subFolder release];
-            
-            NSURL* url = [NSURL URLWithString:urlPath];
-            [urlPath release];
-            
-            [asyncImage loadImageFromURL:url forButton:button];
-        }        
+    if(sub == 0){
+        for (NSInteger i = offset; i < items; i++) {
+            UIButton *button = [buttons objectAtIndex:i];
+            if ([[button imageView] image] == NULL) {
+                AsyncImageView *asyncImage = [[[AsyncImageView alloc] init] autorelease];
+                
+                NSString *sexFolder = sex == 1 ? @"m" : @"f";
+                NSInteger cSub = i/11+1;
+                NSInteger cItem = i%10;
+                if(i > 10 && cItem == 0)
+                    cItem = 1;
+                NSString *subFolder = [[NSString alloc] initWithFormat:@"%i/%i.png", cSub, cItem];
+                NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@/%@", baseURL, sexFolder, subFolder];
+                [sexFolder release];
+                [subFolder release];
+                
+                NSURL* url = [NSURL URLWithString:urlPath];
+                [urlPath release];
+                
+                [asyncImage loadImageFromURL:url forButton:button];
+            }        
+        }
+    }else{
+        for (NSInteger i = offset; i < items; i++) {
+            UIButton *button = [buttons objectAtIndex:i];
+            if ([[button imageView] image] == NULL) {
+                AsyncImageView *asyncImage = [[[AsyncImageView alloc] init] autorelease];
+                
+                NSString *sexFolder = sex == 1 ? @"m" : @"f";
+                NSString *subFolder = [[NSString alloc] initWithFormat:@"%i/%i.png", sub, i+1];
+                NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@/%@", baseURL, sexFolder, subFolder];
+                [sexFolder release];
+                [subFolder release];
+                
+                NSURL* url = [NSURL URLWithString:urlPath];
+                [urlPath release];
+                
+                [asyncImage loadImageFromURL:url forButton:button];
+            }        
+        }
     }
 }
 
@@ -201,5 +247,6 @@
     }
     // A possible optimization would be to unload the views+controllers which are no longer visible
 }
+
 
 @end

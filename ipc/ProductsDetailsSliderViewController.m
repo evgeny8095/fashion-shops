@@ -87,27 +87,50 @@
     
     [self.view addSubview:button];
     
-    NSLog(@"name: %@", self.name);
-    labelName = [[UILabel alloc] initWithFrame:CGRectMake(522, 100, 150, 40)];
+    labelBrand = [[UILabel alloc] initWithFrame:CGRectMake(522, 100, 150, 40)];
+    [labelBrand setText:@"Adidas"];
+    [labelBrand setHidden:YES];
+    [self.view addSubview:labelBrand];
+    
+    labelStore = [[UILabel alloc] initWithFrame:CGRectMake(522, 160, 150, 40)];
+    [labelStore setText:@"Sample Store"];
+    [labelStore setHidden:YES];
+    [self.view addSubview:labelStore];
+    
+    labelName = [[UILabel alloc] initWithFrame:CGRectMake(522, 210, 150, 40)];
     [labelName setText:name];
     [labelName setHidden:YES];
     [self.view addSubview:labelName];
     
-    labelPrice = [[UILabel alloc] initWithFrame:CGRectMake(522, 160, 150, 40)];
+    labelPrice = [[UILabel alloc] initWithFrame:CGRectMake(522, 270, 150, 40)];
     [labelPrice setHidden:YES];
     [labelPrice setText:price];
     [self.view addSubview:labelPrice];
     
-    labelDesc = [[UILabel alloc] initWithFrame:CGRectMake(522, 210, 150, 40)];
+    labelSize = [[UILabel alloc] initWithFrame:CGRectMake(522, 330, 400, 40)];
+    [labelSize setHidden:YES];
+    [labelSize setText:@"Available size: XXS XS S M L XL XXL"];
+    [self.view addSubview:labelSize];
+    
+    labelDesc = [[UILabel alloc] initWithFrame:CGRectMake(522, 390, 400, 40)];
     [labelDesc setText:desc];
     [labelDesc setHidden:YES];
     [self.view addSubview:labelDesc];
     
+    like = [[UIButton alloc] initWithFrame:CGRectMake(522, 450, 50, 30)];
+    [like setHidden:YES];
+    [like setTitle:@"Like" forState:normal];
+    [like.titleLabel setFont:[UIFont fontWithName: @"Helvetica" size: 24]];
+    [like.titleLabel setFont:[UIFont boldSystemFontOfSize:24]];
+    [like setBackgroundColor:[UIColor redColor]];
+    [self.view addSubview:like];
+    
     buy = [[UIButton alloc] initWithFrame:CGRectMake(900, 600, 50, 30)];
     [buy addTarget:self action:@selector(gotoShop:) forControlEvents:UIControlEventTouchUpInside];
-    //[buy setHidden:YES];
     [buy setBackgroundColor:[UIColor blackColor]];
     [buy setTitle:@"Buy" forState:normal];
+    [buy.titleLabel setFont:[UIFont fontWithName: @"Helvetica" size: 24]];
+    [buy.titleLabel setFont:[UIFont boldSystemFontOfSize:24]];
     [self.view addSubview:buy];
 }
 
@@ -131,18 +154,16 @@
         NSInteger px = thisButton.frame.origin.x-nx;
         NSInteger margin = (512-button.frame.size.width)/2;
         [thisButton setFrame:CGRectMake(px+margin, 0, thisButton.frame.size.width, thisButton.frame.size.height)];
-        [labelName setHidden:NO];
-        [labelPrice setHidden:NO];
-        [labelDesc setHidden:NO];
-        [buy setHidden:NO];
+        [self labelHiddenChage:!mode];
+        [buy setFrame:CGRectMake(575, 450, 50, 30)];
+        [buy setBackgroundColor:[UIColor redColor]];
         mode = NO;
     }else{
         NSInteger margin = 512-(button.frame.size.width/2);
         [thisButton setFrame:CGRectMake(margin, 0, thisButton.frame.size.width, thisButton.frame.size.height)];
-        [labelName setHidden:YES];
-        [labelPrice setHidden:YES];
-        [labelDesc setHidden:YES];
-        [buy setHidden:NO];
+        [self labelHiddenChage:!mode];
+        [buy setFrame:CGRectMake(900, 600, 50, 30)];
+        [buy setBackgroundColor:[UIColor blackColor]];
         mode = YES;
     }
     [delegate changeMode:self withMode:mode];
@@ -153,20 +174,29 @@
         [loading setFrame:CGRectMake(479, 295, 66, 66)];
         NSInteger margin = 512-(button.frame.size.width/2);
         [button setFrame:CGRectMake(margin, 0, button.frame.size.width, button.frame.size.height)];
-        [labelName setHidden:YES];
-        [labelPrice setHidden:YES];
-        [labelDesc setHidden:YES];
+        [self labelHiddenChage:cmode];
+        [buy setFrame:CGRectMake(900, 600, 50, 30)];
+        [buy setBackgroundColor:[UIColor blackColor]];
     }else{
         [loading setFrame:CGRectMake(223, 295, 66, 66)];
         NSInteger nx = (NSInteger) button.frame.origin.x % 1024;
         NSInteger px = button.frame.origin.x-nx;
         NSInteger margin = (512-button.frame.size.width)/2;
         [button setFrame:CGRectMake(px+margin, 0, button.frame.size.width, button.frame.size.height)];
-        [labelName setHidden:NO];
-        [labelPrice setHidden:NO];
-        [labelDesc setHidden:NO];
-        //[buy setHidden:NO];
+        [self labelHiddenChage:cmode];
+        [buy setFrame:CGRectMake(575, 450, 50, 30)];
+        [buy setBackgroundColor:[UIColor redColor]];
     }
+}
+
+- (void)labelHiddenChage:(BOOL)cmode{
+    [labelBrand setHidden:cmode];
+    [labelStore setHidden:cmode];
+    [labelName setHidden:cmode];
+    [labelPrice setHidden:cmode];
+    [labelSize setHidden:cmode];
+    [labelDesc setHidden:cmode];
+    [like setHidden:cmode];
 }
 
 - (void)buy:(id)sender{
@@ -187,7 +217,6 @@
 - (void)connectionDidFinishLoading:(NSURLConnection*)theConnection {
 	[connection release];
 	connection=nil;
-	
     
 	UIImage *imagex = [UIImage imageWithData:data];
     [loading setHidden:YES];

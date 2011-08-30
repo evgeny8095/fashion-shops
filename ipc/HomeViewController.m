@@ -39,7 +39,7 @@
     // Do any additional setup after loading the view from its nib.
     
     //search
-    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(800, 0, 70, 44)];
+    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(800, 0, 200, 44)];
     navBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:searchBar];
     [searchBar release];
     

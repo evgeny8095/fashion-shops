@@ -24,8 +24,11 @@
     NSString *desc;
     UIButton *buy;
     UIButton *like;
+    UILabel *labelBrand;
+    UILabel *labelStore;
     UILabel *labelName;
     UILabel *labelPrice;
+    UILabel *labelSize;
     UILabel *labelDesc;
     NSString *url;
     NSInteger cPosition;
@@ -48,5 +51,6 @@
 - (void)changeViewMode:(BOOL)cmode;
 - (void)buy:(id)sender;
 - (IBAction)gotoShop:(id)sender;
+- (void)labelHiddenChage:(BOOL)cmode;
 
 @end
