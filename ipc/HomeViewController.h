@@ -12,6 +12,7 @@
 @interface HomeViewController : UIViewController <UINavigationControllerDelegate>
 
 @property (nonatomic, retain) IBOutlet UINavigationController *navController;
+@property (nonatomic, retain) IBOutlet UINavigationBar *navBar;
 
 - (void)flipForDuration:(NSTimeInterval)time withAnimation:(UIViewAnimationTransition)transition;
 

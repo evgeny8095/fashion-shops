@@ -12,7 +12,7 @@
 
 @implementation HomeViewController
 
-@synthesize navController;
+@synthesize navController, navBar;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -39,7 +39,9 @@
     // Do any additional setup after loading the view from its nib.
     
     //search
-//    UISearchBar searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(900, 20, 100, 44)];
+    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(800, 0, 70, 44)];
+    navBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:searchBar];
+    [searchBar release];
     
     // The left big button
     UIImage *bigHomeImage = [UIImage imageNamed:@"big_home.jpg"];

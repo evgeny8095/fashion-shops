@@ -36,16 +36,26 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+- (void)filterProductList:(id)sender{
+    
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    NSArray *productArray = [[NSArray alloc] initWithObjects:@"San Pham 1",@"San Pham 2", @"San Pham 3", @"San Pham 4", @"San Pham 5", @"San Pham 6", @"San Pham 7", @"San Pham 8", @"San Pham 9", @"San Pham 10", nil];
+    productArray = [[NSArray alloc] initWithObjects:@"San Pham 1",@"San Pham 2", @"San Pham 3", @"San Pham 4", @"San Pham 5", @"San Pham 6", @"San Pham 7", @"San Pham 8", @"San Pham 9", @"San Pham 10", nil];
     imageArray = [[NSArray alloc] initWithObjects:@"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", nil];
     imageURL = [[NSArray alloc] initWithObjects:@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/", nil];
     baseURL = @"http://www.ongsoft.com/ipc/";
+    
+    //refine button
+    UIBarButtonItem *filterButton = [[ UIBarButtonItem alloc] initWithTitle:@"Show by" style:UIBarButtonItemStylePlain target:self action:@selector(filterProductList:)];
+    self.navigationItem.rightBarButtonItem = filterButton;
+    [filterButton release];
+    
     
     totalItem = [productArray count];
     
@@ -112,13 +122,13 @@
 }
 
 - (IBAction)gotoProductDetails:(id)sender{
-    NSString *title = ((UIButton *) sender).titleLabel.text;
+    //NSString *title = ((UIButton *) sender).titleLabel.text;
     NSInteger page = ((UIButton *) sender).tag;
     
     
     BigProductSliderViewController *bigProductSliderViewController = [[BigProductSliderViewController alloc] initWithPage:page];
     bigProductSliderViewController.delegate = self;
-    bigProductSliderViewController.navigationItem.title = title;
+    bigProductSliderViewController.navigationItem.title = [productArray objectAtIndex:page];
     bigProductSliderViewController.sex = sex;
     bigProductSliderViewController.sub = sub;
     bigProductSliderViewController.item = page;

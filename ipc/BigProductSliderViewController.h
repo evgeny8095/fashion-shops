@@ -48,4 +48,6 @@
 - (void)gotoDetails:(id)sender;
 - (IBAction)changePage:(id)sender;
 - (id)initWithPage:(int)page;
+- (void)likeAction:(id)sender;
+
 @end

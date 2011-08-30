@@ -16,6 +16,7 @@
     NSMutableArray *buttons;
     UIPageControl *pageControl;
     BOOL pageControlUsed;
+    NSArray *productArray;
     NSArray *imageArray;
     NSArray *imageURL;
     NSString *baseURL;
@@ -28,6 +29,6 @@
 @property (nonatomic, assign) NSInteger sub;
 
 - (IBAction)gotoProductDetails:(id)sender;
-
+- (void)filterProductList:(id)sender;
 
 @end

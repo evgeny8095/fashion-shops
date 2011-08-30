@@ -45,6 +45,10 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+- (void)likeAction:(id)sender{
+    
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
@@ -56,6 +60,12 @@
     imageArray = [[NSArray alloc] initWithObjects:@"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", nil];
     imageURL = [[NSArray alloc] initWithObjects:@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/", nil];
     baseURL = @"http://www.ongsoft.com/ipc/";
+    
+    UIImage *likeImage = [UIImage imageNamed:@"29-heart.png"];
+    UIBarButtonItem *likeButton = [[UIBarButtonItem alloc] initWithImage:likeImage style:UIBarButtonItemStyleBordered target:self action:@selector(likeAction:)];
+    [likeImage release];
+    self.navigationItem.rightBarButtonItem = likeButton;
+    [likeButton release];
     
     numberOfPages = [productArray count];
     
@@ -180,8 +190,8 @@
     // load the visible page and the page on either side of it (to avoid flashes when the user starts scrolling)
     if(page < numberOfPages && page > 0)
     {
-        [self loadScrollViewWithPage:page - 1];
         [self loadScrollViewWithPage:page];
+        [self loadScrollViewWithPage:page - 1];
         [self loadScrollViewWithPage:page + 1];
         self.navigationItem.title = [productArray objectAtIndex:page];
         cpage = page;
