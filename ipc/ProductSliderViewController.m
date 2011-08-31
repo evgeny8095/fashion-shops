@@ -17,7 +17,7 @@
 @end
 
 @implementation ProductSliderViewController
-@synthesize buttons, sex, sub, myPopOver, popoverController;
+@synthesize buttons, sex, sub, myPopOver, popoverController, title;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -69,11 +69,22 @@
     imageArray = [[NSArray alloc] initWithObjects:@"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", nil];
     imageURL = [[NSArray alloc] initWithObjects:@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/", nil];
     baseURL = @"http://www.ongsoft.com/ipc/";
-
+    
     //refine button
     UIBarButtonItem *filterButton = [[ UIBarButtonItem alloc] initWithTitle:@"Show Option" style:UIBarButtonItemStylePlain target:self action:@selector(filterProductList:)];
     self.navigationItem.rightBarButtonItem = filterButton;
     [filterButton release];
+    
+//    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 480, 44)];
+//    titleLabel.backgroundColor = [UIColor clearColor];
+//    titleLabel.numberOfLines = 2;
+//    titleLabel.font = [UIFont boldSystemFontOfSize:14.0f];
+//    titleLabel.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
+//    titleLabel.textAlignment = UITextAlignmentCenter;
+//    titleLabel.textColor = [UIColor whiteColor];
+//    titleLabel.text = self.title;
+//    self.navigationItem.titleView = titleLabel;
+    self.navigationItem.title = title;
     
     
     totalItem = [productArray count];

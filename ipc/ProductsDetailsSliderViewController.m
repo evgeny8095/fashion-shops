@@ -10,6 +10,10 @@
 #import "WebViewController.h"
 #import "SubcategoryViewController.h"
 
+#define buttonHeight 35
+#define buttonWidth 90
+#define animationDuration 0.1
+
 @implementation ProductsDetailsSliderViewController
 @synthesize image;
 @synthesize imageStr;
@@ -75,6 +79,13 @@
     NSURLRequest* request = [NSURLRequest requestWithURL:curl cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
     connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
     
+    backCover = [[UIView alloc] initWithFrame:self.view.frame];
+    [backCover setBackgroundColor:[UIColor blackColor]];
+    [backCover setAlpha:0.5];
+    [backCover setOpaque:YES];
+    [backCover setHidden:YES];
+    [self.view addSubview:backCover];
+    
     loading = [[UIImageView alloc] initWithFrame:CGRectMake(479, 295, 66, 66)];
     loading.animationImages = animationLoading;
     [loading setAnimationDuration:1];
@@ -90,48 +101,67 @@
     labelBrand = [[UILabel alloc] initWithFrame:CGRectMake(522, 100, 150, 40)];
     [labelBrand setText:@"Adidas"];
     [labelBrand setHidden:YES];
+    [labelBrand setBackgroundColor:[UIColor clearColor]];
+    [labelBrand setTextColor:[UIColor whiteColor]];
+    [labelBrand setShadowColor:[UIColor blackColor]];
     [self.view addSubview:labelBrand];
     
     labelStore = [[UILabel alloc] initWithFrame:CGRectMake(522, 160, 150, 40)];
     [labelStore setText:@"Sample Store"];
     [labelStore setHidden:YES];
+    [labelStore setBackgroundColor:[UIColor clearColor]];
+    [labelStore setTextColor:[UIColor whiteColor]];
+    [labelStore setShadowColor:[UIColor blackColor]];
     [self.view addSubview:labelStore];
     
-    labelName = [[UILabel alloc] initWithFrame:CGRectMake(522, 210, 150, 40)];
+    labelName = [[UILabel alloc] initWithFrame:CGRectMake(522, 220, 500, 40)];
     [labelName setText:name];
     [labelName setHidden:YES];
+    [labelName setBackgroundColor:[UIColor clearColor]];
+    [labelName setTextColor:[UIColor whiteColor]];
+    [labelName setShadowColor:[UIColor blackColor]];
+    [labelName setFont:[UIFont boldSystemFontOfSize:20]];
     [self.view addSubview:labelName];
     
-    labelPrice = [[UILabel alloc] initWithFrame:CGRectMake(522, 270, 150, 40)];
+    labelPrice = [[UILabel alloc] initWithFrame:CGRectMake(622, 280, 150, 40)];
     [labelPrice setHidden:YES];
     [labelPrice setText:price];
+    [labelPrice setBackgroundColor:[UIColor clearColor]];
+    [labelPrice setTextColor:[UIColor whiteColor]];
+    [labelPrice setShadowColor:[UIColor blackColor]];
+    [labelPrice setFont:[UIFont boldSystemFontOfSize:20]];
     [self.view addSubview:labelPrice];
     
-    labelSize = [[UILabel alloc] initWithFrame:CGRectMake(522, 330, 400, 40)];
+    labelSize = [[UILabel alloc] initWithFrame:CGRectMake(522, 340, 400, 40)];
     [labelSize setHidden:YES];
     [labelSize setText:@"Available size: XXS XS S M L XL XXL"];
+    [labelSize setBackgroundColor:[UIColor clearColor]];
+    [labelSize setTextColor:[UIColor whiteColor]];
+    [labelSize setShadowColor:[UIColor blackColor]];
     [self.view addSubview:labelSize];
     
-    labelDesc = [[UILabel alloc] initWithFrame:CGRectMake(522, 390, 400, 40)];
-    [labelDesc setText:desc];
-    [labelDesc setHidden:YES];
-    [self.view addSubview:labelDesc];
+//    labelDesc = [[UILabel alloc] initWithFrame:CGRectMake(522, 400, 400, 40)];
+//    [labelDesc setText:desc];
+//    [labelDesc setHidden:YES];
+//    [self.view addSubview:labelDesc];
     
-    like = [[UIButton alloc] initWithFrame:CGRectMake(522, 450, 50, 30)];
+    like = [[UIButton alloc] initWithFrame:CGRectMake(522, 460, 50, 30)];
     [like setHidden:YES];
     [like setTitle:@"Like" forState:normal];
     [like.titleLabel setFont:[UIFont fontWithName: @"Helvetica" size: 24]];
     [like.titleLabel setFont:[UIFont boldSystemFontOfSize:24]];
     [like setBackgroundColor:[UIColor redColor]];
-    [self.view addSubview:like];
+    //[self.view addSubview:like];
     
-    buy = [[UIButton alloc] initWithFrame:CGRectMake(900, 600, 50, 30)];
+    buy = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    buy.frame = CGRectMake(900, 600, buttonWidth, buttonHeight);
     [buy addTarget:self action:@selector(gotoShop:) forControlEvents:UIControlEventTouchUpInside];
-    [buy setBackgroundColor:[UIColor blackColor]];
-    [buy setTitle:@"Buy" forState:normal];
+    //[buy setBackgroundColor:[UIColor blackColor]];
+    [buy setTitle:@"Buy" forState:UIControlStateNormal];
     [buy.titleLabel setFont:[UIFont fontWithName: @"Helvetica" size: 24]];
     [buy.titleLabel setFont:[UIFont boldSystemFontOfSize:24]];
     [self.view addSubview:buy];
+    [self.view setBackgroundColor:[UIColor whiteColor]];
 }
 
 - (void)viewDidUnload
@@ -153,17 +183,29 @@
         NSInteger nx = (NSInteger) thisButton.frame.origin.x % 1024;
         NSInteger px = thisButton.frame.origin.x-nx;
         NSInteger margin = (512-button.frame.size.width)/2;
-        [thisButton setFrame:CGRectMake(px+margin, 0, thisButton.frame.size.width, thisButton.frame.size.height)];
+        [UIView animateWithDuration:animationDuration delay:0 options:UIViewAnimationTransitionNone
+						 animations:^{ thisButton.center = CGPointMake(256, 327.5); }
+						 completion:^(BOOL finished) {
+                             [thisButton setFrame:CGRectMake(px+margin, 0, thisButton.frame.size.width, thisButton.frame.size.height)];
+						 }];
+        //[thisButton setFrame:CGRectMake(px+margin, 0, thisButton.frame.size.width, thisButton.frame.size.height)];
         [self labelHiddenChage:!mode];
-        [buy setFrame:CGRectMake(575, 450, 50, 30)];
-        [buy setBackgroundColor:[UIColor redColor]];
+        [buy setFrame:CGRectMake(522, 280, buttonWidth, buttonHeight)];
+        //[buy setBackgroundColor:[UIColor redColor]];
+        //[self.view setBackgroundColor:[UIColor grayColor]];
         mode = NO;
     }else{
         NSInteger margin = 512-(button.frame.size.width/2);
-        [thisButton setFrame:CGRectMake(margin, 0, thisButton.frame.size.width, thisButton.frame.size.height)];
+        [UIView animateWithDuration:animationDuration delay:0 options:UIViewAnimationTransitionNone
+						 animations:^{ thisButton.center = CGPointMake(512, 327.5); }
+						 completion:^(BOOL finished) {
+                             [thisButton setFrame:CGRectMake(margin, 0, thisButton.frame.size.width, thisButton.frame.size.height)];
+						 }];
+        
         [self labelHiddenChage:!mode];
-        [buy setFrame:CGRectMake(900, 600, 50, 30)];
-        [buy setBackgroundColor:[UIColor blackColor]];
+        [buy setFrame:CGRectMake(900, 600, buttonWidth, buttonHeight)];
+        //[buy setBackgroundColor:[UIColor blackColor]];
+        //[self.view setBackgroundColor:[UIColor whiteColor]];
         mode = YES;
     }
     [delegate changeMode:self withMode:mode];
@@ -175,8 +217,9 @@
         NSInteger margin = 512-(button.frame.size.width/2);
         [button setFrame:CGRectMake(margin, 0, button.frame.size.width, button.frame.size.height)];
         [self labelHiddenChage:cmode];
-        [buy setFrame:CGRectMake(900, 600, 50, 30)];
-        [buy setBackgroundColor:[UIColor blackColor]];
+        [buy setFrame:CGRectMake(900, 600, buttonWidth, buttonHeight)];
+        //[buy setBackgroundColor:[UIColor blackColor]];
+        //[self.view setBackgroundColor:[UIColor whiteColor]];
     }else{
         [loading setFrame:CGRectMake(223, 295, 66, 66)];
         NSInteger nx = (NSInteger) button.frame.origin.x % 1024;
@@ -184,8 +227,9 @@
         NSInteger margin = (512-button.frame.size.width)/2;
         [button setFrame:CGRectMake(px+margin, 0, button.frame.size.width, button.frame.size.height)];
         [self labelHiddenChage:cmode];
-        [buy setFrame:CGRectMake(575, 450, 50, 30)];
-        [buy setBackgroundColor:[UIColor redColor]];
+        [buy setFrame:CGRectMake(522, 280, buttonWidth, buttonHeight)];
+        //[buy setBackgroundColor:[UIColor redColor]];
+        //[self.view setBackgroundColor:[UIColor grayColor]];
     }
 }
 
@@ -197,6 +241,7 @@
     [labelSize setHidden:cmode];
     [labelDesc setHidden:cmode];
     [like setHidden:cmode];
+    [backCover setHidden:cmode];
 }
 
 - (void)buy:(id)sender{

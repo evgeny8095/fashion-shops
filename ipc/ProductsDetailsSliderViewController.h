@@ -30,6 +30,7 @@
     UILabel *labelPrice;
     UILabel *labelSize;
     UILabel *labelDesc;
+    UIView *backCover;
     NSString *url;
     NSInteger cPosition;
     id<ProductsDetailsSliderViewControllerDelegate> delegate;

@@ -12,6 +12,7 @@
 #import "MyPopOverView.h"
 
 @interface ProductSliderViewController : UIViewController <UIScrollViewDelegate, BigProductSliderViewControllerDelegate, UINavigationControllerDelegate>{
+    NSString *title;
     UIScrollView *productSmallSlider;
     NSInteger totalItem;
     NSMutableArray *buttons;
@@ -32,6 +33,7 @@
 @property (nonatomic, assign) NSInteger sub;
 @property (nonatomic, retain) UIPopoverController *popoverController;
 @property (nonatomic, retain) MyPopOverView *myPopOver;
+@property (nonatomic, copy) NSString *title;
 
 - (IBAction)gotoProductDetails:(id)sender;
 - (void)filterProductList:(id)sender;
