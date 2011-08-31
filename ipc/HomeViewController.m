@@ -38,13 +38,24 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    NSString *baseURL = @"http://www.ongsoft.com/ipc/";
+    
     //search
-    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(800, 0, 200, 44)];
+    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
     navBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:searchBar];
     [searchBar release];
     
     // The left big button
-    UIImage *bigHomeImage = [UIImage imageNamed:@"big_home.jpg"];
+    NSString *bigURL = [NSString stringWithFormat:@"%@%@", baseURL, @"home/big.png"];
+    NSURL *bigHomeURL = [NSURL URLWithString:bigURL];
+    //[bigURL release];
+    UIImage *bigHomeImage = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:bigHomeURL]];
+    //[bigHomeURL release];
+    if (bigHomeImage == nil) {
+        [bigHomeImage release];
+        bigHomeImage = [UIImage imageNamed:@"big_home.jpg"];
+    }
+    
     UIButton *bigButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 44, 512, 655)];
     [bigButton setImage:bigHomeImage forState:normal];
     [bigHomeImage release];
@@ -57,10 +68,46 @@
     [bigLable setAlpha:0.5];
     
     // The 4 right button
-    UIImage *smallHomeImage1 = [UIImage imageNamed:@"small_home1.jpg"];
-    UIImage *smallHomeImage2 = [UIImage imageNamed:@"small_home2.jpg"];
-    UIImage *smallHomeImage3 = [UIImage imageNamed:@"small_home3.jpg"];
-    UIImage *smallHomeImage4 = [UIImage imageNamed:@"small_home4.jpg"];
+    NSString *smallURL1 = [NSString stringWithFormat:@"%@/%@", baseURL, @"home/small1.png"];
+    NSURL *smallHomeURL1 = [NSURL URLWithString:smallURL1];
+    //[smallURL1 release];
+    UIImage *smallHomeImage1 = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:smallHomeURL1]];
+    //[smallHomeURL1 release];
+    if (smallHomeImage1 == nil) {
+        [smallHomeImage1 release];
+        smallHomeImage1 = [UIImage imageNamed:@"small_home1.jpg"];
+    }
+    
+    NSString *smallURL2 = [NSString stringWithFormat:@"%@/%@", baseURL, @"home/small2.png"];
+    NSURL *smallHomeURL2 = [NSURL URLWithString:smallURL2];
+    //[smallURL2 release];
+    UIImage *smallHomeImage2 = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:smallHomeURL2]];
+    //[smallHomeURL2 release];
+    if (smallHomeImage2 == nil) {
+        [smallHomeImage2 release];
+        smallHomeImage2 = [UIImage imageNamed:@"small_home2.jpg"];
+    }
+    
+    NSString *smallURL3 = [NSString stringWithFormat:@"%@/%@", baseURL, @"home/small3.png"];
+    NSURL *smallHomeURL3 = [NSURL URLWithString:smallURL3];
+    //[smallURL3 release];
+    UIImage *smallHomeImage3 = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:smallHomeURL3]];
+    //[smallHomeURL3 release];
+    if (smallHomeImage3 == nil) {
+        [smallHomeImage3 release];
+        smallHomeImage3 = [UIImage imageNamed:@"small_home3.jpg"];
+    }
+    
+    NSString *smallURL4 = [NSString stringWithFormat:@"%@/%@", baseURL, @"home/small4.png"];
+    NSURL *smallHomeURL4 = [NSURL URLWithString:smallURL4];
+    //[smallURL4 release];
+    UIImage *smallHomeImage4 = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:smallHomeURL4]];
+    //[smallHomeURL4 release];
+    if (smallHomeImage4 == nil) {
+        [smallHomeImage4 release];
+        smallHomeImage4 = [UIImage imageNamed:@"small_home1.jpg"];
+    }
+    
     
     UIButton *smallButton1 = [[UIButton alloc] initWithFrame:CGRectMake(512, 44, 256, 327.5)];
     [smallButton1 setImage:smallHomeImage1 forState:normal];

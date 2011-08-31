@@ -97,6 +97,8 @@
         [smallButton setTag:i];
         [smallButton setBackgroundColor:[UIColor whiteColor]];
         [smallButton addTarget:self action:@selector(gotoProductDetails:) forControlEvents:UIControlEventTouchUpInside];
+        CGFloat padding = 10.0;
+        [smallButton setImageEdgeInsets:UIEdgeInsetsMake(padding, padding, padding, padding)];
         
         sy = sy + 1 + smallImageWidth;
         if (sy > 600){
