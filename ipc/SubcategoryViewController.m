@@ -11,7 +11,7 @@
 #import "WebViewController.h"
 
 @implementation SubcategoryViewController
-@synthesize sex;
+@synthesize sex, myPopOver, popoverController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -41,6 +41,7 @@
     
     //search bar
     UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
+    [searchBar setDelegate:self];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:searchBar];
     [searchBar release];
     
@@ -119,6 +120,23 @@
     [self.navigationController pushViewController:productSliderViewController animated:YES];
     
     [productSliderViewController release];
+}
+
+#pragma mark searchbar delegate
+-(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar{
+    myPopOver = [[MyPopOverView alloc] initWithNibName:@"MyPopOverView" bundle:nil];
+    popoverController = [[UIPopoverController alloc] initWithContentViewController:myPopOver];
+    
+    
+    [popoverController setPopoverContentSize:CGSizeMake(300.0f, 300.0f)];
+    //		[popoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    
+    // Or use the following line to display it from a given rectangle
+    [popoverController presentPopoverFromRect:CGRectMake(824, 0, 200, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+-(void)searchBarTextDidEndEditing:(UISearchBar *)searchBar{
+    [popoverController dismissPopoverAnimated:YES];
 }
 
 @end

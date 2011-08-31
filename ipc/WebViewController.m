@@ -47,13 +47,13 @@
     NSURL *url = [NSURL URLWithString:stringUrl];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
-    webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 20, 1024, 655)];
+    webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, 1024, 655)];
     addressBar = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 1024, 20)];
     [addressBar setEditable:NO];
     [webView loadRequest:request];
     [addressBar setText:stringUrl];
     [self.view addSubview:webView];
-    [self.view addSubview:addressBar];
+    //[self.view addSubview:addressBar];
 }
 
 - (void)viewDidUnload

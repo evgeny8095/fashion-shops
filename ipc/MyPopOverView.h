@@ -9,8 +9,11 @@
 #import <UIKit/UIKit.h>
 
 
-@interface MyPopOverView : UIViewController {
-
+@interface MyPopOverView : UIViewController <UITableViewDelegate, UITableViewDataSource>{
+    IBOutlet UITableView *myTable;
+    NSArray *options;
 }
+
+@property (nonatomic, retain) IBOutlet UITableView *myTable;
 
 @end

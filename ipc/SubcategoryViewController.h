@@ -7,12 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MyPopOverView.h"
 
-@interface SubcategoryViewController : UIViewController{
+@interface SubcategoryViewController : UIViewController <UISearchBarDelegate>{
     NSInteger sex;
+    UIPopoverController *popoverController;
+    MyPopOverView *myPopOver;
 }
 
 @property (nonatomic, assign) NSInteger sex;
+@property (nonatomic, retain) UIPopoverController *popoverController;
+@property (nonatomic, retain) MyPopOverView *myPopOver;
 
 -(IBAction)gotoSubCatalogue:(id)sender;
 

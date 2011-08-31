@@ -12,7 +12,7 @@
 
 @implementation HomeViewController
 
-@synthesize navController, navBar;
+@synthesize navController, navBar, myPopOver, popoverController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -42,6 +42,7 @@
     
     //search
     UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
+    [searchBar setDelegate:self];
     navBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:searchBar];
     [searchBar release];
     
@@ -105,7 +106,7 @@
     //[smallHomeURL4 release];
     if (smallHomeImage4 == nil) {
         [smallHomeImage4 release];
-        smallHomeImage4 = [UIImage imageNamed:@"small_home1.jpg"];
+        smallHomeImage4 = [UIImage imageNamed:@"small_home4.jpg"];
     }
     
     
@@ -248,5 +249,22 @@
 //- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
 //    NSLog(@"didshow");
 //}
+
+#pragma mark searchbar delegate
+-(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar{
+    myPopOver = [[MyPopOverView alloc] initWithNibName:@"MyPopOverView" bundle:nil];
+    popoverController = [[UIPopoverController alloc] initWithContentViewController:myPopOver];
+    
+    
+    [popoverController setPopoverContentSize:CGSizeMake(300.0f, 300.0f)];
+    //		[popoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    
+    // Or use the following line to display it from a given rectangle
+    [popoverController presentPopoverFromRect:CGRectMake(824, 0, 200, 38) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+-(void)searchBarTextDidEndEditing:(UISearchBar *)searchBar{
+    [popoverController dismissPopoverAnimated:YES];
+}
 
 @end

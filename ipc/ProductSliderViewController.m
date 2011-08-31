@@ -48,7 +48,7 @@
 		popoverController = [[UIPopoverController alloc] initWithContentViewController:myPopOver];
         
         
-		[popoverController setPopoverContentSize:CGSizeMake(250.0f, 200.0f)];
+		[popoverController setPopoverContentSize:CGSizeMake(300.0f, 300.0f)];
 		[popoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 		
 		// Or use the following line to display it from a given rectangle
@@ -56,7 +56,6 @@
 	}else{
 		[popoverController dismissPopoverAnimated:YES];
 	}
-
 }
 
 #pragma mark - View lifecycle
