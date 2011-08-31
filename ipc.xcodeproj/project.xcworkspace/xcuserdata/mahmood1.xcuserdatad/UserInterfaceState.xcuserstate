@@ -217,7 +217,7 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>13</integer>
+					<integer>57</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
@@ -234,7 +234,7 @@
 		<string>IDEShowUtilities</string>
 		<string>IDEEditorArea</string>
 		<integer>0</integer>
-		<string>HomeViewController.m</string>
+		<string>ProductSliderViewController.m</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -510,7 +510,7 @@
 		<string>IDESCMStatusFilteringEnabled</string>
 		<string>IDESelectedObjects</string>
 		<string>IDEExpandedItemsSet</string>
-		<string>{{0, 0}, {244, 626}}</string>
+		<string>{{0, 452}, {244, 626}}</string>
 		<false/>
 		<dict>
 			<key>$class</key>
@@ -568,7 +568,7 @@
 		</dict>
 		<string>ipc</string>
 		<string>ipc</string>
-		<string>HomeViewController.m</string>
+		<string>ProductSliderViewController.m</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -1495,7 +1495,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>756</real>
+		<real>1016</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -1600,7 +1600,7 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>57</integer>
+					<integer>13</integer>
 				</dict>
 			</array>
 		</dict>
@@ -1780,7 +1780,7 @@
 				<integer>176</integer>
 			</dict>
 			<key>NS.string</key>
-			<string>file://localhost/Users/mahmood1/Documents/ipc/ipc/HomeViewController.m</string>
+			<string>file://localhost/Users/mahmood1/Documents/ipc/ipc/ProductSliderViewController.m</string>
 		</dict>
 		<dict>
 			<key>$classes</key>
@@ -2178,10 +2178,10 @@
 		<string>PrimaryDocumentVisibleCharacterRange</string>
 		<string>HideAllIssues</string>
 		<string>PrimaryDocumentSelectedCharacterRange</string>
-		<real>336480043.353306</real>
-		<string>{9265, 1835}</string>
-		<string>{10891, 0}</string>
-		<string>-searchBarTextDidBeginEditing:</string>
+		<real>336481112.35207301</real>
+		<string>{9514, 1221}</string>
+		<string>{9076, 0}</string>
+		<string>-loadScrollViewWithPage:</string>
 		<string>Xcode.IDEKit.EditorDocument.SourceCode</string>
 		<dict>
 			<key>$class</key>
@@ -2200,7 +2200,7 @@
 				<integer>218</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/mahmood1/Documents/ipc/ipc/HomeViewController.m</string>
+		<string>file://localhost/Users/mahmood1/Documents/ipc/ipc/ProductSliderViewController.m</string>
 		<dict>
 			<key>$classes</key>
 			<array>
@@ -2224,7 +2224,7 @@
 				</dict>
 			</array>
 		</dict>
-		<string>{{0, 0}, {756, 670}}</string>
+		<string>{{0, 0}, {1016, 435}}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -2436,7 +2436,7 @@
 			</array>
 		</dict>
 		<string>ConsoleArea</string>
-		<real>409</real>
+		<real>669</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -2535,7 +2535,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>409</real>
+		<real>669</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -9354,9 +9354,9 @@
 				</dict>
 			</array>
 		</dict>
-		<real>336477931.96650302</real>
-		<string>{884, 1138}</string>
-		<string>{2645, 0}</string>
+		<real>336480357.23938102</real>
+		<string>{6221, 1816}</string>
+		<string>{5225, 0}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -10034,19 +10034,19 @@
 			<array>
 				<dict>
 					<key>CF$UID</key>
-					<integer>351</integer>
+					<integer>208</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>352</integer>
+					<integer>209</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>353</integer>
+					<integer>210</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>354</integer>
+					<integer>211</integer>
 				</dict>
 			</array>
 			<key>NS.objects</key>
@@ -10069,8 +10069,8 @@
 				</dict>
 			</array>
 		</dict>
-		<real>336449266.67703599</real>
-		<string>{37, 1854}</string>
+		<real>336480367.54804599</real>
+		<string>{167, 1740}</string>
 		<string>{1952, 0}</string>
 		<dict>
 			<key>$class</key>
@@ -10354,9 +10354,9 @@
 				</dict>
 			</array>
 		</dict>
-		<real>336479285.03753501</real>
-		<string>{803, 1086}</string>
-		<string>{1804, 47}</string>
+		<real>336481112.347278</real>
+		<string>{9514, 1221}</string>
+		<string>{9076, 0}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -10497,7 +10497,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>336480043.34065002</real>
+		<real>336480123.108715</real>
 		<string>{9265, 1835}</string>
 		<string>{10891, 0}</string>
 		<dict>
@@ -11336,7 +11336,7 @@
 				<integer>872</integer>
 			</dict>
 			<key>NS.time</key>
-			<real>336479934.039635</real>
+			<real>336480749.98261899</real>
 		</dict>
 		<dict>
 			<key>$classes</key>
@@ -11347,7 +11347,7 @@
 			<key>$classname</key>
 			<string>NSDate</string>
 		</dict>
-		<string>Today at 5:38 PM</string>
+		<string>Today at 5:52 PM</string>
 		<integer>106</integer>
 		<dict>
 			<key>$class</key>
@@ -11540,7 +11540,7 @@
 				<integer>888</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/mahmood1/Documents/ipc/ipc/HomeViewController.m</string>
+		<string>file://localhost/Users/mahmood1/Documents/ipc/ipc/ProductSliderViewController.m</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -11558,7 +11558,7 @@
 				<integer>890</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/mahmood1/Documents/ipc/ipc/SubcategoryViewController.m</string>
+		<string>file://localhost/Users/mahmood1/Documents/ipc/ipc/asyncimageview.m</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -11576,7 +11576,7 @@
 				<integer>892</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/mahmood1/Documents/ipc/ipc/SubcategoryViewController.h</string>
+		<string>file://localhost/Users/mahmood1/Documents/ipc/ipc/BigProductSliderViewController.m</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -11594,7 +11594,7 @@
 				<integer>894</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/mahmood1/Documents/ipc/ipc/HomeViewController.h</string>
+		<string>file://localhost/Users/mahmood1/Documents/ipc/ipc/HomeViewController.m</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -11612,7 +11612,7 @@
 				<integer>896</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/mahmood1/Documents/ipc/ipc/ProductSliderViewController.m</string>
+		<string>file://localhost/Users/mahmood1/Documents/ipc/ipc/SubcategoryViewController.m</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -11630,7 +11630,7 @@
 				<integer>898</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/mahmood1/Documents/ipc/ipc/ProductSliderViewController.h</string>
+		<string>file://localhost/Users/mahmood1/Documents/ipc/ipc/SubcategoryViewController.h</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -11648,7 +11648,7 @@
 				<integer>900</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/mahmood1/Documents/ipc/ipc/HomeViewController.xib</string>
+		<string>file://localhost/Users/mahmood1/Documents/ipc/ipc/HomeViewController.h</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -11666,7 +11666,7 @@
 				<integer>902</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/mahmood1/Documents/ipc/ipc/BigProductSliderViewController.m</string>
+		<string>file://localhost/Users/mahmood1/Documents/ipc/ipc/ProductSliderViewController.h</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -11684,7 +11684,7 @@
 				<integer>904</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/mahmood1/Documents/ipc/ipc/ProductsDetailsSliderViewController.m</string>
+		<string>file://localhost/Users/mahmood1/Documents/ipc/ipc/HomeViewController.xib</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -11702,7 +11702,7 @@
 				<integer>906</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/mahmood1/Documents/ipc/ipc/ProductsDetailsSliderViewController.xib</string>
+		<string>file://localhost/Users/mahmood1/Documents/ipc/ipc/ProductsDetailsSliderViewController.m</string>
 	</array>
 	<key>$top</key>
 	<dict>

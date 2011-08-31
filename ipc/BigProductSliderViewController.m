@@ -56,7 +56,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     //[self.navigationController setDelegate:self];
-    productArray = [[NSArray alloc] initWithObjects:@"Simple Product 1",@"Simple Product 2", @"Simple Product 3", @"Simple Product 4", @"Simple Product 5", @"Simple Product 6", @"Simple Product 7", @"Simple Product 8", @"Simple Product 9", @"Simple Product 10", nil];
+    productArray = [[NSArray alloc] initWithObjects:@"Simple Product 1",@"Simple Product 2", @"Simple Product 3", @"Simple Product 4", @"Simple Product 5", @"Simple Product 6", @"Simple Product 7", @"Simple Product 8", @"Simple Product 9", @"Simple Product 10",@"Simple Product 11",@"Simple Product 12", @"Simple Product 13", @"Simple Product 14", @"Simple Product 15", @"Simple Product 16", @"Simple Product 17", @"Simple Product 18", @"Simple Product 19", @"Simple Product 20", nil];
     imageArray = [[NSArray alloc] initWithObjects:@"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", nil];
     imageURL = [[NSArray alloc] initWithObjects:@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/", nil];
     baseURL = @"http://www.ongsoft.com/ipc/";
@@ -142,6 +142,7 @@
     ProductsDetailsSliderViewController *controller = [viewControllers objectAtIndex:page];
     if ((NSNull *)controller == [NSNull null])
     {
+        //hardcode url
         NSString *sexFolder = sex == 1 ? @"m" : @"f";
         NSString *subFolder = [[NSString alloc] initWithFormat:@"%i/%i.png", sub, page+1];
         NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@/%@", baseURL, sexFolder, subFolder];

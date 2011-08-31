@@ -64,7 +64,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    productArray = [[NSArray alloc] initWithObjects:@"Simple Product 1",@"Simple Product 2", @"Simple Product 3", @"Simple Product 4", @"Simple Product 5", @"Simple Product 6", @"Simple Product 7", @"Simple Product 8", @"Simple Product 9", @"Simple Product 10", nil];
+    productArray = [[NSArray alloc] initWithObjects:@"Simple Product 1",@"Simple Product 2", @"Simple Product 3", @"Simple Product 4", @"Simple Product 5", @"Simple Product 6", @"Simple Product 7", @"Simple Product 8", @"Simple Product 9", @"Simple Product 10",@"Simple Product 11",@"Simple Product 12", @"Simple Product 13", @"Simple Product 14", @"Simple Product 15", @"Simple Product 16", @"Simple Product 17", @"Simple Product 18", @"Simple Product 19", @"Simple Product 20", nil];
     imageArray = [[NSArray alloc] initWithObjects:@"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", nil];
     imageURL = [[NSArray alloc] initWithObjects:@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/", nil];
     baseURL = @"http://www.ongsoft.com/ipc/";
@@ -195,12 +195,13 @@
             if ([[button imageView] image] == NULL) {
                 AsyncImageView *asyncImage = [[[AsyncImageView alloc] init] autorelease];
                 
+                //hardcode url
                 NSString *sexFolder = sex == 1 ? @"m" : @"f";
                 NSInteger cSub = i/11+1;
                 NSInteger cItem = i%10;
                 if(i > 10 && cItem == 0)
                     cItem = 1;
-                NSString *subFolder = [[NSString alloc] initWithFormat:@"%i/%i.png", cSub, cItem];
+                NSString *subFolder = [[NSString alloc] initWithFormat:@"%i/t/%i.jpg", cSub, cItem];
                 NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@/%@", baseURL, sexFolder, subFolder];
                 [sexFolder release];
                 [subFolder release];
@@ -217,8 +218,9 @@
             if ([[button imageView] image] == NULL) {
                 AsyncImageView *asyncImage = [[[AsyncImageView alloc] init] autorelease];
                 
+                //hardcode url
                 NSString *sexFolder = sex == 1 ? @"m" : @"f";
-                NSString *subFolder = [[NSString alloc] initWithFormat:@"%i/%i.png", sub, i+1];
+                NSString *subFolder = [[NSString alloc] initWithFormat:@"%i/t/%i.jpg", sub, i+1];
                 NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@/%@", baseURL, sexFolder, subFolder];
                 [sexFolder release];
                 [subFolder release];
