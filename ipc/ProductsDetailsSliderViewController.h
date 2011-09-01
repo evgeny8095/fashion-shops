@@ -22,6 +22,7 @@
     NSString *name;
     NSString *price;
     NSString *desc;
+    UITextView *descText;
     UIButton *buy;
     UIButton *like;
     UILabel *labelBrand;
@@ -30,6 +31,7 @@
     UILabel *labelPrice;
     UILabel *labelSize;
     UILabel *labelDesc;
+    UILabel *labelScreenShot;
     UIView *backCover;
     NSString *url;
     NSInteger cPosition;
@@ -37,7 +39,7 @@
     BOOL mode;
     NSURLConnection* connection;
     NSMutableData* data;
-    UIImageView *loading;
+    UIActivityIndicatorView *loadingView;
 }
 
 @property (nonatomic, retain) UIImage *image;

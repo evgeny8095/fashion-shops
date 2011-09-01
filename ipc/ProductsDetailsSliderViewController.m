@@ -13,6 +13,9 @@
 #define buttonHeight 35
 #define buttonWidth 90
 #define animationDuration 0.1
+#define centerPoint CGPointMake(512,327.5)
+#define leftPoint CGPointMake(256,327.5)
+#define leftDetailsPadding 550
 
 @implementation ProductsDetailsSliderViewController
 @synthesize image;
@@ -60,20 +63,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib. 
-    UIImage *loading1 = [UIImage imageNamed:@"loading1.gif"];
-    UIImage *loading2 = [UIImage imageNamed:@"loading2.gif"];
-    UIImage *loading3 = [UIImage imageNamed:@"loading3.gif"];
-    UIImage *loading4 = [UIImage imageNamed:@"loading4.gif"];
-    UIImage *loading5 = [UIImage imageNamed:@"loading5.gif"];
-    UIImage *loading6 = [UIImage imageNamed:@"loading6.gif"];
-    NSArray *animationLoading = [[NSArray alloc] initWithObjects:loading1, loading2, loading3, loading4, loading5, loading6, nil];
-    [loading1 release];
-    [loading2 release];
-    [loading3 release];
-    [loading4 release];
-    [loading5 release];
-    [loading6 release];
+    // Do any additional setup after loading the view from its nib.
     
     NSURL *curl = [NSURL URLWithString:imageStr];
     NSURLRequest* request = [NSURLRequest requestWithURL:curl cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
@@ -86,19 +76,28 @@
     [backCover setHidden:YES];
     [self.view addSubview:backCover];
     
-    loading = [[UIImageView alloc] initWithFrame:CGRectMake(479, 295, 66, 66)];
-    loading.animationImages = animationLoading;
-    [loading setAnimationDuration:1];
-    [loading startAnimating];
-    [self.view addSubview:loading];
+    //loading indicator
+//    loading = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 66, 66)];
+//    [loading setCenter:CGPointMake(512, 327.5)];
+//    [loading setAnimationImages:animationLoading];
+//    [animationLoading release];
+//    [loading setAnimationDuration:1];
+//    [loading startAnimating];
+//    [self.view addSubview:loading];
+    
+    //build-in loading indicator
+    loadingView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [loadingView setCenter:centerPoint];
+    [loadingView startAnimating];
+    [loadingView setHidesWhenStopped:YES];
+    [self.view addSubview:loadingView];
     
     button = [[UIButton alloc] initWithFrame:CGRectMake(256, 0, 512, 655)];
-    [animationLoading release];
     [button addTarget:self action:@selector(revealDetails:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:button];
     
-    labelBrand = [[UILabel alloc] initWithFrame:CGRectMake(522, 100, 150, 40)];
+    labelBrand = [[UILabel alloc] initWithFrame:CGRectMake(leftDetailsPadding, 50, 150, 40)];
     [labelBrand setText:@"Adidas"];
     [labelBrand setHidden:YES];
     [labelBrand setBackgroundColor:[UIColor clearColor]];
@@ -106,7 +105,7 @@
     [labelBrand setShadowColor:[UIColor blackColor]];
     [self.view addSubview:labelBrand];
     
-    labelStore = [[UILabel alloc] initWithFrame:CGRectMake(522, 160, 150, 40)];
+    labelStore = [[UILabel alloc] initWithFrame:CGRectMake(leftDetailsPadding, 110, 150, 40)];
     [labelStore setText:@"Sample Store"];
     [labelStore setHidden:YES];
     [labelStore setBackgroundColor:[UIColor clearColor]];
@@ -114,16 +113,16 @@
     [labelStore setShadowColor:[UIColor blackColor]];
     [self.view addSubview:labelStore];
     
-    labelName = [[UILabel alloc] initWithFrame:CGRectMake(522, 220, 500, 40)];
+    labelName = [[UILabel alloc] initWithFrame:CGRectMake(leftDetailsPadding, 170, 500, 40)];
     [labelName setText:name];
     [labelName setHidden:YES];
     [labelName setBackgroundColor:[UIColor clearColor]];
     [labelName setTextColor:[UIColor whiteColor]];
     [labelName setShadowColor:[UIColor blackColor]];
-    [labelName setFont:[UIFont boldSystemFontOfSize:20]];
+    [labelName setFont:[UIFont boldSystemFontOfSize:24]];
     [self.view addSubview:labelName];
     
-    labelPrice = [[UILabel alloc] initWithFrame:CGRectMake(622, 280, 150, 40)];
+    labelPrice = [[UILabel alloc] initWithFrame:CGRectMake(leftDetailsPadding+buttonWidth+5, 230, 150, 40)];
     [labelPrice setHidden:YES];
     [labelPrice setText:price];
     [labelPrice setBackgroundColor:[UIColor clearColor]];
@@ -132,7 +131,7 @@
     [labelPrice setFont:[UIFont boldSystemFontOfSize:20]];
     [self.view addSubview:labelPrice];
     
-    labelSize = [[UILabel alloc] initWithFrame:CGRectMake(522, 340, 400, 40)];
+    labelSize = [[UILabel alloc] initWithFrame:CGRectMake(leftDetailsPadding, 290, 400, 40)];
     [labelSize setHidden:YES];
     [labelSize setText:@"Available size: XXS XS S M L XL XXL"];
     [labelSize setBackgroundColor:[UIColor clearColor]];
@@ -140,12 +139,26 @@
     [labelSize setShadowColor:[UIColor blackColor]];
     [self.view addSubview:labelSize];
     
-//    labelDesc = [[UILabel alloc] initWithFrame:CGRectMake(522, 400, 400, 40)];
+    descText = [[UITextView alloc] initWithFrame:CGRectMake(leftDetailsPadding, 350, 430, 100)];
+    [descText setHidden:YES];
+    [descText setText:@"This sample product has:\n* Brown/multicolor animal-print tech taffeta.\n* Drawstring with gold bead detail at spread collar front zip.\n* Long sleeves with elasticized cuffs may be scrunched.\n* Elasticized hem for ease of fit.\n* Polyester.\n* Imported of Italian material."];
+    [descText setBackgroundColor:[UIColor clearColor]];
+    [descText setTextColor:[UIColor whiteColor]];
+    [descText setFont:[UIFont systemFontOfSize:18]];
+    [descText setEditable:NO];
+    [self.view addSubview:descText];
+    
+//    labelScreenShot = [[UILabel alloc] initWithFrame:CGRectMake(leftDetailsPadding, 510, 400, 40)];
+//    [labelScreenShot setHidden:YES];
+//    [labelScreenShot setText:@"More preview:"];
+//    
+    
+//    labelDesc = [[UILabel alloc] initWithFrame:CGRectMake(leftDetailsPadding, 400, 400, 40)];
 //    [labelDesc setText:desc];
 //    [labelDesc setHidden:YES];
 //    [self.view addSubview:labelDesc];
     
-    like = [[UIButton alloc] initWithFrame:CGRectMake(522, 460, 50, 30)];
+    like = [[UIButton alloc] initWithFrame:CGRectMake(leftDetailsPadding, 460, 50, 30)];
     [like setHidden:YES];
     [like setTitle:@"Like" forState:normal];
     [like.titleLabel setFont:[UIFont fontWithName: @"Helvetica" size: 24]];
@@ -180,32 +193,23 @@
 - (void)revealDetails:(id)sender{
         UIButton *thisButton = (UIButton *) sender;
     if(mode){
-        NSInteger nx = (NSInteger) thisButton.frame.origin.x % 1024;
-        NSInteger px = thisButton.frame.origin.x-nx;
-        NSInteger margin = (512-button.frame.size.width)/2;
         [UIView animateWithDuration:animationDuration delay:0 options:UIViewAnimationTransitionNone
-						 animations:^{ thisButton.center = CGPointMake(256, 327.5); }
+						 animations:^{ thisButton.center = leftPoint; loadingView.center = leftPoint; }
 						 completion:^(BOOL finished) {
-                             [thisButton setFrame:CGRectMake(px+margin, 0, thisButton.frame.size.width, thisButton.frame.size.height)];
+                             //do something when finish animation go here
 						 }];
-        //[thisButton setFrame:CGRectMake(px+margin, 0, thisButton.frame.size.width, thisButton.frame.size.height)];
         [self labelHiddenChage:!mode];
-        [buy setFrame:CGRectMake(522, 280, buttonWidth, buttonHeight)];
-        //[buy setBackgroundColor:[UIColor redColor]];
-        //[self.view setBackgroundColor:[UIColor grayColor]];
+        [buy setFrame:CGRectMake(leftDetailsPadding, 230, buttonWidth, buttonHeight)];
         mode = NO;
     }else{
-        NSInteger margin = 512-(button.frame.size.width/2);
         [UIView animateWithDuration:animationDuration delay:0 options:UIViewAnimationTransitionNone
-						 animations:^{ thisButton.center = CGPointMake(512, 327.5); }
+						 animations:^{ thisButton.center = centerPoint; loadingView.center = centerPoint; }
 						 completion:^(BOOL finished) {
-                             [thisButton setFrame:CGRectMake(margin, 0, thisButton.frame.size.width, thisButton.frame.size.height)];
+                             //do something when finish animation go here
 						 }];
         
         [self labelHiddenChage:!mode];
         [buy setFrame:CGRectMake(900, 600, buttonWidth, buttonHeight)];
-        //[buy setBackgroundColor:[UIColor blackColor]];
-        //[self.view setBackgroundColor:[UIColor whiteColor]];
         mode = YES;
     }
     [delegate changeMode:self withMode:mode];
@@ -213,23 +217,15 @@
 
 - (void)changeViewMode:(BOOL)cmode{
     if(cmode){
-        [loading setFrame:CGRectMake(479, 295, 66, 66)];
-        NSInteger margin = 512-(button.frame.size.width/2);
-        [button setFrame:CGRectMake(margin, 0, button.frame.size.width, button.frame.size.height)];
+        [loadingView setCenter:centerPoint];
+        [button setCenter:centerPoint];
         [self labelHiddenChage:cmode];
         [buy setFrame:CGRectMake(900, 600, buttonWidth, buttonHeight)];
-        //[buy setBackgroundColor:[UIColor blackColor]];
-        //[self.view setBackgroundColor:[UIColor whiteColor]];
     }else{
-        [loading setFrame:CGRectMake(223, 295, 66, 66)];
-        NSInteger nx = (NSInteger) button.frame.origin.x % 1024;
-        NSInteger px = button.frame.origin.x-nx;
-        NSInteger margin = (512-button.frame.size.width)/2;
-        [button setFrame:CGRectMake(px+margin, 0, button.frame.size.width, button.frame.size.height)];
+        [loadingView setCenter:leftPoint];
+        [button setCenter:leftPoint];
         [self labelHiddenChage:cmode];
-        [buy setFrame:CGRectMake(522, 280, buttonWidth, buttonHeight)];
-        //[buy setBackgroundColor:[UIColor redColor]];
-        //[self.view setBackgroundColor:[UIColor grayColor]];
+        [buy setFrame:CGRectMake(leftDetailsPadding, 230, buttonWidth, buttonHeight)];
     }
 }
 
@@ -240,6 +236,7 @@
     [labelPrice setHidden:cmode];
     [labelSize setHidden:cmode];
     [labelDesc setHidden:cmode];
+    [descText setHidden:cmode];
     [like setHidden:cmode];
     [backCover setHidden:cmode];
 }
@@ -264,21 +261,15 @@
 	connection=nil;
     
 	UIImage *imagex = [UIImage imageWithData:data];
-    [loading setHidden:YES];
-    if (mode) {
+    [loadingView stopAnimating];
+    if (mode)
         [button setImage:imagex forState:normal];
-        NSInteger margin = 512-(button.frame.size.width/2);
-        [button setFrame:CGRectMake(margin, 0, button.frame.size.width, button.frame.size.height)];
-    }else{
+    else
         [button setImage:imagex forState:normal];
-        NSInteger nx = (NSInteger) button.frame.origin.x % 1024;
-        NSInteger px = button.frame.origin.x-nx;
-        NSInteger margin = (512-button.frame.size.width)/2;
-        [button setFrame:CGRectMake(px+margin, 0, button.frame.size.width, button.frame.size.height)];
-    }
+    [button adjustsImageWhenHighlighted];
     
     [imagex retain];
-	[data release]; //don't need this any more, its in the UIImageView now
+	[data release];
 	data=nil;
 }
 

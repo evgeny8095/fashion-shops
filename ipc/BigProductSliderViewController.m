@@ -149,7 +149,7 @@
         [sexFolder release];
         [subFolder release];
         
-        controller = [[ProductsDetailsSliderViewController alloc] initWithImage:urlPath hasName:[productArray objectAtIndex:page] hasPrice:@"$1000" hasDesc:@"Simple Product mau" inPosition:page withMode:viewMode];
+        controller = [[ProductsDetailsSliderViewController alloc] initWithImage:urlPath hasName:[productArray objectAtIndex:page] hasPrice:@"$100" hasDesc:@"Simple Product mau" inPosition:page withMode:viewMode];
         [urlPath release];
         
         controller.delegate = self;
