@@ -40,6 +40,8 @@
     
     NSString *baseURL = @"http://www.ongsoft.com/ipc/";
     
+    [self.view setBackgroundColor:[UIColor blackColor]];
+    
     //search
     UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
     [searchBar setDelegate:self];
@@ -47,7 +49,7 @@
     [searchBar release];
     
     // The left big button
-    NSString *bigURL = [NSString stringWithFormat:@"%@%@", baseURL, @"home/big.jpg"];
+    NSString *bigURL = [NSString stringWithFormat:@"%@%@", baseURL, @"home/collections.jpg"];
     NSURL *bigHomeURL = [NSURL URLWithString:bigURL];
     //[bigURL release];
     UIImage *bigHomeImage = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:bigHomeURL]];
@@ -69,7 +71,7 @@
     [bigLable setAlpha:0.5];
     
     // The 4 right button
-    NSString *smallURL1 = [NSString stringWithFormat:@"%@/%@", baseURL, @"home/small1.jpg"];
+    NSString *smallURL1 = [NSString stringWithFormat:@"%@/%@", baseURL, @"home/new.jpg"];
     NSURL *smallHomeURL1 = [NSURL URLWithString:smallURL1];
     //[smallURL1 release];
     UIImage *smallHomeImage1 = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:smallHomeURL1]];
@@ -79,7 +81,7 @@
         smallHomeImage1 = [UIImage imageNamed:@"small_home1.jpg"];
     }
     
-    NSString *smallURL2 = [NSString stringWithFormat:@"%@/%@", baseURL, @"home/small2.jpg"];
+    NSString *smallURL2 = [NSString stringWithFormat:@"%@/%@", baseURL, @"home/sale.jpg"];
     NSURL *smallHomeURL2 = [NSURL URLWithString:smallURL2];
     //[smallURL2 release];
     UIImage *smallHomeImage2 = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:smallHomeURL2]];
@@ -89,7 +91,7 @@
         smallHomeImage2 = [UIImage imageNamed:@"small_home2.jpg"];
     }
     
-    NSString *smallURL3 = [NSString stringWithFormat:@"%@/%@", baseURL, @"home/small3.jpg"];
+    NSString *smallURL3 = [NSString stringWithFormat:@"%@/%@", baseURL, @"home/female.jpg"];
     NSURL *smallHomeURL3 = [NSURL URLWithString:smallURL3];
     //[smallURL3 release];
     UIImage *smallHomeImage3 = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:smallHomeURL3]];
@@ -99,7 +101,7 @@
         smallHomeImage3 = [UIImage imageNamed:@"small_home3.jpg"];
     }
     
-    NSString *smallURL4 = [NSString stringWithFormat:@"%@/%@", baseURL, @"home/small4.jpg"];
+    NSString *smallURL4 = [NSString stringWithFormat:@"%@/%@", baseURL, @"home/male.jpg"];
     NSURL *smallHomeURL4 = [NSURL URLWithString:smallURL4];
     //[smallURL4 release];
     UIImage *smallHomeImage4 = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:smallHomeURL4]];
