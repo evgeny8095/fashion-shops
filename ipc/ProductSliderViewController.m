@@ -197,10 +197,10 @@
                 
                 //hardcode url
                 NSString *sexFolder = sex == 1 ? @"m" : @"f";
-                NSInteger cSub = i/11+1;
-                NSInteger cItem = i%10;
-                if(i > 10 && cItem == 0)
-                    cItem = 1;
+                NSInteger cSub = i/20+1;
+                
+                NSInteger cItem = (i%20)+1;
+                
                 NSString *subFolder = [[NSString alloc] initWithFormat:@"%i/t/%i.jpg", cSub, cItem];
                 NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@/%@", baseURL, sexFolder, subFolder];
                 [sexFolder release];

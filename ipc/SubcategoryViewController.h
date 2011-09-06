@@ -13,11 +13,16 @@
     NSInteger sex;
     UIPopoverController *popoverController;
     MyPopOverView *myPopOver;
+    IBOutlet UIButton *topButton;
+    IBOutlet UIScrollView *subCategoryScrollView;
 }
 
 @property (nonatomic, assign) NSInteger sex;
 @property (nonatomic, retain) UIPopoverController *popoverController;
 @property (nonatomic, retain) MyPopOverView *myPopOver;
+
+@property (nonatomic, retain) IBOutlet UIButton *topButton;
+@property (nonatomic, retain) IBOutlet UIScrollView *subCategoryScrollView;
 
 -(IBAction)gotoSubCatalogue:(id)sender;
 

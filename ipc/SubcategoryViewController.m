@@ -10,8 +10,16 @@
 #import "ProductSliderViewController.h"
 #import "WebViewController.h"
 
+#define buttonHeight 195
+#define buttonWidth 233.5
+#define buttonSpacing 10
+#define topPadding 100
+#define sidePadding 5
+#define labelHeight 40
+#define scrollContentHeight 400
+
 @implementation SubcategoryViewController
-@synthesize sex, myPopOver, popoverController;
+@synthesize sex, myPopOver, popoverController, topButton, subCategoryScrollView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -36,7 +44,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    NSArray *subCategoryArray = [[NSArray alloc] initWithObjects:@"  ALL", @"  SHIRT", @"  T-SHIRT", @"  SWIMWEAR", @"  DESIGNED SHIRT", @"  SHORT", @"  SKIRT", @"  JEAN", @"  UNDERWARE", @"  CRAVAT", @"  TROUSER", @"  SPORT", @"  EYESWEAR", @"  ACCESSORY", @"  BAG", @"  WATCH", nil];
+    NSArray *subCategoryArray = [[NSArray alloc] initWithObjects:@"ALL", @"SHIRT", @"T-SHIRT", @"SWIMWEAR", @"DESIGNED SHIRT", @"SHORT", @"SKIRT", @"JEAN", @"UNDERWARE", @"CRAVAT", @"TROUSER", @"SPORT", @"EYESWEAR", @"ACCESSORY", @"BAG", @"WATCH", nil];
     NSArray *subImageArray = [[NSArray alloc] initWithObjects:@"sub_category1.png", @"sub_category2.png", @"sub_category3.png", @"sub_category4.png", @"sub_category5.png", @"sub_category6.png", @"sub_category7.png", @"sub_category8.png", @"sub_category9.png", @"sub_category10.png", @"sub_category11.png", @"sub_category12.png", @"sub_category13.png", @"sub_category14.png", @"sub_category15.png", @"sub_category16.png", nil];
     
     //search bar
@@ -45,53 +53,116 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:searchBar];
     [searchBar release];
     
-    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.view.frame];
+    //banner
+    NSString *baseURL = @"http://www.ongsoft.com/ipc/";
+    NSString *bannerURL = [NSString stringWithFormat:@"%@%@", baseURL, @"banners/sub_banner.png"];
+    [baseURL release];
+    NSURL *bannerImageURL = [NSURL URLWithString:bannerURL];
+    UIImage *bannerImage = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:bannerImageURL]];
+//    if (bannerImage == nil) {
+//        [bannerImage release];
+//        bannerImage = [UIImage imageNamed:@"banner.jpg"];
+//    }
     
-    BOOL overLoad = NO;
-    NSInteger x = 25;
-    NSInteger y = 45;
-    NSInteger scrollWidth = 0;
+    [topButton setImage:bannerImage forState:UIControlStateNormal];
+    //[bannerImage release];
+
+    
+    //code interface
+//    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.view.frame];
+//    
+//    BOOL overLoad = NO;
+//    NSInteger x = 25;
+//    NSInteger y = 45;
+//    NSInteger scrollWidth = 0;
+//    for (NSInteger i = 0; i < subCategoryArray.count; i++) {
+//        UIImage *image = [UIImage imageNamed:[subImageArray objectAtIndex:i]];
+//        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(x, y, 308, 100)];
+//        [button addTarget:self action:@selector(gotoSubCatalogue:) forControlEvents:UIControlEventTouchUpInside];
+//        [button setImage:image forState:normal];
+//        [button setTag:i];
+//        [button setTitle:[subCategoryArray objectAtIndex:i] forState:normal];
+//        [image release];
+//        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(x, y+100, 308, 30)];
+//        [label setText:[subCategoryArray objectAtIndex:i]];
+//        //[label setAlpha:0.7];
+//        [label setTextAlignment:UITextAlignmentLeft];
+//        [label setBackgroundColor:[UIColor blackColor]];
+//        [label setTextColor:[UIColor whiteColor]];
+//        [label setFont:[UIFont fontWithName: @"Helvetica" size: 32]];
+//        [scrollView addSubview:button];
+//        [scrollView addSubview:label];
+//        [button release];
+//        [label release];
+//        
+//        y = y + 45 + 100;
+//        overLoad = YES;
+//        if (y > 600){
+//            y = 45;
+//            x = x + 308 + 25;
+//            overLoad = NO;
+//        }
+//        if (overLoad)
+//            scrollWidth = x + 308 + 25;
+//        else
+//            scrollWidth = x;
+//    }
+    
+//    scrollView.pagingEnabled = NO;
+//    scrollView.contentSize = CGSizeMake(scrollWidth, 700);
+//    scrollView.showsHorizontalScrollIndicator = YES;
+//    scrollView.showsVerticalScrollIndicator = NO;
+//    scrollView.backgroundColor = [UIColor grayColor];
+//    //[self.view addSubview:scrollView];
+//    [subCategoryArray release];
+//    [subImageArray release];
+    
+    //code for interface builder
+    BOOL overLoad;
+    NSInteger px = 0;
+    NSInteger py = 0;
+    NSInteger scrollWidth;
     for (NSInteger i = 0; i < subCategoryArray.count; i++) {
         UIImage *image = [UIImage imageNamed:[subImageArray objectAtIndex:i]];
-        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(x, y, 308, 100)];
+        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(px, py, buttonWidth, buttonHeight)];
         [button addTarget:self action:@selector(gotoSubCatalogue:) forControlEvents:UIControlEventTouchUpInside];
+        [button setImageEdgeInsets:UIEdgeInsetsMake(topPadding, sidePadding, sidePadding, sidePadding)];
         [button setImage:image forState:normal];
         [button setTag:i];
         [button setTitle:[subCategoryArray objectAtIndex:i] forState:normal];
+        [button setBackgroundColor:[UIColor blackColor]];
         [image release];
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(x, y+100, 308, 30)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(px, py, buttonWidth, labelHeight)];
         [label setText:[subCategoryArray objectAtIndex:i]];
         //[label setAlpha:0.7];
-        [label setTextAlignment:UITextAlignmentLeft];
-        [label setBackgroundColor:[UIColor blackColor]];
+        [label setTextAlignment:UITextAlignmentCenter];
+        [label setBackgroundColor:[UIColor clearColor]];
         [label setTextColor:[UIColor whiteColor]];
-        [label setFont:[UIFont fontWithName: @"Helvetica" size: 32]];
-        [scrollView addSubview:button];
-        [scrollView addSubview:label];
+        [label setFont:[UIFont fontWithName: @"Helvetica" size: 24]];
+        [subCategoryScrollView addSubview:button];
+        [subCategoryScrollView addSubview:label];
         [button release];
         [label release];
         
-        y = y + 45 + 100;
+        py = py + buttonSpacing + buttonHeight;
         overLoad = YES;
-        if (y > 600){
-            y = 45;
-            x = x + 308 + 25;
+        
+        if (py > scrollContentHeight){
+            py = 0;
+            px = px + buttonSpacing + buttonWidth;
             overLoad = NO;
         }
+        
         if (overLoad)
-            scrollWidth = x + 308 + 25;
+            scrollWidth = px + buttonWidth;
         else
-            scrollWidth = x;
+            scrollWidth = px;
     }
     
-    scrollView.pagingEnabled = NO;
-    scrollView.contentSize = CGSizeMake(scrollWidth, 700);
-    scrollView.showsHorizontalScrollIndicator = YES;
-    scrollView.showsVerticalScrollIndicator = NO;
-    scrollView.backgroundColor = [UIColor grayColor];
-    [self.view addSubview:scrollView];
-    [subCategoryArray release];
-    [subImageArray release];
+    [subCategoryScrollView setContentSize:CGSizeMake(scrollWidth-buttonSpacing, subCategoryScrollView.frame.size.height)];
+    //[subCategoryScrollView setPagingEnabled:YES];
+    [subCategoryScrollView setIndicatorStyle:UIScrollViewIndicatorStyleWhite];
+    
 }
 
 - (void)viewDidUnload
