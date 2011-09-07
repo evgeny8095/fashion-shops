@@ -46,9 +46,9 @@
 }
 -(void) didParsedCategory
 {
-	for (Category* fr in _categoryDict) {
-		//[self loadFruitImage:fr];
-	}
+//	for (Category* fr in _categoryDict) {
+//		//[self loadFruitImage:fr];
+//	}
 }
 
 @end

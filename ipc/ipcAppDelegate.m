@@ -14,10 +14,16 @@
 @synthesize tabBarController = _tabBarController;
 @synthesize navController = _navController;
 
+- (ApplicationService*) applicationService{
+    return _applicationService;
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
     // Add the tab bar controller's current view as a subview of the window
+    _applicationService = [[ApplicationService alloc] init];
+    [_applicationService loadCategories];
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
     return YES;
@@ -66,6 +72,7 @@
 {
     [_window release];
     [_tabBarController release];
+    [_applicationService release];
     [super dealloc];
 }
 

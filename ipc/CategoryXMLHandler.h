@@ -12,9 +12,14 @@
 
 @interface CategoryXMLHandler : BaseXMLHandler {
     Category* _currentObject;
+    NSNumber* _count;
+    NSString* _name;
     NSMutableDictionary* _categoryDict;
 }
 
 -(id) initWithCategoryDict:(NSMutableDictionary*)categoryDict;
+-(void) afterElementStarting:(NSString *)elementName withAttributes:(NSDictionary *)attributeDict;
+-(void) afterElementEnding:(NSString *)elementName;
+-(NSString*) getWrappedRootNode;
 
 @end

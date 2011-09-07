@@ -7,13 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ApplicationService.h"
 
-@interface ipcAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate>
+@interface ipcAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate>{
+    ApplicationService* _applicationService;
+}
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
 
 @property (nonatomic, retain) IBOutlet UINavigationController *navController;
+
+-(ApplicationService*) applicationService;
 
 @end

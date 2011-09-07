@@ -60,13 +60,11 @@
 }
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
-	// Do nothing
-	/*
 	if (!_chars) {
 		_chars = [string mutableCopy];
 	} else {
 		[_chars appendString:string];
-	}*/
+	}
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName
