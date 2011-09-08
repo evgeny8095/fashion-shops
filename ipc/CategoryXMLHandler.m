@@ -14,7 +14,7 @@
 -(id) initWithCategoryDict:(NSMutableDictionary *)categoryDict{
     if (self = [super init]) {
         _categoryDict = categoryDict;
-        _count = [[NSNumber alloc] initWithInteger:0];
+        _count = [[NSNumber alloc] init];
         _name = [[NSString alloc] init];
     }
     return self;
@@ -31,6 +31,12 @@
     if ([elementName isEqualToString:@"name"]){
         return _name;
     }
+    if ([elementName isEqualToString:@"description"]){
+        return _description;
+    }
+    if ([elementName isEqualToString:@"image"]){
+        return _image;
+    }
 	return nil;
 }
 
@@ -42,9 +48,6 @@
     }
     if ([elementName isEqualToString:@"category"]) {
         _currentObject.cid = [attributeDict objectForKey:@"id"];
-        //_currentObject.name = [attributeDict objectForKey:@"name"];
-        //_currentObject.desc = [attributeDict objectForKey:@"description"];
-        //_currentObject.imageName = [attributeDict objectForKey:@"image"];
     }
 }
 
@@ -58,9 +61,16 @@
         _chars = nil;
 	}
     if ([elementName isEqualToString:@"name"]){
-        //_currentObject.name = [[NSString alloc] initWithData:_chars encoding:nsutf];
-        [_chars release];
-        _chars = nil;
+        _currentObject.name = _chars;
+        NSLog(@"name: %@", _currentObject.name);
+    }
+    if ([elementName isEqualToString:@"description"]) {
+        _currentObject.desc = _chars;
+        NSLog(@"description: %@", _currentObject.desc);
+    }
+    if ([elementName isEqualToString:@"image"]) {
+        _currentObject.imageName = _chars;
+        NSLog(@"image: %@", _currentObject.imageName);
     }
 }
 

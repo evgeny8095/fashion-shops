@@ -9,7 +9,7 @@
 #import "HttpRequest.h"
 
 @interface ApplicationService : NSObject {
-    NSMutableDictionary* _categoryDict;	
+    NSMutableDictionary* _categoryDict;
 }
 
 -(NSMutableDictionary*) categoryDict;

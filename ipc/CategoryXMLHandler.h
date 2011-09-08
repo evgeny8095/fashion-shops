@@ -14,6 +14,8 @@
     Category* _currentObject;
     NSNumber* _count;
     NSString* _name;
+    NSString* _description;
+    NSString* _image;
     NSMutableDictionary* _categoryDict;
 }
 

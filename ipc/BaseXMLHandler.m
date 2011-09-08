@@ -75,6 +75,8 @@
 		return;
 	}
 	[self afterElementEnding:elementName];
+    [_chars release];
+    _chars = nil;
 }
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)error {

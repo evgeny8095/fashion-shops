@@ -8,13 +8,10 @@
 #import <UIKit/UIKit.h>
 #import "ApplicationService.h"
 #import "Category.h"
+#import "ipcAppDelegate.h"
 
 #define BASE_URL @"http://www.themobilelife.com/tmp/fruits/1/"
 #define CATEGORIES_URL @"http://www.ongsoft.com/ipc/xml/categories.xml"
-
-
-
-
 
 #define FRUITS_URL @"http://www.themobilelife.com/tmp/fruits/1/fruits.xml"
 #define SET_FRUIT_URL @"http://www.themobilelife.com/tmp/fruits/1/setFruit.php"
@@ -26,5 +23,5 @@
 #define HTTP_REQUEST_FINISHING_NOTIFICATION @"HttpRequestFinishingNotification"
 #define RELOAD_DATA_NOTIFICATION @"ReloadDataNotification"
 
-#define APP_SERVICE(appSrv) ApplicationService* appSrv = [(MyFruitsDiaryAppDelegate*)[[UIApplication sharedApplication] delegate] appService];
-#define APP_DELEGATE(app) MyFruitsDiaryAppDelegate* app = (MyFruitsDiaryAppDelegate*)[[UIApplication sharedApplication] delegate];
+#define APP_SERVICE(appSrv) ApplicationService* appSrv = [(ipcAppDelegate*)[[UIApplication sharedApplication] delegate] appService];
+#define APP_DELEGATE(app) ipcAppDelegate* app = (ipcAppDelegate*)[[UIApplication sharedApplication] delegate]

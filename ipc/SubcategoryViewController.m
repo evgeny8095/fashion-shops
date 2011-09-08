@@ -9,6 +9,7 @@
 #import "SubcategoryViewController.h"
 #import "ProductSliderViewController.h"
 #import "WebViewController.h"
+#import "Category.h"
 
 #define buttonHeight 195
 #define buttonWidth 233.5
@@ -17,6 +18,7 @@
 #define sidePadding 5
 #define labelHeight 40
 #define scrollContentHeight 400
+
 
 @implementation SubcategoryViewController
 @synthesize sex, myPopOver, popoverController, topButton, subCategoryScrollView;
@@ -67,6 +69,10 @@
     [topButton setImage:bannerImage forState:UIControlStateNormal];
     //[bannerImage release];
 
+    //category dict
+    APP_SERVICE(appSrv);
+	categoryDict = [appSrv categoryDict];
+    NSLog(@"totalCategories: %i",[categoryDict count]);
     
     //code interface
 //    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.view.frame];
@@ -117,23 +123,26 @@
 //    [subCategoryArray release];
 //    [subImageArray release];
     
+    
+    
     //code for interface builder
     BOOL overLoad;
     NSInteger px = 0;
     NSInteger py = 0;
     NSInteger scrollWidth;
-    for (NSInteger i = 0; i < subCategoryArray.count; i++) {
-        UIImage *image = [UIImage imageNamed:[subImageArray objectAtIndex:i]];
+    for (NSInteger i = 0; i < [categoryDict count]; i++) {
+        Category* current = [categoryDict objectForKey:[NSString stringWithFormat:@"%i", i]];
+        UIImage *image = [UIImage imageNamed:current.imageName];
         UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(px, py, buttonWidth, buttonHeight)];
         [button addTarget:self action:@selector(gotoSubCatalogue:) forControlEvents:UIControlEventTouchUpInside];
         [button setImageEdgeInsets:UIEdgeInsetsMake(topPadding, sidePadding, sidePadding, sidePadding)];
         [button setImage:image forState:normal];
-        [button setTag:i];
-        [button setTitle:[subCategoryArray objectAtIndex:i] forState:normal];
+        [button setTag:[current.cid intValue]];
+        [button setTitle:current.name forState:normal];
         [button setBackgroundColor:[UIColor blackColor]];
         [image release];
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(px, py, buttonWidth, labelHeight)];
-        [label setText:[subCategoryArray objectAtIndex:i]];
+        [label setText:[current.name uppercaseString]];
         //[label setAlpha:0.7];
         [label setTextAlignment:UITextAlignmentCenter];
         [label setBackgroundColor:[UIColor clearColor]];

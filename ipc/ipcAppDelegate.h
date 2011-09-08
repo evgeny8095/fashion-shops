@@ -10,7 +10,7 @@
 #import "ApplicationService.h"
 
 @interface ipcAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate>{
-    ApplicationService* _applicationService;
+    ApplicationService* _appService;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
@@ -19,6 +19,6 @@
 
 @property (nonatomic, retain) IBOutlet UINavigationController *navController;
 
--(ApplicationService*) applicationService;
+-(ApplicationService*) appService;
 
 @end

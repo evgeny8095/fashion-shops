@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "MyPopOverView.h"
+#import "ipcGlobal.h"
 
 @interface SubcategoryViewController : UIViewController <UISearchBarDelegate>{
     NSInteger sex;
@@ -15,6 +16,8 @@
     MyPopOverView *myPopOver;
     IBOutlet UIButton *topButton;
     IBOutlet UIScrollView *subCategoryScrollView;
+    NSDictionary *categoryDict;
+    NSNumber* totalCategory;
 }
 
 @property (nonatomic, assign) NSInteger sex;
