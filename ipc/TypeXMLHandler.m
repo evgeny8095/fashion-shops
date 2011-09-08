@@ -1,30 +1,30 @@
 //
-//  CategoryXMLHandler.m
+//  TypeXMLHandler.m
 //  ipc
 //
-//  Created by Mahmood1 on 9/6/11.
+//  Created by Mahmood1 on 9/8/11.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "CategoryXMLHandler.h"
+#import "TypeXMLHandler.h"
 
 
-@implementation CategoryXMLHandler
+@implementation TypeXMLHandler
 
--(id) initWithCategoryDict:(NSMutableDictionary *)categoryDict{
+-(id) initWithTypeDict:(NSMutableDictionary *)typeDict{
     if (self = [super init]) {
-        _categoryDict = categoryDict;
+        _typeDict = typeDict;
         _count = [[NSNumber alloc] init];
     }
     return self;
 }
 
 -(id) initObjectAfterElementStarting:(NSString *)elementName{
-    if ([elementName isEqualToString:@"categories"]){
+    if ([elementName isEqualToString:@"types"]){
         return _count;
     }
-    if ([elementName isEqualToString:@"category"]) {
-		_currentObject = [[Category alloc] init];
+    if ([elementName isEqualToString:@"type"]) {
+		_currentObject = [[Type alloc] init];
 		return _currentObject;
 	}
     if ([elementName isEqualToString:@"name"]
@@ -37,20 +37,20 @@
 }
 
 -(void) afterElementStarting:(NSString *)elementName withAttributes:(NSDictionary *)attributeDict{
-    if ([elementName isEqualToString:@"categories"]){
+    if ([elementName isEqualToString:@"types"]){
         [_count release];
         _count = [[NSNumber alloc] initWithInteger:[[attributeDict objectForKey:@"count"] intValue]];
         NSLog(@"count: %i", [_count intValue]);
     }
-    if ([elementName isEqualToString:@"category"]) {
-        _currentObject.cid = [attributeDict objectForKey:@"id"];
+    if ([elementName isEqualToString:@"type"]) {
+        _currentObject.tid = [attributeDict objectForKey:@"id"];
     }
 }
 
 -(void) afterElementEnding:(NSString *)elementName{
-    if ([elementName isEqualToString:@"category"]) {
-        [_categoryDict setObject:_currentObject forKey:_currentObject.cid];
-        NSLog(@"Category Id: %@", _currentObject.cid);
+    if ([elementName isEqualToString:@"type"]) {
+        [_typeDict setObject:_currentObject forKey:_currentObject.tid];
+        NSLog(@"Type Id: %@", _currentObject.tid);
 		[_currentObject release];
 		_currentObject = nil;
         [_chars release];
@@ -72,7 +72,7 @@
 
 -(NSString*) getWrappedRootNode
 {
-	return @"categories";
+	return @"types";
 }
 
 -(void) dealloc
@@ -81,3 +81,4 @@
 }
 
 @end
+

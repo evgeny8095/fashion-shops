@@ -1,22 +1,21 @@
 //
-//  CategoryXMLHandler.h
+//  BrandXMLHandler.h
 //  ipc
 //
-//  Created by Mahmood1 on 9/6/11.
+//  Created by Mahmood1 on 9/8/11.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
 #import "BaseXMLHandler.h"
 #import "ipcGlobal.h"
 
-
-@interface CategoryXMLHandler : BaseXMLHandler {
-    Category* _currentObject;
+@interface BrandXMLHandler : BaseXMLHandler {
+    Brand* _currentObject;
     NSNumber* _count;
-    NSMutableDictionary* _categoryDict;
+    NSMutableDictionary* _brandDict;
 }
 
--(id) initWithCategoryDict:(NSMutableDictionary*)categoryDict;
+-(id) initWithBrandDict:(NSMutableDictionary*)brandDict;
 -(void) afterElementStarting:(NSString *)elementName withAttributes:(NSDictionary *)attributeDict;
 -(void) afterElementEnding:(NSString *)elementName;
 -(NSString*) getWrappedRootNode;

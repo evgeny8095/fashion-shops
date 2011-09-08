@@ -1,8 +1,8 @@
 //
-//  CategoryXMLHandler.h
+//  StoreXMLHandler.h
 //  ipc
 //
-//  Created by Mahmood1 on 9/6/11.
+//  Created by Mahmood1 on 9/8/11.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
@@ -10,13 +10,13 @@
 #import "ipcGlobal.h"
 
 
-@interface CategoryXMLHandler : BaseXMLHandler {
-    Category* _currentObject;
+@interface StoreXMLHandler : BaseXMLHandler {    
+    Store* _currentObject;
     NSNumber* _count;
-    NSMutableDictionary* _categoryDict;
+    NSMutableDictionary* _storeDict;
 }
 
--(id) initWithCategoryDict:(NSMutableDictionary*)categoryDict;
+-(id) initWithStoreDict:(NSMutableDictionary*)storeDict;
 -(void) afterElementStarting:(NSString *)elementName withAttributes:(NSDictionary *)attributeDict;
 -(void) afterElementEnding:(NSString *)elementName;
 -(NSString*) getWrappedRootNode;

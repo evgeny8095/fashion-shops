@@ -130,14 +130,14 @@
     NSInteger px = 0;
     NSInteger py = 0;
     NSInteger scrollWidth;
-    for (NSInteger i = 0; i < [categoryDict count]; i++) {
-        Category* current = [categoryDict objectForKey:[NSString stringWithFormat:@"%i", i]];
+    for (NSString* key in categoryDict) {
+        Category* current = [categoryDict objectForKey:key];
         UIImage *image = [UIImage imageNamed:current.imageName];
         UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(px, py, buttonWidth, buttonHeight)];
         [button addTarget:self action:@selector(gotoSubCatalogue:) forControlEvents:UIControlEventTouchUpInside];
         [button setImageEdgeInsets:UIEdgeInsetsMake(topPadding, sidePadding, sidePadding, sidePadding)];
         [button setImage:image forState:normal];
-        [button setTag:[current.cid intValue]];
+        [button setTag:[current.cid intValue]-1];
         [button setTitle:current.name forState:normal];
         [button setBackgroundColor:[UIColor blackColor]];
         [image release];

@@ -91,6 +91,14 @@
 		F29B49D0140B9A59007265D7 /* loading4.gif in Resources */ = {isa = PBXBuildFile; fileRef = F29B49CA140B9A59007265D7 /* loading4.gif */; };
 		F29B49D1140B9A59007265D7 /* loading5.gif in Resources */ = {isa = PBXBuildFile; fileRef = F29B49CB140B9A59007265D7 /* loading5.gif */; };
 		F29B49D2140B9A59007265D7 /* loading6.gif in Resources */ = {isa = PBXBuildFile; fileRef = F29B49CC140B9A59007265D7 /* loading6.gif */; };
+		F2A0500E141874BB00FD11F9 /* TypeXMLHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A0500D141874BB00FD11F9 /* TypeXMLHandler.m */; };
+		F2A05011141876A900FD11F9 /* Type.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A05010141876A900FD11F9 /* Type.m */; };
+		F2A050141418799800FD11F9 /* Store.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A050131418799700FD11F9 /* Store.m */; };
+		F2A0501714187EE000FD11F9 /* StoreXMLHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A0501614187EE000FD11F9 /* StoreXMLHandler.m */; };
+		F2A0501A1418A13400FD11F9 /* BrandXMLHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A050191418A12B00FD11F9 /* BrandXMLHandler.m */; };
+		F2A0501D1418A38600FD11F9 /* Brand.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A0501C1418A38100FD11F9 /* Brand.m */; };
+		F2A050201418AE9100FD11F9 /* Product.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A0501F1418AE8D00FD11F9 /* Product.m */; };
+		F2A050231418B6E200FD11F9 /* ProductXMLHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A050221418B6E100FD11F9 /* ProductXMLHandler.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -201,6 +209,22 @@
 		F29B49CA140B9A59007265D7 /* loading4.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading4.gif; sourceTree = "<group>"; };
 		F29B49CB140B9A59007265D7 /* loading5.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading5.gif; sourceTree = "<group>"; };
 		F29B49CC140B9A59007265D7 /* loading6.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading6.gif; sourceTree = "<group>"; };
+		F2A0500C141874BB00FD11F9 /* TypeXMLHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypeXMLHandler.h; sourceTree = "<group>"; };
+		F2A0500D141874BB00FD11F9 /* TypeXMLHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TypeXMLHandler.m; sourceTree = "<group>"; };
+		F2A0500F141876A900FD11F9 /* Type.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Type.h; sourceTree = "<group>"; };
+		F2A05010141876A900FD11F9 /* Type.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Type.m; sourceTree = "<group>"; };
+		F2A050121418799700FD11F9 /* Store.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Store.h; sourceTree = "<group>"; };
+		F2A050131418799700FD11F9 /* Store.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Store.m; sourceTree = "<group>"; };
+		F2A0501514187EDF00FD11F9 /* StoreXMLHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreXMLHandler.h; sourceTree = "<group>"; };
+		F2A0501614187EE000FD11F9 /* StoreXMLHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreXMLHandler.m; sourceTree = "<group>"; };
+		F2A050181418A12400FD11F9 /* BrandXMLHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrandXMLHandler.h; sourceTree = "<group>"; };
+		F2A050191418A12B00FD11F9 /* BrandXMLHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrandXMLHandler.m; sourceTree = "<group>"; };
+		F2A0501B1418A37E00FD11F9 /* Brand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Brand.h; sourceTree = "<group>"; };
+		F2A0501C1418A38100FD11F9 /* Brand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Brand.m; sourceTree = "<group>"; };
+		F2A0501E1418AE8B00FD11F9 /* Product.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Product.h; sourceTree = "<group>"; };
+		F2A0501F1418AE8D00FD11F9 /* Product.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Product.m; sourceTree = "<group>"; };
+		F2A050211418B6E000FD11F9 /* ProductXMLHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductXMLHandler.h; sourceTree = "<group>"; };
+		F2A050221418B6E100FD11F9 /* ProductXMLHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductXMLHandler.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -249,19 +273,13 @@
 			isa = PBXGroup;
 			children = (
 				F22BAC3A141620EC00E1A73C /* model */,
+				F2A050091418734700FD11F9 /* xml parser */,
+				F2A0500B141873F900FD11F9 /* services */,
 				5A971E4713DD6256008A19BE /* ipcAppDelegate.h */,
 				5A971E4813DD6256008A19BE /* ipcAppDelegate.m */,
 				5A971E4A13DD6256008A19BE /* MainWindow.xib */,
 				F22BAC3914161E8700E1A73C /* ipcGlobal.h */,
 				5A971E3F13DD6256008A19BE /* Supporting Files */,
-				F22BAC2414161C6D00E1A73C /* HttpRequest.h */,
-				F22BAC2514161C6D00E1A73C /* HttpRequest.m */,
-				F22BAC2614161C6D00E1A73C /* ApplicationService.h */,
-				F22BAC2714161C6E00E1A73C /* ApplicationService.m */,
-				F22BAC2814161C6E00E1A73C /* BaseXMLHandler.h */,
-				F22BAC2914161C6E00E1A73C /* BaseXMLHandler.m */,
-				F22BAC3E14162A2000E1A73C /* CategoryXMLHandler.h */,
-				F22BAC3F14162A2100E1A73C /* CategoryXMLHandler.m */,
 				5AF53EB913E63F5B0031E56C /* HomeViewController.h */,
 				5AF53EBA13E63F5B0031E56C /* HomeViewController.m */,
 				5AF53EBB13E63F5B0031E56C /* HomeViewController.xib */,
@@ -374,8 +392,46 @@
 			children = (
 				F22BAC3B1416215800E1A73C /* Category.h */,
 				F22BAC3C1416215800E1A73C /* Category.m */,
+				F2A0500F141876A900FD11F9 /* Type.h */,
+				F2A05010141876A900FD11F9 /* Type.m */,
+				F2A050121418799700FD11F9 /* Store.h */,
+				F2A050131418799700FD11F9 /* Store.m */,
+				F2A0501B1418A37E00FD11F9 /* Brand.h */,
+				F2A0501C1418A38100FD11F9 /* Brand.m */,
+				F2A0501E1418AE8B00FD11F9 /* Product.h */,
+				F2A0501F1418AE8D00FD11F9 /* Product.m */,
 			);
 			name = model;
+			sourceTree = "<group>";
+		};
+		F2A050091418734700FD11F9 /* xml parser */ = {
+			isa = PBXGroup;
+			children = (
+				F22BAC2814161C6E00E1A73C /* BaseXMLHandler.h */,
+				F22BAC2914161C6E00E1A73C /* BaseXMLHandler.m */,
+				F2A0500C141874BB00FD11F9 /* TypeXMLHandler.h */,
+				F2A0500D141874BB00FD11F9 /* TypeXMLHandler.m */,
+				F22BAC3E14162A2000E1A73C /* CategoryXMLHandler.h */,
+				F22BAC3F14162A2100E1A73C /* CategoryXMLHandler.m */,
+				F2A0501514187EDF00FD11F9 /* StoreXMLHandler.h */,
+				F2A0501614187EE000FD11F9 /* StoreXMLHandler.m */,
+				F2A050181418A12400FD11F9 /* BrandXMLHandler.h */,
+				F2A050191418A12B00FD11F9 /* BrandXMLHandler.m */,
+				F2A050211418B6E000FD11F9 /* ProductXMLHandler.h */,
+				F2A050221418B6E100FD11F9 /* ProductXMLHandler.m */,
+			);
+			name = "xml parser";
+			sourceTree = "<group>";
+		};
+		F2A0500B141873F900FD11F9 /* services */ = {
+			isa = PBXGroup;
+			children = (
+				F22BAC2414161C6D00E1A73C /* HttpRequest.h */,
+				F22BAC2514161C6D00E1A73C /* HttpRequest.m */,
+				F22BAC2614161C6D00E1A73C /* ApplicationService.h */,
+				F22BAC2714161C6E00E1A73C /* ApplicationService.m */,
+			);
+			name = services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -516,6 +572,14 @@
 				F22BAC2E14161C6E00E1A73C /* BaseXMLHandler.m in Sources */,
 				F22BAC3D1416215800E1A73C /* Category.m in Sources */,
 				F22BAC4014162A2100E1A73C /* CategoryXMLHandler.m in Sources */,
+				F2A0500E141874BB00FD11F9 /* TypeXMLHandler.m in Sources */,
+				F2A05011141876A900FD11F9 /* Type.m in Sources */,
+				F2A050141418799800FD11F9 /* Store.m in Sources */,
+				F2A0501714187EE000FD11F9 /* StoreXMLHandler.m in Sources */,
+				F2A0501A1418A13400FD11F9 /* BrandXMLHandler.m in Sources */,
+				F2A0501D1418A38600FD11F9 /* Brand.m in Sources */,
+				F2A050201418AE9100FD11F9 /* Product.m in Sources */,
+				F2A050231418B6E200FD11F9 /* ProductXMLHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,7 +7,11 @@
 //
 
 #import "ApplicationService.h"
+#import "TypeXMLHandler.h"
 #import "CategoryXMLHandler.h"
+#import "StoreXMLHandler.h"
+#import "BrandXMLHandler.h"
+#import "ProductXMLHandler.h"
 #import "ipcGlobal.h"
 
 @implementation ApplicationService
@@ -16,6 +20,9 @@
 {
 	if (self = [super init]) {
         _categoryDict = [[NSMutableDictionary alloc] init];
+        _typeDict = [[NSMutableDictionary alloc] init];
+        _storeDict = [[NSMutableDictionary alloc] init];
+        _brandDict = [[NSMutableDictionary alloc] init];
 	} 
 	return self;	
 }
@@ -23,6 +30,21 @@
 -(NSMutableDictionary*) categoryDict
 {
     return _categoryDict;
+}
+
+-(NSMutableDictionary*) typeDict
+{
+    return _typeDict;
+}
+
+-(NSMutableDictionary*) storeDict
+{
+    return _storeDict;
+}
+
+-(NSMutableDictionary*) brandDict
+{
+    return _brandDict;
 }
 
 #pragma mark -
@@ -46,9 +68,103 @@
 }
 -(void) didParsedCategory
 {
-//	for (Category* fr in _categoryDict) {
-//		//[self loadFruitImage:fr];
-//	}
+    //end 
+}
+
+#pragma mark-
+#pragma mark loadTypes
+-(void) loadTypes{
+    HttpRequest* req = [[HttpRequest alloc] initWithFinishTarget:self 
+													   andAction:@selector(gotTypes: byRequest:)];
+	[req call:TYPES_URL params:[NSDictionary dictionary]];
+	[req release];
+}
+
+-(void)gotTypes:(NSData *)data byRequest:(HttpRequest *)req
+{
+	NSLog(@"types: %s", data.bytes);
+    TypeXMLHandler* handler = [[TypeXMLHandler alloc] initWithTypeDict:_typeDict];
+    //[handler setEndDocumentTarget:self andAction:@selector(didParsedType)];
+	NSXMLParser* parser = [[[NSXMLParser alloc] initWithData:data] autorelease];
+	parser.delegate = handler;
+	[parser parse];
+	[handler release];
+}
+-(void) didParsedType
+{
+    //end point
+}
+
+#pragma mark-
+#pragma mark loadStore
+-(void) loadStores{
+    HttpRequest* req = [[HttpRequest alloc] initWithFinishTarget:self 
+													   andAction:@selector(gotStores: byRequest:)];
+	[req call:STORE_URL params:[NSDictionary dictionary]];
+	[req release];
+}
+
+-(void)gotStores:(NSData *)data byRequest:(HttpRequest *)req
+{
+	NSLog(@"stores: %s", data.bytes);
+    StoreXMLHandler* handler = [[StoreXMLHandler alloc] initWithStoreDict:_storeDict];
+    //[handler setEndDocumentTarget:self andAction:@selector(didParsedStore)];
+	NSXMLParser* parser = [[[NSXMLParser alloc] initWithData:data] autorelease];
+	parser.delegate = handler;
+	[parser parse];
+	[handler release];
+}
+-(void) didParsedStore
+{
+    //end point
+}
+
+#pragma mark-
+#pragma mark loadBrands
+-(void) loadBrands{
+    HttpRequest* req = [[HttpRequest alloc] initWithFinishTarget:self 
+													   andAction:@selector(gotBrands: byRequest:)];
+	[req call:BRAND_URL params:[NSDictionary dictionary]];
+	[req release];
+}
+
+-(void)gotBrands:(NSData *)data byRequest:(HttpRequest *)req
+{
+	NSLog(@"brands: %s", data.bytes);
+    BrandXMLHandler* handler = [[BrandXMLHandler alloc] initWithBrandDict:_brandDict];
+    //[handler setEndDocumentTarget:self andAction:@selector(didParsedBrand)];
+	NSXMLParser* parser = [[[NSXMLParser alloc] initWithData:data] autorelease];
+	parser.delegate = handler;
+	[parser parse];
+	[handler release];
+}
+-(void) didParsedBrand
+{
+    //end point
+}
+
+#pragma mark-
+#pragma mark loadProduc
+-(void) loadProducts{
+    HttpRequest* req = [[HttpRequest alloc] initWithFinishTarget:self 
+													   andAction:@selector(gotBrands: byRequest:)];
+	[req call:PRODUCT_URL params:[NSDictionary dictionary]];
+	[req release];
+}
+
+-(void)gotProducts:(NSData *)data byRequest:(HttpRequest *)req
+{
+	NSLog(@"brands: %s", data.bytes);
+    ProductXMLHandler* handler = [[ProductXMLHandler alloc] initWithProductDict:_productDict andApplication:(ApplicationService*)self];
+    //[handler setEndDocumentTarget:self andAction:@selector(didParsedProduct)];
+	NSXMLParser* parser = [[[NSXMLParser alloc] initWithData:data] autorelease];
+	parser.delegate = handler;
+	[parser parse];
+	[handler release];
+}
+-(void) didParsedProduct
+{
+    //end point
 }
 
 @end
