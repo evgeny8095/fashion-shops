@@ -28,6 +28,8 @@
     [_appService loadTypes];
     [_appService loadCategories];
     //[_appService loadProducts];
+    
+    [self.window setBackgroundColor:[UIColor grayColor]];
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
     return YES;

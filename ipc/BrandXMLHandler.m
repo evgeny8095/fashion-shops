@@ -45,7 +45,7 @@
 }
 
 -(void) afterElementEnding:(NSString *)elementName{
-    if ([elementName isEqualToString:@"type"]) {
+    if ([elementName isEqualToString:@"brand"]) {
         [_brandDict setObject:_currentObject forKey:_currentObject.bid];
         NSLog(@"Brand Id: %@", _currentObject.bid);
 		[_currentObject release];

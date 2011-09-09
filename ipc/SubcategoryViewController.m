@@ -72,6 +72,7 @@
     //category dict
     APP_SERVICE(appSrv);
 	categoryDict = [appSrv categoryDict];
+    [appSrv loadProducts];
     NSLog(@"totalCategories: %i",[categoryDict count]);
     
     //code interface

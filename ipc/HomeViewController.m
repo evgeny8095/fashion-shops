@@ -38,6 +38,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    [self.view setBackgroundColor:[UIColor grayColor]];
+    
     NSString *baseURL = @"http://www.ongsoft.com/ipc/";
     
     [self.view setBackgroundColor:[UIColor blackColor]];
@@ -227,6 +229,14 @@
     
     [self flipForDuration:0.75 withAnimation:UIViewAnimationTransitionFlipFromLeft];
     
+//    [UIView animateWithDuration:0.75 
+//                     animations:^{
+//                         
+//                     }
+//                     completion:^(BOOL finished) {
+//                         [self.view addSubview:navController.view];
+//                     }];
+    //[self.view addSubview:navController.view];
     [subCategoryViewController release];
 }
 
@@ -237,7 +247,7 @@
 }
 
 - (void)flipForDuration:(NSTimeInterval)time withAnimation:(UIViewAnimationTransition)transition{
-    [UIView beginAnimations:Nil context:NULL];
+    [UIView beginAnimations:Nil context:nil];
 	[UIView setAnimationDuration:time];
 	[UIView setAnimationTransition:transition forView:self.view cache:YES];
     [UIView commitAnimations];

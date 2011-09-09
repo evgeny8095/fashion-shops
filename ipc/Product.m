@@ -20,7 +20,7 @@
 @synthesize types = _types;
 @synthesize categories = _categories;
 @synthesize store = _store;
-@synthesize brands = _brands;
+@synthesize brand = _brand;
 
 -(id) init
 {
@@ -35,7 +35,7 @@
         _types = [[NSMutableDictionary alloc] init];
         _categories = [[NSMutableDictionary alloc] init];
         _store = [[Store alloc] init];
-        _brands = [[NSMutableDictionary alloc] init];
+        _brand = [[Brand alloc] init];
 	}
 	return self;
 }
@@ -49,9 +49,9 @@
               url:(NSString*)strUrl
               map:(NSString*)strMap
             store:(Store*)c_store
+            brand:(Brand*)c_brand
             types:(NSMutableDictionary*)c_types
        categories:(NSMutableDictionary*)c_categories
-           brands:(NSMutableDictionary*)c_brands
 {
     if (self = [super init]) {
         _pid = strId;
@@ -62,9 +62,9 @@
         _url = strUrl;
         _rating = c_rating;
         _store = c_store;
+        _brand = c_brand;
         _types = c_types;
         _categories = c_categories;
-        _brands = c_brands;
 	}
     
     return self;
@@ -83,8 +83,8 @@
     _categories = nil;
     [_store release];
     _store = nil;
-    [_brands release];
-    _brands = nil;
+    [_brand release];
+    _brand = nil;
 	[super dealloc];
 }
 

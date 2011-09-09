@@ -16,7 +16,6 @@
     NSMutableDictionary* _productDict;
     NSMutableDictionary* _typeDict;
     NSMutableDictionary* _categoryDict;
-    NSMutableDictionary* _brandDict;
     NSDictionary* c_typeDict;
     NSDictionary* c_categoryDict;
     NSDictionary* c_storeDict;

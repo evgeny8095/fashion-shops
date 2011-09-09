@@ -22,9 +22,9 @@
     NSInteger _rating;
     NSString* _url;
     Store* _store;
+    Brand* _brand;
     NSMutableDictionary* _types;
     NSMutableDictionary* _categories;
-    NSMutableDictionary* _brands;
 }
 
 @property (nonatomic, retain) NSString *pid;
@@ -35,9 +35,9 @@
 @property (nonatomic, assign) NSInteger rating;
 @property (nonatomic, retain) NSString *url;
 @property (nonatomic, retain) Store *store;
+@property (nonatomic, retain) Brand *brand;
 @property (nonatomic, retain) NSMutableDictionary *types;
 @property (nonatomic, retain) NSMutableDictionary *categories;
-@property (nonatomic, retain) NSMutableDictionary *brands;
 
 
 - (id) initWithId:(NSString*)strId
@@ -49,8 +49,8 @@
               url:(NSString*)strUrl
               map:(NSString*)strMap
             store:(Store*)store
+            brand:(Brand*)brand
             types:(NSMutableDictionary*)types
-       categories:(NSMutableDictionary*)categories
-           brands:(NSMutableDictionary*)brands;
+       categories:(NSMutableDictionary*)categories;
 
 @end

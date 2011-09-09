@@ -144,7 +144,7 @@
     {
         //hardcode url
         NSString *sexFolder = sex == 1 ? @"m" : @"f";
-        NSString *subFolder = [[NSString alloc] initWithFormat:@"%i/%i.png", sub, page+1];
+        NSString *subFolder = [[NSString alloc] initWithFormat:@"%i/%i.jpg", sub, page+1];
         NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@/%@", baseURL, sexFolder, subFolder];
         [sexFolder release];
         [subFolder release];

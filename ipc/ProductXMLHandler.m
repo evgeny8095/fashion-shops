@@ -16,7 +16,6 @@
         _count = [[NSNumber alloc] init];
         _typeDict = nil;
         _categoryDict = nil;
-        _brandDict = nil;
         c_typeDict = [AppSer typeDict];
         c_categoryDict = [AppSer categoryDict];
         c_storeDict = [AppSer storeDict];
@@ -40,6 +39,7 @@
         || [elementName isEqualToString:@"rating"]
         || [elementName isEqualToString:@"url"]
         || [elementName isEqualToString:@"store"]
+        || [elementName isEqualToString:@"brand"]
         ){
         return _currentObject;
     }
@@ -60,15 +60,6 @@
     }
     if ([elementName isEqualToString:@"category"]) {
         return _categoryDict;
-    }
-    if ([elementName isEqualToString:@"brands"]) {
-        if (_brandDict == nil) {
-            _brandDict = [[NSMutableDictionary alloc] init];
-            return _brandDict;
-        }
-    }
-    if ([elementName isEqualToString:@"brand"]) {
-        return _brandDict;
     }
     return nil;
 }
@@ -99,7 +90,7 @@
     }
     if ([elementName isEqualToString:@"price"]) {
         _currentObject.price = [_chars intValue];
-        NSLog(@"address: %@", _currentObject.price);
+        NSLog(@"address: %i", _currentObject.price);
     }
     if ([elementName isEqualToString:@"description"]) {
         _currentObject.desc = _chars;
@@ -119,16 +110,31 @@
     }
     if ([elementName isEqualToString:@"store"]){
         _currentObject.store = [c_storeDict objectForKey:_chars];
+        NSLog(@"store id: %@", _currentObject.store.sid);
+    }
+    if ([elementName isEqualToString:@"brand"]) {
+        _currentObject.brand = [c_brandDict objectForKey:_chars];
+        NSLog(@"brand id: %@", _currentObject.brand.bid);
     }
     if ([elementName isEqualToString:@"type"]) {
-        //[_typeDict setObject: forKey:<#(id)#>
+        Type *type = [c_typeDict objectForKey:_chars];
+        if (type != nil) {
+            [_typeDict setObject:type forKey:_chars];
+            NSLog(@"type id: %@", type.tid);
+        }        
     }
-    
+    if ([elementName isEqualToString:@"category"]){
+        Category *category = [c_categoryDict objectForKey:_chars];
+        if (category != nil) {
+            [_categoryDict setObject:category forKey:_chars];
+            NSLog(@"catetory id: %@", category.cid);
+        }        
+    }    
 }
 
 -(NSString*) getWrappedRootNode
 {
-	return @"stores";
+	return @"products";
 }
 
 -(void) dealloc

@@ -16,10 +16,11 @@
 
 #define BASE_URL @"http://www.themobilelife.com/tmp/fruits/1/"
 #define CATEGORIES_URL @"http://www.ongsoft.com/ios/categories.php"
-#define TYPES_URL @"http://www.ongsoft.com/ios/types.php"
+#define TYPES_URL @"http://www.ongsoft.com/ios/typies.php"
 #define STORE_URL @"http://www.ongsoft.com/ios/stores.php"
 #define BRAND_URL @"http://www.ongsoft.com/ios/brands.php"
 #define PRODUCT_URL @"http://www.ongsoft.com/ios/products.php"
+//#define PRODUCT_URL @"http://www.ongsoft.com/ipc/xml/products.xml"
 
 #define FRUITS_URL @"http://www.themobilelife.com/tmp/fruits/1/fruits.xml"
 #define SET_FRUIT_URL @"http://www.themobilelife.com/tmp/fruits/1/setFruit.php"

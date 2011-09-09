@@ -23,6 +23,7 @@
         _typeDict = [[NSMutableDictionary alloc] init];
         _storeDict = [[NSMutableDictionary alloc] init];
         _brandDict = [[NSMutableDictionary alloc] init];
+        _productDict = [[NSMutableDictionary alloc] init];
 	} 
 	return self;	
 }
@@ -45,6 +46,11 @@
 -(NSMutableDictionary*) brandDict
 {
     return _brandDict;
+}
+
+-(NSMutableDictionary*) productDict
+{
+    return _productDict;
 }
 
 #pragma mark -
@@ -144,17 +150,17 @@
 }
 
 #pragma mark-
-#pragma mark loadProduc
+#pragma mark loadProducts
 -(void) loadProducts{
     HttpRequest* req = [[HttpRequest alloc] initWithFinishTarget:self 
-													   andAction:@selector(gotBrands: byRequest:)];
+													   andAction:@selector(gotProducts: byRequest:)];
 	[req call:PRODUCT_URL params:[NSDictionary dictionary]];
 	[req release];
 }
 
 -(void)gotProducts:(NSData *)data byRequest:(HttpRequest *)req
 {
-	NSLog(@"brands: %s", data.bytes);
+	NSLog(@"products: %s", data.bytes);
     ProductXMLHandler* handler = [[ProductXMLHandler alloc] initWithProductDict:_productDict andApplication:(ApplicationService*)self];
     //[handler setEndDocumentTarget:self andAction:@selector(didParsedProduct)];
 	NSXMLParser* parser = [[[NSXMLParser alloc] initWithData:data] autorelease];
