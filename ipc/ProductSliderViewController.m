@@ -196,14 +196,14 @@
                 AsyncImageView *asyncImage = [[[AsyncImageView alloc] init] autorelease];
                 
                 //hardcode url
-                NSString *sexFolder = _type == 1 ? @"m" : @"f";
-                NSInteger cSub = i/20+1;
+                NSString *typeFolder = _type == 1 ? @"m" : @"f";
+                NSInteger cCategory = i/20+1;
                 
                 NSInteger cItem = (i%20)+1;
                 
-                NSString *subFolder = [[NSString alloc] initWithFormat:@"%i/t/%i.jpg", cSub, cItem];
-                NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@/%@", baseURL, sexFolder, subFolder];
-                [sexFolder release];
+                NSString *subFolder = [[NSString alloc] initWithFormat:@"%i/t/%i.jpg", cCategory, cItem];
+                NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@/%@", baseURL, typeFolder, subFolder];
+                [typeFolder release];
                 [subFolder release];
                 
                 NSURL* url = [NSURL URLWithString:urlPath];

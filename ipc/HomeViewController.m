@@ -236,7 +236,6 @@
 //                     completion:^(BOOL finished) {
 //                         [self.view addSubview:navController.view];
 //                     }];
-    //[self.view addSubview:navController.view];
     [subCategoryViewController release];
 }
 
