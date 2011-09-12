@@ -11,7 +11,7 @@
 #import "ipcGlobal.h"
 
 @interface SubcategoryViewController : UIViewController <UISearchBarDelegate>{
-    NSInteger sex;
+    NSInteger _type;
     UIPopoverController *popoverController;
     MyPopOverView *myPopOver;
     IBOutlet UIButton *topButton;
@@ -20,7 +20,7 @@
     NSNumber* totalCategory;
 }
 
-@property (nonatomic, assign) NSInteger sex;
+@property (nonatomic, assign) NSInteger type;
 @property (nonatomic, retain) UIPopoverController *popoverController;
 @property (nonatomic, retain) MyPopOverView *myPopOver;
 

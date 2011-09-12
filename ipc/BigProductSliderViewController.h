@@ -29,8 +29,8 @@
     NSInteger cpage;
     BOOL viewMode;
     id<BigProductSliderViewControllerDelegate> delegate;
-    NSInteger sex;
-    NSInteger sub;
+    NSInteger _type;
+    NSInteger _category;
     NSInteger item;
     
 }
@@ -40,8 +40,8 @@
 @property (nonatomic, retain) IBOutlet UIPageControl *pageControl;
 @property (nonatomic, retain) NSMutableArray *viewControllers;
 @property (nonatomic, retain) id<BigProductSliderViewControllerDelegate> delegate;
-@property (nonatomic, assign) NSInteger sex;
-@property (nonatomic, assign) NSInteger sub;
+@property (nonatomic, assign) NSInteger type;
+@property (nonatomic, assign) NSInteger category;
 @property (nonatomic, assign) NSInteger item;
 
 - (void)revealDetails:(id)sender;

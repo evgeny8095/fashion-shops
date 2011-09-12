@@ -17,7 +17,7 @@
 @end
 
 @implementation ProductSliderViewController
-@synthesize buttons, sex, sub, myPopOver, popoverController, title;
+@synthesize buttons, type = _type, category = _category, myPopOver, popoverController, title;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -87,7 +87,7 @@
     
     
     totalItem = [productArray count];
-    if(sub == 0){
+    if(_category == 0){
         totalItem = [productArray count]*15;
     }
     
@@ -163,8 +163,8 @@
     BigProductSliderViewController *bigProductSliderViewController = [[BigProductSliderViewController alloc] initWithPage:page];
     bigProductSliderViewController.delegate = self;
     bigProductSliderViewController.navigationItem.title = [productArray objectAtIndex:page];
-    bigProductSliderViewController.sex = sex;
-    bigProductSliderViewController.sub = sub;
+    bigProductSliderViewController.type = _type;
+    bigProductSliderViewController.category = _category;
     bigProductSliderViewController.item = page;
     [bigProductSliderViewController.navigationItem.backBarButtonItem setTitle:@"ALL"];
     
@@ -189,14 +189,14 @@
     NSInteger items = truePage*8;
     items = items > totalItem ? totalItem : items;
     NSInteger offset = page*8;
-    if(sub == 0){
+    if(_category == 0){
         for (NSInteger i = offset; i < items; i++) {
             UIButton *button = [buttons objectAtIndex:i];
             if ([[button imageView] image] == NULL) {
                 AsyncImageView *asyncImage = [[[AsyncImageView alloc] init] autorelease];
                 
                 //hardcode url
-                NSString *sexFolder = sex == 1 ? @"m" : @"f";
+                NSString *sexFolder = _type == 1 ? @"m" : @"f";
                 NSInteger cSub = i/20+1;
                 
                 NSInteger cItem = (i%20)+1;
@@ -219,8 +219,8 @@
                 AsyncImageView *asyncImage = [[[AsyncImageView alloc] init] autorelease];
                 
                 //hardcode url
-                NSString *sexFolder = sex == 1 ? @"m" : @"f";
-                NSString *subFolder = [[NSString alloc] initWithFormat:@"%i/t/%i.jpg", sub, i+1];
+                NSString *sexFolder = _type == 1 ? @"m" : @"f";
+                NSString *subFolder = [[NSString alloc] initWithFormat:@"%i/t/%i.jpg", _category, i+1];
                 NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@/%@", baseURL, sexFolder, subFolder];
                 [sexFolder release];
                 [subFolder release];

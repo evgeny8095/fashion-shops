@@ -21,7 +21,7 @@
 
 
 @implementation SubcategoryViewController
-@synthesize sex, myPopOver, popoverController, topButton, subCategoryScrollView;
+@synthesize type = _type, myPopOver, popoverController, topButton, subCategoryScrollView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -46,8 +46,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    NSArray *subCategoryArray = [[NSArray alloc] initWithObjects:@"ALL", @"SHIRT", @"T-SHIRT", @"SWIMWEAR", @"DESIGNED SHIRT", @"SHORT", @"SKIRT", @"JEAN", @"UNDERWARE", @"CRAVAT", @"TROUSER", @"SPORT", @"EYESWEAR", @"ACCESSORY", @"BAG", @"WATCH", nil];
-    NSArray *subImageArray = [[NSArray alloc] initWithObjects:@"sub_category1.png", @"sub_category2.png", @"sub_category3.png", @"sub_category4.png", @"sub_category5.png", @"sub_category6.png", @"sub_category7.png", @"sub_category8.png", @"sub_category9.png", @"sub_category10.png", @"sub_category11.png", @"sub_category12.png", @"sub_category13.png", @"sub_category14.png", @"sub_category15.png", @"sub_category16.png", nil];
+    
+    //NSArray *subCategoryArray = [[NSArray alloc] initWithObjects:@"ALL", @"SHIRT", @"T-SHIRT", @"SWIMWEAR", @"DESIGNED SHIRT", @"SHORT", @"SKIRT", @"JEAN", @"UNDERWARE", @"CRAVAT", @"TROUSER", @"SPORT", @"EYESWEAR", @"ACCESSORY", @"BAG", @"WATCH", nil];
+    //NSArray *subImageArray = [[NSArray alloc] initWithObjects:@"sub_category1.png", @"sub_category2.png", @"sub_category3.png", @"sub_category4.png", @"sub_category5.png", @"sub_category6.png", @"sub_category7.png", @"sub_category8.png", @"sub_category9.png", @"sub_category10.png", @"sub_category11.png", @"sub_category12.png", @"sub_category13.png", @"sub_category14.png", @"sub_category15.png", @"sub_category16.png", nil];
     
     //search bar
     UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
@@ -190,11 +191,11 @@
 
 -(IBAction)gotoSubCatalogue:(id)sender{
     NSString *title = ((UIButton *) sender).titleLabel.text;
-    NSInteger sub = ((UIButton *) sender).tag;
+    NSInteger category = ((UIButton *) sender).tag;
     
     ProductSliderViewController *productSliderViewController = [[ProductSliderViewController alloc] init];
-    productSliderViewController.sex = sex;
-    productSliderViewController.sub = sub;
+    productSliderViewController.type = _type;
+    productSliderViewController.category = category;
     //productSliderViewController.navigationItem.title = title;
     productSliderViewController.title = title;
     

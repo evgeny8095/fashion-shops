@@ -22,15 +22,15 @@
     NSArray *imageArray;
     NSArray *imageURL;
     NSString *baseURL;
-    NSInteger sex;
-    NSInteger sub;
+    NSInteger _type;
+    NSInteger _category;
     UIPopoverController *popoverController;
     MyPopOverView *myPopOver;
 }
 
 @property (nonatomic, retain) NSMutableArray *buttons;
-@property (nonatomic, assign) NSInteger sex;
-@property (nonatomic, assign) NSInteger sub;
+@property (nonatomic, assign) NSInteger type;
+@property (nonatomic, assign) NSInteger category;
 @property (nonatomic, retain) UIPopoverController *popoverController;
 @property (nonatomic, retain) MyPopOverView *myPopOver;
 @property (nonatomic, copy) NSString *title;

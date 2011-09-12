@@ -207,7 +207,7 @@
 
 - (IBAction)gotoCategory:(id)sender{
     NSString *title = ((UIButton *) sender).titleLabel.text;
-    NSInteger sex =  ((UIButton *) sender).tag;
+    NSInteger type =  ((UIButton *) sender).tag;
     
     navController = [[UINavigationController alloc] init];
     navController.delegate=self;
@@ -219,7 +219,7 @@
     SubcategoryViewController *subCategoryViewController = [[SubcategoryViewController alloc] init];
     
     subCategoryViewController.navigationItem.title = title;
-    subCategoryViewController.sex = sex;
+    subCategoryViewController.type = type;
     
     subCategoryViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"HOME" style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
     

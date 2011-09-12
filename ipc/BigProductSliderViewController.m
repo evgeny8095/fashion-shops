@@ -16,7 +16,7 @@
 @end
 
 @implementation BigProductSliderViewController
-@synthesize productBigSlider, scrollView, pageControl, viewControllers, delegate, sex, sub, item;
+@synthesize productBigSlider, scrollView, pageControl, viewControllers, delegate, type = _type, category = _category, item;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -143,11 +143,11 @@
     if ((NSNull *)controller == [NSNull null])
     {
         //hardcode url
-        NSString *sexFolder = sex == 1 ? @"m" : @"f";
-        NSString *subFolder = [[NSString alloc] initWithFormat:@"%i/%i.jpg", sub, page+1];
-        NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@/%@", baseURL, sexFolder, subFolder];
-        [sexFolder release];
-        [subFolder release];
+        NSString *typeFolder = _type == 1 ? @"m" : @"f";
+        NSString *categoryFolder = [[NSString alloc] initWithFormat:@"%i/%i.jpg", _category, page+1];
+        NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@/%@", baseURL, typeFolder, categoryFolder];
+        [typeFolder release];
+        [categoryFolder release];
         
         controller = [[ProductsDetailsSliderViewController alloc] initWithImage:urlPath hasName:[productArray objectAtIndex:page] hasPrice:@"$100" hasDesc:@"Simple Product mau" inPosition:page withMode:viewMode];
         [urlPath release];
