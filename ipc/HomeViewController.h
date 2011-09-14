@@ -13,6 +13,7 @@
 @interface HomeViewController : UIViewController <UINavigationControllerDelegate, UISearchBarDelegate>{
     UIPopoverController *popoverController;
     MyPopOverView *myPopOver;
+    NSDictionary* _typeDict;
 }
 
 @property (nonatomic, retain) IBOutlet UINavigationController *navController;

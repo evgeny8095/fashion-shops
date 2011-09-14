@@ -7,22 +7,38 @@
 //
 #import <Foundation/Foundation.h>
 #import "HttpRequest.h"
+#import "Type.h"
+
+@protocol ApplicationServiceDelegate
+
+@optional
+-(void) didFinishParsingCategory:(NSMutableDictionary*)categoryDict;
+
+@end
 
 @interface ApplicationService : NSObject {
     NSMutableDictionary* _categoryDict;
+    NSMutableDictionary* _categoryForTypeDict;
     NSMutableDictionary* _typeDict;
     NSMutableDictionary* _storeDict;
     NSMutableDictionary* _brandDict;
     NSMutableDictionary* _productDict;
+    BOOL _status;
+	id<ApplicationServiceDelegate> _delegate;
 }
 
+@property (nonatomic,assign) id<ApplicationServiceDelegate> delegate;
+
 -(NSMutableDictionary*) categoryDict;
+-(NSMutableDictionary*) categoryForTypeDict;
 -(NSMutableDictionary*) typeDict;
 -(NSMutableDictionary*) storeDict;
 -(NSMutableDictionary*) brandDict;
 -(NSMutableDictionary*) productDict;
+-(BOOL) finishParsing;
 
 -(void) loadCategories;
+-(void) loadCategoriesForType:(Type*)c_type;
 -(void) gotCategories: (NSData*)data byRequest:(HttpRequest*)req;
 -(void) didParsedCategory;
 

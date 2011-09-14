@@ -9,6 +9,7 @@
 #import "HomeViewController.h"
 #import "CatalogueViewController.h"
 #import "SubcategoryViewController.h"
+#import "CategoryXMLHandler.h"
 
 @implementation HomeViewController
 
@@ -37,6 +38,10 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    
+    APP_SERVICE(appSrv);
+	_typeDict = [appSrv typeDict];
     
     [self.view setBackgroundColor:[UIColor grayColor]];
     
@@ -206,8 +211,27 @@
 }
 
 - (IBAction)gotoCategory:(id)sender{
+    
     NSString *title = ((UIButton *) sender).titleLabel.text;
-    NSInteger type =  ((UIButton *) sender).tag;
+    NSInteger typeId =  ((UIButton *) sender).tag;
+    NSString *key = [NSString stringWithFormat:@"%i", typeId];
+    Type *c_type = [_typeDict objectForKey:key];
+    
+    APP_SERVICE(appSrv);
+    [appSrv loadCategoriesForType:c_type];
+    //sleep(3);
+    //[appSrv loadCategories];
+    
+    
+//    NSURL* url = [NSURL URLWithString:@"http://www.ongsoft.com/categories.php?type=2"];
+//    NSMutableDictionary* myCategoryDict = nil;
+//    CategoryXMLHandler* handler = [[CategoryXMLHandler alloc] initWithCategoryDict:myCategoryDict];
+//	NSXMLParser* parser = [[[NSXMLParser alloc] initWithData:[NSData dataWithContentsOfURL:url]] autorelease];
+//	parser.delegate = handler;
+//	[parser parse];
+//	[handler release];
+//    NSInteger myInt = [myCategoryDict count];
+//    NSLog(@"%i", myInt);
     
     navController = [[UINavigationController alloc] init];
     navController.delegate=self;
@@ -217,9 +241,10 @@
     [navController.navigationBar setBarStyle:UIBarStyleBlack];
     
     SubcategoryViewController *subCategoryViewController = [[SubcategoryViewController alloc] init];
-    
+    [appSrv setDelegate:subCategoryViewController];
     subCategoryViewController.navigationItem.title = title;
-    subCategoryViewController.type = type;
+    subCategoryViewController.type = typeId;
+    //subCategoryViewController.categoryDict = myCategoryDict;
     
     subCategoryViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"HOME" style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
     

@@ -7,14 +7,15 @@
 //
 
 #import "ApplicationService.h"
+#import "ipcGlobal.h"
 #import "TypeXMLHandler.h"
 #import "CategoryXMLHandler.h"
 #import "StoreXMLHandler.h"
 #import "BrandXMLHandler.h"
 #import "ProductXMLHandler.h"
-#import "ipcGlobal.h"
 
 @implementation ApplicationService
+@synthesize delegate = _delegate;
 
 -(id) init
 {
@@ -24,6 +25,7 @@
         _storeDict = [[NSMutableDictionary alloc] init];
         _brandDict = [[NSMutableDictionary alloc] init];
         _productDict = [[NSMutableDictionary alloc] init];
+        _status = NO;
 	} 
 	return self;	
 }
@@ -31,6 +33,11 @@
 -(NSMutableDictionary*) categoryDict
 {
     return _categoryDict;
+}
+
+-(NSMutableDictionary*) categoryForTypeDict
+{
+    return _categoryForTypeDict;
 }
 
 -(NSMutableDictionary*) typeDict
@@ -53,6 +60,11 @@
     return _productDict;
 }
 
+-(BOOL) finishParsing
+{
+    return _status;
+}
+
 #pragma mark -
 #pragma mark loadCategories
 -(void) loadCategories{
@@ -62,11 +74,19 @@
 	[req release];
 }
 
+-(void) loadCategoriesForType:(Type*)c_type
+{
+    HttpRequest* req = [[HttpRequest alloc] initWithFinishTarget:self 
+													   andAction:@selector(gotCategories: byRequest:)];
+	[req call:CATEGORIES_URL params:[NSDictionary dictionaryWithObject:[c_type tid] forKey:@"type"]];
+	[req release];
+}
+
 -(void)gotCategories: (NSData*)data byRequest:(HttpRequest*)req
 {
 	NSLog(@"categories: %s", data.bytes);
     CategoryXMLHandler* handler = [[CategoryXMLHandler alloc] initWithCategoryDict:_categoryDict];
-    //[handler setEndDocumentTarget:self andAction:@selector(didParsedCategory)];
+    [handler setEndDocumentTarget:self andAction:@selector(didParsedCategory)];
 	NSXMLParser* parser = [[[NSXMLParser alloc] initWithData:data] autorelease];
 	parser.delegate = handler;
 	[parser parse];
@@ -74,7 +94,7 @@
 }
 -(void) didParsedCategory
 {
-    //end 
+    [_delegate didFinishParsingCategory:_categoryDict];
 }
 
 #pragma mark-
