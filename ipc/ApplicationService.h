@@ -8,11 +8,13 @@
 #import <Foundation/Foundation.h>
 #import "HttpRequest.h"
 #import "Type.h"
+#import "Category.h"
 
 @protocol ApplicationServiceDelegate
 
 @optional
 -(void) didFinishParsingCategory:(NSMutableDictionary*)categoryDict;
+-(void) didFinishParsingProduct:(NSMutableDictionary *)productDict;
 
 @end
 
@@ -55,6 +57,7 @@
 -(void) didParsedBrand;
 
 -(void) loadProducts;
+-(void) loadProductsForType:(Type*)c_type forCatetory:(Category*)c_category;
 -(void) gotProducts: (NSData*)data byRequest:(HttpRequest*)req;
 -(void) didParsedProduct;
 

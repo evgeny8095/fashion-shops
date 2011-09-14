@@ -262,5 +262,11 @@
     // A possible optimization would be to unload the views+controllers which are no longer visible
 }
 
+#pragma mark -
+#pragma mark ApplicationServiceDelegate
+-(void) didFinishParsingProduct:(NSMutableDictionary *)productDict
+{
+    //
+}
 
 @end

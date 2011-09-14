@@ -178,11 +178,21 @@
 	[req release];
 }
 
+-(void) loadProductsForType:(Type*)c_type forCatetory:(Category*)c_category{
+    HttpRequest* req = [[HttpRequest alloc] initWithFinishTarget:self 
+													   andAction:@selector(gotProducts: byRequest:)];
+    NSMutableDictionary* dictionary = [[NSMutableDictionary alloc] init];
+    [dictionary setObject:[c_type tid] forKey:@"type"];
+    [dictionary setObject:[c_category cid] forKey:@"category"];
+	[req call:PRODUCT_URL params:dictionary];
+	[req release];
+}
+
 -(void)gotProducts:(NSData *)data byRequest:(HttpRequest *)req
 {
 	NSLog(@"products: %s", data.bytes);
     ProductXMLHandler* handler = [[ProductXMLHandler alloc] initWithProductDict:_productDict andApplication:(ApplicationService*)self];
-    //[handler setEndDocumentTarget:self andAction:@selector(didParsedProduct)];
+    [handler setEndDocumentTarget:self andAction:@selector(didParsedProduct)];
 	NSXMLParser* parser = [[[NSXMLParser alloc] initWithData:data] autorelease];
 	parser.delegate = handler;
 	[parser parse];
@@ -190,7 +200,7 @@
 }
 -(void) didParsedProduct
 {
-    //end point
+    [_delegate didFinishParsingProduct:_productDict];
 }
 
 @end

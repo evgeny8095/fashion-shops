@@ -10,8 +10,9 @@
 #import "BigProductSliderViewController.h"
 #import "asyncimageview.h"
 #import "MyPopOverView.h"
+#import "ipcGlobal.h"
 
-@interface ProductSliderViewController : UIViewController <UIScrollViewDelegate, BigProductSliderViewControllerDelegate, UINavigationControllerDelegate>{
+@interface ProductSliderViewController : UIViewController <UIScrollViewDelegate, BigProductSliderViewControllerDelegate, UINavigationControllerDelegate, ApplicationServiceDelegate>{
     NSString *title;
     UIScrollView *productSmallSlider;
     NSInteger totalItem;

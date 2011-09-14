@@ -66,7 +66,7 @@
 	NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:finalURL]];
 	
 	//_timestamp = [[NSDate date] retain];
-	_connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+	_connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
 	
 }
 

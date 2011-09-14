@@ -21,7 +21,7 @@
 
 
 @implementation SubcategoryViewController
-@synthesize type = _type, myPopOver, popoverController, topButton, subCategoryScrollView;
+@synthesize type = _type, myPopOver, popoverController, topButton, subCategoryScrollView, loading;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -71,8 +71,8 @@
     //[bannerImage release];
 
     //category dict
-    APP_SERVICE(appSrv);
-    _categoryDict = [appSrv categoryDict];
+    //APP_SERVICE(appSrv);
+    //_categoryDict = [appSrv categoryDict];
     //NSLog(@"totalCategories: %i",[_categoryDict count]);
 	
     //code interface
@@ -192,7 +192,16 @@
     NSString *title = ((UIButton *) sender).titleLabel.text;
     NSInteger category = ((UIButton *) sender).tag;
     
+    APP_SERVICE(appSrvvv);
+    NSDictionary *types = [appSrvvv typeDict];
+    NSDictionary *categories = [appSrvvv categoryDict];
+    Type* c_type = [types objectForKey:[NSString stringWithFormat:@"%i", _type]];
+    Category* c_category = [categories objectForKey:[NSString stringWithFormat:@"%i", category]];
+    [appSrvvv loadProductsForType:c_type forCatetory:c_category];
+    
     ProductSliderViewController *productSliderViewController = [[ProductSliderViewController alloc] init];
+    [appSrvvv setDelegate:productSliderViewController];
+    
     productSliderViewController.type = _type;
     productSliderViewController.category = category;
     //productSliderViewController.navigationItem.title = title;
@@ -270,6 +279,7 @@
     [subCategoryScrollView setContentSize:CGSizeMake(scrollWidth-buttonSpacing, subCategoryScrollView.frame.size.height)];
     //[subCategoryScrollView setPagingEnabled:YES];
     [subCategoryScrollView setIndicatorStyle:UIScrollViewIndicatorStyleWhite];
+    [loading stopAnimating];
 }
 
 @end

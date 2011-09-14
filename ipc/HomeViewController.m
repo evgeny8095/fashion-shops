@@ -217,21 +217,8 @@
     NSString *key = [NSString stringWithFormat:@"%i", typeId];
     Type *c_type = [_typeDict objectForKey:key];
     
-    APP_SERVICE(appSrv);
-    [appSrv loadCategoriesForType:c_type];
-    //sleep(3);
-    //[appSrv loadCategories];
-    
-    
-//    NSURL* url = [NSURL URLWithString:@"http://www.ongsoft.com/categories.php?type=2"];
-//    NSMutableDictionary* myCategoryDict = nil;
-//    CategoryXMLHandler* handler = [[CategoryXMLHandler alloc] initWithCategoryDict:myCategoryDict];
-//	NSXMLParser* parser = [[[NSXMLParser alloc] initWithData:[NSData dataWithContentsOfURL:url]] autorelease];
-//	parser.delegate = handler;
-//	[parser parse];
-//	[handler release];
-//    NSInteger myInt = [myCategoryDict count];
-//    NSLog(@"%i", myInt);
+    APP_SERVICE(appSrvv);
+    [appSrvv loadCategoriesForType:c_type];
     
     navController = [[UINavigationController alloc] init];
     navController.delegate=self;
@@ -241,7 +228,8 @@
     [navController.navigationBar setBarStyle:UIBarStyleBlack];
     
     SubcategoryViewController *subCategoryViewController = [[SubcategoryViewController alloc] init];
-    [appSrv setDelegate:subCategoryViewController];
+    [appSrvv setDelegate:subCategoryViewController];
+    
     subCategoryViewController.navigationItem.title = title;
     subCategoryViewController.type = typeId;
     //subCategoryViewController.categoryDict = myCategoryDict;

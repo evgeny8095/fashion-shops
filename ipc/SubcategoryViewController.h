@@ -18,6 +18,7 @@
     IBOutlet UIScrollView *subCategoryScrollView;
     NSDictionary* _categoryDict;
     NSNumber* totalCategory;
+    UIActivityIndicatorView* loading;
 }
 
 @property (nonatomic, assign) NSInteger type;
@@ -26,6 +27,7 @@
 
 @property (nonatomic, retain) IBOutlet UIButton *topButton;
 @property (nonatomic, retain) IBOutlet UIScrollView *subCategoryScrollView;
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *loading;
 
 -(IBAction)gotoSubCatalogue:(id)sender;
 
