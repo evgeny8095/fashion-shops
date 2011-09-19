@@ -14,7 +14,7 @@
 #import "Product.h"
 #import "ipcAppDelegate.h"
 
-#define BASE_URL @"http://www.themobilelife.com/tmp/fruits/1/"
+#define BASE_URL @"http://www.ongsoft.com/ipc/"
 #define CATEGORIES_URL @"http://www.ongsoft.com/ios/categories.php"
 #define TYPES_URL @"http://www.ongsoft.com/ios/typies.php"
 #define STORE_URL @"http://www.ongsoft.com/ios/stores.php"

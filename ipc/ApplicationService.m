@@ -15,7 +15,7 @@
 #import "ProductXMLHandler.h"
 
 @implementation ApplicationService
-@synthesize delegate = _delegate;
+@synthesize delegate = _delegate, totalProduct = _totalProduct, startPosition = _startPosition, endPosition = _endPosition;
 
 -(id) init
 {
@@ -25,6 +25,7 @@
         _storeDict = [[NSMutableDictionary alloc] init];
         _brandDict = [[NSMutableDictionary alloc] init];
         _productDict = [[NSMutableDictionary alloc] init];
+        _productArray = [[NSMutableArray alloc] init];
         _status = NO;
 	} 
 	return self;	
@@ -60,6 +61,19 @@
     return _productDict;
 }
 
+-(NSMutableArray*) productArray
+{
+    return _productArray;
+}
+
+-(void) clearProducts
+{
+    [_productDict release];
+    _productDict = [[NSMutableDictionary alloc] init];
+    [_productArray release];
+    _productArray = [[NSMutableArray alloc] init];
+}
+
 -(BOOL) finishParsing
 {
     return _status;
@@ -84,7 +98,7 @@
 
 -(void)gotCategories: (NSData*)data byRequest:(HttpRequest*)req
 {
-	NSLog(@"categories: %s", data.bytes);
+	//NSLog(@"categories: %s", data.bytes);
     CategoryXMLHandler* handler = [[CategoryXMLHandler alloc] initWithCategoryDict:_categoryDict];
     [handler setEndDocumentTarget:self andAction:@selector(didParsedCategory)];
 	NSXMLParser* parser = [[[NSXMLParser alloc] initWithData:data] autorelease];
@@ -108,7 +122,7 @@
 
 -(void)gotTypes:(NSData *)data byRequest:(HttpRequest *)req
 {
-	NSLog(@"types: %s", data.bytes);
+	//NSLog(@"types: %s", data.bytes);
     TypeXMLHandler* handler = [[TypeXMLHandler alloc] initWithTypeDict:_typeDict];
     //[handler setEndDocumentTarget:self andAction:@selector(didParsedType)];
 	NSXMLParser* parser = [[[NSXMLParser alloc] initWithData:data] autorelease];
@@ -132,7 +146,7 @@
 
 -(void)gotStores:(NSData *)data byRequest:(HttpRequest *)req
 {
-	NSLog(@"stores: %s", data.bytes);
+	//NSLog(@"stores: %s", data.bytes);
     StoreXMLHandler* handler = [[StoreXMLHandler alloc] initWithStoreDict:_storeDict];
     //[handler setEndDocumentTarget:self andAction:@selector(didParsedStore)];
 	NSXMLParser* parser = [[[NSXMLParser alloc] initWithData:data] autorelease];
@@ -156,7 +170,7 @@
 
 -(void)gotBrands:(NSData *)data byRequest:(HttpRequest *)req
 {
-	NSLog(@"brands: %s", data.bytes);
+	//NSLog(@"brands: %s", data.bytes);
     BrandXMLHandler* handler = [[BrandXMLHandler alloc] initWithBrandDict:_brandDict];
     //[handler setEndDocumentTarget:self andAction:@selector(didParsedBrand)];
 	NSXMLParser* parser = [[[NSXMLParser alloc] initWithData:data] autorelease];
@@ -188,10 +202,22 @@
 	[req release];
 }
 
+-(void) loadProductsForType:(Type*)c_type forCatetory:(Category*)c_category from:(NSInteger)start to:(NSInteger)end{
+    HttpRequest* req = [[HttpRequest alloc] initWithFinishTarget:self 
+													   andAction:@selector(gotProducts: byRequest:)];
+    NSMutableDictionary* dictionary = [[NSMutableDictionary alloc] init];
+    [dictionary setObject:[c_type tid] forKey:@"type"];
+    [dictionary setObject:[c_category cid] forKey:@"category"];
+    [dictionary setObject:[NSString stringWithFormat:@"%i", start] forKey:@"startPosition"];
+    [dictionary setObject:[NSString stringWithFormat:@"%i", end] forKey:@"endPosition"];
+	[req call:PRODUCT_URL params:dictionary];
+	[req release];
+}
+
 -(void)gotProducts:(NSData *)data byRequest:(HttpRequest *)req
 {
-	NSLog(@"products: %s", data.bytes);
-    ProductXMLHandler* handler = [[ProductXMLHandler alloc] initWithProductDict:_productDict andApplication:(ApplicationService*)self];
+	//NSLog(@"products: %s", data.bytes);
+    ProductXMLHandler* handler = [[ProductXMLHandler alloc] initWithProductDict:_productDict productArray:_productArray andApplication:(ApplicationService*)self];
     [handler setEndDocumentTarget:self andAction:@selector(didParsedProduct)];
 	NSXMLParser* parser = [[[NSXMLParser alloc] initWithData:data] autorelease];
 	parser.delegate = handler;
@@ -200,7 +226,7 @@
 }
 -(void) didParsedProduct
 {
-    [_delegate didFinishParsingProduct:_productDict];
+    [_delegate didFinishParsingProduct:_productArray withTotalProducts:_totalProduct fromPosition:_startPosition toPosition:_endPosition];
 }
 
 @end

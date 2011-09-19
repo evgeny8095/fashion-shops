@@ -37,7 +37,6 @@
     if ([elementName isEqualToString:@"brands"]){
         [_count release];
         _count = [[NSNumber alloc] initWithInteger:[[attributeDict objectForKey:@"count"] intValue]];
-        NSLog(@"count: %i", [_count intValue]);
     }
     if ([elementName isEqualToString:@"brand"]) {
         _currentObject.bid = [attributeDict objectForKey:@"id"];
@@ -47,7 +46,6 @@
 -(void) afterElementEnding:(NSString *)elementName{
     if ([elementName isEqualToString:@"brand"]) {
         [_brandDict setObject:_currentObject forKey:_currentObject.bid];
-        NSLog(@"Brand Id: %@", _currentObject.bid);
 		[_currentObject release];
 		_currentObject = nil;
         [_chars release];
@@ -55,7 +53,6 @@
 	}
     if ([elementName isEqualToString:@"name"]){
         _currentObject.name = _chars;
-        NSLog(@"name: %@", _currentObject.name);
     }
 }
 

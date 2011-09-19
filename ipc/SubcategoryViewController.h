@@ -19,6 +19,7 @@
     NSDictionary* _categoryDict;
     NSNumber* totalCategory;
     UIActivityIndicatorView* loading;
+    NSDictionary* _typeDict;
 }
 
 @property (nonatomic, assign) NSInteger type;

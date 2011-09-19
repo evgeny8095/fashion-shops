@@ -17,7 +17,8 @@
 @end
 
 @implementation ProductSliderViewController
-@synthesize buttons, type = _type, category = _category, myPopOver, popoverController, title;
+@synthesize buttons, type = _type, category = _category, myPopOver, popoverController, title, productScrollView;
+@synthesize c_type, c_category;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,6 +32,8 @@
 
 - (void)dealloc{
     [popoverController dismissPopoverAnimated:NO];
+    APP_SERVICE(appSrv4);
+    [appSrv4 clearProducts];
     [super dealloc];
 }
 
@@ -86,60 +89,60 @@
     self.navigationItem.title = title;
     
     
-    totalItem = [productArray count];
-    if(_category == 0){
-        totalItem = [productArray count]*15;
-    }
-    
-    productSmallSlider = [[UIScrollView alloc] initWithFrame:self.view.frame];
-    
-    NSInteger sx = 0;
-    NSInteger sy = 0;
-    NSInteger smallSliderWidth;
-    NSInteger smallImageWidth = 327;
-    NSInteger smallImageHeight = 255;
-    
-    NSMutableArray *tempButtons = [[NSMutableArray alloc] init];
-    for (unsigned i = 0; i < totalItem; i++)
-    {
-        //small slider
-        UIButton *smallButton = [[UIButton alloc] initWithFrame:CGRectMake(sx, sy, smallImageHeight, smallImageWidth)];
-        [smallButton setTag:i];
-        [smallButton setBackgroundColor:[UIColor whiteColor]];
-        [smallButton addTarget:self action:@selector(gotoProductDetails:) forControlEvents:UIControlEventTouchUpInside];
-        CGFloat padding = 10.0;
-        [smallButton setImageEdgeInsets:UIEdgeInsetsMake(padding, padding, padding, padding)];
-        
-        sy = sy + 1 + smallImageWidth;
-        if (sy > 600){
-            sy = 0;
-            sx = sx + smallImageHeight + 1;
-        }
-//        if (i % 8 == 7) {
-//            //sx = sx + 2;
-//            sx=sx;
+//    totalItem = [productArray count];
+//    if(_category == 0){
+//        totalItem = [productArray count]*15;
+//    }
+//    
+//    productSmallSlider = [[UIScrollView alloc] initWithFrame:self.view.frame];
+//    
+//    NSInteger sx = 0;
+//    NSInteger sy = 0;
+//    NSInteger smallSliderWidth;
+//    NSInteger smallImageWidth = 327;
+//    NSInteger smallImageHeight = 255;
+//    
+//    NSMutableArray *tempButtons = [[NSMutableArray alloc] init];
+//    for (unsigned i = 0; i < totalItem; i++)
+//    {
+//        //small slider
+//        UIButton *smallButton = [[UIButton alloc] initWithFrame:CGRectMake(sx, sy, smallImageHeight, smallImageWidth)];
+//        [smallButton setTag:i];
+//        [smallButton setBackgroundColor:[UIColor whiteColor]];
+//        [smallButton addTarget:self action:@selector(gotoProductDetails:) forControlEvents:UIControlEventTouchUpInside];
+//        CGFloat padding = 10.0;
+//        [smallButton setImageEdgeInsets:UIEdgeInsetsMake(padding, padding, padding, padding)];
+//        
+//        sy = sy + 1 + smallImageWidth;
+//        if (sy > 600){
+//            sy = 0;
+//            sx = sx + smallImageHeight + 1;
 //        }
-		[tempButtons addObject:smallButton];
-        [smallButton release];
-    }
-    
-    self.buttons = tempButtons;
-    [tempButtons release];
-    for(UIButton *button in buttons){
-        [productSmallSlider addSubview:button];
-    }
-
-    smallSliderWidth = (totalItem/8+1)*1024;
-    productSmallSlider.pagingEnabled = YES;
-    productSmallSlider.contentSize = CGSizeMake(smallSliderWidth, 655);
-    productSmallSlider.backgroundColor = [UIColor grayColor];
-    productSmallSlider.showsHorizontalScrollIndicator = YES;
-    productSmallSlider.showsVerticalScrollIndicator = NO;
-    productSmallSlider.delegate=self;
-    
-    [self.view addSubview:productSmallSlider];
-    [self loadScrollViewWithPage:0];
-    [self loadScrollViewWithPage:1];
+////        if (i % 8 == 7) {
+////            //sx = sx + 2;
+////            sx=sx;
+////        }
+//		[tempButtons addObject:smallButton];
+//        [smallButton release];
+//    }
+//    
+//    self.buttons = tempButtons;
+//    [tempButtons release];
+//    for(UIButton *button in buttons){
+//        [productSmallSlider addSubview:button];
+//    }
+//
+//    smallSliderWidth = (totalItem/8+1)*1024;
+//    productSmallSlider.pagingEnabled = YES;
+//    productSmallSlider.contentSize = CGSizeMake(smallSliderWidth, 655);
+//    productSmallSlider.backgroundColor = [UIColor grayColor];
+//    productSmallSlider.showsHorizontalScrollIndicator = YES;
+//    productSmallSlider.showsVerticalScrollIndicator = NO;
+//    productSmallSlider.delegate=self;
+//    
+//    [self.view addSubview:productSmallSlider];
+//    [self loadScrollViewWithPage:0];
+//    [self loadScrollViewWithPage:1];
 }
 
 - (void)viewDidUnload
@@ -160,9 +163,9 @@
     NSInteger page = ((UIButton *) sender).tag;
     
     
-    BigProductSliderViewController *bigProductSliderViewController = [[BigProductSliderViewController alloc] initWithPage:page];
+    BigProductSliderViewController *bigProductSliderViewController = [[BigProductSliderViewController alloc] initWithPage:page andProducts:_productArray withTotal:totalItem];
     bigProductSliderViewController.delegate = self;
-    bigProductSliderViewController.navigationItem.title = [productArray objectAtIndex:page];
+    //bigProductSliderViewController.navigationItem.title = [[_productArray objectAtIndex:page] name];
     bigProductSliderViewController.type = _type;
     bigProductSliderViewController.category = _category;
     bigProductSliderViewController.item = page;
@@ -176,7 +179,7 @@
 #pragma mark Big....Delegate Method
 -(void)finishSomething:(UIViewController *)sender withItemNumber:(NSInteger)number{
     NSInteger page = number/8;
-    [productSmallSlider scrollRectToVisible:CGRectMake(1024*page, 0, 1024, 655) animated:NO];
+    [productScrollView scrollRectToVisible:CGRectMake(1024*page, 0, 1024, 655) animated:NO];
 }
 
 - (void)loadScrollViewWithPage:(int)page
@@ -186,53 +189,24 @@
     if (page >= totalItem/8+1)
         return;
     NSInteger truePage = page + 1;
-    NSInteger items = truePage*8;
-    items = items > totalItem ? totalItem : items;
-    NSInteger offset = page*8;
-    if(_category == 0){
-        for (NSInteger i = offset; i < items; i++) {
-            UIButton *button = [buttons objectAtIndex:i];
-            if ([[button imageView] image] == NULL) {
-                AsyncImageView *asyncImage = [[[AsyncImageView alloc] init] autorelease];
-                
-                //hardcode url
-                NSString *typeFolder = _type == 1 ? @"m" : @"f";
-                NSInteger cCategory = i/20+1;
-                
-                NSInteger cItem = (i%20)+1;
-                
-                NSString *subFolder = [[NSString alloc] initWithFormat:@"%i/t/%i.jpg", cCategory, cItem];
-                NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@/%@", baseURL, typeFolder, subFolder];
-                [typeFolder release];
-                [subFolder release];
-                
-                NSURL* url = [NSURL URLWithString:urlPath];
-                [urlPath release];
-                
-                [asyncImage loadImageFromURL:url forButton:button];
-            }        
-        }
-    }else{
-        for (NSInteger i = offset; i < items; i++) {
-            UIButton *button = [buttons objectAtIndex:i];
-            if ([[button imageView] image] == NULL) {
-                AsyncImageView *asyncImage = [[[AsyncImageView alloc] init] autorelease];
-                
-                //hardcode url
-                NSString *sexFolder = _type == 1 ? @"m" : @"f";
-                NSString *subFolder = [[NSString alloc] initWithFormat:@"%i/t/%i.jpg", _category, i+1];
-                NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@/%@", baseURL, sexFolder, subFolder];
-                [sexFolder release];
-                [subFolder release];
-                
-                NSURL* url = [NSURL URLWithString:urlPath];
-                [urlPath release];
-                
-                [asyncImage loadImageFromURL:url forButton:button];
-            }        
-        }
+    
+    NSInteger loadingPage = truePage+1;
+    NSNumber *loaded = [loadedPage objectForKey:[NSString stringWithFormat:@"%i", page+1]];
+    NSInteger loadedIndicator = [loaded intValue];
+    
+    if (loadedIndicator == 0 && loadingPage <= totalPages) {
+        NSLog(@"loading page: %i", loadingPage);
+        NSInteger start = (loadingPage)*8-8;
+        NSInteger end = (loadingPage)*8-1;
+        if (start < totalItem){
+            APP_SERVICE(appSrv);
+            [appSrv loadProductsForType:c_type forCatetory:c_category from:start to:end];
+            [loadedPage setObject:[NSNumber numberWithInteger:1] forKey:[NSString stringWithFormat:@"%i", page+1]];
+        }        
     }
 }
+
+#pragma mark navigationcontroller delegate methods
 
 
 #pragma mark scroll controller delegate
@@ -248,8 +222,8 @@
     }
 	
     // Switch the indicator when more than 50% of the previous/next page is visible
-    CGFloat pageWidth = productSmallSlider.frame.size.width;
-    int page = floor((productSmallSlider.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
+    CGFloat pageWidth = productScrollView.frame.size.width;
+    int page = floor((productScrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
     pageControl.currentPage = page;
     
     // load the visible page and the page on either side of it (to avoid flashes when the user starts scrolling)
@@ -264,9 +238,99 @@
 
 #pragma mark -
 #pragma mark ApplicationServiceDelegate
--(void) didFinishParsingProduct:(NSMutableDictionary *)productDict
+-(void) didFinishParsingProduct:(NSMutableArray *)c_productArray withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end
 {
-    //
+    if (start == 0) {
+        loadedPage = [[NSMutableDictionary alloc] init];
+        totalPages = total/8+1;
+        for (NSInteger i = 0; i<totalPages; i++) {
+            [loadedPage setObject:[NSNumber numberWithInteger:0] forKey:[NSString stringWithFormat:@"%i", i]];
+        }
+        
+        _productArray = c_productArray;
+        NSLog(@"Number of loaded product %i", [_productArray count]);
+        
+        
+        totalItem = total;
+        
+        //NSInteger c_numberProduct = [_productArray count];
+        if(_category == 0){
+            totalItem = [productArray count]*15;
+        }
+        
+        NSInteger sx = 0;
+        NSInteger sy = 0;
+        NSInteger smallSliderWidth;
+        NSInteger smallImageWidth = 327;
+        NSInteger smallImageHeight = 255;
+        
+        NSMutableArray *tempButtons = [[NSMutableArray alloc] init];
+        for (NSInteger i = 0; i < totalItem; i++)
+        {
+            UIButton *smallButton = [[UIButton alloc] initWithFrame:CGRectMake(sx, sy, smallImageHeight, smallImageWidth)];
+            [smallButton setBackgroundColor:[UIColor whiteColor]];
+            [smallButton addTarget:self action:@selector(gotoProductDetails:) forControlEvents:UIControlEventTouchUpInside];
+            [smallButton setTag:i];
+            CGFloat padding = 10.0;
+            [smallButton setImageEdgeInsets:UIEdgeInsetsMake(padding, padding, padding, padding)];
+            
+            sy = sy + 1 + smallImageWidth;
+            if (sy > 600){
+                sy = 0;
+                sx = sx + smallImageHeight + 1;
+            }
+            [tempButtons addObject:smallButton];
+            [smallButton release];
+        }
+        
+        self.buttons = tempButtons;
+        [tempButtons release];
+        for(UIButton *button in buttons){
+            [productScrollView addSubview:button];
+        }
+        
+        smallSliderWidth = (totalItem/8+1)*1024;
+        productScrollView.pagingEnabled = YES;
+        productScrollView.contentSize = CGSizeMake(smallSliderWidth, 655);
+        productScrollView.backgroundColor = [UIColor grayColor];
+        productScrollView.showsHorizontalScrollIndicator = YES;
+        productScrollView.showsVerticalScrollIndicator = NO;
+        productScrollView.delegate=self;
+        
+        [self.view addSubview:productScrollView];
+        [loadedPage setObject:[NSNumber numberWithInteger:1] forKey:@"0"];
+        [loadedPage setObject:[NSNumber numberWithInteger:1] forKey:@"1"];
+        [self loadScrollViewWithPage:0];
+        [self loadScrollViewWithPage:1];
+        
+        [self loadPageWithProductsStartAt:start EndAt:end];
+    }else{
+        [self loadPageWithProductsStartAt:start EndAt:end];
+    }
+}
+
+-(void) loadPageWithProductsStartAt:(NSInteger)start EndAt:(NSInteger)end
+{
+    for (NSInteger i = start; i <= (end > totalItem-1 ? totalItem-1 : end) ; i++) {
+        Product *product = [_productArray objectAtIndex:i];
+        UIButton *button = [buttons objectAtIndex:i];
+        //[button setTag:[[product pid] intValue]];
+        if ([[button imageView] image] == NULL) {
+            AsyncImageView *asyncImage = [[[AsyncImageView alloc] init] autorelease];
+            
+            //hardcode url
+            NSString *sexFolder = _type == 1 ? @"m" : @"f";
+            NSString *subFolder = [[NSString alloc] initWithFormat:@"%i/t/%@.jpg", _category, [product image]];
+            NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@/%@", BASE_URL, sexFolder, subFolder];
+            [sexFolder release];
+            [subFolder release];
+            
+            NSURL* url = [NSURL URLWithString:urlPath];
+            [urlPath release];
+            
+            [asyncImage loadImageFromURL:url forButton:button];
+        }        
+    }
 }
 
 @end

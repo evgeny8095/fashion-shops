@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ProductsDetailsSliderViewController.h"
+#import "ipcGlobal.h"
 
 @protocol BigProductSliderViewControllerDelegate <NSObject>
 
@@ -20,7 +21,7 @@
     UIScrollView *scrollView;
 	UIPageControl *pageControl;
     NSMutableArray *viewControllers;
-    NSArray *productArray;
+    NSArray *productArrayx;
     NSArray *imageArray;
     NSArray *imageURL;
     NSString *baseURL;
@@ -32,6 +33,7 @@
     NSInteger _type;
     NSInteger _category;
     NSInteger item;
+    NSMutableArray* _productArray;
     
 }
 
@@ -47,7 +49,7 @@
 - (void)revealDetails:(id)sender;
 - (void)gotoDetails:(id)sender;
 - (IBAction)changePage:(id)sender;
-- (id)initWithPage:(int)page;
+- (id)initWithPage:(int)page andProducts:(NSMutableArray*)products withTotal:(NSInteger)total;
 - (void)likeAction:(id)sender;
 
 @end

@@ -40,7 +40,6 @@
     if ([elementName isEqualToString:@"categories"]){
         [_count release];
         _count = [[NSNumber alloc] initWithInteger:[[attributeDict objectForKey:@"count"] intValue]];
-        NSLog(@"count: %i", [_count intValue]);
     }
     if ([elementName isEqualToString:@"category"]) {
         _currentObject.cid = [attributeDict objectForKey:@"id"];
@@ -50,7 +49,6 @@
 -(void) afterElementEnding:(NSString *)elementName{
     if ([elementName isEqualToString:@"category"]) {
         [_categoryDict setObject:_currentObject forKey:_currentObject.cid];
-        NSLog(@"Category Id: %@", _currentObject.cid);
 		[_currentObject release];
 		_currentObject = nil;
         [_chars release];
@@ -58,15 +56,12 @@
 	}
     if ([elementName isEqualToString:@"name"]){
         _currentObject.name = _chars;
-        NSLog(@"name: %@", _currentObject.name);
     }
     if ([elementName isEqualToString:@"description"]) {
         _currentObject.desc = _chars;
-        NSLog(@"description: %@", _currentObject.desc);
     }
     if ([elementName isEqualToString:@"image"]) {
         _currentObject.imageName = _chars;
-        NSLog(@"image: %@", _currentObject.imageName);
     }
 }
 

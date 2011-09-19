@@ -24,6 +24,27 @@
 @synthesize price;
 @synthesize desc;
 @synthesize delegate;
+@synthesize product = _product;
+@synthesize type = _type;
+@synthesize category = _category;
+
+- (id)initwithProduct:(Product *)c_product inPosition:(NSInteger)position withMode:(BOOL)cmode
+{
+    self = [super initWithNibName:nil bundle:nil];
+    if (self) {
+        //UIImage *imagex = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:strImg]]];
+        self.imageStr = [c_product image];
+        //[imagex release];
+        self.name = [c_product name];
+        self.price = [NSString stringWithFormat:@"%i",[c_product price]];
+        self.desc = [c_product desc];
+        cPosition = position;
+        mode = cmode;
+        _product = c_product;
+    }
+    
+    return self;
+}
 
 - (id)initWithImage:(NSString *)strImg hasName:(NSString *)strName hasPrice:(NSString *)strPrice hasDesc:(NSString *)strDesc inPosition:(NSInteger)position withMode:(BOOL)cmode{
     self = [super initWithNibName:nil bundle:nil];
@@ -64,8 +85,15 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    //hardcode url
+    NSString *sexFolder = _type == 1 ? @"m" : @"f";
+    NSString *subFolder = [[NSString alloc] initWithFormat:@"%i/%@.jpg", _category, [_product image]];
+    NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@/%@", BASE_URL, sexFolder, subFolder];
+    [sexFolder release];
+    [subFolder release];
     
-    NSURL *curl = [NSURL URLWithString:imageStr];
+    NSURL *curl = [NSURL URLWithString:urlPath];
+    [urlPath release];
     NSURLRequest* request = [NSURLRequest requestWithURL:curl cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
     connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
     

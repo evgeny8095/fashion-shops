@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ipcGlobal.h"
 
 @protocol ProductsDetailsSliderViewControllerDelegate <NSObject>
 
@@ -40,6 +41,9 @@
     NSURLConnection* connection;
     NSMutableData* data;
     UIActivityIndicatorView *loadingView;
+    Product* _product;
+    NSInteger _type;
+    NSInteger _category;
 }
 
 @property (nonatomic, retain) UIImage *image;
@@ -47,8 +51,12 @@
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSString *price;
 @property (nonatomic, retain) NSString *desc;
+@property (nonatomic, retain) Product *product;
 @property (nonatomic, retain) id<ProductsDetailsSliderViewControllerDelegate> delegate;
+@property (nonatomic, assign) NSInteger type;
+@property (nonatomic, assign) NSInteger category;
 
+- (id)initwithProduct:(Product*)c_product inPosition:(NSInteger)position withMode:(BOOL)cmode;
 - (id)initWithImage:(NSString *)strImg hasName:(NSString *)strName hasPrice:(NSString *)strPrice hasDesc:(NSString *)strDesc inPosition:(NSInteger)position withMode:(BOOL)cmode;
 - (void)revealDetails:(id)sender;
 - (void)changeViewMode:(BOOL)cmode;

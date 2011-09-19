@@ -63,6 +63,7 @@
 	
 	// make request
 	//NSString* url = _method ? _url : [self generateGetURL];
+    NSLog(@"querry: %@", finalURL);
 	NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:finalURL]];
 	
 	//_timestamp = [[NSDate date] retain];

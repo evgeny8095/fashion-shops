@@ -27,12 +27,14 @@
     return self;
 }
 
-- (id)initWithPage:(int)page
+- (id)initWithPage:(int)page andProducts:(NSMutableArray *)products withTotal:(NSInteger)total
 {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
         cpage = page;
         viewMode = YES;
+        _productArray = products;
+        numberOfPages = total;
     }
     return self;
 }
@@ -43,6 +45,11 @@
     [super didReceiveMemoryWarning];
     
     // Release any cached data, images, etc that aren't in use.
+}
+
+- (void)dealloc{
+    [_productArray release];
+    [super dealloc];
 }
 
 - (void)likeAction:(id)sender{
@@ -56,7 +63,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     //[self.navigationController setDelegate:self];
-    productArray = [[NSArray alloc] initWithObjects:@"Simple Product 1",@"Simple Product 2", @"Simple Product 3", @"Simple Product 4", @"Simple Product 5", @"Simple Product 6", @"Simple Product 7", @"Simple Product 8", @"Simple Product 9", @"Simple Product 10",@"Simple Product 11",@"Simple Product 12", @"Simple Product 13", @"Simple Product 14", @"Simple Product 15", @"Simple Product 16", @"Simple Product 17", @"Simple Product 18", @"Simple Product 19", @"Simple Product 20", nil];
+    //productArray = [[NSArray alloc] initWithObjects:@"Simple Product 1",@"Simple Product 2", @"Simple Product 3", @"Simple Product 4", @"Simple Product 5", @"Simple Product 6", @"Simple Product 7", @"Simple Product 8", @"Simple Product 9", @"Simple Product 10",@"Simple Product 11",@"Simple Product 12", @"Simple Product 13", @"Simple Product 14", @"Simple Product 15", @"Simple Product 16", @"Simple Product 17", @"Simple Product 18", @"Simple Product 19", @"Simple Product 20", nil];
     imageArray = [[NSArray alloc] initWithObjects:@"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", nil];
     imageURL = [[NSArray alloc] initWithObjects:@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/", nil];
     baseURL = @"http://www.ongsoft.com/ipc/";
@@ -67,7 +74,7 @@
     self.navigationItem.rightBarButtonItem = likeButton;
     [likeButton release];
     
-    numberOfPages = [productArray count];
+    //numberOfPages = [_productArray count];
     
     NSMutableArray *controllers = [[NSMutableArray alloc] init];
     for (unsigned i = 0; i < numberOfPages; i++)
@@ -142,15 +149,9 @@
     ProductsDetailsSliderViewController *controller = [viewControllers objectAtIndex:page];
     if ((NSNull *)controller == [NSNull null])
     {
-        //hardcode url
-        NSString *typeFolder = _type == 1 ? @"m" : @"f";
-        NSString *categoryFolder = [[NSString alloc] initWithFormat:@"%i/%i.jpg", _category, page+1];
-        NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@/%@", baseURL, typeFolder, categoryFolder];
-        [typeFolder release];
-        [categoryFolder release];
-        
-        controller = [[ProductsDetailsSliderViewController alloc] initWithImage:urlPath hasName:[productArray objectAtIndex:page] hasPrice:@"$100" hasDesc:@"Simple Product mau" inPosition:page withMode:viewMode];
-        [urlPath release];
+        controller = [[ProductsDetailsSliderViewController alloc] initwithProduct:[_productArray objectAtIndex:page] inPosition:page withMode:viewMode];
+        controller.type = _type;
+        controller.category = _category;
         
         controller.delegate = self;
         [viewControllers replaceObjectAtIndex:page withObject:controller];
@@ -194,7 +195,7 @@
         [self loadScrollViewWithPage:page];
         [self loadScrollViewWithPage:page - 1];
         [self loadScrollViewWithPage:page + 1];
-        self.navigationItem.title = [productArray objectAtIndex:page];
+        self.navigationItem.title = [[_productArray objectAtIndex:page] name];
         cpage = page;
     }
     // A possible optimization would be to unload the views+controllers which are no longer visible

@@ -197,11 +197,13 @@
     NSDictionary *categories = [appSrvvv categoryDict];
     Type* c_type = [types objectForKey:[NSString stringWithFormat:@"%i", _type]];
     Category* c_category = [categories objectForKey:[NSString stringWithFormat:@"%i", category]];
-    [appSrvvv loadProductsForType:c_type forCatetory:c_category];
+    [appSrvvv loadProductsForType:c_type forCatetory:c_category from:0 to:15];
+    //[appSrvvv loadProductsForType:c_type forCatetory:c_category];
     
     ProductSliderViewController *productSliderViewController = [[ProductSliderViewController alloc] init];
     [appSrvvv setDelegate:productSliderViewController];
-    
+    productSliderViewController.c_type = c_type;
+    productSliderViewController.c_category = c_category;
     productSliderViewController.type = _type;
     productSliderViewController.category = category;
     //productSliderViewController.navigationItem.title = title;
