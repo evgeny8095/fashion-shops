@@ -14,8 +14,15 @@
 @synthesize tabBarController = _tabBarController;
 @synthesize navController = _navController;
 
-- (ApplicationService*) appService{
+#pragma mark - 
+#pragma mark Services Accessor
+- (ApplicationService*) appService
+{
     return _appService;
+}
+- (DataService*) dataService
+{
+    return _dataService;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -26,8 +33,7 @@
     [_appService loadTypes];
     [_appService loadBrands];
     [_appService loadStores];
-    //[_appService loadCategories];
-    //[_appService loadProducts];
+    _dataService = [[DataService alloc] init];
     
     [self.window setBackgroundColor:[UIColor grayColor]];
     self.window.rootViewController = self.tabBarController;
@@ -67,11 +73,7 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    /*
-     Called when the application is about to terminate.
-     Save data if appropriate.
-     See also applicationDidEnterBackground:.
-     */
+    [_dataService applicationTerminate];
 }
 
 - (void)dealloc

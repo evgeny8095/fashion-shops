@@ -44,6 +44,7 @@
     Product* _product;
     NSInteger _type;
     NSInteger _category;
+    NSManagedObjectContext *managedObjectContext;
 }
 
 @property (nonatomic, retain) UIImage *image;
@@ -63,5 +64,6 @@
 - (void)buy:(id)sender;
 - (IBAction)gotoShop:(id)sender;
 - (void)labelHiddenChage:(BOOL)cmode;
+- (void)addToFavourite;
 
 @end

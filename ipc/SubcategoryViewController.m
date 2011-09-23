@@ -198,7 +198,6 @@
     Type* c_type = [types objectForKey:[NSString stringWithFormat:@"%i", _type]];
     Category* c_category = [categories objectForKey:[NSString stringWithFormat:@"%i", category]];
     [appSrvvv loadProductsForType:c_type forCatetory:c_category from:0 to:15];
-    //[appSrvvv loadProductsForType:c_type forCatetory:c_category];
     
     ProductSliderViewController *productSliderViewController = [[ProductSliderViewController alloc] init];
     [appSrvvv setDelegate:productSliderViewController];
@@ -247,7 +246,7 @@
         [button addTarget:self action:@selector(gotoSubCatalogue:) forControlEvents:UIControlEventTouchUpInside];
         [button setImageEdgeInsets:UIEdgeInsetsMake(topPadding, sidePadding, sidePadding, sidePadding)];
         [button setImage:image forState:normal];
-        [button setTag:[current.cid intValue]-1];
+        [button setTag:[current.cid intValue]];
         [button setTitle:current.name forState:normal];
         [button setBackgroundColor:[UIColor blackColor]];
         [image release];
@@ -279,7 +278,6 @@
     }
     
     [subCategoryScrollView setContentSize:CGSizeMake(scrollWidth-buttonSpacing, subCategoryScrollView.frame.size.height)];
-    //[subCategoryScrollView setPagingEnabled:YES];
     [subCategoryScrollView setIndicatorStyle:UIScrollViewIndicatorStyleWhite];
     [loading stopAnimating];
 }

@@ -6,13 +6,16 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 #import "ApplicationService.h"
+#import "DataService.h"
 #import "Type.h"
 #import "Category.h"
 #import "Brand.h"
 #import "Store.h"
 #import "Product.h"
 #import "ipcAppDelegate.h"
+#import "Testing.h"
 
 #define BASE_URL @"http://www.ongsoft.com/ipc/"
 #define CATEGORIES_URL @"http://www.ongsoft.com/ios/categories.php"
@@ -32,5 +35,6 @@
 #define HTTP_REQUEST_FINISHING_NOTIFICATION @"HttpRequestFinishingNotification"
 #define RELOAD_DATA_NOTIFICATION @"ReloadDataNotification"
 
-#define APP_SERVICE(appSrv) ApplicationService* appSrv = [(ipcAppDelegate*)[[UIApplication sharedApplication] delegate] appService];
+#define APP_SERVICE(appSrv) ApplicationService* appSrv = [(ipcAppDelegate*)[[UIApplication sharedApplication] delegate] appService]
+#define DATA_SERVICE(dataSrv) DataService* dataSrv = [(ipcAppDelegate*)[[UIApplication sharedApplication] delegate] dataService]
 #define APP_DELEGATE(app) ipcAppDelegate* app = (ipcAppDelegate*)[[UIApplication sharedApplication] delegate]

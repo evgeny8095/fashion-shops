@@ -320,7 +320,7 @@
             
             //hardcode url
             NSString *sexFolder = _type == 1 ? @"m" : @"f";
-            NSString *subFolder = [[NSString alloc] initWithFormat:@"%i/t/%@.jpg", _category, [product image]];
+            NSString *subFolder = [[NSString alloc] initWithFormat:@"%i/t/%@.jpg", _category-2, [product image]];
             NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@/%@", BASE_URL, sexFolder, subFolder];
             [sexFolder release];
             [subFolder release];

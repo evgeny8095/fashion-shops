@@ -7,7 +7,6 @@
 //
 
 #import "HomeViewController.h"
-#import "CatalogueViewController.h"
 #import "SubcategoryViewController.h"
 #import "CategoryXMLHandler.h"
 
@@ -212,9 +211,6 @@
     NSInteger typeId =  ((UIButton *) sender).tag;
     NSString *key = [NSString stringWithFormat:@"%i", typeId];
     Type *c_type = [_typeDict objectForKey:key];
-    
-    
-    
     
     navController = [[UINavigationController alloc] init];
     navController.delegate=self;

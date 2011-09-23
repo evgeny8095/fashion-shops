@@ -23,11 +23,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "ipc/HomeViewController.m"
-         timestampString = "338098866.041773"
+         timestampString = "338195918.77681"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "218"
-         endingLineNumber = "218"
+         startingLineNumber = "214"
+         endingLineNumber = "214"
          landmarkName = "-gotoCategory:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -141,6 +141,34 @@
          startingLineNumber = "91"
          endingLineNumber = "91"
          landmarkName = "-viewDidLoad"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "ipc/ApplicationService.m"
+         timestampString = "338195189.276073"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "210"
+         endingLineNumber = "210"
+         landmarkName = "-loadProductsForType:forCatetory:from:to:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "ipc/SubcategoryViewController.m"
+         timestampString = "338195803.279073"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "237"
+         endingLineNumber = "237"
+         landmarkName = "-didFinishParsingCategory:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

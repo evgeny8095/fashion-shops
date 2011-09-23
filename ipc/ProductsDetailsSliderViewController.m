@@ -87,7 +87,7 @@
     // Do any additional setup after loading the view from its nib.
     //hardcode url
     NSString *sexFolder = _type == 1 ? @"m" : @"f";
-    NSString *subFolder = [[NSString alloc] initWithFormat:@"%i/%@.jpg", _category, [_product image]];
+    NSString *subFolder = [[NSString alloc] initWithFormat:@"%i/%@.jpg", _category-2, [_product image]];
     NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@/%@", BASE_URL, sexFolder, subFolder];
     [sexFolder release];
     [subFolder release];
@@ -186,13 +186,15 @@
 //    [labelDesc setHidden:YES];
 //    [self.view addSubview:labelDesc];
     
-    like = [[UIButton alloc] initWithFrame:CGRectMake(leftDetailsPadding, 460, 50, 30)];
-    [like setHidden:YES];
-    [like setTitle:@"Like" forState:normal];
+    like = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    like.frame = CGRectMake(905+buttonWidth, 600, buttonWidth, buttonHeight);
+    //[like setHidden:YES];
+    [like addTarget:self action:@selector(addToFavourite) forControlEvents:UIControlEventTouchUpInside];
+    [like setTitle:@"Like" forState:UIControlStateNormal];
     [like.titleLabel setFont:[UIFont fontWithName: @"Helvetica" size: 24]];
     [like.titleLabel setFont:[UIFont boldSystemFontOfSize:24]];
     [like setBackgroundColor:[UIColor redColor]];
-    //[self.view addSubview:like];
+    [self.view addSubview:like];
     
     buy = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     buy.frame = CGRectMake(900, 600, buttonWidth, buttonHeight);
@@ -202,6 +204,7 @@
     [buy.titleLabel setFont:[UIFont fontWithName: @"Helvetica" size: 24]];
     [buy.titleLabel setFont:[UIFont boldSystemFontOfSize:24]];
     [self.view addSubview:buy];
+    
     [self.view setBackgroundColor:[UIColor whiteColor]];
 }
 
@@ -299,6 +302,23 @@
     [imagex retain];
 	[data release];
 	data=nil;
+}
+
+#pragma mark -
+#pragma mark Favourite Function
+- (void)addToFavourite
+{
+    
+    DATA_SERVICE(dataSrv);
+    managedObjectContext = [dataSrv managedObjectContext];
+    Testing* test = (Testing*)[NSEntityDescription insertNewObjectForEntityForName:@"Testing" inManagedObjectContext:managedObjectContext];
+    [test setTid:[_product pid]];
+    [test setName:[_product name]];
+    NSError *error;
+	if (![managedObjectContext save:&error]) {
+		// This is a serious error saying the record could not be saved.
+		// Advise the user to restart the application
+	}
 }
 
 @end

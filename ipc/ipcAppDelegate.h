@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "ApplicationService.h"
+#import "DataService.h"
 
 @interface ipcAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate>{
     ApplicationService* _appService;
+    DataService* _dataService;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
@@ -20,5 +22,6 @@
 @property (nonatomic, retain) IBOutlet UINavigationController *navController;
 
 -(ApplicationService*) appService;
+-(DataService*) dataService;
 
 @end
