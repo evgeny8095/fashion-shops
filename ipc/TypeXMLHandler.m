@@ -42,7 +42,7 @@
         _count = [[NSNumber alloc] initWithInteger:[[attributeDict objectForKey:@"count"] intValue]];
     }
     if ([elementName isEqualToString:@"type"]) {
-        _currentObject.tid = [attributeDict objectForKey:@"id"];
+        [_currentObject setTid:[attributeDict objectForKey:@"id"]];
     }
 }
 
@@ -61,7 +61,7 @@
         _currentObject.desc = _chars;
     }
     if ([elementName isEqualToString:@"image"]) {
-        _currentObject.imageName = _chars;
+        _currentObject.image = _chars;
     }
 }
 

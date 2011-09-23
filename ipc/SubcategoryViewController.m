@@ -241,7 +241,7 @@
     NSInteger scrollWidth;
     for (NSString* key in _categoryDict) {
         Category* current = [_categoryDict objectForKey:key];
-        UIImage *image = [UIImage imageNamed:current.imageName];
+        UIImage *image = [UIImage imageNamed:current.image];
         UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(px, py, buttonWidth, buttonHeight)];
         [button addTarget:self action:@selector(gotoSubCatalogue:) forControlEvents:UIControlEventTouchUpInside];
         [button setImageEdgeInsets:UIEdgeInsetsMake(topPadding, sidePadding, sidePadding, sidePadding)];

@@ -14,14 +14,14 @@
     NSString* _cid;
     NSString* _name;
     NSString* _desc;
-    NSString* _imageName;
+    NSString* _image;
 }
 
 @property (nonatomic, retain) NSString *cid;
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSString *desc;
-@property (nonatomic, retain) NSString *imageName;
+@property (nonatomic, retain) NSString *image;
 
-- (id) initWithId:(NSString*)strId name:(NSString*)strName description:(NSString*)strDescription andImageName:(NSString*)strImageName;
+- (id) initWithId:(NSString*)strId name:(NSString*)strName description:(NSString*)strDescription andImageName:(NSString*)strImage;
 
 @end

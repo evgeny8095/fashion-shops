@@ -61,7 +61,7 @@
         _currentObject.desc = _chars;
     }
     if ([elementName isEqualToString:@"image"]) {
-        _currentObject.imageName = _chars;
+        _currentObject.image = _chars;
     }
 }
 

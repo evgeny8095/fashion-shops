@@ -39,7 +39,7 @@
         _count = [[NSNumber alloc] initWithInteger:[[attributeDict objectForKey:@"count"] intValue]];
     }
     if ([elementName isEqualToString:@"brand"]) {
-        _currentObject.bid = [attributeDict objectForKey:@"id"];
+        [_currentObject setBid:[attributeDict objectForKey:@"id"]];
     }
 }
 

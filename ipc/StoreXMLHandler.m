@@ -77,7 +77,7 @@
         _currentObject.map = _chars;
     }
     if ([elementName isEqualToString:@"rating"]) {
-        _currentObject.rating = [_chars intValue];
+        _currentObject.rating = [NSNumber numberWithInt:[_chars intValue]];
     }
     if ([elementName isEqualToString:@"phone"]) {
         _currentObject.phone = _chars;

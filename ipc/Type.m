@@ -10,7 +10,7 @@
 
 
 @implementation Type
-@synthesize tid = _tid, name = _name, desc = _desc, imageName = _imageName;
+@synthesize tid = _tid, name = _name, desc = _desc, image = _image;
 
 -(id) init
 {
@@ -18,7 +18,7 @@
 		_tid = nil;
 		_name = nil;
 		_desc = nil;
-        _imageName = nil;
+        _image = nil;
 	}
 	return self;
 }
@@ -26,12 +26,12 @@
 -(id) initWithId:(NSString *)strId
             name:(NSString *)strName
      description:(NSString *)strDescription
-    andImageName:(NSString *)strImageName{
+    andImageName:(NSString *)strImage{
     if (self = [super init]) {
         _tid = strId;
         _name = strName;
         _desc = strDescription;
-        _imageName = strImageName;
+        _image = strImage;
 	}
 	return self;
 }
@@ -41,7 +41,7 @@
 	[_tid release];
     [_name release];
     [_desc release];
-    [_imageName release];
+    [_image release];
 	[super dealloc];
 }
 
