@@ -7,12 +7,13 @@
 //
 
 #import "FavouriteViewController.h"
+#import "ProductSliderViewController.h"
 
 
 @implementation FavouriteViewController
 @synthesize navController;
 @synthesize navBar;
-@synthesize testArray;
+@synthesize fproductArray;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -47,14 +48,14 @@
     DATA_SERVICE(dataSrv);
     managedObjectContext = [dataSrv managedObjectContext];
     
-	NSEntityDescription *test = [NSEntityDescription entityForName:@"Testing" inManagedObjectContext:managedObjectContext];
+	NSEntityDescription *fproduct = [NSEntityDescription entityForName:@"FProduct" inManagedObjectContext:managedObjectContext];
 	
 	// Setup the fetch request
 	NSFetchRequest *request = [[NSFetchRequest alloc] init];
-	[request setEntity:test];
+	[request setEntity:fproduct];
 	
 	// Define how we will sort the records
-	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"tid" ascending:NO];
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"pid" ascending:NO];
 	NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
 	
 	[request setSortDescriptors:sortDescriptors];
@@ -70,13 +71,45 @@
 	}
 	
 	// Save our fetched data to an array
-	[self setTestArray: mutableFetchResults];
+	[self setFproductArray: mutableFetchResults];
 	
+    for (FProduct* fproduct in fproductArray)
+    {
+        Product* product = [fproduct toProduct];
+        if (productArray == nil) {
+            productArray = [[NSMutableArray alloc] init];
+        }
+        [productArray addObject:product];
+        [product release];
+    }
+    
+    navController = [[UINavigationController alloc] init];
+    //navController.delegate=self;
+    
+    [navController.view setFrame:self.view.frame];
+    
+    [navController.navigationBar setBarStyle:UIBarStyleBlack];
+    
 	[mutableFetchResults release];
 	[request release];
     
-    NSInteger count = [testArray count];
+    NSInteger count = [fproductArray count];
     NSLog(@"testArray count: %i", count);
+    
+    ProductSliderViewController *productSliderViewController = [[ProductSliderViewController alloc] initWithProductArray:productArray];
+    //productSliderViewController.c_type = c_type;
+    //productSliderViewController.c_category = c_category;
+    //productSliderViewController.type = _type;
+    //productSliderViewController.category = category;
+    //productSliderViewController.navigationItem.title = title;
+    
+    //productSliderViewController.title = title;
+    
+    [self.view addSubview:navController.view];
+    
+    [self.navController pushViewController:productSliderViewController animated:NO];
+    
+    [productSliderViewController release];
 }
 
 - (void)viewDidUnload

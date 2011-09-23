@@ -311,9 +311,32 @@
     
     DATA_SERVICE(dataSrv);
     managedObjectContext = [dataSrv managedObjectContext];
-    Testing* test = (Testing*)[NSEntityDescription insertNewObjectForEntityForName:@"Testing" inManagedObjectContext:managedObjectContext];
-    [test setTid:[_product pid]];
-    [test setName:[_product name]];
+    FProduct* fproduct = (FProduct*)[NSEntityDescription insertNewObjectForEntityForName:@"FProduct" inManagedObjectContext:managedObjectContext];
+    [fproduct copyFromProduct:_product];
+    
+    FBrand* fbrand = (FBrand*)[NSEntityDescription insertNewObjectForEntityForName:@"FBrand" inManagedObjectContext:managedObjectContext];
+    [fbrand copyFromBrand:[_product brand]];
+    [fproduct setBrand:fbrand];
+    
+    FStore* fstore = (FStore*)[NSEntityDescription insertNewObjectForEntityForName:@"FStore" inManagedObjectContext:managedObjectContext];
+    [fstore copyFromStore:[_product store]];
+    [fproduct setStore:fstore];
+    
+    NSMutableSet* ftypies = [[NSMutableSet alloc] init];
+    for (Type* type in [_product types]) {
+        FType* ftype = (FType*)[NSEntityDescription insertNewObjectForEntityForName:@"FType" inManagedObjectContext:managedObjectContext];
+        [ftype copyFromType:type];
+        [ftypies addObject:ftype];
+    }
+    [fproduct setTypies:ftypies];
+    
+    NSMutableSet* fcategories = [[NSMutableSet alloc] init];
+    for (Category* category in [_product categories]) {
+        FCategory* fcategory = (FCategory*)[NSEntityDescription insertNewObjectForEntityForName:@"FCategory" inManagedObjectContext:managedObjectContext];
+        [fcategories addObject:fcategory];
+    }
+    [fproduct setCategories:fcategories];
+    
     NSError *error;
 	if (![managedObjectContext save:&error]) {
 		// This is a serious error saying the record could not be saved.

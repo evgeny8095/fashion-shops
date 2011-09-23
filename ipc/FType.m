@@ -23,4 +23,14 @@
     [self setImage:[type image]];
 }
 
+-(Type*) toType
+{
+    Type* type = [[Type alloc] init];
+    type.tid = self.tid;
+    type.name = self.name;
+    type.desc = self.desc;
+    type.image = self.image;
+    return type;
+}
+
 @end

@@ -19,5 +19,6 @@
 @property (nonatomic, retain) NSString * image;
 
 -(void) copyFromCategory:(Category*)category;
+-(Category*) toCategory;
 
 @end

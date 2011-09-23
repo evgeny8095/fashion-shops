@@ -15,11 +15,12 @@
     NSManagedObjectContext *managedObjectContext;
     UIPopoverController *popoverController;
     MyPopOverView *myPopOver;
-    NSMutableArray *testArray;
+    NSMutableArray *fproductArray;
+    NSMutableArray *productArray;
 }
 
 @property (nonatomic, retain) IBOutlet UINavigationController *navController;
 @property (nonatomic, retain) IBOutlet UINavigationBar *navBar;
-@property (nonatomic, retain) NSMutableArray *testArray;
+@property (nonatomic, retain) NSMutableArray *fproductArray;
 
 @end

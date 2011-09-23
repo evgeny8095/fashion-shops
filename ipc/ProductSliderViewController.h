@@ -33,6 +33,7 @@
     Type* c_type;
     Category* c_category;
     NSMutableDictionary* loadedPage;
+    NSString* loadFrom;
 }
 
 @property (nonatomic, retain) NSMutableArray *buttons;
@@ -45,6 +46,7 @@
 @property (nonatomic, retain) Type* c_type;
 @property (nonatomic, retain) Category* c_category;
 
+- (id) initWithProductArray:(NSMutableArray*)fproductArray;
 - (IBAction)gotoProductDetails:(id)sender;
 - (void)filterProductList:(id)sender;
 - (void)loadPageWithProductsStartAt:(NSInteger)start EndAt:(NSInteger)end;

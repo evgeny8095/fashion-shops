@@ -9,7 +9,7 @@
 #import "Category.h"
 
 @implementation Category
-@synthesize cid = _cid, name = _name, desc = _desc, imageName = _imageName;
+@synthesize cid = _cid, name = _name, desc = _desc, image = _image;
 
 -(id) init
 {

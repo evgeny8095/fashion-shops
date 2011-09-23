@@ -94,7 +94,7 @@
         _currentObject.name = _chars;
     }
     if ([elementName isEqualToString:@"price"]) {
-        _currentObject.price = _chars;
+        _currentObject.price = [_chars intValue];
     }
     if ([elementName isEqualToString:@"description"]) {
         _currentObject.desc = _chars;
@@ -106,7 +106,7 @@
         _currentObject.url = _chars;
     }
     if ([elementName isEqualToString:@"rating"]) {
-        _currentObject.rating = [NSNumber numberWithInt:[_chars intValue]];
+        _currentObject.rating = [_chars intValue];
     }
     if ([elementName isEqualToString:@"store"]){
         _currentObject.store = [c_storeDict objectForKey:_chars];

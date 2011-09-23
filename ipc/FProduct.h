@@ -28,5 +28,5 @@
 @property (nonatomic, retain) FBrand * brand;
 
 -(void) copyFromProduct:(Product*)product;
-
+-(Product*) toProduct;
 @end

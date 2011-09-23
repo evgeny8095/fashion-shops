@@ -33,4 +33,19 @@
     [self setPhone:[store phone]];
 }
 
+-(Store*) toStore
+{
+    Store* store = [[Store alloc] init];
+    store.sid = self.sid;
+    store.name = self.name;
+    store.address = self.address;
+    store.desc = self.desc;
+    store.logo = self.logo;
+    store.url = self.url;
+    store.map = self.map;
+    store.rating = [self.rating intValue];
+    store.phone = store.phone;
+    return store;
+}
+
 @end

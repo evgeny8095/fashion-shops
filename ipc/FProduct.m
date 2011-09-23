@@ -94,4 +94,29 @@
     [self setUrl:[product url]];
 }
 
+-(Product*) toProduct
+{
+    Product* product = [[Product alloc] init];
+    product.pid = self.pid;
+    product.name = self.name;
+    product.desc = self.desc;
+    product.price = [self.price intValue];
+    product.rating = [self.rating intValue];
+    product.image = self.image;
+    product.url = self.url;
+    product.store = [[self store] toStore];
+    product.brand = [[self brand] toBrand];
+    for (FType* ftype in [self typies]){
+        Type* type = [ftype toType];
+        [product.types setObject:type forKey:[type tid]];
+        [type release];
+    }
+    for (FCategory* fcategory in [self categories]) {
+        Category* category = [fcategory toCategory];
+        [product.categories setObject:category forKey:[category cid]];
+        [category release];
+    }
+    return product;
+}
+
 @end

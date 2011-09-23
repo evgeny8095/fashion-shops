@@ -23,18 +23,15 @@
 	return self;
 }
 
--(id) initWithId:(NSString *)strId
-            name:(NSString *)strName
-     description:(NSString *)strDescription
-    andImageName:(NSString *)strImage{
+-(id) initWithId:(NSString *)strId name:(NSString *)strName description:(NSString *)strDescription andImage:(NSString *)strImage
+{
     if (self = [super init]) {
         _tid = strId;
         _name = strName;
         _desc = strDescription;
         _image = strImage;
 	}
-	return self;
-}
+	return self;}
 
 -(void) dealloc
 {		

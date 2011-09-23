@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Product.h"
 #import "Type.h"
 #import "Category.h"
 #import "Store.h"
 #import "Brand.h"
-
 
 @interface Product : NSObject {
     NSString* _pid;

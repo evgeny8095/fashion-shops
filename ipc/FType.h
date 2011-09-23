@@ -20,5 +20,6 @@
 @property (nonatomic, retain) NSString * image;
 
 -(void) copyFromType:(Type*)type;
+-(Type*) toType;
 
 @end

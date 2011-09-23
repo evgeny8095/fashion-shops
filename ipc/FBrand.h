@@ -17,5 +17,6 @@
 @property (nonatomic, retain) NSString * name;
 
 -(void) copyFromBrand:(Brand*)brand;
+-(Brand*) toBrand;
 
 @end

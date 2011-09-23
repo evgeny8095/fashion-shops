@@ -19,4 +19,12 @@
     [self setName:[brand name]];
 }
 
+-(Brand*) toBrand
+{
+    Brand* brand = [[Brand alloc] init];
+    brand.bid = self.bid;
+    brand.name = self.name;
+    return brand;
+}
+
 @end

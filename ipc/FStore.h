@@ -24,5 +24,6 @@
 @property (nonatomic, retain) NSString * phone;
 
 -(void) copyFromStore:(Store*)store;
+-(Store*) toStore;
 
 @end

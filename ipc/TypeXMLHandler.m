@@ -24,7 +24,7 @@
         return _count;
     }
     if ([elementName isEqualToString:@"type"]) {
-		_currentObject = [[Type alloc] init];
+        _currentObject = [[Type alloc] init];
 		return _currentObject;
 	}
     if ([elementName isEqualToString:@"name"]

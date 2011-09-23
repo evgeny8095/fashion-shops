@@ -23,4 +23,14 @@
     [self setImage:[category image]];
 }
 
+-(Category*) toCategory
+{
+    Category* category = [[Category alloc] init];
+    category.cid = self.cid;
+    category.name = self.name;
+    category.desc = self.desc;
+    category.image = self.image;
+    return category;
+}
+
 @end
