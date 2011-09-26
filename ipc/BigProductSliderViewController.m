@@ -16,7 +16,7 @@
 @end
 
 @implementation BigProductSliderViewController
-@synthesize productBigSlider, scrollView, pageControl, viewControllers, delegate, type = _type, category = _category, item;
+@synthesize scrollView, pageControl, viewControllers, delegate, type = _type, category = _category, item;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -84,7 +84,6 @@
     self.viewControllers = controllers;
     [controllers release];
     
-    //productBigSlider = [[UIScrollView alloc] initWithFrame:self.view.frame];
     scrollView = [[UIScrollView alloc] initWithFrame:self.view.frame];
     
     // a page is the width of the scroll view

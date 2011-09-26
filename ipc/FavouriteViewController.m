@@ -44,6 +44,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     // Define our table/entity to use
+    [self.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     
     DATA_SERVICE(dataSrv);
     managedObjectContext = [dataSrv managedObjectContext];
@@ -102,7 +103,6 @@
     //productSliderViewController.type = _type;
     //productSliderViewController.category = category;
     //productSliderViewController.navigationItem.title = title;
-    
     //productSliderViewController.title = title;
     
     [self.view addSubview:navController.view];

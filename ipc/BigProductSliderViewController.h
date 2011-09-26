@@ -17,7 +17,6 @@
 @end
 
 @interface BigProductSliderViewController : UIViewController <UIScrollViewDelegate, ProductsDetailsSliderViewControllerDelegate>{
-    UIScrollView *productBigSlider;
     UIScrollView *scrollView;
 	UIPageControl *pageControl;
     NSMutableArray *viewControllers;
@@ -37,7 +36,6 @@
     
 }
 
-@property (nonatomic, retain) IBOutlet UIScrollView *productBigSlider;
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, retain) IBOutlet UIPageControl *pageControl;
 @property (nonatomic, retain) NSMutableArray *viewControllers;
