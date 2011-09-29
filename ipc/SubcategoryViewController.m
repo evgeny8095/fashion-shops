@@ -47,9 +47,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    //NSArray *subCategoryArray = [[NSArray alloc] initWithObjects:@"ALL", @"SHIRT", @"T-SHIRT", @"SWIMWEAR", @"DESIGNED SHIRT", @"SHORT", @"SKIRT", @"JEAN", @"UNDERWARE", @"CRAVAT", @"TROUSER", @"SPORT", @"EYESWEAR", @"ACCESSORY", @"BAG", @"WATCH", nil];
-    //NSArray *subImageArray = [[NSArray alloc] initWithObjects:@"sub_category1.png", @"sub_category2.png", @"sub_category3.png", @"sub_category4.png", @"sub_category5.png", @"sub_category6.png", @"sub_category7.png", @"sub_category8.png", @"sub_category9.png", @"sub_category10.png", @"sub_category11.png", @"sub_category12.png", @"sub_category13.png", @"sub_category14.png", @"sub_category15.png", @"sub_category16.png", nil];
-    
     //search bar
     UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
     [searchBar setDelegate:self];
@@ -61,118 +58,19 @@
     NSString *bannerURL = [NSString stringWithFormat:@"%@%@", baseURL, @"banners/sub_banner.png"];
     [baseURL release];
     NSURL *bannerImageURL = [NSURL URLWithString:bannerURL];
-    UIImage *bannerImage = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:bannerImageURL]];
+    UIImage *bannerImage = [[UIImage alloc] initWithData:[[NSData dataWithContentsOfURL:bannerImageURL] autorelease]];
 //    if (bannerImage == nil) {
 //        [bannerImage release];
 //        bannerImage = [UIImage imageNamed:@"banner.jpg"];
 //    }
     
     [topButton setImage:bannerImage forState:UIControlStateNormal];
-    //[bannerImage release];
+    [bannerImage release];
+}
 
-    //category dict
-    //APP_SERVICE(appSrv);
-    //_categoryDict = [appSrv categoryDict];
-    //NSLog(@"totalCategories: %i",[_categoryDict count]);
-	
-    //code interface
-//    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.view.frame];
-//    
-//    BOOL overLoad = NO;
-//    NSInteger x = 25;
-//    NSInteger y = 45;
-//    NSInteger scrollWidth = 0;
-//    for (NSInteger i = 0; i < subCategoryArray.count; i++) {
-//        UIImage *image = [UIImage imageNamed:[subImageArray objectAtIndex:i]];
-//        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(x, y, 308, 100)];
-//        [button addTarget:self action:@selector(gotoSubCatalogue:) forControlEvents:UIControlEventTouchUpInside];
-//        [button setImage:image forState:normal];
-//        [button setTag:i];
-//        [button setTitle:[subCategoryArray objectAtIndex:i] forState:normal];
-//        [image release];
-//        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(x, y+100, 308, 30)];
-//        [label setText:[subCategoryArray objectAtIndex:i]];
-//        //[label setAlpha:0.7];
-//        [label setTextAlignment:UITextAlignmentLeft];
-//        [label setBackgroundColor:[UIColor blackColor]];
-//        [label setTextColor:[UIColor whiteColor]];
-//        [label setFont:[UIFont fontWithName: @"Helvetica" size: 32]];
-//        [scrollView addSubview:button];
-//        [scrollView addSubview:label];
-//        [button release];
-//        [label release];
-//        
-//        y = y + 45 + 100;
-//        overLoad = YES;
-//        if (y > 600){
-//            y = 45;
-//            x = x + 308 + 25;
-//            overLoad = NO;
-//        }
-//        if (overLoad)
-//            scrollWidth = x + 308 + 25;
-//        else
-//            scrollWidth = x;
-//    }
-    
-//    scrollView.pagingEnabled = NO;
-//    scrollView.contentSize = CGSizeMake(scrollWidth, 700);
-//    scrollView.showsHorizontalScrollIndicator = YES;
-//    scrollView.showsVerticalScrollIndicator = NO;
-//    scrollView.backgroundColor = [UIColor grayColor];
-//    //[self.view addSubview:scrollView];
-//    [subCategoryArray release];
-//    [subImageArray release];
-    
-    
-    
-    //code for interface builder
-//    BOOL overLoad;
-//    NSInteger px = 0;
-//    NSInteger py = 0;
-//    NSInteger scrollWidth;
-//    for (NSString* key in _categoryDict) {
-//        Category* current = [_categoryDict objectForKey:key];
-//        UIImage *image = [UIImage imageNamed:current.imageName];
-//        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(px, py, buttonWidth, buttonHeight)];
-//        [button addTarget:self action:@selector(gotoSubCatalogue:) forControlEvents:UIControlEventTouchUpInside];
-//        [button setImageEdgeInsets:UIEdgeInsetsMake(topPadding, sidePadding, sidePadding, sidePadding)];
-//        [button setImage:image forState:normal];
-//        [button setTag:[current.cid intValue]-1];
-//        [button setTitle:current.name forState:normal];
-//        [button setBackgroundColor:[UIColor blackColor]];
-//        [image release];
-//        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(px, py, buttonWidth, labelHeight)];
-//        [label setText:[current.name uppercaseString]];
-//        //[label setAlpha:0.7];
-//        [label setTextAlignment:UITextAlignmentCenter];
-//        [label setBackgroundColor:[UIColor clearColor]];
-//        [label setTextColor:[UIColor whiteColor]];
-//        [label setFont:[UIFont fontWithName: @"Helvetica" size: 24]];
-//        [subCategoryScrollView addSubview:button];
-//        [subCategoryScrollView addSubview:label];
-//        [button release];
-//        [label release];
-//        
-//        py = py + buttonSpacing + buttonHeight;
-//        overLoad = YES;
-//        
-//        if (py > scrollContentHeight){
-//            py = 0;
-//            px = px + buttonSpacing + buttonWidth;
-//            overLoad = NO;
-//        }
-//        
-//        if (overLoad)
-//            scrollWidth = px + buttonWidth;
-//        else
-//            scrollWidth = px;
-//    }
-//    
-//    [subCategoryScrollView setContentSize:CGSizeMake(scrollWidth-buttonSpacing, subCategoryScrollView.frame.size.height)];
-//    //[subCategoryScrollView setPagingEnabled:YES];
-//    [subCategoryScrollView setIndicatorStyle:UIScrollViewIndicatorStyleWhite];
-    
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
 }
 
 - (void)viewDidUnload
@@ -205,8 +103,8 @@
     productSliderViewController.c_category = c_category;
     productSliderViewController.type = _type;
     productSliderViewController.category = category;
-    //productSliderViewController.navigationItem.title = title;
-    productSliderViewController.title = title;
+    //productSliderViewController.navigationItem.title = [title uppercaseString];
+    productSliderViewController.title = [title uppercaseString];
     
     [self.navigationController pushViewController:productSliderViewController animated:YES];
     
@@ -234,6 +132,7 @@
 #pragma mark appservice delegate
 -(void) didFinishParsingCategory:(NSMutableDictionary*)c_categoryDict
 {
+    [loading stopAnimating];
     _categoryDict = c_categoryDict;
     BOOL overLoad;
     NSInteger px = 0;
@@ -279,7 +178,17 @@
     
     [subCategoryScrollView setContentSize:CGSizeMake(scrollWidth-buttonSpacing, subCategoryScrollView.frame.size.height)];
     [subCategoryScrollView setIndicatorStyle:UIScrollViewIndicatorStyleWhite];
-    [loading stopAnimating];
+}
+
+
+#pragma mark --
+#pragma mark UINavigationController delegate method
+- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    if (viewController == self) {
+        APP_SERVICE(appSrv);
+        [appSrv clearProducts];
+    }
 }
 
 @end

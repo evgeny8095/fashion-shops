@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesStackState
+   version = "1.0">
+   <StackStates>
+      <StackState
+         stackFrameDescription = "-[ProductXMLHandler afterElementEnding:]:ProductXMLHandler.m">
+         <expressions>
+            <expression
+               value = "_chars">
+            </expression>
+         </expressions>
+      </StackState>
+      <StackState
+         stackFrameDescription = "-[ProductSliderViewController dealloc]:ProductSliderViewController.m">
+         <expressions>
+            <expression
+               value = "[loadFrom isEqualToString:@&quot;favourite2&quot;]">
+            </expression>
+         </expressions>
+      </StackState>
+      <StackState
+         stackFrameDescription = "-[ProductsDetailsSliderViewController initwithProduct:inPosition:withMode:]:ProductsDetailsSliderViewController.m">
+         <expressions>
+            <expression
+               value = "c_product">
+            </expression>
+         </expressions>
+      </StackState>
+   </StackStates>
+</VariablesStackState>

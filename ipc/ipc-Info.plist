@@ -12,7 +12,7 @@
 	<string></string>
 	<key>CFBundleIconFiles</key>
 	<array>
-		<string>ipc.png</string>
+		<string>stylepad_logo.png</string>
 	</array>
 	<key>CFBundleIdentifier</key>
 	<string>com.ongsoft.${PRODUCT_NAME:rfc1034identifier}</string>

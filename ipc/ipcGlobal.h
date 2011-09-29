@@ -9,6 +9,7 @@
 #import <CoreData/CoreData.h>
 #import "ApplicationService.h"
 #import "DataService.h"
+#import "FavouriteService.h"
 #import "Type.h"
 #import "FType.h"
 #import "Category.h"
@@ -42,4 +43,5 @@
 
 #define APP_SERVICE(appSrv) ApplicationService* appSrv = [(ipcAppDelegate*)[[UIApplication sharedApplication] delegate] appService]
 #define DATA_SERVICE(dataSrv) DataService* dataSrv = [(ipcAppDelegate*)[[UIApplication sharedApplication] delegate] dataService]
+#define FAV_SERVICE(favSrv) FavouriteService* favSrv = [(ipcAppDelegate*)[[UIApplication sharedApplication] delegate] favService]
 #define APP_DELEGATE(app) ipcAppDelegate* app = (ipcAppDelegate*)[[UIApplication sharedApplication] delegate]

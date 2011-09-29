@@ -24,6 +24,10 @@
 {
     return _dataService;
 }
+- (FavouriteService*) favService
+{
+    return _favService;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -34,6 +38,8 @@
     [_appService loadBrands];
     [_appService loadStores];
     _dataService = [[DataService alloc] init];
+    _favService = [[FavouriteService alloc] init];
+    [_favService loadFavouriteProducts];
     
     [self.window setBackgroundColor:[UIColor grayColor]];
     self.window.rootViewController = self.tabBarController;
@@ -81,6 +87,8 @@
     [_window release];
     [_tabBarController release];
     [_appService release];
+    [_dataService release];
+    [_favService release];
     [super dealloc];
 }
 

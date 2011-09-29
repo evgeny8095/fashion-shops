@@ -10,7 +10,7 @@
 #import "MyPopOverView.h"
 #import "ipcGlobal.h"
 
-@interface SubcategoryViewController : UIViewController <UISearchBarDelegate, ApplicationServiceDelegate>{
+@interface SubcategoryViewController : UIViewController <UISearchBarDelegate, ApplicationServiceDelegate, UINavigationControllerDelegate>{
     NSInteger _type;
     UIPopoverController *popoverController;
     MyPopOverView *myPopOver;

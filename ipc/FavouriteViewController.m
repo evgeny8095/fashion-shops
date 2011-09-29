@@ -46,58 +46,57 @@
     // Define our table/entity to use
     [self.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     
-    DATA_SERVICE(dataSrv);
-    managedObjectContext = [dataSrv managedObjectContext];
-    
-	NSEntityDescription *fproduct = [NSEntityDescription entityForName:@"FProduct" inManagedObjectContext:managedObjectContext];
-	
-	// Setup the fetch request
-	NSFetchRequest *request = [[NSFetchRequest alloc] init];
-	[request setEntity:fproduct];
-	
-	// Define how we will sort the records
-	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"pid" ascending:NO];
-	NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-	
-	[request setSortDescriptors:sortDescriptors];
-	[sortDescriptor release];
-	
-	// Fetch the records and handle an error
-	NSError *error;
-	NSMutableArray *mutableFetchResults = [[managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
-	
-	if (!mutableFetchResults) {
-		// Handle the error.
-		// This is a serious error and should advise the user to restart the application
-	}
-	
-	// Save our fetched data to an array
-	[self setFproductArray: mutableFetchResults];
-	
-    for (FProduct* fproduct in fproductArray)
-    {
-        Product* product = [fproduct toProduct];
-        if (productArray == nil) {
-            productArray = [[NSMutableArray alloc] init];
-        }
-        [productArray addObject:product];
-        [product release];
-    }
+//    DATA_SERVICE(dataSrv);
+//    managedObjectContext = [dataSrv managedObjectContext];
+//    
+//	NSEntityDescription *fproduct = [NSEntityDescription entityForName:@"FProduct" inManagedObjectContext:managedObjectContext];
+//	
+//	// Setup the fetch request
+//	NSFetchRequest *request = [[NSFetchRequest alloc] init];
+//	[request setEntity:fproduct];
+//	
+//	// Define how we will sort the records
+//	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"pid" ascending:NO];
+//	NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+//	
+//	[request setSortDescriptors:sortDescriptors];
+//	[sortDescriptor release];
+//	
+//	// Fetch the records and handle an error
+//	NSError *error;
+//	NSMutableArray *mutableFetchResults = [[managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
+//	
+//	if (!mutableFetchResults) {
+//		// Handle the error.
+//		// This is a serious error and should advise the user to restart the application
+//	}
+//	
+//	// Save our fetched data to an array
+//	[self setFproductArray: mutableFetchResults];
+//	
+//    for (FProduct* fproduct in fproductArray)
+//    {
+//        Product* product = [fproduct toProduct];
+//        if (productArray == nil) {
+//            productArray = [[NSMutableArray alloc] init];
+//        }
+//        [productArray addObject:product];
+//        [product release];
+//    }
     
     navController = [[UINavigationController alloc] init];
-    //navController.delegate=self;
     
     [navController.view setFrame:self.view.frame];
     
     [navController.navigationBar setBarStyle:UIBarStyleBlack];
     
-	[mutableFetchResults release];
-	[request release];
+	//[mutableFetchResults release];
+	//[request release];
     
-    NSInteger count = [fproductArray count];
-    NSLog(@"testArray count: %i", count);
+    //NSInteger count = [fproductArray count];
+    //NSLog(@"testArray count: %i", count);
     
-    ProductSliderViewController *productSliderViewController = [[ProductSliderViewController alloc] initWithProductArray:productArray];
+    //ProductSliderViewController *productSliderViewController = [[ProductSliderViewController alloc] initWithProductArray:productArray];
     //productSliderViewController.c_type = c_type;
     //productSliderViewController.c_category = c_category;
     //productSliderViewController.type = _type;
@@ -105,11 +104,30 @@
     //productSliderViewController.navigationItem.title = title;
     //productSliderViewController.title = title;
     
-    [self.view addSubview:navController.view];
+    FAV_SERVICE(favSrv);
+    favouriteProductsString = [favSrv favouriteProductStringFormat];
     
-    [self.navController pushViewController:productSliderViewController animated:NO];
-    
-    [productSliderViewController release];
+    if (favouriteProductsString != nil && ![favouriteProductsString isEqualToString:@""]) {
+        APP_SERVICE(appSrvvv);
+        //NSDictionary *types = [appSrvvv typeDict];
+        //NSDictionary *categories = [appSrvvv categoryDict];
+        [appSrvvv loadProductsForProductIds:favouriteProductsString from:0 to:15];
+        
+        ProductSliderViewController *productSliderViewController = [[ProductSliderViewController alloc] initForFavoriteProducts:favouriteProductsString];
+        [appSrvvv setDelegate:productSliderViewController];
+        //productSliderViewController.c_type = c_type;
+        //productSliderViewController.c_category = c_category;
+        //productSliderViewController.type = _type;
+        //productSliderViewController.category = category;
+        //productSliderViewController.navigationItem.title = title;
+        //productSliderViewController.title = title;
+        
+        [self.view addSubview:navController.view];
+        
+        [self.navController pushViewController:productSliderViewController animated:NO];
+        
+        [productSliderViewController release];
+    }    
 }
 
 - (void)viewDidUnload

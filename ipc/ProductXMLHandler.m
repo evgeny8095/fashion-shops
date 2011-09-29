@@ -92,6 +92,7 @@
 	}
     if ([elementName isEqualToString:@"name"]){
         _currentObject.name = _chars;
+        NSLog(@"name: %@", _chars);
     }
     if ([elementName isEqualToString:@"price"]) {
         _currentObject.price = [_chars intValue];

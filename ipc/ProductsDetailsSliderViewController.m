@@ -79,6 +79,11 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+- (void)dealloc{
+    [_product release];
+    [super dealloc];
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
@@ -126,7 +131,7 @@
     [self.view addSubview:button];
     
     labelBrand = [[UILabel alloc] initWithFrame:CGRectMake(leftDetailsPadding, 50, 150, 40)];
-    [labelBrand setText:@"Adidas"];
+    [labelBrand setText:[[_product brand] name]];
     [labelBrand setHidden:YES];
     [labelBrand setBackgroundColor:[UIColor clearColor]];
     [labelBrand setTextColor:[UIColor whiteColor]];
@@ -134,7 +139,7 @@
     [self.view addSubview:labelBrand];
     
     labelStore = [[UILabel alloc] initWithFrame:CGRectMake(leftDetailsPadding, 110, 150, 40)];
-    [labelStore setText:@"Sample Store"];
+    [labelStore setText:[[_product store] name]];
     [labelStore setHidden:YES];
     [labelStore setBackgroundColor:[UIColor clearColor]];
     [labelStore setTextColor:[UIColor whiteColor]];
@@ -142,7 +147,7 @@
     [self.view addSubview:labelStore];
     
     labelName = [[UILabel alloc] initWithFrame:CGRectMake(leftDetailsPadding, 170, 500, 40)];
-    [labelName setText:name];
+    [labelName setText:[_product name]];
     [labelName setHidden:YES];
     [labelName setBackgroundColor:[UIColor clearColor]];
     [labelName setTextColor:[UIColor whiteColor]];
@@ -152,7 +157,7 @@
     
     labelPrice = [[UILabel alloc] initWithFrame:CGRectMake(leftDetailsPadding+buttonWidth+5, 230, 150, 40)];
     [labelPrice setHidden:YES];
-    [labelPrice setText:price];
+    [labelPrice setText:[NSString stringWithFormat:@"%i", [_product price]]];
     [labelPrice setBackgroundColor:[UIColor clearColor]];
     [labelPrice setTextColor:[UIColor whiteColor]];
     [labelPrice setShadowColor:[UIColor blackColor]];
@@ -169,7 +174,8 @@
     
     descText = [[UITextView alloc] initWithFrame:CGRectMake(leftDetailsPadding, 350, 430, 100)];
     [descText setHidden:YES];
-    [descText setText:@"This sample product has:\n* Brown/multicolor animal-print tech taffeta.\n* Drawstring with gold bead detail at spread collar front zip.\n* Long sleeves with elasticized cuffs may be scrunched.\n* Elasticized hem for ease of fit.\n* Polyester.\n* Imported of Italian material."];
+    //[descText setText:@"This sample product has:\n* Brown/multicolor animal-print tech taffeta.\n* Drawstring with gold bead detail at spread collar front zip.\n* Long sleeves with elasticized cuffs may be scrunched.\n* Elasticized hem for ease of fit.\n* Polyester.\n* Imported of Italian material."];
+    [descText setText:[_product desc]];
     [descText setBackgroundColor:[UIColor clearColor]];
     [descText setTextColor:[UIColor whiteColor]];
     [descText setFont:[UIFont systemFontOfSize:18]];
@@ -186,18 +192,18 @@
 //    [labelDesc setHidden:YES];
 //    [self.view addSubview:labelDesc];
     
-    like = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    like.frame = CGRectMake(905+buttonWidth, 600, buttonWidth, buttonHeight);
-    //[like setHidden:YES];
-    [like addTarget:self action:@selector(addToFavourite) forControlEvents:UIControlEventTouchUpInside];
-    [like setTitle:@"Like" forState:UIControlStateNormal];
-    [like.titleLabel setFont:[UIFont fontWithName: @"Helvetica" size: 24]];
-    [like.titleLabel setFont:[UIFont boldSystemFontOfSize:24]];
-    [like setBackgroundColor:[UIColor redColor]];
-    [self.view addSubview:like];
+//    like = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+//    like.frame = CGRectMake(855+buttonWidth, 600, buttonWidth, buttonHeight);
+//    //[like setHidden:YES];
+//    [like addTarget:self action:@selector(addToFavourite) forControlEvents:UIControlEventTouchUpInside];
+//    [like setTitle:@"Like" forState:UIControlStateNormal];
+//    [like.titleLabel setFont:[UIFont fontWithName: @"Helvetica" size: 24]];
+//    [like.titleLabel setFont:[UIFont boldSystemFontOfSize:24]];
+//    [like setBackgroundColor:[UIColor redColor]];
+//    [self.view addSubview:like];
     
     buy = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    buy.frame = CGRectMake(900, 600, buttonWidth, buttonHeight);
+    buy.frame = CGRectMake(850, 600, buttonWidth, buttonHeight);
     [buy addTarget:self action:@selector(gotoShop:) forControlEvents:UIControlEventTouchUpInside];
     //[buy setBackgroundColor:[UIColor blackColor]];
     [buy setTitle:@"Buy" forState:UIControlStateNormal];
@@ -268,7 +274,7 @@
     [labelSize setHidden:cmode];
     [labelDesc setHidden:cmode];
     [descText setHidden:cmode];
-    [like setHidden:cmode];
+    //[like setHidden:cmode];
     [backCover setHidden:cmode];
 }
 

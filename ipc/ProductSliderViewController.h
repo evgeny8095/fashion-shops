@@ -34,6 +34,7 @@
     Category* c_category;
     NSMutableDictionary* loadedPage;
     NSString* loadFrom;
+    NSString* ids;
 }
 
 @property (nonatomic, retain) NSMutableArray *buttons;
@@ -47,8 +48,11 @@
 @property (nonatomic, retain) Category* c_category;
 
 - (id) initWithProductArray:(NSMutableArray*)fproductArray;
+- (id) initForFavoriteProducts:(NSString*)c_ids;
+- (id) initForFeatureProducts;
 - (IBAction)gotoProductDetails:(id)sender;
 - (void)filterProductList:(id)sender;
+- (void) didFinishParsing:(NSMutableArray*)c_productArray withTotalProduct:(NSInteger)total fromPostion:(NSInteger)start toPosition:(NSInteger)end;
 - (void)loadPageWithProductsStartAt:(NSInteger)start EndAt:(NSInteger)end;
 
 @end

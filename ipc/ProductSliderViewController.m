@@ -25,19 +25,39 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        
     }
     return self;
 }
 
 - (void)dealloc{
     [popoverController dismissPopoverAnimated:NO];
-    APP_SERVICE(appSrv4);
-    [appSrv4 clearProducts];
+    //APP_SERVICE(appSrv4);
+    //[appSrv4 clearProducts];
     [super dealloc];
 }
 
-- (id) initWithProductArray:(NSMutableArray *)fproductArray
+-(id) initForFavoriteProducts:(NSString *)c_ids
+{
+    self = [super initWithNibName:nil bundle:nil];
+    if (self) {
+        // Custom initialization
+        ids = c_ids;
+        loadFrom = [[NSString alloc] initWithString:@"favourite2"];
+    }
+    return self;
+}
+
+-(id) initForFeatureProducts
+{
+    self = [super initWithNibName:nil bundle:nil];
+    if (self) {
+        // Custom initialization
+        loadFrom = [[NSString alloc] initWithString:@"feature"];
+    }
+    return self;
+}
+
+-(id) initWithProductArray:(NSMutableArray *)fproductArray
 {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
@@ -78,10 +98,6 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    productArray = [[NSArray alloc] initWithObjects:@"Simple Product 1",@"Simple Product 2", @"Simple Product 3", @"Simple Product 4", @"Simple Product 5", @"Simple Product 6", @"Simple Product 7", @"Simple Product 8", @"Simple Product 9", @"Simple Product 10",@"Simple Product 11",@"Simple Product 12", @"Simple Product 13", @"Simple Product 14", @"Simple Product 15", @"Simple Product 16", @"Simple Product 17", @"Simple Product 18", @"Simple Product 19", @"Simple Product 20", nil];
-    imageArray = [[NSArray alloc] initWithObjects:@"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", @"san_pham1a.png", nil];
-    imageURL = [[NSArray alloc] initWithObjects:@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/",@"http://www.ongsoft.com/ipc/", nil];
-    baseURL = @"http://www.ongsoft.com/ipc/";
     
     //refine button
     UIBarButtonItem *filterButton = [[ UIBarButtonItem alloc] initWithTitle:@"Show Option" style:UIBarButtonItemStylePlain target:self action:@selector(filterProductList:)];
@@ -205,7 +221,10 @@
         NSInteger end = (loadingPage)*8-1;
         if (start < totalItem){
             APP_SERVICE(appSrv);
-            [appSrv loadProductsForType:c_type forCatetory:c_category from:start to:end];
+            if ([loadFrom isEqualToString:@"favourite2"])
+                [appSrv loadProductsForProductIds:ids from:start to:end];
+            else
+                [appSrv loadProductsForType:c_type forCatetory:c_category from:start to:end];
             [loadedPage setObject:[NSNumber numberWithInteger:1] forKey:[NSString stringWithFormat:@"%i", page+1]];
         }        
     }
@@ -243,7 +262,7 @@
 
 #pragma mark -
 #pragma mark ApplicationServiceDelegate
--(void) didFinishParsingProduct:(NSMutableArray *)c_productArray withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end
+-(void) didFinishParsing:(NSMutableArray*)c_productArray withTotalProduct:(NSInteger)total fromPostion:(NSInteger)start toPosition:(NSInteger)end
 {
     if (start == 0) {
         loadedPage = [[NSMutableDictionary alloc] init];
@@ -309,6 +328,21 @@
     }else{
         [self loadPageWithProductsStartAt:start EndAt:end];
     }
+}
+
+-(void) didFinishParsingProduct:(NSMutableArray *)c_productArray withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end
+{
+    [self didFinishParsing:c_productArray withTotalProduct:total fromPostion:start toPosition:end];
+}
+
+-(void) didFinishParsingFavouriteProduct:(NSMutableArray *)c_productArray withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end
+{
+    [self didFinishParsing:c_productArray withTotalProduct:total fromPostion:start toPosition:end];
+}
+
+-(void) didFinishParsingFeatureProduct:(NSMutableArray *)c_productArray withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end
+{
+    [self didFinishParsing:c_productArray withTotalProduct:total fromPostion:start toPosition:end];
 }
 
 -(void) loadPageWithProductsStartAt:(NSInteger)start EndAt:(NSInteger)end

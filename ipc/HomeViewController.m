@@ -231,6 +231,7 @@
     subCategoryViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"HOME" style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
     
     [navController pushViewController:subCategoryViewController animated:YES];
+    [navController setDelegate:subCategoryViewController];
     
     [self.view addSubview:navController.view];
     
