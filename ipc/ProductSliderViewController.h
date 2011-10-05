@@ -47,9 +47,10 @@
 @property (nonatomic, retain) Type* c_type;
 @property (nonatomic, retain) Category* c_category;
 
-- (id) initWithProductArray:(NSMutableArray*)fproductArray;
-- (id) initForFavoriteProducts:(NSString*)c_ids;
-- (id) initForFeatureProducts;
+- (id)initWithProductArray:(NSMutableArray*)fproductArray;
+- (id)initForFavoriteProducts:(NSString*)c_ids;
+- (id)initForFeatureProducts;
+- (id)initForSalesProducts;
 - (IBAction)gotoProductDetails:(id)sender;
 - (void)filterProductList:(id)sender;
 - (void) didFinishParsing:(NSMutableArray*)c_productArray withTotalProduct:(NSInteger)total fromPostion:(NSInteger)start toPosition:(NSInteger)end;

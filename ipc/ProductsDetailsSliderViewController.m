@@ -92,31 +92,43 @@
     // Do any additional setup after loading the view from its nib.
     //hardcode url
     NSString *sexFolder = _type == 1 ? @"m" : @"f";
-    NSString *subFolder = [[NSString alloc] initWithFormat:@"%i/%@.jpg", _category-2, [_product image]];
+    NSString *subFolder = [[NSString alloc] initWithFormat:@"%i/%@.jpg", (_category-1), [_product image]];
     NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@/%@", BASE_URL, sexFolder, subFolder];
+    //NSString *urlPath = [[NSString alloc] initWithFormat:@"%@/%@", BASE_URL, [_product image]];
+    NSLog(@"C: %i", _category);
+    NSLog(@"Path: %@", urlPath);
     [sexFolder release];
     [subFolder release];
+    
+//    CAGradientLayer *gradient = [CAGradientLayer layer];
+//    gradient.frame = self.view.frame;
+//    gradient.colors = [NSArray arrayWithObjects:[UIColor whiteColor],[UIColor blackColor], nil];
+//    [self.view.layer addSublayer:gradient];
     
     NSURL *curl = [NSURL URLWithString:urlPath];
     [urlPath release];
     NSURLRequest* request = [NSURLRequest requestWithURL:curl cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
     connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
     
-    backCover = [[UIView alloc] initWithFrame:self.view.frame];
-    [backCover setBackgroundColor:[UIColor blackColor]];
-    [backCover setAlpha:0.5];
-    [backCover setOpaque:YES];
-    [backCover setHidden:YES];
-    [self.view addSubview:backCover];
+//    backCover = [[UIView alloc] initWithFrame:self.view.frame];
+//    [backCover setBackgroundColor:[UIColor blackColor]];
+//    [backCover setAlpha:0.7];
+//    [backCover setOpaque:YES];
+//    [backCover setHidden:YES];
+//    [self.view addSubview:backCover];
     
-    //loading indicator
-//    loading = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 66, 66)];
-//    [loading setCenter:CGPointMake(512, 327.5)];
-//    [loading setAnimationImages:animationLoading];
-//    [animationLoading release];
-//    [loading setAnimationDuration:1];
-//    [loading startAnimating];
-//    [self.view addSubview:loading];
+    gradientView = [[SSGradientView alloc] initWithFrame:self.view.frame];
+	//gradientView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+	gradientView.topBorderColor = [UIColor colorWithRed:0.558f green:0.599f blue:0.643f alpha:1.0f];
+	gradientView.topInsetColor = [UIColor colorWithWhite:1.0f alpha:0.3f];
+	gradientView.colors = [NSArray arrayWithObjects:
+							[UIColor grayColor],
+							[UIColor blackColor],
+							nil];
+	gradientView.bottomBorderColor = [UIColor colorWithRed:0.428f green:0.479f blue:0.520f alpha:1.0f];
+    [gradientView setHidden:YES];
+    //[gradientView setAlpha:0.9];
+	[self.view addSubview:gradientView];
     
     //build-in loading indicator
     loadingView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
@@ -127,10 +139,9 @@
     
     button = [[UIButton alloc] initWithFrame:CGRectMake(256, 0, 512, 655)];
     [button addTarget:self action:@selector(revealDetails:) forControlEvents:UIControlEventTouchUpInside];
-    
     [self.view addSubview:button];
     
-    labelBrand = [[UILabel alloc] initWithFrame:CGRectMake(leftDetailsPadding, 50, 150, 40)];
+    labelBrand = [[UILabel alloc] initWithFrame:CGRectMake(leftDetailsPadding, 30, 150, 40)];
     [labelBrand setText:[[_product brand] name]];
     [labelBrand setHidden:YES];
     [labelBrand setBackgroundColor:[UIColor clearColor]];
@@ -138,43 +149,62 @@
     [labelBrand setShadowColor:[UIColor blackColor]];
     [self.view addSubview:labelBrand];
     
-    labelStore = [[UILabel alloc] initWithFrame:CGRectMake(leftDetailsPadding, 110, 150, 40)];
+    labelStore = [[UILabel alloc] initWithFrame:CGRectMake(leftDetailsPadding, 70, 150, 40)];
     [labelStore setText:[[_product store] name]];
     [labelStore setHidden:YES];
     [labelStore setBackgroundColor:[UIColor clearColor]];
     [labelStore setTextColor:[UIColor whiteColor]];
     [labelStore setShadowColor:[UIColor blackColor]];
+    [labelStore setFont:[UIFont fontWithName:@"Helvetiva" size:14]];
     [self.view addSubview:labelStore];
     
-    labelName = [[UILabel alloc] initWithFrame:CGRectMake(leftDetailsPadding, 170, 500, 40)];
+    labelName = [[UILabel alloc] initWithFrame:CGRectMake(leftDetailsPadding, 130, 500, 60)];
     [labelName setText:[_product name]];
     [labelName setHidden:YES];
     [labelName setBackgroundColor:[UIColor clearColor]];
     [labelName setTextColor:[UIColor whiteColor]];
     [labelName setShadowColor:[UIColor blackColor]];
-    [labelName setFont:[UIFont boldSystemFontOfSize:24]];
+    [labelName setFont:[UIFont boldSystemFontOfSize:30]];
+    [labelName setFont:[UIFont fontWithName:@"Helvetica" size:30]];
+    
     [self.view addSubview:labelName];
     
-    labelPrice = [[UILabel alloc] initWithFrame:CGRectMake(leftDetailsPadding+buttonWidth+5, 230, 150, 40)];
+    labelPrice = [[UILabel alloc] initWithFrame:CGRectMake(leftDetailsPadding+buttonWidth+10, 230, 150, 40)];
     [labelPrice setHidden:YES];
-    [labelPrice setText:[NSString stringWithFormat:@"%i", [_product price]]];
+    [labelPrice setText:[NSString stringWithFormat:@"$ %i", [_product price]]];
     [labelPrice setBackgroundColor:[UIColor clearColor]];
     [labelPrice setTextColor:[UIColor whiteColor]];
     [labelPrice setShadowColor:[UIColor blackColor]];
     [labelPrice setFont:[UIFont boldSystemFontOfSize:20]];
     [self.view addSubview:labelPrice];
     
-    labelSize = [[UILabel alloc] initWithFrame:CGRectMake(leftDetailsPadding, 290, 400, 40)];
-    [labelSize setHidden:YES];
-    [labelSize setText:@"Available size: XXS XS S M L XL XXL"];
-    [labelSize setBackgroundColor:[UIColor clearColor]];
-    [labelSize setTextColor:[UIColor whiteColor]];
-    [labelSize setShadowColor:[UIColor blackColor]];
-    [self.view addSubview:labelSize];
+    more = [[SSGradientView alloc] initWithFrame:CGRectMake(leftDetailsPadding, 290, 400, 100)];
+    more.topBorderColor = [UIColor colorWithRed:0.558f green:0.599f blue:0.643f alpha:1.0f];
+	more.topInsetColor = [UIColor colorWithWhite:1.0f alpha:0.3f];
+	more.colors = [NSArray arrayWithObjects:
+                           [UIColor blackColor],
+                           [UIColor grayColor],
+                           nil];
+	more.bottomBorderColor = [UIColor colorWithRed:0.428f green:0.479f blue:0.520f alpha:1.0f];
+    [more setHidden:YES];
+    SSLineView *moreLine = [[SSLineView alloc] initWithFrame:CGRectMake(0, 49, 400, 2)];
+    //[more addSubview:moreLine];
+    [moreLine release];
+    UIImageView *location = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 16, 16)];
+    UIImage *marker = [UIImage imageNamed:@"07-map-marker.png"];
+    [location setImage:marker];
+    [marker release];
+    [more addSubview:location];
+    [location release];
+    //[self.view addSubview:more];
+    lineView = [[SSLineView alloc] initWithFrame:CGRectMake(leftDetailsPadding, 300, 400, 2)];
+    //lineView = [[SSLineView alloc] initWithFrame:CGRectMake(leftDetailsPadding, 398, 400, 2)];
+    [lineView setHidden:YES];
+    [self.view addSubview:lineView];
     
-    descText = [[UITextView alloc] initWithFrame:CGRectMake(leftDetailsPadding, 350, 430, 100)];
+    descText = [[UITextView alloc] initWithFrame:CGRectMake(leftDetailsPadding, 302, 430, 80)];
+    //descText = [[UITextView alloc] initWithFrame:CGRectMake(leftDetailsPadding, 400, 430, 80)];
     [descText setHidden:YES];
-    //[descText setText:@"This sample product has:\n* Brown/multicolor animal-print tech taffeta.\n* Drawstring with gold bead detail at spread collar front zip.\n* Long sleeves with elasticized cuffs may be scrunched.\n* Elasticized hem for ease of fit.\n* Polyester.\n* Imported of Italian material."];
     [descText setText:[_product desc]];
     [descText setBackgroundColor:[UIColor clearColor]];
     [descText setTextColor:[UIColor whiteColor]];
@@ -271,11 +301,13 @@
     [labelStore setHidden:cmode];
     [labelName setHidden:cmode];
     [labelPrice setHidden:cmode];
-    [labelSize setHidden:cmode];
     [labelDesc setHidden:cmode];
     [descText setHidden:cmode];
     //[like setHidden:cmode];
-    [backCover setHidden:cmode];
+    //[backCover setHidden:cmode];
+    [lineView setHidden:cmode];
+    [gradientView setHidden:cmode];
+    [more setHidden:cmode];
 }
 
 - (void)buy:(id)sender{

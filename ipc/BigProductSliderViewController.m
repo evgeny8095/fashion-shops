@@ -66,8 +66,12 @@
     // Do any additional setup after loading the view from its nib.
     baseURL = @"http://www.ongsoft.com/ipc/";
     
-    UIImage *likeImage = [UIImage imageNamed:@"29-heart.png"];
-    UIBarButtonItem *likeButton = [[UIBarButtonItem alloc] initWithImage:likeImage style:UIBarButtonItemStyleBordered target:self action:@selector(likeAction:)];
+    UIImage *likeImage = [UIImage imageNamed:@"heart.png"];
+    UIBarButtonItem *likeButton = [[UIBarButtonItem alloc] initWithImage:likeImage style:UIBarButtonItemStylePlain target:self action:@selector(likeAction:)];
+//    UIButton *buttona = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [buttona setImage:likeImage forState:normal];
+//    [buttona addTarget:self action:@selector(likeAction:) forControlEvents: UIControlEventTouchUpInside];
+//    UIBarButtonItem *customItem = [[UIBarButtonItem alloc] initWithCustomView: buttona];
     [likeImage release];
     self.navigationItem.rightBarButtonItem = likeButton;
     [likeButton release];
@@ -193,6 +197,10 @@
         [self loadScrollViewWithPage:page - 1];
         [self loadScrollViewWithPage:page + 1];
         self.navigationItem.title = [[_productArray objectAtIndex:page] name];
+        FAV_SERVICE(favSrv);
+        if ([[favSrv favouriteProducts] indexOfObject:[_productArray objectAtIndex:page]] != NSNotFound) {
+            self.navigationItem.rightBarButtonItem.image = [UIImage imageNamed:@"heart-like.png"];
+        }
         cpage = page;
     }
     // A possible optimization would be to unload the views+controllers which are no longer visible
@@ -215,7 +223,6 @@
 {
     WebViewController *webViewController = [[WebViewController alloc] initWithStringURL:url];
     [webViewController.navigationController setTitle:@"Web"];
-
     [self.navigationController pushViewController:webViewController animated:YES];
     [webViewController release];
 }

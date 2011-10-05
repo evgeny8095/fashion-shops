@@ -84,6 +84,11 @@
 //        [product release];
 //    }
     
+}
+
+- (void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
     navController = [[UINavigationController alloc] init];
     
     [navController.view setFrame:self.view.frame];
@@ -120,7 +125,7 @@
         //productSliderViewController.type = _type;
         //productSliderViewController.category = category;
         //productSliderViewController.navigationItem.title = title;
-        //productSliderViewController.title = title;
+        productSliderViewController.title = @"FAVOURITE";
         
         [self.view addSubview:navController.view];
         
@@ -128,6 +133,14 @@
         
         [productSliderViewController release];
     }    
+
+}
+
+-(void) viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [navController release];
+    navController = nil;
 }
 
 - (void)viewDidUnload

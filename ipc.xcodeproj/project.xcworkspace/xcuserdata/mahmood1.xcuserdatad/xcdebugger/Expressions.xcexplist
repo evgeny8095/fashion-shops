@@ -26,5 +26,13 @@
             </expression>
          </expressions>
       </StackState>
+      <StackState
+         stackFrameDescription = "-[ApplicationService didParsedSalesProduct]:ApplicationService.m">
+         <expressions>
+            <expression
+               value = "0x4d52d90">
+            </expression>
+         </expressions>
+      </StackState>
    </StackStates>
 </VariablesStackState>

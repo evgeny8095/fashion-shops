@@ -33,7 +33,6 @@
     NSInteger _category;
     NSInteger item;
     NSMutableArray* _productArray;
-    
 }
 
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;

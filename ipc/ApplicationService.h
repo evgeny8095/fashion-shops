@@ -14,9 +14,10 @@
 
 @optional
 -(void) didFinishParsingCategory:(NSMutableDictionary*)categoryDict;
--(void) didFinishParsingProduct:(NSMutableArray *)productArray withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end;
--(void) didFinishParsingFavouriteProduct:(NSMutableArray *)productArray withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end;
--(void) didFinishParsingFeatureProduct:(NSMutableArray *)productArray withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end;
+-(void) didFinishParsingProduct:(NSMutableArray *)c_productArray withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end;
+-(void) didFinishParsingFavouriteProduct:(NSMutableArray *)c_productArray withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end;
+-(void) didFinishParsingFeatureProduct:(NSMutableArray *)c_productArray withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end;
+-(void) didFinishParsingSalesProduct:(NSMutableArray *)c_productArray withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end;
 @end
 
 @interface ApplicationService : NSObject {
@@ -29,6 +30,8 @@
     NSMutableArray* _productArray;
     NSMutableArray* _favoriteProductArray;
     NSMutableArray* _featureProductArray;
+    NSMutableArray* _featureProductList;
+    NSMutableArray* _salesProductArray;
     BOOL _status;
 	id<ApplicationServiceDelegate> _delegate;
     NSInteger _totalProduct;
@@ -50,9 +53,11 @@
 -(NSMutableArray*) productArray;
 -(NSMutableArray*) favouriteProductArray;
 -(NSMutableArray*) featureProductArray;
+-(NSMutableArray*) featureProductList;
+-(NSMutableArray*) salesProductArray;
 -(void) clearProducts;
-
-
+-(void) clearSalesProducts;
+-(void) shuffleFeatureProductList;
 -(BOOL) finishParsing;
 
 -(void) loadCategories;
@@ -82,9 +87,17 @@
 -(void) gotFavouriteProducts: (NSData*)data byRequest:(HttpRequest*)req;
 -(void) didParsedFavouriteProduct;
 
+-(void) loadFeatureProductsList;
+-(void) gotFeatureProductsList:(NSData *)data byRequest:(HttpRequest *)req;
+-(void) didParsedFeatureProductsList;
+
 -(void) loadProductsOfFeatureShopFrom:(NSInteger)start to:(NSInteger)end;
--(void) gotFeatureProducts: (NSData*)data byRequest:(HttpRequest*)req;
+-(void) gotFeatureProducts:(NSData*)data byRequest:(HttpRequest*)req;
 -(void) didParsedFeatureProduct;
+
+-(void) loadProductsOnSalesFrom:(NSInteger)start to:(NSInteger)end;
+-(void) gotSalesProducts:(NSData*)data byRequest:(HttpRequest*)req;
+-(void) didParsedSalesProducts;
 
 @end
 

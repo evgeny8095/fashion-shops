@@ -37,6 +37,7 @@
     [_appService loadTypes];
     [_appService loadBrands];
     [_appService loadStores];
+    [_appService loadFeatureProductsList];
     _dataService = [[DataService alloc] init];
     _favService = [[FavouriteService alloc] init];
     [_favService loadFavouriteProducts];

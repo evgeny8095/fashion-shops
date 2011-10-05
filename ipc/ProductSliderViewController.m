@@ -25,6 +25,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        loadFrom = [[NSString alloc] initWithString:@""];
     }
     return self;
 }
@@ -53,6 +54,17 @@
     if (self) {
         // Custom initialization
         loadFrom = [[NSString alloc] initWithString:@"feature"];
+    }
+    return self;
+}
+
+-(id) initForSalesProducts
+{
+    self = [super initWithNibName:nil bundle:nil];
+    if (self)
+    {
+        // Custom initialization
+        loadFrom = [[NSString alloc] initWithString:@"sales"];
     }
     return self;
 }
@@ -98,6 +110,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.navigationItem.title = title;
     
     //refine button
     UIBarButtonItem *filterButton = [[ UIBarButtonItem alloc] initWithTitle:@"Show Option" style:UIBarButtonItemStylePlain target:self action:@selector(filterProductList:)];
@@ -113,7 +126,6 @@
 //    titleLabel.textColor = [UIColor whiteColor];
 //    titleLabel.text = self.title;
 //    self.navigationItem.titleView = titleLabel;
-    self.navigationItem.title = title;
     
     if (loadFrom != nil && loadFrom == @"favourite")
     {
@@ -223,7 +235,11 @@
             APP_SERVICE(appSrv);
             if ([loadFrom isEqualToString:@"favourite2"])
                 [appSrv loadProductsForProductIds:ids from:start to:end];
-            else
+            if ([loadFrom isEqualToString:@"feature"])
+                [appSrv loadProductsOfFeatureShopFrom:start to:end];
+            if ([loadFrom isEqualToString:@"sales"])
+                [appSrv loadProductsOnSalesFrom:start to:end];
+            if ([loadFrom isEqualToString:@""])
                 [appSrv loadProductsForType:c_type forCatetory:c_category from:start to:end];
             [loadedPage setObject:[NSNumber numberWithInteger:1] forKey:[NSString stringWithFormat:@"%i", page+1]];
         }        
@@ -345,6 +361,11 @@
     [self didFinishParsing:c_productArray withTotalProduct:total fromPostion:start toPosition:end];
 }
 
+-(void) didFinishParsingSalesProduct:(NSMutableArray *)c_productArray withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end
+{
+    [self didFinishParsing:c_productArray withTotalProduct:total fromPostion:start toPosition:end];
+}
+
 -(void) loadPageWithProductsStartAt:(NSInteger)start EndAt:(NSInteger)end
 {
     for (NSInteger i = start; i <= (end > totalItem-1 ? totalItem-1 : end) ; i++) {
@@ -356,8 +377,23 @@
             
             //hardcode url
             NSString *sexFolder = _type == 1 ? @"m" : @"f";
-            NSString *subFolder = [[NSString alloc] initWithFormat:@"%i/t/%@.jpg", _category-2, [product image]];
-            NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@/%@", BASE_URL, sexFolder, subFolder];
+            NSString *subFolder = [[NSString alloc] initWithFormat:@"%i/t/%@.jpg", _category-1, [product image]];
+            NSString *str = [[NSString alloc] initWithFormat:@"%@", [product image]];
+            NSRange range = [str rangeOfString:@"/" options:NSBackwardsSearch];
+            NSLog(@"last index of /: %i", range.location);
+            
+            NSString *urlPath;
+            if (range.location < [str length]) {
+                NSString *pre = [str substringToIndex:range.location+1];
+                NSString *post = [str substringFromIndex:range.location];
+                NSString *thumb = [[NSString alloc] initWithFormat:@"%@t%@", pre, post];
+                NSLog(@"pre: %@", thumb);
+                urlPath = [[NSString alloc] initWithFormat:@"%@%@", BASE_URL, thumb];
+            }
+            else
+            {
+                urlPath = [[NSString alloc] initWithFormat:@"%@%@/%@", BASE_URL, sexFolder, subFolder];
+            }
             [sexFolder release];
             [subFolder release];
             

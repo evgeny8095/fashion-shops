@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
+#import "SSLineView.h"
+#import "SSGradientView.h"
 #import "ipcGlobal.h"
 
 @protocol ProductsDetailsSliderViewControllerDelegate <NSObject>
@@ -30,7 +33,6 @@
     UILabel *labelStore;
     UILabel *labelName;
     UILabel *labelPrice;
-    UILabel *labelSize;
     UILabel *labelDesc;
     UILabel *labelScreenShot;
     UIView *backCover;
@@ -45,6 +47,9 @@
     NSInteger _type;
     NSInteger _category;
     NSManagedObjectContext *managedObjectContext;
+    SSGradientView *more;
+    SSLineView *lineView;
+    SSGradientView *gradientView;
 }
 
 @property (nonatomic, retain) UIImage *image;

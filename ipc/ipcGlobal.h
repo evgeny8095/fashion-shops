@@ -29,6 +29,7 @@
 #define STORE_URL @"http://www.ongsoft.com/ios/stores.php"
 #define BRAND_URL @"http://www.ongsoft.com/ios/brands.php"
 #define PRODUCT_URL @"http://www.ongsoft.com/ios/products.php"
+//#define FEATURE_PRODUCT_URL @"http://www.ongsoft.com/ios/products.php"
 //#define PRODUCT_URL @"http://www.ongsoft.com/ipc/xml/products.xml"
 
 #define FRUITS_URL @"http://www.themobilelife.com/tmp/fruits/1/fruits.xml"
