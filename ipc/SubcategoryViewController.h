@@ -17,6 +17,7 @@
     IBOutlet UIButton *topButton;
     IBOutlet UIScrollView *subCategoryScrollView;
     NSDictionary* _categoryDict;
+    NSArray* _categoryArray;
     NSNumber* totalCategory;
     UIActivityIndicatorView* loading;
     NSDictionary* _typeDict;

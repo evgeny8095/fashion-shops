@@ -66,15 +66,22 @@
     // Do any additional setup after loading the view from its nib.
     baseURL = @"http://www.ongsoft.com/ipc/";
     
-    UIImage *likeImage = [UIImage imageNamed:@"heart.png"];
+    UIImage *likeImage = [UIImage imageNamed:@"heart-like.png"];
     UIBarButtonItem *likeButton = [[UIBarButtonItem alloc] initWithImage:likeImage style:UIBarButtonItemStylePlain target:self action:@selector(likeAction:)];
-//    UIButton *buttona = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [buttona setImage:likeImage forState:normal];
-//    [buttona addTarget:self action:@selector(likeAction:) forControlEvents: UIControlEventTouchUpInside];
-//    UIBarButtonItem *customItem = [[UIBarButtonItem alloc] initWithCustomView: buttona];
+    //UIBarButtonItem *likeButton = [[UIBarButtonItem alloc]  initWithTitle:@"L" style:UIBarButtonItemStylePlain target:self action:@selector(likeAction:)];
+
     [likeImage release];
     self.navigationItem.rightBarButtonItem = likeButton;
     [likeButton release];
+    
+//    UIView *container = [[UIView alloc] init];
+//    UIButton *customButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    customButton.frame = CGRectMake(0, 0, 130, 44);
+//    [customButton setImage:likeImage forState:UIControlStateNormal];
+//    [container addSubview:customButton];
+//    
+//    UIBarButtonItem *customBarButton = [[UIBarButtonItem alloc] initWithCustomView:container];
+//    self.navigationItem.rightBarButtonItem = customBarButton;
     
     //numberOfPages = [_productArray count];
     

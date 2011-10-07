@@ -9,11 +9,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "ipc/CategoryXMLHandler.m"
-         timestampString = "337600960.862229"
+         timestampString = "339653231.996603"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "23"
-         endingLineNumber = "23"
+         startingLineNumber = "24"
+         endingLineNumber = "24"
          landmarkName = "-initObjectAfterElementStarting:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -37,11 +37,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "ipc/FavouriteService.m"
-         timestampString = "338871489.567611"
+         timestampString = "339646019.344579"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "55"
-         endingLineNumber = "55"
+         startingLineNumber = "63"
+         endingLineNumber = "63"
          landmarkName = "-loadFavouriteProducts"
          landmarkType = "5">
       </FileBreakpoint>

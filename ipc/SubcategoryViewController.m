@@ -130,16 +130,21 @@
 
 #pragma mark -
 #pragma mark appservice delegate
--(void) didFinishParsingCategory:(NSMutableDictionary*)c_categoryDict
+-(void) didFinishParsingCategory:(NSMutableDictionary*)c_categoryDict andArray:(NSMutableArray *)c_categoryArray
 {
     [loading stopAnimating];
     _categoryDict = c_categoryDict;
+    _categoryArray = c_categoryArray;
     BOOL overLoad;
     NSInteger px = 0;
     NSInteger py = 0;
     NSInteger scrollWidth;
-    for (NSString* key in _categoryDict) {
-        Category* current = [_categoryDict objectForKey:key];
+    
+    NSInteger count = [_categoryArray count];
+    
+    for (NSUInteger i = 0; i < count; i++) {
+        //Category* current = [_categoryDict objectForKey:key];
+        Category* current = [_categoryArray objectAtIndex:i];
         UIImage *image = [UIImage imageNamed:current.image];
         UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(px, py, buttonWidth, buttonHeight)];
         [button addTarget:self action:@selector(gotoSubCatalogue:) forControlEvents:UIControlEventTouchUpInside];

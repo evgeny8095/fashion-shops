@@ -221,6 +221,7 @@
     
     SubcategoryViewController *subCategoryViewController = [[SubcategoryViewController alloc] init];
     APP_SERVICE(appSrv);
+    [appSrv clearCategory];
     [appSrv setDelegate:subCategoryViewController];
     [appSrv loadCategoriesForType:c_type];
     

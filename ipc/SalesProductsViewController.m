@@ -48,7 +48,8 @@
     //NSDictionary *categories = [appSrv categoryDict];
     //Type* c_type = [types objectForKey:[NSString stringWithFormat:@"%i", _type]];
     //Category* c_category = [categories objectForKey:[NSString stringWithFormat:@"%i", category]];
-    [appSrv loadProductsOnSalesFrom:0 to:0];
+    
+    //[appSrv loadProductsOnSalesFrom:0 to:0];
     
     ProductSliderViewController *productSliderViewController = [[ProductSliderViewController alloc] initForSalesProducts];
     [appSrv setDelegate:productSliderViewController];
@@ -59,9 +60,15 @@
     //productSliderViewController.navigationItem.title = [title uppercaseString];
     productSliderViewController.title = @"SALES";
     
-    [self.navigationController pushViewController:productSliderViewController animated:YES];
+    //[self.navigationController pushViewController:productSliderViewController animated:YES];
     
     [productSliderViewController release];
+    
+    UILabel *underContruction = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 500, 100)];
+    [underContruction setText:@"Feature Under Contruction!"];
+    [underContruction setFont:[UIFont systemFontOfSize:40]];
+    [underContruction setCenter:CGPointMake(512, 355)];
+    [self.view addSubview:underContruction];
 }
 
 - (void)viewDidAppear:(BOOL)animated

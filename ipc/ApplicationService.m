@@ -21,6 +21,7 @@
 {
 	if (self = [super init]) {
         _categoryDict = [[NSMutableDictionary alloc] init];
+        _categoryForTypeArray = [[NSMutableArray alloc] init];
         _typeDict = [[NSMutableDictionary alloc] init];
         _storeDict = [[NSMutableDictionary alloc] init];
         _brandDict = [[NSMutableDictionary alloc] init];
@@ -43,6 +44,11 @@
 -(NSMutableDictionary*) categoryForTypeDict
 {
     return _categoryForTypeDict;
+}
+
+-(NSMutableArray*) categoryForTypeArray
+{
+    return _categoryForTypeArray;
 }
 
 -(NSMutableDictionary*) typeDict
@@ -88,6 +94,33 @@
 -(NSMutableArray*) salesProductArray
 {
     return _salesProductArray;
+}
+
+-(void)dealloc
+{
+    [_categoryDict release];
+    [_categoryForTypeDict release];
+    [_categoryForTypeArray release];
+    [_typeDict release];
+    [_storeDict release];
+    [_brandDict release];
+    [_productDict release];
+    [_productArray release];
+    [_favoriteProductArray release];
+    [_featureProductArray release];
+    [_featureProductList release];
+    [_salesProductArray release];
+    [super dealloc];
+}
+
+-(void) clearCategory
+{
+    [_categoryDict release];
+    _categoryDict = [[NSMutableDictionary alloc] init];
+    [_categoryForTypeDict release];
+    _categoryForTypeDict = [[NSMutableDictionary alloc] init];
+    [_categoryForTypeArray release];
+    _categoryForTypeArray = [[NSMutableArray alloc] init];
 }
 
 -(void) clearProducts
@@ -139,7 +172,7 @@
 -(void)gotCategories: (NSData*)data byRequest:(HttpRequest*)req
 {
 	//NSLog(@"categories: %s", data.bytes);
-    CategoryXMLHandler* handler = [[CategoryXMLHandler alloc] initWithCategoryDict:_categoryDict];
+    CategoryXMLHandler* handler = [[CategoryXMLHandler alloc] initWithCategoryDict:_categoryDict andCategoryArray:_categoryForTypeArray];
     [handler setEndDocumentTarget:self andAction:@selector(didParsedCategory)];
 	NSXMLParser* parser = [[[NSXMLParser alloc] initWithData:data] autorelease];
 	parser.delegate = handler;
@@ -148,7 +181,7 @@
 }
 -(void) didParsedCategory
 {
-    [_delegate didFinishParsingCategory:_categoryDict];
+    [_delegate didFinishParsingCategory:_categoryDict andArray:_categoryForTypeArray];
 }
 
 #pragma mark-

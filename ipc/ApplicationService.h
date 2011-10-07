@@ -13,7 +13,7 @@
 @protocol ApplicationServiceDelegate
 
 @optional
--(void) didFinishParsingCategory:(NSMutableDictionary*)categoryDict;
+-(void) didFinishParsingCategory:(NSMutableDictionary*)categoryDict andArray:(NSMutableArray*)categoryArray;
 -(void) didFinishParsingProduct:(NSMutableArray *)c_productArray withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end;
 -(void) didFinishParsingFavouriteProduct:(NSMutableArray *)c_productArray withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end;
 -(void) didFinishParsingFeatureProduct:(NSMutableArray *)c_productArray withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end;
@@ -23,6 +23,7 @@
 @interface ApplicationService : NSObject {
     NSMutableDictionary* _categoryDict;
     NSMutableDictionary* _categoryForTypeDict;
+    NSMutableArray* _categoryForTypeArray;
     NSMutableDictionary* _typeDict;
     NSMutableDictionary* _storeDict;
     NSMutableDictionary* _brandDict;
@@ -46,6 +47,7 @@
 
 -(NSMutableDictionary*) categoryDict;
 -(NSMutableDictionary*) categoryForTypeDict;
+-(NSMutableArray*) categoryForTypeArray;
 -(NSMutableDictionary*) typeDict;
 -(NSMutableDictionary*) storeDict;
 -(NSMutableDictionary*) brandDict;
@@ -55,6 +57,7 @@
 -(NSMutableArray*) featureProductArray;
 -(NSMutableArray*) featureProductList;
 -(NSMutableArray*) salesProductArray;
+-(void) clearCategory;
 -(void) clearProducts;
 -(void) clearSalesProducts;
 -(void) shuffleFeatureProductList;

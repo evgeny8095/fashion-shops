@@ -118,6 +118,7 @@
 		F2FF0584143C497100FAA9DE /* SSGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2FF0583143C497100FAA9DE /* SSGradientView.m */; };
 		F2FF0587143C4B0500FAA9DE /* SSBorderedView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2FF0586143C4B0500FAA9DE /* SSBorderedView.m */; };
 		F2FF058A143C4B2F00FAA9DE /* SSDrawingUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = F2FF0589143C4B2F00FAA9DE /* SSDrawingUtilities.m */; };
+		F2FF059C143D912600FAA9DE /* btn-red.png in Resources */ = {isa = PBXBuildFile; fileRef = F2FF059B143D912600FAA9DE /* btn-red.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -126,7 +127,7 @@
 		5A6DBB171407A0E700B51DB9 /* BigProductSliderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BigProductSliderViewController.m; sourceTree = "<group>"; };
 		5A6DBB181407A0E700B51DB9 /* BigProductSliderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BigProductSliderViewController.xib; sourceTree = "<group>"; };
 		5A6DBB191407A0E700B51DB9 /* BigProductSliderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BigProductSliderViewController.h; sourceTree = "<group>"; };
-		5A971E3413DD6256008A19BE /* ipc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ipc.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5A971E3413DD6256008A19BE /* Style Pad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Style Pad.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A971E3813DD6256008A19BE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5A971E3A13DD6256008A19BE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5A971E3C13DD6256008A19BE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -274,6 +275,7 @@
 		F2FF0586143C4B0500FAA9DE /* SSBorderedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSBorderedView.m; sourceTree = "<group>"; };
 		F2FF0588143C4B2F00FAA9DE /* SSDrawingUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSDrawingUtilities.h; sourceTree = "<group>"; };
 		F2FF0589143C4B2F00FAA9DE /* SSDrawingUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSDrawingUtilities.m; sourceTree = "<group>"; };
+		F2FF059B143D912600FAA9DE /* btn-red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-red.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -303,7 +305,7 @@
 		5A971E3513DD6256008A19BE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5A971E3413DD6256008A19BE /* ipc.app */,
+				5A971E3413DD6256008A19BE /* Style Pad.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -385,6 +387,7 @@
 		5AE7669213DE727800209326 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				F2FF059B143D912600FAA9DE /* btn-red.png */,
 				F2912695143AF568001CEBDA /* heart-like.png */,
 				F29126A5143B235E001CEBDA /* 07-map-marker.png */,
 				F29126A2143B1C82001CEBDA /* 18-envelope.png */,
@@ -555,7 +558,7 @@
 			);
 			name = ipc;
 			productName = ipc;
-			productReference = 5A971E3413DD6256008A19BE /* ipc.app */;
+			productReference = 5A971E3413DD6256008A19BE /* Style Pad.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -653,6 +656,7 @@
 				F2912698143AF568001CEBDA /* heart.png in Resources */,
 				F29126A3143B1C82001CEBDA /* 18-envelope.png in Resources */,
 				F29126A6143B235E001CEBDA /* 07-map-marker.png in Resources */,
+				F2FF059C143D912600FAA9DE /* btn-red.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -778,7 +782,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ipc/ipc-Prefix.pch";
 				INFOPLIST_FILE = "ipc/ipc-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Style Pad";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -789,7 +793,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ipc/ipc-Prefix.pch";
 				INFOPLIST_FILE = "ipc/ipc-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Style Pad";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

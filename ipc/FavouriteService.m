@@ -20,6 +20,14 @@
 	return self;	
 }
 
+-(void)dealloc
+{
+    [_favourite release];
+    [_favouriteProducts release];
+    [_favouriteProductString release];
+    [super dealloc];
+}
+
 -(NSMutableArray*) favouriteProducts
 {
     return _favouriteProducts;

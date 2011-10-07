@@ -10,7 +10,7 @@
 #import "WebViewController.h"
 #import "SubcategoryViewController.h"
 
-#define buttonHeight 35
+#define buttonHeight 40
 #define buttonWidth 90
 #define animationDuration 0.1
 #define centerPoint CGPointMake(512,327.5)
@@ -100,23 +100,12 @@
     [sexFolder release];
     [subFolder release];
     
-//    CAGradientLayer *gradient = [CAGradientLayer layer];
-//    gradient.frame = self.view.frame;
-//    gradient.colors = [NSArray arrayWithObjects:[UIColor whiteColor],[UIColor blackColor], nil];
-//    [self.view.layer addSublayer:gradient];
-    
     NSURL *curl = [NSURL URLWithString:urlPath];
     [urlPath release];
     NSURLRequest* request = [NSURLRequest requestWithURL:curl cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
     connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
     
-//    backCover = [[UIView alloc] initWithFrame:self.view.frame];
-//    [backCover setBackgroundColor:[UIColor blackColor]];
-//    [backCover setAlpha:0.7];
-//    [backCover setOpaque:YES];
-//    [backCover setHidden:YES];
-//    [self.view addSubview:backCover];
-    
+    //gradient backgound
     gradientView = [[SSGradientView alloc] initWithFrame:self.view.frame];
 	//gradientView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 	gradientView.topBorderColor = [UIColor colorWithRed:0.558f green:0.599f blue:0.643f alpha:1.0f];
@@ -210,6 +199,7 @@
     [descText setTextColor:[UIColor whiteColor]];
     [descText setFont:[UIFont systemFontOfSize:18]];
     [descText setEditable:NO];
+    [descText setScrollEnabled:YES];
     [self.view addSubview:descText];
     
 //    labelScreenShot = [[UILabel alloc] initWithFrame:CGRectMake(leftDetailsPadding, 510, 400, 40)];
@@ -232,10 +222,11 @@
 //    [like setBackgroundColor:[UIColor redColor]];
 //    [self.view addSubview:like];
     
-    buy = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    buy = [UIButton buttonWithType:UIButtonTypeCustom];
     buy.frame = CGRectMake(850, 600, buttonWidth, buttonHeight);
+    //UIImage *likeImage = [[UIImage imageNamed:@"btn-red.png"] stretchableImageWithLeftCapWidth:10.0 topCapHeight:0.0]
+    [buy setBackgroundImage:[[UIImage imageNamed:@"btn-red.png"] stretchableImageWithLeftCapWidth:10.0 topCapHeight:0.0] forState:UIControlStateNormal];
     [buy addTarget:self action:@selector(gotoShop:) forControlEvents:UIControlEventTouchUpInside];
-    //[buy setBackgroundColor:[UIColor blackColor]];
     [buy setTitle:@"Buy" forState:UIControlStateNormal];
     [buy.titleLabel setFont:[UIFont fontWithName: @"Helvetica" size: 24]];
     [buy.titleLabel setFont:[UIFont boldSystemFontOfSize:24]];

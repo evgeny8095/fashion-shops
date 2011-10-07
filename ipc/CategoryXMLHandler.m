@@ -11,9 +11,10 @@
 
 @implementation CategoryXMLHandler
 
--(id) initWithCategoryDict:(NSMutableDictionary *)categoryDict{
+-(id) initWithCategoryDict:(NSMutableDictionary *)categoryDict andCategoryArray:(NSMutableArray*)categoryArray{
     if (self = [super init]) {
         _categoryDict = categoryDict;
+        _categoryArray = categoryArray;
         _count = [[NSNumber alloc] init];
     }
     return self;
@@ -49,6 +50,7 @@
 -(void) afterElementEnding:(NSString *)elementName{
     if ([elementName isEqualToString:@"category"]) {
         [_categoryDict setObject:_currentObject forKey:_currentObject.cid];
+        [_categoryArray addObject:_currentObject];
 		[_currentObject release];
 		_currentObject = nil;
         [_chars release];
