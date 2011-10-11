@@ -42,7 +42,7 @@
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
+    //[super didReceiveMemoryWarning];
     
     // Release any cached data, images, etc that aren't in use.
 }
@@ -70,7 +70,7 @@
     UIBarButtonItem *likeButton = [[UIBarButtonItem alloc] initWithImage:likeImage style:UIBarButtonItemStylePlain target:self action:@selector(likeAction:)];
     //UIBarButtonItem *likeButton = [[UIBarButtonItem alloc]  initWithTitle:@"L" style:UIBarButtonItemStylePlain target:self action:@selector(likeAction:)];
 
-    [likeImage release];
+    //[likeImage release];
     self.navigationItem.rightBarButtonItem = likeButton;
     [likeButton release];
     
@@ -163,7 +163,7 @@
         
         controller.delegate = self;
         [viewControllers replaceObjectAtIndex:page withObject:controller];
-        [controller release];
+        //[controller release];
     }else{
         [controller changeViewMode:viewMode];
     }

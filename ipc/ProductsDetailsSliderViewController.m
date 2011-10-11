@@ -74,7 +74,7 @@
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
+    //[super didReceiveMemoryWarning];
     
     // Release any cached data, images, etc that aren't in use.
 }
@@ -90,15 +90,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    //hardcode url
-    NSString *sexFolder = _type == 1 ? @"m" : @"f";
-    NSString *subFolder = [[NSString alloc] initWithFormat:@"%i/%@.jpg", (_category-1), [_product image]];
-    NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@/%@", BASE_URL, sexFolder, subFolder];
-    //NSString *urlPath = [[NSString alloc] initWithFormat:@"%@/%@", BASE_URL, [_product image]];
-    NSLog(@"C: %i", _category);
-    NSLog(@"Path: %@", urlPath);
-    [sexFolder release];
-    [subFolder release];
+
+    NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@/%@", BASE_URL, PRODUCT_FOLDER, [_product image]];
     
     NSURL *curl = [NSURL URLWithString:urlPath];
     [urlPath release];
@@ -111,7 +104,7 @@
 	gradientView.topBorderColor = [UIColor colorWithRed:0.558f green:0.599f blue:0.643f alpha:1.0f];
 	gradientView.topInsetColor = [UIColor colorWithWhite:1.0f alpha:0.3f];
 	gradientView.colors = [NSArray arrayWithObjects:
-							[UIColor grayColor],
+							[UIColor darkGrayColor],
 							[UIColor blackColor],
 							nil];
 	gradientView.bottomBorderColor = [UIColor colorWithRed:0.428f green:0.479f blue:0.520f alpha:1.0f];
@@ -144,12 +137,14 @@
     [labelStore setBackgroundColor:[UIColor clearColor]];
     [labelStore setTextColor:[UIColor whiteColor]];
     [labelStore setShadowColor:[UIColor blackColor]];
-    [labelStore setFont:[UIFont fontWithName:@"Helvetiva" size:14]];
+    [labelStore setFont:[UIFont fontWithName:@"Helvetiva" size:24]];
     [self.view addSubview:labelStore];
     
-    labelName = [[UILabel alloc] initWithFrame:CGRectMake(leftDetailsPadding, 130, 500, 60)];
+    labelName = [[UILabel alloc] initWithFrame:CGRectMake(leftDetailsPadding, 100, 450, 120)];
     [labelName setText:[_product name]];
     [labelName setHidden:YES];
+    [labelName setNumberOfLines:2];
+    [labelName setLineBreakMode:UILineBreakModeWordWrap];
     [labelName setBackgroundColor:[UIColor clearColor]];
     [labelName setTextColor:[UIColor whiteColor]];
     [labelName setShadowColor:[UIColor blackColor]];
@@ -182,7 +177,7 @@
     UIImageView *location = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 16, 16)];
     UIImage *marker = [UIImage imageNamed:@"07-map-marker.png"];
     [location setImage:marker];
-    [marker release];
+    //[marker release];
     [more addSubview:location];
     [location release];
     //[self.view addSubview:more];
@@ -191,7 +186,7 @@
     [lineView setHidden:YES];
     [self.view addSubview:lineView];
     
-    descText = [[UITextView alloc] initWithFrame:CGRectMake(leftDetailsPadding, 302, 430, 80)];
+    descText = [[UITextView alloc] initWithFrame:CGRectMake(leftDetailsPadding, 302, 430, 150)];
     //descText = [[UITextView alloc] initWithFrame:CGRectMake(leftDetailsPadding, 400, 430, 80)];
     [descText setHidden:YES];
     [descText setText:[_product desc]];
@@ -306,7 +301,7 @@
 }
 
 - (IBAction)gotoShop:(id)sender{
-    [delegate finishSomething:self withURL:@"http://www.ongsoft.com"];
+    [delegate finishSomething:self withURL:[_product url]];
 }
 
 //the URL connection calls this repeatedly as data arrives
@@ -328,49 +323,8 @@
         [button setImage:imagex forState:normal];
     [button adjustsImageWhenHighlighted];
     
-    [imagex retain];
 	[data release];
 	data=nil;
-}
-
-#pragma mark -
-#pragma mark Favourite Function
-- (void)addToFavourite
-{
-    
-    DATA_SERVICE(dataSrv);
-    managedObjectContext = [dataSrv managedObjectContext];
-    FProduct* fproduct = (FProduct*)[NSEntityDescription insertNewObjectForEntityForName:@"FProduct" inManagedObjectContext:managedObjectContext];
-    [fproduct copyFromProduct:_product];
-    
-    FBrand* fbrand = (FBrand*)[NSEntityDescription insertNewObjectForEntityForName:@"FBrand" inManagedObjectContext:managedObjectContext];
-    [fbrand copyFromBrand:[_product brand]];
-    [fproduct setBrand:fbrand];
-    
-    FStore* fstore = (FStore*)[NSEntityDescription insertNewObjectForEntityForName:@"FStore" inManagedObjectContext:managedObjectContext];
-    [fstore copyFromStore:[_product store]];
-    [fproduct setStore:fstore];
-    
-    NSMutableSet* ftypies = [[NSMutableSet alloc] init];
-    for (Type* type in [_product types]) {
-        FType* ftype = (FType*)[NSEntityDescription insertNewObjectForEntityForName:@"FType" inManagedObjectContext:managedObjectContext];
-        [ftype copyFromType:type];
-        [ftypies addObject:ftype];
-    }
-    [fproduct setTypies:ftypies];
-    
-    NSMutableSet* fcategories = [[NSMutableSet alloc] init];
-    for (Category* category in [_product categories]) {
-        FCategory* fcategory = (FCategory*)[NSEntityDescription insertNewObjectForEntityForName:@"FCategory" inManagedObjectContext:managedObjectContext];
-        [fcategories addObject:fcategory];
-    }
-    [fproduct setCategories:fcategories];
-    
-    NSError *error;
-	if (![managedObjectContext save:&error]) {
-		// This is a serious error saying the record could not be saved.
-		// Advise the user to restart the application
-	}
 }
 
 @end

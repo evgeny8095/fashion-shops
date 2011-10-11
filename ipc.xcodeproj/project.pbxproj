@@ -79,7 +79,6 @@
 		F28DC2981429C1ED0094C6D9 /* DataService.m in Sources */ = {isa = PBXBuildFile; fileRef = F28DC2971429C1ED0094C6D9 /* DataService.m */; };
 		F28DC29D1429C7A90094C6D9 /* FavouriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F28DC29B1429C7A80094C6D9 /* FavouriteViewController.m */; };
 		F28DC29E1429C7A90094C6D9 /* FavouriteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F28DC29C1429C7A90094C6D9 /* FavouriteViewController.xib */; };
-		F28DC2A11429CE380094C6D9 /* Favourite.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F28DC29F1429CE380094C6D9 /* Favourite.xcdatamodeld */; };
 		F2912697143AF568001CEBDA /* heart-like.png in Resources */ = {isa = PBXBuildFile; fileRef = F2912695143AF568001CEBDA /* heart-like.png */; };
 		F2912698143AF568001CEBDA /* heart.png in Resources */ = {isa = PBXBuildFile; fileRef = F2912696143AF568001CEBDA /* heart.png */; };
 		F29126A3143B1C82001CEBDA /* 18-envelope.png in Resources */ = {isa = PBXBuildFile; fileRef = F29126A2143B1C82001CEBDA /* 18-envelope.png */; };
@@ -108,12 +107,6 @@
 		F2DCC842142C731300E60735 /* Product.m in Sources */ = {isa = PBXBuildFile; fileRef = F2DCC83B142C731300E60735 /* Product.m */; };
 		F2DCC843142C731300E60735 /* Store.m in Sources */ = {isa = PBXBuildFile; fileRef = F2DCC83D142C731300E60735 /* Store.m */; };
 		F2DCC844142C731300E60735 /* Type.m in Sources */ = {isa = PBXBuildFile; fileRef = F2DCC83F142C731300E60735 /* Type.m */; };
-		F2DCC851142C733300E60735 /* FBrand.m in Sources */ = {isa = PBXBuildFile; fileRef = F2DCC846142C733300E60735 /* FBrand.m */; };
-		F2DCC852142C733300E60735 /* FCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = F2DCC848142C733300E60735 /* FCategory.m */; };
-		F2DCC853142C733300E60735 /* FProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = F2DCC84A142C733300E60735 /* FProduct.m */; };
-		F2DCC854142C733300E60735 /* FStore.m in Sources */ = {isa = PBXBuildFile; fileRef = F2DCC84C142C733300E60735 /* FStore.m */; };
-		F2DCC855142C733300E60735 /* FType.m in Sources */ = {isa = PBXBuildFile; fileRef = F2DCC84E142C733300E60735 /* FType.m */; };
-		F2DCC856142C733300E60735 /* Testing.m in Sources */ = {isa = PBXBuildFile; fileRef = F2DCC850142C733300E60735 /* Testing.m */; };
 		F2FF0580143C45AF00FAA9DE /* SSLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2FF057F143C45AF00FAA9DE /* SSLineView.m */; };
 		F2FF0584143C497100FAA9DE /* SSGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2FF0583143C497100FAA9DE /* SSGradientView.m */; };
 		F2FF0587143C4B0500FAA9DE /* SSBorderedView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2FF0586143C4B0500FAA9DE /* SSBorderedView.m */; };
@@ -216,7 +209,6 @@
 		F28DC29A1429C7A80094C6D9 /* FavouriteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavouriteViewController.h; sourceTree = "<group>"; };
 		F28DC29B1429C7A80094C6D9 /* FavouriteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouriteViewController.m; sourceTree = "<group>"; };
 		F28DC29C1429C7A90094C6D9 /* FavouriteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FavouriteViewController.xib; sourceTree = "<group>"; };
-		F28DC2A01429CE380094C6D9 /* Favourite.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Favourite.xcdatamodel; sourceTree = "<group>"; };
 		F2912695143AF568001CEBDA /* heart-like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart-like.png"; sourceTree = "<group>"; };
 		F2912696143AF568001CEBDA /* heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heart.png; sourceTree = "<group>"; };
 		F29126A2143B1C82001CEBDA /* 18-envelope.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "18-envelope.png"; sourceTree = "<group>"; };
@@ -255,18 +247,6 @@
 		F2DCC83D142C731300E60735 /* Store.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Store.m; sourceTree = "<group>"; };
 		F2DCC83E142C731300E60735 /* Type.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Type.h; sourceTree = "<group>"; };
 		F2DCC83F142C731300E60735 /* Type.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Type.m; sourceTree = "<group>"; };
-		F2DCC845142C733300E60735 /* FBrand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBrand.h; sourceTree = "<group>"; };
-		F2DCC846142C733300E60735 /* FBrand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBrand.m; sourceTree = "<group>"; };
-		F2DCC847142C733300E60735 /* FCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCategory.h; sourceTree = "<group>"; };
-		F2DCC848142C733300E60735 /* FCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCategory.m; sourceTree = "<group>"; };
-		F2DCC849142C733300E60735 /* FProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FProduct.h; sourceTree = "<group>"; };
-		F2DCC84A142C733300E60735 /* FProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FProduct.m; sourceTree = "<group>"; };
-		F2DCC84B142C733300E60735 /* FStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FStore.h; sourceTree = "<group>"; };
-		F2DCC84C142C733300E60735 /* FStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FStore.m; sourceTree = "<group>"; };
-		F2DCC84D142C733300E60735 /* FType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FType.h; sourceTree = "<group>"; };
-		F2DCC84E142C733300E60735 /* FType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FType.m; sourceTree = "<group>"; };
-		F2DCC84F142C733300E60735 /* Testing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Testing.h; sourceTree = "<group>"; };
-		F2DCC850142C733300E60735 /* Testing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Testing.m; sourceTree = "<group>"; };
 		F2FF057E143C45AF00FAA9DE /* SSLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSLineView.h; sourceTree = "<group>"; };
 		F2FF057F143C45AF00FAA9DE /* SSLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSLineView.m; sourceTree = "<group>"; };
 		F2FF0582143C497100FAA9DE /* SSGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSGradientView.h; sourceTree = "<group>"; };
@@ -327,7 +307,6 @@
 			children = (
 				F2B6493E143C4413001A3042 /* other */,
 				F289704D14317E3900F9F400 /* resource */,
-				F2CC1923142C649E0088C97A /* coredata_modal */,
 				F22BAC3A141620EC00E1A73C /* model */,
 				F2A050091418734700FD11F9 /* xml parser */,
 				F2A0500B141873F900FD11F9 /* services */,
@@ -521,26 +500,6 @@
 			name = other;
 			sourceTree = "<group>";
 		};
-		F2CC1923142C649E0088C97A /* coredata_modal */ = {
-			isa = PBXGroup;
-			children = (
-				F28DC29F1429CE380094C6D9 /* Favourite.xcdatamodeld */,
-				F2DCC845142C733300E60735 /* FBrand.h */,
-				F2DCC846142C733300E60735 /* FBrand.m */,
-				F2DCC847142C733300E60735 /* FCategory.h */,
-				F2DCC848142C733300E60735 /* FCategory.m */,
-				F2DCC849142C733300E60735 /* FProduct.h */,
-				F2DCC84A142C733300E60735 /* FProduct.m */,
-				F2DCC84B142C733300E60735 /* FStore.h */,
-				F2DCC84C142C733300E60735 /* FStore.m */,
-				F2DCC84D142C733300E60735 /* FType.h */,
-				F2DCC84E142C733300E60735 /* FType.m */,
-				F2DCC84F142C733300E60735 /* Testing.h */,
-				F2DCC850142C733300E60735 /* Testing.m */,
-			);
-			name = coredata_modal;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -687,18 +646,11 @@
 				F2A050231418B6E200FD11F9 /* ProductXMLHandler.m in Sources */,
 				F28DC2981429C1ED0094C6D9 /* DataService.m in Sources */,
 				F28DC29D1429C7A90094C6D9 /* FavouriteViewController.m in Sources */,
-				F28DC2A11429CE380094C6D9 /* Favourite.xcdatamodeld in Sources */,
 				F2DCC840142C731300E60735 /* Brand.m in Sources */,
 				F2DCC841142C731300E60735 /* Category.m in Sources */,
 				F2DCC842142C731300E60735 /* Product.m in Sources */,
 				F2DCC843142C731300E60735 /* Store.m in Sources */,
 				F2DCC844142C731300E60735 /* Type.m in Sources */,
-				F2DCC851142C733300E60735 /* FBrand.m in Sources */,
-				F2DCC852142C733300E60735 /* FCategory.m in Sources */,
-				F2DCC853142C733300E60735 /* FProduct.m in Sources */,
-				F2DCC854142C733300E60735 /* FStore.m in Sources */,
-				F2DCC855142C733300E60735 /* FType.m in Sources */,
-				F2DCC856142C733300E60735 /* Testing.m in Sources */,
 				F289704A14317D3600F9F400 /* FavouriteService.m in Sources */,
 				F299FDF914346AB300A7F2C9 /* FeatureProductsViewController.m in Sources */,
 				F28D817E1435A8150049BC10 /* SalesProductsViewController.m in Sources */,
@@ -820,19 +772,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		F28DC29F1429CE380094C6D9 /* Favourite.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				F28DC2A01429CE380094C6D9 /* Favourite.xcdatamodel */,
-			);
-			currentVersion = F28DC2A01429CE380094C6D9 /* Favourite.xcdatamodel */;
-			path = Favourite.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 5A971E2B13DD6256008A19BE /* Project object */;
 }

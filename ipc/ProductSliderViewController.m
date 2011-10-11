@@ -83,7 +83,7 @@
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
+    //[super didReceiveMemoryWarning];
     
     // Release any cached data, images, etc that aren't in use.
 }
@@ -148,7 +148,8 @@
             [smallButton setImageEdgeInsets:UIEdgeInsetsMake(padding, padding, padding, padding)];
             
             sy = sy + 1 + smallImageWidth;
-            if (sy > 600){
+            if (sy > 600)
+            {
                 sy = 0;
                 sx = sx + smallImageHeight + 1;
             }
@@ -198,11 +199,11 @@
     
     BigProductSliderViewController *bigProductSliderViewController = [[BigProductSliderViewController alloc] initWithPage:page andProducts:_productArray withTotal:totalItem];
     bigProductSliderViewController.delegate = self;
-    //bigProductSliderViewController.navigationItem.title = [[_productArray objectAtIndex:page] name];
+    bigProductSliderViewController.navigationItem.title = [[_productArray objectAtIndex:page] name];
     bigProductSliderViewController.type = _type;
     bigProductSliderViewController.category = _category;
     bigProductSliderViewController.item = page;
-    [bigProductSliderViewController.navigationItem.backBarButtonItem setTitle:@"ALL"];
+    //[bigProductSliderViewController.navigationItem.backBarButtonItem setTitle:@"ALL"];
     
     [self.navigationController pushViewController:bigProductSliderViewController animated:YES];
     
@@ -326,7 +327,8 @@
             [productScrollView addSubview:button];
         }
         
-        smallSliderWidth = (totalItem/8+1)*1024;
+        smallSliderWidth = (totalItem/9+1)*1024;
+        NSLog(@"scroll width: %i", smallSliderWidth);
         productScrollView.pagingEnabled = YES;
         productScrollView.contentSize = CGSizeMake(smallSliderWidth, 655);
         productScrollView.backgroundColor = [UIColor grayColor];
@@ -375,27 +377,9 @@
         if ([[button imageView] image] == NULL) {
             AsyncImageView *asyncImage = [[[AsyncImageView alloc] init] autorelease];
             
-            //hardcode url
-            NSString *sexFolder = _type == 1 ? @"m" : @"f";
-            NSString *subFolder = [[NSString alloc] initWithFormat:@"%i/t/%@.jpg", _category-1, [product image]];
-            NSString *str = [[NSString alloc] initWithFormat:@"%@", [product image]];
-            NSRange range = [str rangeOfString:@"/" options:NSBackwardsSearch];
-            NSLog(@"last index of /: %i", range.location);
+            NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@t-%@", BASE_URL, PRODUCT_FOLDER, [product image]];
             
-            NSString *urlPath;
-            if (range.location < [str length]) {
-                NSString *pre = [str substringToIndex:range.location+1];
-                NSString *post = [str substringFromIndex:range.location];
-                NSString *thumb = [[NSString alloc] initWithFormat:@"%@t%@", pre, post];
-                NSLog(@"pre: %@", thumb);
-                urlPath = [[NSString alloc] initWithFormat:@"%@%@", BASE_URL, thumb];
-            }
-            else
-            {
-                urlPath = [[NSString alloc] initWithFormat:@"%@%@/%@", BASE_URL, sexFolder, subFolder];
-            }
-            [sexFolder release];
-            [subFolder release];
+            NSLog(@"product image: %@", urlPath);
             
             NSURL* url = [NSURL URLWithString:urlPath];
             [urlPath release];

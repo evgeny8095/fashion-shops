@@ -69,6 +69,7 @@
     [underContruction setFont:[UIFont systemFontOfSize:40]];
     [underContruction setCenter:CGPointMake(512, 355)];
     [self.view addSubview:underContruction];
+    [underContruction release];
 }
 
 - (void)viewDidAppear:(BOOL)animated

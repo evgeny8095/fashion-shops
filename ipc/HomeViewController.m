@@ -26,7 +26,7 @@
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
+    //[super didReceiveMemoryWarning];
     
     // Release any cached data, images, etc that aren't in use.
 }
@@ -54,7 +54,7 @@
     NSString *bigURL = [NSString stringWithFormat:@"%@%@", BASE_URL, @"home/collections.jpg"];
     NSURL *bigHomeURL = [NSURL URLWithString:bigURL];
     //[bigURL release];
-    UIImage *bigHomeImage = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:bigHomeURL]];
+    UIImage *bigHomeImage = [[[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:bigHomeURL]] autorelease];
     //[bigHomeURL release];
     if (bigHomeImage == nil) {
         [bigHomeImage release];
@@ -63,7 +63,7 @@
     
     UIButton *bigButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 44, 512, 655)];
     [bigButton setImage:bigHomeImage forState:normal];
-    [bigHomeImage release];
+    //[bigHomeImage release];
     UILabel *bigLable = [[UILabel alloc] initWithFrame:CGRectMake(0, 659, 512, 40)];
     [bigLable setText:@"COLLECTIONS"];
     [bigLable setTextAlignment:UITextAlignmentCenter];
@@ -76,7 +76,7 @@
     NSString *smallURL1 = [NSString stringWithFormat:@"%@/%@", BASE_URL, @"home/new.jpg"];
     NSURL *smallHomeURL1 = [NSURL URLWithString:smallURL1];
     //[smallURL1 release];
-    UIImage *smallHomeImage1 = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:smallHomeURL1]];
+    UIImage *smallHomeImage1 = [[[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:smallHomeURL1]] autorelease];
     //[smallHomeURL1 release];
     if (smallHomeImage1 == nil) {
         [smallHomeImage1 release];
@@ -86,7 +86,7 @@
     NSString *smallURL2 = [NSString stringWithFormat:@"%@/%@", BASE_URL, @"home/sale.jpg"];
     NSURL *smallHomeURL2 = [NSURL URLWithString:smallURL2];
     //[smallURL2 release];
-    UIImage *smallHomeImage2 = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:smallHomeURL2]];
+    UIImage *smallHomeImage2 = [[[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:smallHomeURL2]] autorelease];
     //[smallHomeURL2 release];
     if (smallHomeImage2 == nil) {
         [smallHomeImage2 release];
@@ -96,7 +96,7 @@
     NSString *smallURL3 = [NSString stringWithFormat:@"%@/%@", BASE_URL, @"home/female.jpg"];
     NSURL *smallHomeURL3 = [NSURL URLWithString:smallURL3];
     //[smallURL3 release];
-    UIImage *smallHomeImage3 = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:smallHomeURL3]];
+    UIImage *smallHomeImage3 = [[[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:smallHomeURL3]] autorelease];
     //[smallHomeURL3 release];
     if (smallHomeImage3 == nil) {
         [smallHomeImage3 release];
@@ -106,7 +106,7 @@
     NSString *smallURL4 = [NSString stringWithFormat:@"%@/%@", BASE_URL, @"home/male.jpg"];
     NSURL *smallHomeURL4 = [NSURL URLWithString:smallURL4];
     //[smallURL4 release];
-    UIImage *smallHomeImage4 = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:smallHomeURL4]];
+    UIImage *smallHomeImage4 = [[[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:smallHomeURL4]] autorelease];
     //[smallHomeURL4 release];
     if (smallHomeImage4 == nil) {
         [smallHomeImage4 release];
@@ -119,7 +119,7 @@
     [smallButton1 setTitle:@"NEW ARRIVAL" forState:normal];
     [smallButton1 addTarget:self action:@selector(gotoCategory:) forControlEvents:UIControlEventTouchUpInside];
     [smallButton1 setTag:1];
-    [smallHomeImage1 release];
+    //[smallHomeImage1 release];
     UILabel *smallLable1 = [[UILabel alloc] initWithFrame:CGRectMake(512, 331.5, 256, 40)];
     [smallLable1 setText:@"NEW ARRIVAL"];
     [smallLable1 setTextAlignment:UITextAlignmentCenter];
@@ -131,7 +131,7 @@
     UIButton *smallButton2 = [[UIButton alloc] initWithFrame:CGRectMake(768, 44, 256, 327.5)];
     [smallButton2 setImage:smallHomeImage2 forState:normal];
     [smallButton2 setTitle:@"SALE" forState:normal];
-    [smallHomeImage2 release];
+    //[smallHomeImage2 release];
     [smallButton2 addTarget:self action:@selector(gotoCategory:) forControlEvents:UIControlEventTouchUpInside];
     [smallButton2 setTag:2];
     UILabel *smallLable2 = [[UILabel alloc] initWithFrame:CGRectMake(768, 331.5, 256, 40)];
@@ -146,7 +146,7 @@
     [smallButton3 setImage:smallHomeImage3 forState:normal];
     [smallButton3 setTitle:@"FEMALE" forState:normal];
     [smallButton3 setTag:2];
-    [smallHomeImage3 release];
+    //[smallHomeImage3 release];
     [smallButton3 addTarget:self action:@selector(gotoCategory:) forControlEvents:UIControlEventTouchUpInside];
     UILabel *smallLable3 = [[UILabel alloc] initWithFrame:CGRectMake(512, 659, 256, 40)];
     [smallLable3 setText:@"FEMALE"];
@@ -160,7 +160,7 @@
     [smallButton4 setImage:smallHomeImage4 forState:normal];
     [smallButton4 setTitle:@"MALE" forState:normal];
     [smallButton4 setTag:1];
-    [smallHomeImage4 release];
+    //[smallHomeImage4 release];
     [smallButton4 addTarget:self action:@selector(gotoCategory:) forControlEvents:UIControlEventTouchUpInside];
     UILabel *smallLable4 = [[UILabel alloc] initWithFrame:CGRectMake(768, 659, 256, 40)];
     [smallLable4 setText:@"MALE"];
@@ -277,7 +277,7 @@
     
     
     [popoverController setPopoverContentSize:CGSizeMake(300.0f, 300.0f)];
-    //		[popoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    //[popoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     
     // Or use the following line to display it from a given rectangle
     [popoverController presentPopoverFromRect:CGRectMake(824, 0, 200, 38) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];

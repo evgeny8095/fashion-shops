@@ -69,6 +69,5 @@
 - (void)buy:(id)sender;
 - (IBAction)gotoShop:(id)sender;
 - (void)labelHiddenChage:(BOOL)cmode;
-- (void)addToFavourite;
 
 @end

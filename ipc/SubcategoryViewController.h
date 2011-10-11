@@ -21,6 +21,7 @@
     NSNumber* totalCategory;
     UIActivityIndicatorView* loading;
     NSDictionary* _typeDict;
+    NSMutableArray *buttons;
 }
 
 @property (nonatomic, assign) NSInteger type;

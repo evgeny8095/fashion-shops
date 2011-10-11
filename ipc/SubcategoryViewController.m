@@ -35,7 +35,7 @@
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
+    //[super didReceiveMemoryWarning];
     
     // Release any cached data, images, etc that aren't in use.
 }
@@ -54,9 +54,7 @@
     [searchBar release];
     
     //banner
-    NSString *baseURL = @"http://www.ongsoft.com/ipc/";
-    NSString *bannerURL = [NSString stringWithFormat:@"%@%@", baseURL, @"banners/sub_banner.png"];
-    [baseURL release];
+    NSString *bannerURL = [NSString stringWithFormat:@"%@%@", BASE_URL, @"banners/sub_banner.png"];
     NSURL *bannerImageURL = [NSURL URLWithString:bannerURL];
     UIImage *bannerImage = [[UIImage alloc] initWithData:[[NSData dataWithContentsOfURL:bannerImageURL] autorelease]];
 //    if (bannerImage == nil) {
@@ -138,24 +136,78 @@
     BOOL overLoad;
     NSInteger px = 0;
     NSInteger py = 0;
-    NSInteger scrollWidth;
+    NSInteger scrollWidth = 0;
     
     NSInteger count = [_categoryArray count];
     
+//    NSMutableArray *tempButtons = [[NSMutableArray alloc] init];
+//    for (NSInteger i = 0; i < count; i++)
+//    {
+//        UIButton *smallButton = [[UIButton alloc] initWithFrame:CGRectMake(px, py, buttonWidth, buttonHeight)];
+//        [smallButton setBackgroundColor:[UIColor whiteColor]];
+//        [smallButton addTarget:self action:@selector(gotoProductDetails:) forControlEvents:UIControlEventTouchUpInside];
+//        [smallButton setTag:i];
+//        CGFloat padding = 10.0;
+//        [smallButton setImageEdgeInsets:UIEdgeInsetsMake(padding, padding, padding, padding)];
+//        
+//        py = py + buttonSpacing + buttonHeight;
+//        overLoad = YES;
+//        
+//        if (py > scrollContentHeight){
+//            py = 0;
+//            px = px + buttonSpacing + buttonWidth;
+//            overLoad = NO;
+//        }
+//        
+//        if (overLoad)
+//            scrollWidth = px + buttonWidth;
+//        else
+//            scrollWidth = px;
+//        [tempButtons addObject:smallButton];
+//        [smallButton release];
+//    }
+//    
+//    self.buttons = tempButtons;
+//    [tempButtons release];
+//    for(UIButton *button in buttons){
+//        [productScrollView addSubview:button];
+//    }
+    buttons = [[NSMutableArray alloc] init];
+    for (NSUInteger i = 0; i < count; i++) {
+        UIButton *button = [[UIButton alloc] init];
+        [buttons addObject:button];
+        [button release];
+    }
+    
+    for (NSUInteger i = 0; i < count; i++) {
+        Category* category = [_categoryArray objectAtIndex:i];
+        
+        AsyncImageView *asyncImage = [[[AsyncImageView alloc] init] autorelease];
+        
+        NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@%@", BASE_URL, CATEGORIES_FOLDER, category.image];
+        NSURL* url = [NSURL URLWithString:urlPath];
+        [urlPath release];
+        
+        [asyncImage loadImageFromURL:url forButton:[buttons objectAtIndex:i]];
+    }
+    
     for (NSUInteger i = 0; i < count; i++) {
         //Category* current = [_categoryDict objectForKey:key];
-        Category* current = [_categoryArray objectAtIndex:i];
-        UIImage *image = [UIImage imageNamed:current.image];
-        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(px, py, buttonWidth, buttonHeight)];
+        Category* category = [_categoryArray objectAtIndex:i];
+        UIButton* button = [buttons objectAtIndex:i];
+       // UIImage *image = [UIImage imageNamed:current.image];
+        //UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(px, py, buttonWidth, buttonHeight)];
+        [button setFrame:CGRectMake(px, py, buttonWidth, buttonHeight)];
         [button addTarget:self action:@selector(gotoSubCatalogue:) forControlEvents:UIControlEventTouchUpInside];
         [button setImageEdgeInsets:UIEdgeInsetsMake(topPadding, sidePadding, sidePadding, sidePadding)];
-        [button setImage:image forState:normal];
-        [button setTag:[current.cid intValue]];
-        [button setTitle:current.name forState:normal];
+        //[button setImage:image forState:normal];
+        //[button setImage:[images objectAtIndex:i] forState:UIControlStateNormal];
+        [button setTag:[category.cid intValue]];
+        [button setTitle:category.name forState:normal];
         [button setBackgroundColor:[UIColor blackColor]];
-        [image release];
+        //[image release];
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(px, py, buttonWidth, labelHeight)];
-        [label setText:[current.name uppercaseString]];
+        [label setText:[category.name uppercaseString]];
         //[label setAlpha:0.7];
         [label setTextAlignment:UITextAlignmentCenter];
         [label setBackgroundColor:[UIColor clearColor]];
@@ -163,7 +215,7 @@
         [label setFont:[UIFont fontWithName: @"Helvetica" size: 24]];
         [subCategoryScrollView addSubview:button];
         [subCategoryScrollView addSubview:label];
-        [button release];
+        //[button release];
         [label release];
         
         py = py + buttonSpacing + buttonHeight;

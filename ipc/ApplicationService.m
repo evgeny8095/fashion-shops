@@ -272,6 +272,7 @@
     [dictionary setObject:[c_type tid] forKey:@"type"];
     [dictionary setObject:[c_category cid] forKey:@"category"];
 	[req call:PRODUCT_URL params:dictionary];
+    [dictionary release];
 	[req release];
 }
 
@@ -284,6 +285,7 @@
     [dictionary setObject:[NSString stringWithFormat:@"%i", start] forKey:@"startPosition"];
     [dictionary setObject:[NSString stringWithFormat:@"%i", end] forKey:@"endPosition"];
 	[req call:PRODUCT_URL params:dictionary];
+    [dictionary release];
 	[req release];
 }
 
@@ -312,6 +314,7 @@
     [dictionary setObject:[NSString stringWithFormat:@"%i", start] forKey:@"startPosition"];
     [dictionary setObject:[NSString stringWithFormat:@"%i", end] forKey:@"endPosition"];
     [req call:PRODUCT_URL params:dictionary];
+    [dictionary release];
 	[req release];
 }
 
@@ -382,6 +385,7 @@
     [dictionary setObject:[NSString stringWithFormat:@"%i", end] forKey:@"endPosition"];
     [req call:PRODUCT_URL params:dictionary];
 	[req release];
+    [dictionary release];
     [strIds release];
 }
 
@@ -410,6 +414,7 @@
     [dictionary setObject:[NSString stringWithFormat:@"%i", start] forKey:@"startPosition"];
     [dictionary setObject:[NSString stringWithFormat:@"%i", end] forKey:@"endPosition"];
     [req call:PRODUCT_URL params:dictionary];
+    [dictionary release];
 	[req release];
 }
 
