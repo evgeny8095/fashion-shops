@@ -44,6 +44,9 @@
     
     [self.window setBackgroundColor:[UIColor grayColor]];
     self.window.rootViewController = self.tabBarController;
+    
+    [[[[[self tabBarController] tabBar] items] objectAtIndex:3] setBadgeValue:@"5"];
+    
     [self.window makeKeyAndVisible];
     return YES;
 }

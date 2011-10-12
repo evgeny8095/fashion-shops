@@ -13,7 +13,6 @@
 @implementation FavouriteViewController
 @synthesize navController;
 @synthesize navBar;
-@synthesize fproductArray;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

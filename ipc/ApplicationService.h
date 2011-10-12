@@ -33,14 +33,15 @@
     NSMutableArray* _featureProductArray;
     NSMutableArray* _featureProductList;
     NSMutableArray* _salesProductArray;
-    BOOL _status;
 	id<ApplicationServiceDelegate> _delegate;
+    id<ApplicationServiceDelegate> _delegate2;
     NSInteger _totalProduct;
     NSInteger _startPosition;
     NSInteger _endPosition;
 }
 
 @property (nonatomic,assign) id<ApplicationServiceDelegate> delegate;
+@property (nonatomic,assign) id<ApplicationServiceDelegate> delegate2;
 @property (nonatomic,assign) NSInteger totalProduct;
 @property (nonatomic,assign) NSInteger startPosition;
 @property (nonatomic,assign) NSInteger endPosition;
@@ -61,7 +62,6 @@
 -(void) clearProducts;
 -(void) clearSalesProducts;
 -(void) shuffleFeatureProductList;
--(BOOL) finishParsing;
 
 -(void) loadCategories;
 -(void) loadCategoriesForType:(Type*)c_type;

@@ -15,11 +15,11 @@
 #import "ProductXMLHandler.h"
 
 @implementation ApplicationService
-@synthesize delegate = _delegate, totalProduct = _totalProduct, startPosition = _startPosition, endPosition = _endPosition;
+@synthesize delegate = _delegate, delegate2 = _delegate2, totalProduct = _totalProduct, startPosition = _startPosition, endPosition = _endPosition;
 
 -(id) init
 {
-	if (self = [super init]) {
+	if (self == [super init]) {
         _categoryDict = [[NSMutableDictionary alloc] init];
         _categoryForTypeArray = [[NSMutableArray alloc] init];
         _typeDict = [[NSMutableDictionary alloc] init];
@@ -31,7 +31,6 @@
         _featureProductList = [[NSMutableArray alloc] init];
         _featureProductArray = [[NSMutableArray alloc] init];
         _salesProductArray = [[NSMutableArray alloc] init];
-        _status = NO;
 	} 
 	return self;	
 }
@@ -145,11 +144,6 @@
         NSUInteger n = (random() % nElement) + 1;
         [_featureProductList exchangeObjectAtIndex:i withObjectAtIndex:n];
     }
-}
-
--(BOOL) finishParsing
-{
-    return _status;
 }
 
 #pragma mark -
@@ -364,13 +358,6 @@
 													   andAction:@selector(gotFeatureProducts: byRequest:)];
     NSMutableString* strIds = [[NSMutableString alloc] initWithString:@""];
     NSInteger count = [_featureProductList count];
-//    NSInteger limit = end >= count ? count-1 : end;
-//    for (NSInteger i = start; i <= limit; i++) {
-//        if (i == count-1)
-//            [strIds appendString:[NSString stringWithFormat:@"%@", [[_featureProductList objectAtIndex:i] pid]]];
-//        else
-//            [strIds appendString:[NSString stringWithFormat:@"%@,", [[_featureProductList objectAtIndex:i] pid]]];
-//    }
     for (NSInteger i = 0; i < count; i++) {
         Product *product = [_featureProductList objectAtIndex:i];
         if (i == count-1)
@@ -378,7 +365,6 @@
         else
             [strIds appendString:[NSString stringWithFormat:@"%@,", [product pid]]];
     }
-    //NSLog(@"%@", strIds);
     NSMutableDictionary* dictionary = [[NSMutableDictionary alloc] init];
     [dictionary setObject:strIds forKey:@"ids"];
     [dictionary setObject:[NSString stringWithFormat:@"%i", start] forKey:@"startPosition"];

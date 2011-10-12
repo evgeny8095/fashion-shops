@@ -42,17 +42,35 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    APP_SERVICE(appSrv);
+    [self.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+        
+    UILabel *underContruction = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 500, 100)];
+    [underContruction setText:@"Feature Under Contruction!"];
+    [underContruction setFont:[UIFont systemFontOfSize:40]];
+    [underContruction setCenter:CGPointMake(512, 355)];
+    //[self.view addSubview:underContruction];
+    [underContruction release];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    navController = [[UINavigationController alloc] init];
+    
+    [navController.view setFrame:self.view.frame];
+    
+    [navController.navigationBar setBarStyle:UIBarStyleBlack];
+    
+    APP_SERVICE(appSrvvv);
     //NSDictionary *types = [appSrv typeDict];
     //NSDictionary *categories = [appSrv categoryDict];
     //Type* c_type = [types objectForKey:[NSString stringWithFormat:@"%i", _type]];
     //Category* c_category = [categories objectForKey:[NSString stringWithFormat:@"%i", category]];
     
-    //[appSrv loadProductsOnSalesFrom:0 to:0];
+    [appSrvvv loadProductsOnSalesFrom:0 to:15];
     
     ProductSliderViewController *productSliderViewController = [[ProductSliderViewController alloc] initForSalesProducts];
-    [appSrv setDelegate:productSliderViewController];
+    [appSrvvv setDelegate:productSliderViewController];
     //productSliderViewController.c_type = c_type;
     //productSliderViewController.c_category = c_category;
     //productSliderViewController.type = _type;
@@ -60,26 +78,21 @@
     //productSliderViewController.navigationItem.title = [title uppercaseString];
     productSliderViewController.title = @"SALES";
     
-    //[self.navigationController pushViewController:productSliderViewController animated:YES];
+    [self.view addSubview:navController.view];
+    
+    [self.navController pushViewController:productSliderViewController animated:YES];
     
     [productSliderViewController release];
     
-    UILabel *underContruction = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 500, 100)];
-    [underContruction setText:@"Feature Under Contruction!"];
-    [underContruction setFont:[UIFont systemFontOfSize:40]];
-    [underContruction setCenter:CGPointMake(512, 355)];
-    [self.view addSubview:underContruction];
-    [underContruction release];
-}
+    //[[[[[self tabBarController] tabBar] items] objectAtIndex:3] setBadgeValue:@"5"];
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
+    [navController release];
+    navController = nil;
 }
 
 - (void)viewDidUnload
