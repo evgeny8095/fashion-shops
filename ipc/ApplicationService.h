@@ -61,6 +61,7 @@
 -(void) clearCategory;
 -(void) clearProducts;
 -(void) clearSalesProducts;
+-(void) clearFavouriteProduct;
 -(void) shuffleFeatureProductList;
 
 -(void) loadCategories;

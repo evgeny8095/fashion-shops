@@ -136,6 +136,12 @@
     _salesProductArray = [[NSMutableArray alloc] init];
 }
 
+-(void) clearFavouriteProduct
+{
+    [_favoriteProductArray release];
+    _favoriteProductArray = [[NSMutableArray alloc] init];
+}
+
 -(void) shuffleFeatureProductList
 {
     NSUInteger count = [_featureProductList count];

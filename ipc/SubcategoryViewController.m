@@ -14,6 +14,8 @@
 #define buttonHeight 195
 #define buttonWidth 233.5
 #define buttonSpacing 10
+//#define topPadding 100
+//#define sidePadding 5
 #define topPadding 100
 #define sidePadding 5
 #define labelHeight 40
@@ -47,14 +49,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    //search bar
+    //search ba
     UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
     [searchBar setDelegate:self];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:searchBar];
     [searchBar release];
     
     //banner
-    NSString *bannerURL = [NSString stringWithFormat:@"%@%@", BASE_URL, @"banners/sub_banner.png"];
+    NSString *bannerURL = [NSString stringWithFormat:@"%@%@", BASE_URL, @"banners/sub_banner3.png"];
     NSURL *bannerImageURL = [NSURL URLWithString:bannerURL];
     UIImage *bannerImage = [[UIImage alloc] initWithData:[[NSData dataWithContentsOfURL:bannerImageURL] autorelease]];
 //    if (bannerImage == nil) {
@@ -199,7 +201,9 @@
         //UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(px, py, buttonWidth, buttonHeight)];
         [button setFrame:CGRectMake(px, py, buttonWidth, buttonHeight)];
         [button addTarget:self action:@selector(gotoSubCatalogue:) forControlEvents:UIControlEventTouchUpInside];
-        [button setImageEdgeInsets:UIEdgeInsetsMake(topPadding, sidePadding, sidePadding, sidePadding)];
+        
+        //[button setImageEdgeInsets:UIEdgeInsetsMake(topPadding, sidePadding, sidePadding, sidePadding)];
+        
         //[button setImage:image forState:normal];
         //[button setImage:[images objectAtIndex:i] forState:UIControlStateNormal];
         [button setTag:[category.cid intValue]];
@@ -214,7 +218,7 @@
         [label setTextColor:[UIColor whiteColor]];
         [label setFont:[UIFont fontWithName: @"Helvetica" size: 24]];
         [subCategoryScrollView addSubview:button];
-        [subCategoryScrollView addSubview:label];
+        //[subCategoryScrollView addSubview:label];
         //[button release];
         [label release];
         

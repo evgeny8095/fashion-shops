@@ -28,7 +28,7 @@
 @synthesize type = _type;
 @synthesize category = _category;
 
-- (id)initwithProduct:(Product *)c_product inPosition:(NSInteger)position withMode:(BOOL)cmode
+- (id)initwithProduct:(Product *)c_product inPosition:(NSInteger)position ofTotal:(NSInteger)c_total withMode:(BOOL)cmode
 {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
@@ -39,6 +39,7 @@
         self.price = [NSString stringWithFormat:@"%i",[c_product price]];
         self.desc = [c_product desc];
         cPosition = position;
+        total = c_total;
         mode = cmode;
         _product = c_product;
     }
@@ -89,7 +90,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
 
     NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@/%@", BASE_URL, PRODUCT_FOLDER, [_product image]];
     
@@ -101,15 +101,14 @@
     //gradient backgound
     gradientView = [[SSGradientView alloc] initWithFrame:self.view.frame];
 	//gradientView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-	gradientView.topBorderColor = [UIColor colorWithRed:0.558f green:0.599f blue:0.643f alpha:1.0f];
-	gradientView.topInsetColor = [UIColor colorWithWhite:1.0f alpha:0.3f];
+	//gradientView.topBorderColor = [UIColor colorWithRed:0.558f green:0.599f blue:0.643f alpha:1.0f];
+	//gradientView.topInsetColor = [UIColor colorWithWhite:1.0f alpha:0.3f];
 	gradientView.colors = [NSArray arrayWithObjects:
 							[UIColor darkGrayColor],
 							[UIColor blackColor],
 							nil];
 	gradientView.bottomBorderColor = [UIColor colorWithRed:0.428f green:0.479f blue:0.520f alpha:1.0f];
     [gradientView setHidden:YES];
-    //[gradientView setAlpha:0.9];
 	[self.view addSubview:gradientView];
     
     //build-in loading indicator
@@ -118,6 +117,8 @@
     [loadingView startAnimating];
     [loadingView setHidesWhenStopped:YES];
     [self.view addSubview:loadingView];
+    
+    //
     
     button = [[UIButton alloc] initWithFrame:CGRectMake(256, 0, 512, 655)];
     [button addTarget:self action:@selector(revealDetails:) forControlEvents:UIControlEventTouchUpInside];
@@ -228,6 +229,27 @@
     [self.view addSubview:buy];
     
     [self.view setBackgroundColor:[UIColor whiteColor]];
+    
+    infoBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1024, 35)];
+    [infoBar setBackgroundColor:[UIColor lightTextColor]];
+    UILabel *priceAndStore = [[UILabel alloc] initWithFrame:CGRectMake(112, 0, 800, 35)];
+    NSString *priceAndStoreString = [[NSString alloc] initWithFormat:@"%i - %@", [_product price], [[_product store] name]];
+    [priceAndStore setText:priceAndStoreString];
+    [priceAndStore setTextAlignment:UITextAlignmentCenter];
+    [priceAndStore setBackgroundColor:[UIColor clearColor]];
+    [priceAndStore setTextColor:[UIColor grayColor]];
+    [infoBar addSubview:priceAndStore];
+    [priceAndStore release];
+    [priceAndStoreString release];
+    UILabel *numberOf = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 200, 35)];
+    NSString *numberOfString = [[NSString alloc] initWithFormat:@"%i of %i", cPosition+1, total];
+    [numberOf setText:numberOfString];
+    [numberOf setTextAlignment:UITextAlignmentLeft];
+    [numberOf setBackgroundColor:[UIColor clearColor]];
+    [numberOf setTextColor:[UIColor grayColor]];
+    [infoBar addSubview:numberOf];
+    
+    [self.view addSubview:infoBar];
 }
 
 - (void)viewDidUnload
@@ -294,6 +316,7 @@
     [lineView setHidden:cmode];
     [gradientView setHidden:cmode];
     [more setHidden:cmode];
+    [infoBar setHidden:!cmode];
 }
 
 - (void)buy:(id)sender{

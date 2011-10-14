@@ -18,6 +18,8 @@
     NSInteger totalItem;
     NSInteger totalPages;
     NSMutableArray *buttons;
+    NSMutableArray *labels;
+    NSMutableArray *secondLabels;
     UIPageControl *pageControl;
     BOOL pageControlUsed;
     NSArray *productArray;
@@ -35,9 +37,12 @@
     NSMutableDictionary* loadedPage;
     NSString* loadFrom;
     NSString* ids;
+    UILabel *infomationLabel;
 }
 
 @property (nonatomic, retain) NSMutableArray *buttons;
+@property (nonatomic, retain) NSMutableArray *labels;
+@property (nonatomic, retain) NSMutableArray *secondLabels;
 @property (nonatomic, assign) NSInteger type;
 @property (nonatomic, assign) NSInteger category;
 @property (nonatomic, retain) UIPopoverController *popoverController;

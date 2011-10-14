@@ -85,6 +85,8 @@
     [super viewDidDisappear:animated];
     [navController release];
     navController = nil;
+    APP_SERVICE(appSrv);
+    [appSrv clearFavouriteProduct];
 }
 
 - (void)viewDidUnload

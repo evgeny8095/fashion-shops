@@ -38,6 +38,7 @@
     UIView *backCover;
     NSString *url;
     NSInteger cPosition;
+    NSInteger total;
     id<ProductsDetailsSliderViewControllerDelegate> delegate;
     BOOL mode;
     NSURLConnection* connection;
@@ -50,6 +51,7 @@
     SSGradientView *more;
     SSLineView *lineView;
     SSGradientView *gradientView;
+    UIView *infoBar;
 }
 
 @property (nonatomic, retain) UIImage *image;
@@ -62,7 +64,7 @@
 @property (nonatomic, assign) NSInteger type;
 @property (nonatomic, assign) NSInteger category;
 
-- (id)initwithProduct:(Product*)c_product inPosition:(NSInteger)position withMode:(BOOL)cmode;
+- (id)initwithProduct:(Product*)c_product inPosition:(NSInteger)position ofTotal:(NSInteger)c_total withMode:(BOOL)cmode;
 - (id)initWithImage:(NSString *)strImg hasName:(NSString *)strName hasPrice:(NSString *)strPrice hasDesc:(NSString *)strDesc inPosition:(NSInteger)position withMode:(BOOL)cmode;
 - (void)revealDetails:(id)sender;
 - (void)changeViewMode:(BOOL)cmode;

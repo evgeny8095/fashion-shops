@@ -52,10 +52,20 @@
     [super dealloc];
 }
 
-- (void)likeAction:(id)sender{
+- (void)favAction:(id)sender
+{
     Product *product = [_productArray objectAtIndex:cpage];
     FAV_SERVICE(favSrv);
     [favSrv addFavouriteProduct:[[product pid] intValue]];
+    [self checkFavProduct:product];
+}
+
+- (void)unFavAction:(id)sender
+{
+    Product *product = [_productArray objectAtIndex:cpage];
+    FAV_SERVICE(favSrv);
+    [favSrv removeFavouriteProduct:[[product pid] intValue]];
+    [self checkFavProduct:product];
 }
 
 #pragma mark - View lifecycle
@@ -66,13 +76,18 @@
     // Do any additional setup after loading the view from its nib.
     baseURL = @"http://www.ongsoft.com/ipc/";
     
-    UIImage *likeImage = [UIImage imageNamed:@"heart-like.png"];
-    UIBarButtonItem *likeButton = [[UIBarButtonItem alloc] initWithImage:likeImage style:UIBarButtonItemStylePlain target:self action:@selector(likeAction:)];
-    //UIBarButtonItem *likeButton = [[UIBarButtonItem alloc]  initWithTitle:@"L" style:UIBarButtonItemStylePlain target:self action:@selector(likeAction:)];
-
-    //[likeImage release];
-    self.navigationItem.rightBarButtonItem = likeButton;
-    [likeButton release];
+    UIImage *favImage = [UIImage imageNamed:@"heart-like.png"];
+    UIImage *unFavImage = [UIImage imageNamed:@"heart.png"];
+    UIButton *favButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [favButton setFrame:CGRectMake(0, 0, 25, 25)];
+    [favButton setImage:favImage forState:UIControlStateNormal];
+    [favButton addTarget:self action:@selector(unFavAction:) forControlEvents:UIControlEventTouchUpInside];
+    favBarButton = [[UIBarButtonItem alloc] initWithCustomView:favButton];
+    UIButton *unFavButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [unFavButton setFrame:CGRectMake(0, 0, 25, 25)];
+    [unFavButton setImage:unFavImage forState:UIControlStateNormal];
+    [unFavButton addTarget:self action:@selector(favAction:) forControlEvents:UIControlEventTouchUpInside];
+    unFavBarButton = [[UIBarButtonItem alloc] initWithCustomView:unFavButton];
     
 //    UIView *container = [[UIView alloc] init];
 //    UIButton *customButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -157,7 +172,7 @@
     ProductsDetailsSliderViewController *controller = [viewControllers objectAtIndex:page];
     if ((NSNull *)controller == [NSNull null])
     {
-        controller = [[ProductsDetailsSliderViewController alloc] initwithProduct:[_productArray objectAtIndex:page] inPosition:page withMode:viewMode];
+        controller = [[ProductsDetailsSliderViewController alloc] initwithProduct:[_productArray objectAtIndex:page] inPosition:page ofTotal:numberOfPages withMode:viewMode];
         controller.type = _type;
         controller.category = _category;
         
@@ -177,7 +192,9 @@
         controller.view.frame = frame;
         [scrollView addSubview:controller.view];
     }
-
+    if (cpage == page) {
+        [self checkFavProduct:[_productArray objectAtIndex:cpage]];
+    }
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)sender
@@ -198,7 +215,7 @@
     [delegate finishSomething:self withItemNumber:page];
     
     // load the visible page and the page on either side of it (to avoid flashes when the user starts scrolling)
-    if(page < numberOfPages && page > 0)
+    if(page < numberOfPages && page >= 0)
     {
         [self loadScrollViewWithPage:page];
         [self loadScrollViewWithPage:page - 1];
@@ -236,6 +253,21 @@
 
 -(void) changeMode:(UIViewController *)sender withMode:(BOOL)modeToChange{
     viewMode = modeToChange;
+}
+
+-(void) checkFavProduct:(Product*)product
+{
+    FAV_SERVICE(favSrv);
+    NSString *favString = [favSrv favouriteProductStringFormat];
+    NSRange range = [favString rangeOfString:[product pid]];
+    NSLog(@"%@ for %@ : l:%i and r:%i", favString, [product pid], range.location, range.length);
+    if (range.length > 0) {
+        //[favSrv removeFavouriteProduct:[proString intValue]];
+        self.navigationItem.rightBarButtonItem = favBarButton;
+    } else{
+        //[favSrv addFavouriteProduct:[proString intValue]];
+        self.navigationItem.rightBarButtonItem = unFavBarButton;
+    }
 }
 
 @end
