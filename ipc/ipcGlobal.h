@@ -22,6 +22,7 @@
 #define PRODUCT_FOLDER @"images/product/"
 #define CATEGORIES_URL @"http://www.ongsoft.com/ios/categories.php"
 #define TYPES_URL @"http://www.ongsoft.com/ios/typies.php"
+#define TYPIES_FOLDER @"images/type/"
 #define STORE_URL @"http://www.ongsoft.com/ios/stores.php"
 #define BRAND_URL @"http://www.ongsoft.com/ios/brands.php"
 #define PRODUCT_URL @"http://www.ongsoft.com/ios/products.php"

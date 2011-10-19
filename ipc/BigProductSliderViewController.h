@@ -35,6 +35,7 @@
     NSMutableArray* _productArray;
     UIBarButtonItem *favBarButton;
     UIBarButtonItem *unFavBarButton;
+    UIView* infoBar;
 }
 
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
@@ -52,5 +53,6 @@
 - (void)favAction:(id)sender;
 - (void)unFavAction:(id)sender;
 - (void)checkFavProduct:(Product*)product;
+- (void)changeInforBarForProduct:(Product*)product inPage:(NSInteger)page inTotal:(NSInteger)total;
 
 @end

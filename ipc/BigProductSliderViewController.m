@@ -76,15 +76,15 @@
     // Do any additional setup after loading the view from its nib.
     baseURL = @"http://www.ongsoft.com/ipc/";
     
-    UIImage *favImage = [UIImage imageNamed:@"heart-like.png"];
-    UIImage *unFavImage = [UIImage imageNamed:@"heart.png"];
+    UIImage *favImage = [UIImage imageNamed:@"heart2.png"];
+    UIImage *unFavImage = [UIImage imageNamed:@"heart1.png"];
     UIButton *favButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [favButton setFrame:CGRectMake(0, 0, 25, 25)];
+    [favButton setFrame:CGRectMake(0, 0, 27, 25)];
     [favButton setImage:favImage forState:UIControlStateNormal];
     [favButton addTarget:self action:@selector(unFavAction:) forControlEvents:UIControlEventTouchUpInside];
     favBarButton = [[UIBarButtonItem alloc] initWithCustomView:favButton];
     UIButton *unFavButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [unFavButton setFrame:CGRectMake(0, 0, 25, 25)];
+    [unFavButton setFrame:CGRectMake(0, 0, 27, 25)];
     [unFavButton setImage:unFavImage forState:UIControlStateNormal];
     [unFavButton addTarget:self action:@selector(favAction:) forControlEvents:UIControlEventTouchUpInside];
     unFavBarButton = [[UIBarButtonItem alloc] initWithCustomView:unFavButton];
@@ -131,6 +131,32 @@
     }
     
     [self.view addSubview:scrollView];
+    
+    infoBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1024, 35)];
+    [infoBar setBackgroundColor:[UIColor grayColor]];
+    [infoBar setAlpha:0.4];
+    UILabel *priceAndStore = [[UILabel alloc] initWithFrame:CGRectMake(112, 0, 800, 35)];
+    [priceAndStore setTag:1];
+//    NSString *priceAndStoreString = [[NSString alloc] initWithFormat:@"%@ - %@", formattedPriceString, [[_product store] name]];
+//    [priceAndStore setText:priceAndStoreString];
+    [priceAndStore setTextAlignment:UITextAlignmentCenter];
+    [priceAndStore setBackgroundColor:[UIColor clearColor]];
+    [priceAndStore setTextColor:[UIColor blackColor]];
+    [infoBar addSubview:priceAndStore];
+    [priceAndStore release];
+//    [priceAndStoreString release];
+    
+    UILabel *numberOf = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 200, 35)];
+    [numberOf setTag:2];
+//    NSString *numberOfString = [[NSString alloc] initWithFormat:@"%i of %i", cPosition+1, total];
+//    [numberOf setText:numberOfString];
+    [numberOf setTextAlignment:UITextAlignmentLeft];
+    [numberOf setBackgroundColor:[UIColor clearColor]];
+    [numberOf setTextColor:[UIColor blackColor]];
+    [infoBar addSubview:numberOf];
+    [numberOf release];
+    [self changeInforBarForProduct:[_productArray objectAtIndex:cpage] inPage:cpage inTotal:numberOfPages];
+    [self.view addSubview:infoBar];
 }
 
 - (void)viewDidUnload
@@ -195,6 +221,8 @@
     if (cpage == page) {
         [self checkFavProduct:[_productArray objectAtIndex:cpage]];
     }
+    
+    [self changeInforBarForProduct:[_productArray objectAtIndex:page] inPage:page inTotal:numberOfPages];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)sender
@@ -221,10 +249,9 @@
         [self loadScrollViewWithPage:page - 1];
         [self loadScrollViewWithPage:page + 1];
         self.navigationItem.title = [[_productArray objectAtIndex:page] name];
-        FAV_SERVICE(favSrv);
-        if ([[favSrv favouriteProducts] indexOfObject:[_productArray objectAtIndex:page]] != NSNotFound) {
-            self.navigationItem.rightBarButtonItem.image = [UIImage imageNamed:@"heart-like.png"];
-        }
+        
+        [self changeInforBarForProduct:[_productArray objectAtIndex:page] inPage:page inTotal:numberOfPages];
+        
         cpage = page;
     }
     // A possible optimization would be to unload the views+controllers which are no longer visible
@@ -253,6 +280,7 @@
 
 -(void) changeMode:(UIViewController *)sender withMode:(BOOL)modeToChange{
     viewMode = modeToChange;
+    [infoBar setHidden:!modeToChange];
 }
 
 -(void) checkFavProduct:(Product*)product
@@ -260,7 +288,7 @@
     FAV_SERVICE(favSrv);
     NSString *favString = [favSrv favouriteProductStringFormat];
     NSRange range = [favString rangeOfString:[product pid]];
-    NSLog(@"%@ for %@ : l:%i and r:%i", favString, [product pid], range.location, range.length);
+    //NSLog(@"%@ for %@ : l:%i and r:%i", favString, [product pid], range.location, range.length);
     if (range.length > 0) {
         //[favSrv removeFavouriteProduct:[proString intValue]];
         self.navigationItem.rightBarButtonItem = favBarButton;
@@ -268,6 +296,21 @@
         //[favSrv addFavouriteProduct:[proString intValue]];
         self.navigationItem.rightBarButtonItem = unFavBarButton;
     }
+}
+
+-(void) changeInforBarForProduct:(Product *)product inPage:(NSInteger)page inTotal:(NSInteger)total
+{
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    [formatter setPositiveFormat:@"###,###"];
+    [formatter setPositiveSuffix:@"₫"];
+    NSString *formattedPriceString = [formatter stringFromNumber:[NSNumber numberWithInteger:[product price]]];
+    NSString *priceAndStoreString = [[NSString alloc] initWithFormat:@"%@ - %@", formattedPriceString, [product name]];
+    [((UILabel*)[infoBar viewWithTag:1]) setText:priceAndStoreString];
+    [priceAndStoreString release];
+    NSString *numberOfString = [[NSString alloc] initWithFormat:@"%i of %i", page+1, numberOfPages];
+    [((UILabel*)[infoBar viewWithTag:2]) setText:numberOfString];
+    [numberOfString release];
+    [formatter release];
 }
 
 @end

@@ -11,9 +11,10 @@
 
 @implementation TypeXMLHandler
 
--(id) initWithTypeDict:(NSMutableDictionary *)typeDict{
-    if (self = [super init]) {
+-(id) initWithTypeDict:(NSMutableDictionary *)typeDict andArray:(NSMutableArray *)typeArray{
+    if (self == [super init]) {
         _typeDict = typeDict;
+        _typeArray = typeArray;
         _count = [[NSNumber alloc] init];
     }
     return self;
@@ -49,6 +50,7 @@
 -(void) afterElementEnding:(NSString *)elementName{
     if ([elementName isEqualToString:@"type"]) {
         [_typeDict setObject:_currentObject forKey:_currentObject.tid];
+        [_typeArray addObject:_currentObject];
 		[_currentObject release];
 		_currentObject = nil;
         [_chars release];

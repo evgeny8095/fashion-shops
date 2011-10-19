@@ -23,6 +23,7 @@
         _categoryDict = [[NSMutableDictionary alloc] init];
         _categoryForTypeArray = [[NSMutableArray alloc] init];
         _typeDict = [[NSMutableDictionary alloc] init];
+        _typeArray = [[NSMutableArray alloc] init];
         _storeDict = [[NSMutableDictionary alloc] init];
         _brandDict = [[NSMutableDictionary alloc] init];
         _productDict = [[NSMutableDictionary alloc] init];
@@ -53,6 +54,11 @@
 -(NSMutableDictionary*) typeDict
 {
     return _typeDict;
+}
+
+-(NSMutableArray*) typeArray
+{
+    return _typeArray;
 }
 
 -(NSMutableDictionary*) storeDict
@@ -152,6 +158,30 @@
     }
 }
 
+#pragma mark-
+#pragma mark loadTypes
+-(void) loadTypes{
+    HttpRequest* req = [[HttpRequest alloc] initWithFinishTarget:self 
+													   andAction:@selector(gotTypes: byRequest:)];
+	[req call:TYPES_URL params:[NSDictionary dictionary]];
+	[req release];
+}
+
+-(void)gotTypes:(NSData *)data byRequest:(HttpRequest *)req
+{
+	//NSLog(@"types: %s", data.bytes);
+    TypeXMLHandler* handler = [[TypeXMLHandler alloc] initWithTypeDict:_typeDict andArray:_typeArray];
+    [handler setEndDocumentTarget:self andAction:@selector(didParsedType)];
+	NSXMLParser* parser = [[[NSXMLParser alloc] initWithData:data] autorelease];
+	parser.delegate = handler;
+	[parser parse];
+	[handler release];
+}
+-(void) didParsedType
+{
+    [_delegate didFinishParsingType:_typeDict andArray:_typeArray];
+}
+
 #pragma mark -
 #pragma mark loadCategories
 -(void) loadCategories{
@@ -182,30 +212,6 @@
 -(void) didParsedCategory
 {
     [_delegate didFinishParsingCategory:_categoryDict andArray:_categoryForTypeArray];
-}
-
-#pragma mark-
-#pragma mark loadTypes
--(void) loadTypes{
-    HttpRequest* req = [[HttpRequest alloc] initWithFinishTarget:self 
-													   andAction:@selector(gotTypes: byRequest:)];
-	[req call:TYPES_URL params:[NSDictionary dictionary]];
-	[req release];
-}
-
--(void)gotTypes:(NSData *)data byRequest:(HttpRequest *)req
-{
-	//NSLog(@"types: %s", data.bytes);
-    TypeXMLHandler* handler = [[TypeXMLHandler alloc] initWithTypeDict:_typeDict];
-    //[handler setEndDocumentTarget:self andAction:@selector(didParsedType)];
-	NSXMLParser* parser = [[[NSXMLParser alloc] initWithData:data] autorelease];
-	parser.delegate = handler;
-	[parser parse];
-	[handler release];
-}
--(void) didParsedType
-{
-    //end point
 }
 
 #pragma mark-
@@ -291,7 +297,7 @@
 
 -(void)gotProducts:(NSData *)data byRequest:(HttpRequest *)req
 {
-	NSLog(@"products: %s", data.bytes);
+	//NSLog(@"products: %s", data.bytes);
     ProductXMLHandler* handler = [[ProductXMLHandler alloc] initWithProductDict:_productDict productArray:_productArray andApplication:(ApplicationService*)self];
     [handler setEndDocumentTarget:self andAction:@selector(didParsedProduct)];
 	NSXMLParser* parser = [[[NSXMLParser alloc] initWithData:data] autorelease];

@@ -14,9 +14,10 @@
     Type* _currentObject;
     NSNumber* _count;
     NSMutableDictionary* _typeDict;
+    NSMutableArray* _typeArray;
 }
 
--(id) initWithTypeDict:(NSMutableDictionary*)typeDict;
+-(id) initWithTypeDict:(NSMutableDictionary*)typeDict andArray:(NSMutableArray*)typeArray;
 -(void) afterElementStarting:(NSString *)elementName withAttributes:(NSDictionary *)attributeDict;
 -(void) afterElementEnding:(NSString *)elementName;
 -(NSString*) getWrappedRootNode;

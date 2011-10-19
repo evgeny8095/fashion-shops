@@ -295,12 +295,12 @@
             [label setTextAlignment:UITextAlignmentCenter];
             //[label setTextColor:[UIColor grayColor]];
             //[label setBackgroundColor:[UIColor redColor]];
-            [label setText:@"Missing Information"];
+            [label setText:@"Loading"];
             UILabel *secondLabel = [[UILabel alloc] initWithFrame:CGRectMake(sx, sy+307, 255, 20)];
             [secondLabel setTextAlignment:UITextAlignmentCenter];
             //[secondLabel setBackgroundColor:[UIColor blueColor]];
             [secondLabel setTextColor:[UIColor grayColor]];
-            [secondLabel setText:@"Missing Information"];
+            [secondLabel setText:@""];
             sy = sy + 1 + smallImageWidth;
             if (sy > 600){
                 sy = 0;
@@ -330,7 +330,7 @@
             [productScrollView addSubview:label];
         }
         
-        smallSliderWidth = (totalItem/9+1)*1024;
+        smallSliderWidth = (totalItem%8==0?totalItem/8:totalItem/8+1)*1024;
         NSLog(@"scroll width: %i", smallSliderWidth);
         productScrollView.pagingEnabled = YES;
         productScrollView.contentSize = CGSizeMake(smallSliderWidth, 655);
@@ -373,6 +373,9 @@
 
 -(void) loadPageWithProductsStartAt:(NSInteger)start EndAt:(NSInteger)end
 {
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    [formatter setPositiveFormat:@"###,###"];
+    [formatter setPositiveSuffix:@"₫"];
     for (NSInteger i = start; i <= (end > totalItem-1 ? totalItem-1 : end) ; i++) {
         Product *product = [_productArray objectAtIndex:i];
         UIButton *button = [buttons objectAtIndex:i];
@@ -384,7 +387,7 @@
             
             NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@t-%@", BASE_URL, PRODUCT_FOLDER, [product image]];
             
-            NSLog(@"product image: %@", urlPath);
+            //NSLog(@"product image: %@", urlPath);
             
             NSURL* url = [NSURL URLWithString:urlPath];
             [urlPath release];
@@ -394,16 +397,12 @@
         NSString *labelString = [[NSString alloc] initWithFormat:@"%@" ,[product name]];
         [label setText:labelString];
         [labelString release];
-//        NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-//        [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
-//        NSString *formattedString = [formatter stringFromNumber:[NSNumber numberWithInteger:[product price]]];
-        NSString *secondLabelString = [[NSString alloc] initWithFormat:@"%i - %@", [product price], [[product store] name]];
+        NSString *formattedString = [formatter stringFromNumber:[NSNumber numberWithInteger:[product price]]];
+        NSString *secondLabelString = [[NSString alloc] initWithFormat:@"%@ - %@", formattedString, [[product store] name]];
         [secondLabel setText:secondLabelString];
-//        [formatter release];
-//        [formattedString release];
         [secondLabelString release];
-        
     }
+    [formatter release];
 }
 
 @end

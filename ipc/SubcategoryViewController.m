@@ -11,9 +11,11 @@
 #import "WebViewController.h"
 #import "Category.h"
 
-#define buttonHeight 195
-#define buttonWidth 233.5
-#define buttonSpacing 10
+//#define buttonHeight 195
+//#define buttonWidth 233.5
+#define buttonHeight 167.5
+#define buttonWidth 206
+#define buttonSpacing 40
 //#define topPadding 100
 //#define sidePadding 5
 #define topPadding 100
@@ -48,7 +50,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    [self.view setBackgroundColor:[UIColor blackColor]];
     //search ba
     UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
     [searchBar setDelegate:self];
@@ -56,7 +58,7 @@
     [searchBar release];
     
     //banner
-    NSString *bannerURL = [NSString stringWithFormat:@"%@%@", BASE_URL, @"banners/sub_banner3.png"];
+    NSString *bannerURL = [NSString stringWithFormat:@"%@%@", BASE_URL, @"images/banners/sub_banner5.png"];
     NSURL *bannerImageURL = [NSURL URLWithString:bannerURL];
     UIImage *bannerImage = [[UIImage alloc] initWithData:[[NSData dataWithContentsOfURL:bannerImageURL] autorelease]];
 //    if (bannerImage == nil) {
@@ -141,39 +143,7 @@
     NSInteger scrollWidth = 0;
     
     NSInteger count = [_categoryArray count];
-    
-//    NSMutableArray *tempButtons = [[NSMutableArray alloc] init];
-//    for (NSInteger i = 0; i < count; i++)
-//    {
-//        UIButton *smallButton = [[UIButton alloc] initWithFrame:CGRectMake(px, py, buttonWidth, buttonHeight)];
-//        [smallButton setBackgroundColor:[UIColor whiteColor]];
-//        [smallButton addTarget:self action:@selector(gotoProductDetails:) forControlEvents:UIControlEventTouchUpInside];
-//        [smallButton setTag:i];
-//        CGFloat padding = 10.0;
-//        [smallButton setImageEdgeInsets:UIEdgeInsetsMake(padding, padding, padding, padding)];
-//        
-//        py = py + buttonSpacing + buttonHeight;
-//        overLoad = YES;
-//        
-//        if (py > scrollContentHeight){
-//            py = 0;
-//            px = px + buttonSpacing + buttonWidth;
-//            overLoad = NO;
-//        }
-//        
-//        if (overLoad)
-//            scrollWidth = px + buttonWidth;
-//        else
-//            scrollWidth = px;
-//        [tempButtons addObject:smallButton];
-//        [smallButton release];
-//    }
-//    
-//    self.buttons = tempButtons;
-//    [tempButtons release];
-//    for(UIButton *button in buttons){
-//        [productScrollView addSubview:button];
-//    }
+
     buttons = [[NSMutableArray alloc] init];
     for (NSUInteger i = 0; i < count; i++) {
         UIButton *button = [[UIButton alloc] init];
@@ -231,13 +201,13 @@
             overLoad = NO;
         }
         
-        if (overLoad)
+        if (i==count-1 && overLoad)
             scrollWidth = px + buttonWidth;
         else
-            scrollWidth = px;
+            scrollWidth = px - buttonSpacing;
     }
     
-    [subCategoryScrollView setContentSize:CGSizeMake(scrollWidth-buttonSpacing, subCategoryScrollView.frame.size.height)];
+    [subCategoryScrollView setContentSize:CGSizeMake(scrollWidth, subCategoryScrollView.frame.size.height)];
     [subCategoryScrollView setIndicatorStyle:UIScrollViewIndicatorStyleWhite];
 }
 

@@ -18,6 +18,7 @@
 -(void) didFinishParsingFavouriteProduct:(NSMutableArray *)c_productArray withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end;
 -(void) didFinishParsingFeatureProduct:(NSMutableArray *)c_productArray withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end;
 -(void) didFinishParsingSalesProduct:(NSMutableArray *)c_productArray withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end;
+-(void) didFinishParsingType:(NSMutableDictionary*)typeDict andArray:(NSMutableArray*)typeArray;
 @end
 
 @interface ApplicationService : NSObject {
@@ -25,6 +26,7 @@
     NSMutableDictionary* _categoryForTypeDict;
     NSMutableArray* _categoryForTypeArray;
     NSMutableDictionary* _typeDict;
+    NSMutableArray* _typeArray;
     NSMutableDictionary* _storeDict;
     NSMutableDictionary* _brandDict;
     NSMutableDictionary* _productDict;
@@ -50,6 +52,7 @@
 -(NSMutableDictionary*) categoryForTypeDict;
 -(NSMutableArray*) categoryForTypeArray;
 -(NSMutableDictionary*) typeDict;
+-(NSMutableArray*) typeArray;
 -(NSMutableDictionary*) storeDict;
 -(NSMutableDictionary*) brandDict;
 -(NSMutableDictionary*) productDict;

@@ -154,14 +154,21 @@
     
     [self.view addSubview:labelName];
     
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    [formatter setPositiveFormat:@"###,###"];
+    [formatter setPositiveSuffix:@"₫"];
+    
     labelPrice = [[UILabel alloc] initWithFrame:CGRectMake(leftDetailsPadding+buttonWidth+10, 230, 150, 40)];
     [labelPrice setHidden:YES];
-    [labelPrice setText:[NSString stringWithFormat:@"$ %i", [_product price]]];
+    NSString *formattedPriceString = [formatter stringFromNumber:[NSNumber numberWithInteger:[_product price]]];
+    [labelPrice setText:[NSString stringWithFormat:@"%@", formattedPriceString]];
     [labelPrice setBackgroundColor:[UIColor clearColor]];
     [labelPrice setTextColor:[UIColor whiteColor]];
     [labelPrice setShadowColor:[UIColor blackColor]];
     [labelPrice setFont:[UIFont boldSystemFontOfSize:20]];
     [self.view addSubview:labelPrice];
+    
+    [formatter release];
     
     more = [[SSGradientView alloc] initWithFrame:CGRectMake(leftDetailsPadding, 290, 400, 100)];
     more.topBorderColor = [UIColor colorWithRed:0.558f green:0.599f blue:0.643f alpha:1.0f];
@@ -233,7 +240,7 @@
     infoBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1024, 35)];
     [infoBar setBackgroundColor:[UIColor lightTextColor]];
     UILabel *priceAndStore = [[UILabel alloc] initWithFrame:CGRectMake(112, 0, 800, 35)];
-    NSString *priceAndStoreString = [[NSString alloc] initWithFormat:@"%i - %@", [_product price], [[_product store] name]];
+    NSString *priceAndStoreString = [[NSString alloc] initWithFormat:@"%@ - %@", formattedPriceString, [[_product store] name]];
     [priceAndStore setText:priceAndStoreString];
     [priceAndStore setTextAlignment:UITextAlignmentCenter];
     [priceAndStore setBackgroundColor:[UIColor clearColor]];
@@ -249,7 +256,7 @@
     [numberOf setTextColor:[UIColor grayColor]];
     [infoBar addSubview:numberOf];
     
-    [self.view addSubview:infoBar];
+    //[self.view addSubview:infoBar];
 }
 
 - (void)viewDidUnload
