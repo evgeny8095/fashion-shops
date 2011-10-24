@@ -48,61 +48,65 @@
 {
     [super viewDidLoad];
     APP_SERVICE(appSrv);
-    _typeDict = [appSrv typeDict];
-    _typeArray = [appSrv typeArray];
-    // Do any additional setup after loading the view from its nib.
+    [appSrv loadTypes];
+    [appSrv setDelegate:self];
     
-    //[self.view setBackgroundColor:[UIColor grayColor]];
     
-    [self.view setBackgroundColor:[UIColor blackColor]];
-    
-    //search
-    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
-    [searchBar setDelegate:self];
-    navBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:searchBar];
-    [searchBar release];
-    
-    //type buttons
-    NSInteger px = 0;
-    NSInteger py = 0;
-    //NSInteger scrollWidth = 0;
-    NSInteger count = [_typeArray count];
-    
-    buttons = [[NSMutableArray alloc] init];
-    for (NSUInteger i = 0; i < count; i++) {
-        UIButton *button = [[UIButton alloc] init];
-        [buttons addObject:button];
-        [button release];
-    }
-    
-    for (NSUInteger i = 0; i < count; i++) {
-        Type* type = [_typeArray objectAtIndex:i];
-        
-        AsyncImageView *asyncImage = [[[AsyncImageView alloc] init] autorelease];
-        
-        NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@%@", BASE_URL, TYPIES_FOLDER, type.image];
-        NSURL* url = [NSURL URLWithString:urlPath];
-        NSLog(@"type url: %@", urlPath);
-        [urlPath release];
-        
-        [asyncImage loadImageFromURL:url forButton:[buttons objectAtIndex:i]];
-    }
-    
-    for (NSUInteger i = 0; i < count; i++) {
-        Type* type = [_typeArray objectAtIndex:i];
-        UIButton* button = [buttons objectAtIndex:i];
-        [button setFrame:CGRectMake(px, py, buttonWidth, buttonHeight)];
-        [button addTarget:self action:@selector(gotoCategory:) forControlEvents:UIControlEventTouchUpInside];
-        [button setTag:[type.tid intValue]];
-        [button setTitle:type.name forState:normal];
-        [button setBackgroundColor:[UIColor clearColor]];
-        [scrollView addSubview:button];
-        
-        px = px + buttonSpacing + buttonWidth;
-    }
-    
-    [scrollView setContentSize:CGSizeMake(px, scrollView.frame.size.height)];
-    [scrollView setIndicatorStyle:UIScrollViewIndicatorStyleWhite];
+//    _typeDict = [appSrv typeDict];
+//    _typeArray = [appSrv typeArray];
+//    // Do any additional setup after loading the view from its nib.
+//    
+//    //[self.view setBackgroundColor:[UIColor grayColor]];
+//    
+//    [self.view setBackgroundColor:[UIColor blackColor]];
+//    
+//    //search
+//    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
+//    [searchBar setDelegate:self];
+//    navBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:searchBar];
+//    [searchBar release];
+//    
+//    //type buttons
+//    NSInteger px = 0;
+//    NSInteger py = 0;
+//    //NSInteger scrollWidth = 0;
+//    NSInteger count = [_typeArray count];
+//    
+//    buttons = [[NSMutableArray alloc] init];
+//    for (NSUInteger i = 0; i < count; i++) {
+//        UIButton *button = [[UIButton alloc] init];
+//        [buttons addObject:button];
+//        [button release];
+//    }
+//    
+//    for (NSUInteger i = 0; i < count; i++) {
+//        Type* type = [_typeArray objectAtIndex:i];
+//        
+//        AsyncImageView *asyncImage = [[[AsyncImageView alloc] init] autorelease];
+//        
+//        NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@%@", BASE_URL, TYPIES_FOLDER, type.image];
+//        NSURL* url = [NSURL URLWithString:urlPath];
+//        NSLog(@"type url: %@", urlPath);
+//        [urlPath release];
+//        
+//        [asyncImage loadImageFromURL:url forButton:[buttons objectAtIndex:i]];
+//    }
+//    
+//    for (NSUInteger i = 0; i < count; i++) {
+//        Type* type = [_typeArray objectAtIndex:i];
+//        UIButton* button = [buttons objectAtIndex:i];
+//        [button setFrame:CGRectMake(px, py, buttonWidth, buttonHeight)];
+//        [button addTarget:self action:@selector(gotoCategory:) forControlEvents:UIControlEventTouchUpInside];
+//        [button setTag:[type.tid intValue]];
+//        [button setTitle:type.name forState:normal];
+//        [button setBackgroundColor:[UIColor clearColor]];
+//        [scrollView addSubview:button];
+//        
+//        px = px + buttonSpacing + buttonWidth;
+//    }
+//    
+//    [scrollView setContentSize:CGSizeMake(px, scrollView.frame.size.height)];
+//    [scrollView setIndicatorStyle:UIScrollViewIndicatorStyleWhite];
 }
 
 - (void)viewDidUnload
@@ -182,6 +186,65 @@
 //- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
 //    NSLog(@"didshow");
 //}
+#pragma mark-
+#pragma mark Application Service for loading typies
+-(void)didFinishParsingType:(NSMutableDictionary *)typeDict andArray:(NSMutableArray *)typeArray
+{
+    _typeDict = typeDict;
+    _typeArray = typeArray;
+    
+    //[self.view setBackgroundColor:[UIColor grayColor]];
+    
+    [self.view setBackgroundColor:[UIColor blackColor]];
+    
+    //search
+    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
+    [searchBar setDelegate:self];
+    navBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:searchBar];
+    [searchBar release];
+    
+    //type buttons
+    NSInteger px = 0;
+    NSInteger py = 0;
+    //NSInteger scrollWidth = 0;
+    NSInteger count = [_typeArray count];
+    
+    buttons = [[NSMutableArray alloc] init];
+    for (NSUInteger i = 0; i < count; i++) {
+        UIButton *button = [[UIButton alloc] init];
+        [buttons addObject:button];
+        [button release];
+    }
+    
+    for (NSUInteger i = 0; i < count; i++) {
+        Type* type = [_typeArray objectAtIndex:i];
+        
+        AsyncImageView *asyncImage = [[[AsyncImageView alloc] init] autorelease];
+        
+        NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@%@", BASE_URL, TYPIES_FOLDER, type.image];
+        NSURL* url = [NSURL URLWithString:urlPath];
+        NSLog(@"type url: %@", urlPath);
+        [urlPath release];
+        
+        [asyncImage loadImageFromURL:url forButton:[buttons objectAtIndex:i]];
+    }
+    
+    for (NSUInteger i = 0; i < count; i++) {
+        Type* type = [_typeArray objectAtIndex:i];
+        UIButton* button = [buttons objectAtIndex:i];
+        [button setFrame:CGRectMake(px, py, buttonWidth, buttonHeight)];
+        [button addTarget:self action:@selector(gotoCategory:) forControlEvents:UIControlEventTouchUpInside];
+        [button setTag:[type.tid intValue]];
+        [button setTitle:type.name forState:normal];
+        [button setBackgroundColor:[UIColor clearColor]];
+        [scrollView addSubview:button];
+        
+        px = px + buttonSpacing + buttonWidth;
+    }
+    
+    [scrollView setContentSize:CGSizeMake(px, scrollView.frame.size.height)];
+    [scrollView setIndicatorStyle:UIScrollViewIndicatorStyleWhite];
+}
 
 #pragma mark searchbar delegate
 -(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar{

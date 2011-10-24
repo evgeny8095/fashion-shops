@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "MyPopOverView.h"
+#import "ApplicationService.h"
 
 
-@interface HomeViewController2 : UIViewController <UINavigationControllerDelegate, UISearchBarDelegate>{
+@interface HomeViewController2 : UIViewController <UINavigationControllerDelegate, UISearchBarDelegate, ApplicationServiceDelegate>{
     UIPopoverController *popoverController;
     MyPopOverView *myPopOver;
     NSDictionary* _typeDict;

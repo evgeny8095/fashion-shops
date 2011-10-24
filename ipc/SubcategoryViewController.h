@@ -10,7 +10,7 @@
 #import "MyPopOverView.h"
 #import "ipcGlobal.h"
 
-@interface SubcategoryViewController : UIViewController <UISearchBarDelegate, ApplicationServiceDelegate, UINavigationControllerDelegate>{
+@interface SubcategoryViewController : UIViewController <UIScrollViewDelegate, UISearchBarDelegate, ApplicationServiceDelegate, UINavigationControllerDelegate>{
     NSInteger _type;
     UIPopoverController *popoverController;
     MyPopOverView *myPopOver;
@@ -31,6 +31,8 @@
 @property (nonatomic, retain) IBOutlet UIButton *topButton;
 @property (nonatomic, retain) IBOutlet UIScrollView *subCategoryScrollView;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *loading;
+@property (nonatomic, retain) IBOutlet UIImageView *next;
+@property (nonatomic, retain) IBOutlet UIImageView *previous;
 
 -(IBAction)gotoSubCatalogue:(id)sender;
 

@@ -26,6 +26,7 @@
 
 @implementation SubcategoryViewController
 @synthesize type = _type, myPopOver, popoverController, topButton, subCategoryScrollView, loading;
+@synthesize next, previous;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -49,7 +50,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
+    [next setHidden:YES];
+    [previous setHidden:YES];
+    
     [self.view setBackgroundColor:[UIColor blackColor]];
     //search ba
     UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
@@ -137,6 +141,9 @@
     [loading stopAnimating];
     _categoryDict = c_categoryDict;
     _categoryArray = c_categoryArray;
+    if ([_categoryArray count]>=8) {
+        [next setHidden:NO];
+    }
     BOOL overLoad;
     NSInteger px = 0;
     NSInteger py = 0;
@@ -209,6 +216,28 @@
     
     [subCategoryScrollView setContentSize:CGSizeMake(scrollWidth, subCategoryScrollView.frame.size.height)];
     [subCategoryScrollView setIndicatorStyle:UIScrollViewIndicatorStyleWhite];
+    [subCategoryScrollView setDelegate:self];
+}
+
+#pragma mark --
+#pragma mark Scroll View Delegate Methods
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGFloat pageWidth = subCategoryScrollView.frame.size.width;
+    int page = floor((subCategoryScrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
+    if (page == 0) {
+        [next setHidden:NO];
+        [previous setHidden:YES];
+    }
+   // NSInteger total = [_categoryArray count]%8 == 0?[_categoryArray count]/8:[_categoryArray count]/8+1;
+    if (page == [_categoryArray count]/8) {
+        [next setHidden:YES];
+        [previous setHidden:NO];
+    }
+    if (page > 0 && page < [_categoryArray count]/8) {
+        [next setHidden:NO];
+        [previous setHidden:NO];
+    }
 }
 
 

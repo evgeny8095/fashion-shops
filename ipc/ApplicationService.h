@@ -19,6 +19,7 @@
 -(void) didFinishParsingFeatureProduct:(NSMutableArray *)c_productArray withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end;
 -(void) didFinishParsingSalesProduct:(NSMutableArray *)c_productArray withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end;
 -(void) didFinishParsingType:(NSMutableDictionary*)typeDict andArray:(NSMutableArray*)typeArray;
+-(void) didFinishParsingFilterProduct:(NSMutableArray*)c_productArray withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end;
 @end
 
 @interface ApplicationService : NSObject {
@@ -35,6 +36,7 @@
     NSMutableArray* _featureProductArray;
     NSMutableArray* _featureProductList;
     NSMutableArray* _salesProductArray;
+    NSMutableArray* _filteredProductArray;
 	id<ApplicationServiceDelegate> _delegate;
     id<ApplicationServiceDelegate> _delegate2;
     NSInteger _totalProduct;
@@ -61,6 +63,7 @@
 -(NSMutableArray*) featureProductArray;
 -(NSMutableArray*) featureProductList;
 -(NSMutableArray*) salesProductArray;
+-(NSMutableArray*) filteredProductArray;
 -(void) clearCategory;
 -(void) clearProducts;
 -(void) clearSalesProducts;
@@ -105,6 +108,10 @@
 -(void) loadProductsOnSalesFrom:(NSInteger)start to:(NSInteger)end;
 -(void) gotSalesProducts:(NSData*)data byRequest:(HttpRequest*)req;
 -(void) didParsedSalesProducts;
+
+-(void) loadFilteredProductFrom:(NSInteger)start to:(NSInteger)end hasTypes:(NSString*)typies hasBrands:(NSString*)brands ofStores:(NSString*)stores inCategories:(NSString*)categories hasTopPrice:(NSString*)topPrice hasBottomPrice:(NSString*)bottomPrice;
+-(void) gotFilteredProduct:(NSData*)data byRequest:(HttpRequest*)req;
+-(void) didParsedFilteredProduct;
 
 @end
 

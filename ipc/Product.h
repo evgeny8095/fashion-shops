@@ -17,6 +17,7 @@
     NSString* _pid;
     NSString* _name;
     NSInteger _price;
+    NSInteger _discount;
     NSString* _desc;
     NSString* _image;
     NSInteger _rating;
@@ -30,6 +31,7 @@
 @property (nonatomic, retain) NSString *pid;
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, assign) NSInteger price;
+@property (nonatomic, assign) NSInteger discount;
 @property (nonatomic, retain) NSString *desc;
 @property (nonatomic, retain) NSString *image;
 @property (nonatomic, assign) NSInteger rating;
@@ -43,6 +45,7 @@
 - (id) initWithId:(NSString*)strId
              name:(NSString*)strName
             price:(NSInteger)c_price
+         discount:(NSInteger)c_discount
       description:(NSString*)strDescription
             image:(NSString*)strImage
            rating:(NSInteger)c_rating

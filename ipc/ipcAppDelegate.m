@@ -28,19 +28,25 @@
 {
     return _favService;
 }
+- (RequestService*) reqService
+{
+    return _reqService;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
     // Add the tab bar controller's current view as a subview of the window
     _appService = [[ApplicationService alloc] init];
-    [_appService loadTypes];
+    //[_appService loadTypes];
     [_appService loadBrands];
     [_appService loadStores];
     [_appService loadFeatureProductsList];
     _dataService = [[DataService alloc] init];
     _favService = [[FavouriteService alloc] init];
     [_favService loadFavouriteProducts];
+    _reqService = [[RequestService alloc] init];
+    [_reqService loadUserInformation];
     
     [self.window setBackgroundColor:[UIColor grayColor]];
     self.window.rootViewController = self.tabBarController;

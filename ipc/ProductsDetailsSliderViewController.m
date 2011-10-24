@@ -27,6 +27,8 @@
 @synthesize product = _product;
 @synthesize type = _type;
 @synthesize category = _category;
+@synthesize popoverController;
+@synthesize infoCollectorViewController;
 
 - (id)initwithProduct:(Product *)c_product inPosition:(NSInteger)position ofTotal:(NSInteger)c_total withMode:(BOOL)cmode
 {
@@ -194,7 +196,7 @@
     [lineView setHidden:YES];
     [self.view addSubview:lineView];
     
-    descText = [[UITextView alloc] initWithFrame:CGRectMake(leftDetailsPadding, 302, 430, 150)];
+    descText = [[UITextView alloc] initWithFrame:CGRectMake(leftDetailsPadding, 302, 430, 200)];
     //descText = [[UITextView alloc] initWithFrame:CGRectMake(leftDetailsPadding, 400, 430, 80)];
     [descText setHidden:YES];
     [descText setText:[_product desc]];
@@ -229,7 +231,8 @@
     buy.frame = CGRectMake(850, 600, buttonWidth, buttonHeight);
     //UIImage *likeImage = [[UIImage imageNamed:@"btn-red.png"] stretchableImageWithLeftCapWidth:10.0 topCapHeight:0.0]
     [buy setBackgroundImage:[[UIImage imageNamed:@"btn-red.png"] stretchableImageWithLeftCapWidth:10.0 topCapHeight:0.0] forState:UIControlStateNormal];
-    [buy addTarget:self action:@selector(gotoShop:) forControlEvents:UIControlEventTouchUpInside];
+    //[buy addTarget:self action:@selector(gotoShop:) forControlEvents:UIControlEventTouchUpInside];
+    [buy addTarget:self action:@selector(buy:) forControlEvents:UIControlEventTouchUpInside];
     [buy setTitle:@"Buy" forState:UIControlStateNormal];
     [buy.titleLabel setFont:[UIFont fontWithName: @"Helvetica" size: 24]];
     [buy.titleLabel setFont:[UIFont boldSystemFontOfSize:24]];
@@ -327,7 +330,19 @@
 }
 
 - (void)buy:(id)sender{
-    
+    REQ_DELEGATE(reqSrv);
+    [reqSrv setPid:[_product pid]];
+    if ([reqSrv isInfoNull]) {
+        infoCollectorViewController = [[InfoCollectorViewController alloc] initWithNibName:@"InfoCollectorViewController" bundle:nil];
+        [infoCollectorViewController setPid:[_product pid]];
+        popoverController = [[UIPopoverController alloc] initWithContentViewController:infoCollectorViewController];
+        [popoverController setPopoverContentSize:infoCollectorViewController.view.frame.size];
+        [popoverController presentPopoverFromRect:((UIButton*)sender).frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    }
+    else
+    {
+        [reqSrv sentSingleProductRequest];
+    }
 }
 
 - (IBAction)gotoShop:(id)sender{

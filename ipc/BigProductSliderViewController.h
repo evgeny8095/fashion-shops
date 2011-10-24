@@ -53,6 +53,6 @@
 - (void)favAction:(id)sender;
 - (void)unFavAction:(id)sender;
 - (void)checkFavProduct:(Product*)product;
-- (void)changeInforBarForProduct:(Product*)product inPage:(NSInteger)page inTotal:(NSInteger)total;
+- (void)changeInfoBarForProduct:(Product*)product inPage:(NSInteger)page inTotal:(NSInteger)total;
 
 @end

@@ -13,6 +13,7 @@
 @synthesize pid = _pid;
 @synthesize name = _name;
 @synthesize price = _price;
+@synthesize discount = _discount;
 @synthesize desc = _desc;
 @synthesize image = _image;
 @synthesize url = _url;
@@ -24,10 +25,11 @@
 
 -(id) init
 {
-	if (self = [super init]) {
+	if (self == [super init]) {
 		_pid = nil;
 		_name = nil;
         _price = 0;
+        _discount = 0;
 		_desc = nil;
         _image = nil;
         _url = nil;
@@ -43,6 +45,7 @@
 - (id) initWithId:(NSString*)strId
              name:(NSString*)strName
             price:(NSInteger)c_price
+         discount:(NSInteger)c_discount
       description:(NSString*)strDescription
             image:(NSString*)strImage
            rating:(NSInteger)c_rating
@@ -53,10 +56,11 @@
             types:(NSMutableDictionary*)c_types
        categories:(NSMutableDictionary*)c_categories
 {
-    if (self = [super init]) {
+    if (self == [super init]) {
         _pid = strId;
 		_name = strName;
         _price = c_price;
+        _discount = c_discount;
 		_desc = strDescription;
         _image = strImage;
         _url = strUrl;

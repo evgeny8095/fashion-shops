@@ -396,10 +396,24 @@
         }
         NSString *labelString = [[NSString alloc] initWithFormat:@"%@" ,[product name]];
         [label setText:labelString];
+        [label setFont:[UIFont fontWithName:@"Helvetica" size:14]];
         [labelString release];
-        NSString *formattedString = [formatter stringFromNumber:[NSNumber numberWithInteger:[product price]]];
-        NSString *secondLabelString = [[NSString alloc] initWithFormat:@"%@ - %@", formattedString, [[product store] name]];
+        
+        NSInteger currentPrice = 0;
+        if ([product discount]>0) {
+            currentPrice = [product price]*[product discount]/100;
+        }
+        
+        NSString *formattedPriceString = [formatter stringFromNumber:[NSNumber numberWithInteger:[product price]]];
+        NSString *secondLabelString;
+        if (currentPrice > 0) {
+            NSString *formattedCurrentPriceString = [formatter stringFromNumber:[NSNumber numberWithInteger:currentPrice]];
+            secondLabelString = [[NSString alloc] initWithFormat:@"(%@) - %@", formattedPriceString, formattedCurrentPriceString];
+        }
+        else
+            secondLabelString = [[NSString alloc] initWithFormat:@"%@ - %@", formattedPriceString, [[product store] name]];
         [secondLabel setText:secondLabelString];
+        [secondLabel setFont:[UIFont fontWithName:@"Helvetica" size:12]];
         [secondLabelString release];
     }
     [formatter release];

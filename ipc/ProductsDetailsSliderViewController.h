@@ -10,6 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "SSLineView.h"
 #import "SSGradientView.h"
+#import "InfoCollectorViewController.h"
 #import "ipcGlobal.h"
 
 @protocol ProductsDetailsSliderViewControllerDelegate <NSObject>
@@ -52,6 +53,9 @@
     SSLineView *lineView;
     SSGradientView *gradientView;
     UIView *infoBar;
+    
+    UIPopoverController *popoverController;
+    InfoCollectorViewController *infoCollectorViewController;
 }
 
 @property (nonatomic, retain) UIImage *image;
@@ -63,6 +67,9 @@
 @property (nonatomic, retain) id<ProductsDetailsSliderViewControllerDelegate> delegate;
 @property (nonatomic, assign) NSInteger type;
 @property (nonatomic, assign) NSInteger category;
+
+@property (nonatomic, retain) UIPopoverController *popoverController;
+@property (nonatomic, retain) InfoCollectorViewController *infoCollectorViewController;
 
 - (id)initwithProduct:(Product*)c_product inPosition:(NSInteger)position ofTotal:(NSInteger)c_total withMode:(BOOL)cmode;
 - (id)initWithImage:(NSString *)strImg hasName:(NSString *)strName hasPrice:(NSString *)strPrice hasDesc:(NSString *)strDesc inPosition:(NSInteger)position withMode:(BOOL)cmode;

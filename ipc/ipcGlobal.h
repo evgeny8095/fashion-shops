@@ -26,6 +26,7 @@
 #define STORE_URL @"http://www.ongsoft.com/ios/stores.php"
 #define BRAND_URL @"http://www.ongsoft.com/ios/brands.php"
 #define PRODUCT_URL @"http://www.ongsoft.com/ios/products.php"
+#define REQUEST_PRODUCT_URL @"requestproducts.php"
 //#define FEATURE_PRODUCT_URL @"http://www.ongsoft.com/ios/products.php"
 //#define PRODUCT_URL @"http://www.ongsoft.com/ipc/xml/products.xml"
 
@@ -42,4 +43,5 @@
 #define APP_SERVICE(appSrv) ApplicationService* appSrv = [(ipcAppDelegate*)[[UIApplication sharedApplication] delegate] appService]
 #define DATA_SERVICE(dataSrv) DataService* dataSrv = [(ipcAppDelegate*)[[UIApplication sharedApplication] delegate] dataService]
 #define FAV_SERVICE(favSrv) FavouriteService* favSrv = [(ipcAppDelegate*)[[UIApplication sharedApplication] delegate] favService]
+#define REQ_DELEGATE(reqSrv) RequestService* reqSrv = [(ipcAppDelegate*)[[UIApplication sharedApplication] delegate] reqService]
 #define APP_DELEGATE(app) ipcAppDelegate* app = (ipcAppDelegate*)[[UIApplication sharedApplication] delegate]

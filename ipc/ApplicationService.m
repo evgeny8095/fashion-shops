@@ -101,6 +101,11 @@
     return _salesProductArray;
 }
 
+-(NSMutableArray*) filteredProductArray
+{
+    return _filteredProductArray;
+}
+
 -(void)dealloc
 {
     [_categoryDict release];
@@ -430,6 +435,49 @@
 -(void) didParsedSalesProducts
 {
     [_delegate didFinishParsingSalesProduct:_salesProductArray withTotalProducts:_totalProduct fromPosition:_startPosition toPosition:_endPosition];
+}
+
+-(void) loadFilteredProductFrom:(NSInteger)start
+                             to:(NSInteger)end
+                       hasTypes:(NSString *)typies
+                      hasBrands:(NSString *)brands
+                       ofStores:(NSString *)stores
+                   inCategories:(NSString *)categories
+                    hasTopPrice:(NSString *)topPrice
+                 hasBottomPrice:(NSString *)bottomPrice
+{
+    HttpRequest* req = [[HttpRequest alloc] initWithFinishTarget:self
+													   andAction:@selector(gotFilteredProduct: byRequest:)];
+    NSMutableDictionary* dictionary = [[NSMutableDictionary alloc] init];
+    
+    [dictionary setObject:typies forKey:@"type"];
+    [dictionary setObject:brands forKey:@"brand"];
+    [dictionary setObject:stores forKey:@"store"];
+    [dictionary setObject:categories forKey:@"category"];
+    [dictionary setObject:topPrice forKey:@"topPrice"];
+    [dictionary setObject:bottomPrice forKey:@"bottomPrice"];
+    
+    [dictionary setObject:[NSString stringWithFormat:@"%i", start] forKey:@"startPosition"];
+    [dictionary setObject:[NSString stringWithFormat:@"%i", end] forKey:@"endPosition"];
+    [req call:PRODUCT_URL params:dictionary];
+    [dictionary release];
+	[req release];
+}
+
+-(void) gotFilteredProduct:(NSData *)data byRequest:(HttpRequest *)req
+{
+    //NSLog(@"products: %s", data.bytes);
+    ProductXMLHandler* handler = [[ProductXMLHandler alloc] initWithProductDict:_productDict productArray:_filteredProductArray andApplication:(ApplicationService*)self];
+    [handler setEndDocumentTarget:self andAction:@selector(didParsedFilteredProduct)];
+	NSXMLParser* parser = [[[NSXMLParser alloc] initWithData:data] autorelease];
+	parser.delegate = handler;
+	[parser parse];
+	[handler release];
+}
+
+-(void) didParsedFilteredProduct
+{
+    [_delegate didFinishParsingFilterProduct:_filteredProductArray withTotalProducts:_totalProduct fromPosition:_startPosition toPosition:_endPosition];
 }
 
 @end

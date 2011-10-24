@@ -37,6 +37,7 @@
 	}
     if ([elementName isEqualToString:@"name"]
         || [elementName isEqualToString:@"price"]
+        || [elementName isEqualToString:@"discount"]
         || [elementName isEqualToString:@"description"]
         || [elementName isEqualToString:@"image"]
         || [elementName isEqualToString:@"rating"]
@@ -96,6 +97,9 @@
     }
     if ([elementName isEqualToString:@"price"]) {
         _currentObject.price = [_chars intValue];
+    }
+    if ([elementName isEqualToString:@"discount"]) {
+        _currentObject.discount = [_chars intValue];
     }
     if ([elementName isEqualToString:@"description"]) {
         _currentObject.desc = _chars;

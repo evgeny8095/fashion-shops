@@ -50,13 +50,13 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "ipc/SubcategoryViewController.m"
-         timestampString = "340532097.051356"
+         filePath = "ipc/ApplicationService.m"
+         timestampString = "341122111.202872"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "42"
-         endingLineNumber = "42"
-         landmarkName = "-didReceiveMemoryWarning"
+         startingLineNumber = "345"
+         endingLineNumber = "345"
+         landmarkName = "-didParsedFavouriteProduct"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -64,13 +64,13 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "ipc/ApplicationService.m"
-         timestampString = "340600204.772045"
+         filePath = "ipc/HttpRequest.m"
+         timestampString = "340880740.438581"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "340"
-         endingLineNumber = "340"
-         landmarkName = "-didParsedFavouriteProduct"
+         startingLineNumber = "65"
+         endingLineNumber = "65"
+         landmarkName = "-call:params:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

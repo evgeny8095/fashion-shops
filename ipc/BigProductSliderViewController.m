@@ -155,7 +155,7 @@
     [numberOf setTextColor:[UIColor blackColor]];
     [infoBar addSubview:numberOf];
     [numberOf release];
-    [self changeInforBarForProduct:[_productArray objectAtIndex:cpage] inPage:cpage inTotal:numberOfPages];
+    [self changeInfoBarForProduct:[_productArray objectAtIndex:cpage] inPage:cpage inTotal:numberOfPages];
     [self.view addSubview:infoBar];
 }
 
@@ -222,7 +222,7 @@
         [self checkFavProduct:[_productArray objectAtIndex:cpage]];
     }
     
-    [self changeInforBarForProduct:[_productArray objectAtIndex:page] inPage:page inTotal:numberOfPages];
+    [self changeInfoBarForProduct:[_productArray objectAtIndex:page] inPage:page inTotal:numberOfPages];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)sender
@@ -250,7 +250,7 @@
         [self loadScrollViewWithPage:page + 1];
         self.navigationItem.title = [[_productArray objectAtIndex:page] name];
         
-        [self changeInforBarForProduct:[_productArray objectAtIndex:page] inPage:page inTotal:numberOfPages];
+        [self changeInfoBarForProduct:[_productArray objectAtIndex:page] inPage:page inTotal:numberOfPages];
         
         cpage = page;
     }
@@ -298,15 +298,28 @@
     }
 }
 
--(void) changeInforBarForProduct:(Product *)product inPage:(NSInteger)page inTotal:(NSInteger)total
+-(void) changeInfoBarForProduct:(Product *)product inPage:(NSInteger)page inTotal:(NSInteger)total
 {
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     [formatter setPositiveFormat:@"###,###"];
     [formatter setPositiveSuffix:@"₫"];
+    
+    NSInteger currentPrice = 0;
+    if ([product discount]>0) {
+        currentPrice = [product price]*[product discount]/100;
+    }
+    
     NSString *formattedPriceString = [formatter stringFromNumber:[NSNumber numberWithInteger:[product price]]];
-    NSString *priceAndStoreString = [[NSString alloc] initWithFormat:@"%@ - %@", formattedPriceString, [product name]];
+    NSString *priceAndStoreString;
+    if (currentPrice > 0) {
+        NSString *formattedCurrentPriceString = [formatter stringFromNumber:[NSNumber numberWithInteger:currentPrice]];
+        priceAndStoreString = [[NSString alloc] initWithFormat:@"(%@) - %@ - %@", formattedPriceString, formattedCurrentPriceString, [[product store] name]];
+    }
+    else
+        priceAndStoreString = [[NSString alloc] initWithFormat:@"%@ - %@", formattedPriceString, [[product store] name]];
     [((UILabel*)[infoBar viewWithTag:1]) setText:priceAndStoreString];
     [priceAndStoreString release];
+    
     NSString *numberOfString = [[NSString alloc] initWithFormat:@"%i of %i", page+1, numberOfPages];
     [((UILabel*)[infoBar viewWithTag:2]) setText:numberOfString];
     [numberOfString release];

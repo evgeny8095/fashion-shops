@@ -19,6 +19,14 @@
          </expressions>
       </StackState>
       <StackState
+         stackFrameDescription = "-[InfoCollectorViewController validateTextField]:InfoCollectorViewController.m">
+         <expressions>
+            <expression
+               value = "[self isEmailValidated:[email text]]">
+            </expression>
+         </expressions>
+      </StackState>
+      <StackState
          stackFrameDescription = "-[ProductsDetailsSliderViewController initwithProduct:inPosition:withMode:]:ProductsDetailsSliderViewController.m">
          <expressions>
             <expression
@@ -31,6 +39,14 @@
          <expressions>
             <expression
                value = "0x4d52d90">
+            </expression>
+         </expressions>
+      </StackState>
+      <StackState
+         stackFrameDescription = "-[RequestService saveUserInformation]:RequestService.m">
+         <expressions>
+            <expression
+               value = "_email">
             </expression>
          </expressions>
       </StackState>

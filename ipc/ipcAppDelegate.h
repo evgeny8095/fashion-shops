@@ -10,11 +10,13 @@
 #import "ApplicationService.h"
 #import "DataService.h"
 #import "FavouriteService.h"
+#import "RequestService.h"
 
 @interface ipcAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate>{
     ApplicationService* _appService;
     DataService* _dataService;
     FavouriteService* _favService;
+    RequestService* _reqService;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
@@ -26,5 +28,6 @@
 -(ApplicationService*) appService;
 -(DataService*) dataService;
 -(FavouriteService*) favService;
+-(RequestService*) reqService;
 
 @end
