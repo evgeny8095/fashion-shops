@@ -10,8 +10,7 @@
 
 
 @implementation MyPopOverView
-
-@synthesize myTable;
+@synthesize navController;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -27,8 +26,11 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-    options = [[NSArray alloc] initWithObjects:@"Keywords", @"Brand", @"Store", @"Size", nil];
-    
+    FilterOptionsViewController *filterOptions = [[FilterOptionsViewController alloc] init];
+    [navController.view setFrame:filterOptions.view.frame];
+    [self.view setFrame:filterOptions.view.frame];
+    [navController presentModalViewController:filterOptions animated:NO];
+    [self.view addSubview:navController.view];
 }
 
 
@@ -56,28 +58,6 @@
 
 - (void)dealloc {
     [super dealloc];
-}
-
-#pragma mark UITableView delegates
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
-}
-
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [options count];
-}
-
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-}
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"mytable"];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"mytable"];
-    }
-    cell.textLabel.text = [options objectAtIndex:indexPath.row];
-    return cell;
 }
 
 @end

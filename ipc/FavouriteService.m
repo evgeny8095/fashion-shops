@@ -13,7 +13,7 @@
 
 -(id) init
 {
-	if (self == [super init]) {
+	if (self = [super init]) {
         _favourite = [[NSMutableDictionary alloc] init];
         _favouriteProducts = [[NSMutableArray alloc] init];
 	} 

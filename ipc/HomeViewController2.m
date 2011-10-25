@@ -146,7 +146,7 @@
     subCategoryViewController.type = typeId;
     //subCategoryViewController.categoryDict = myCategoryDict;
     
-    subCategoryViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"HOME" style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
+    [subCategoryViewController.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"HOME" style:UIBarButtonItemStylePlain target:self action:@selector(goBack)]];
     
     [navController pushViewController:subCategoryViewController animated:YES];
     [navController setDelegate:subCategoryViewController];
@@ -221,7 +221,7 @@
         
         AsyncImageView *asyncImage = [[[AsyncImageView alloc] init] autorelease];
         
-        NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@%@", BASE_URL, TYPIES_FOLDER, type.image];
+        NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@%@%@", BASE_URL, RESOURCE_PATH, TYPIES_FOLDER, type.image];
         NSURL* url = [NSURL URLWithString:urlPath];
         NSLog(@"type url: %@", urlPath);
         [urlPath release];
@@ -252,11 +252,11 @@
     popoverController = [[UIPopoverController alloc] initWithContentViewController:myPopOver];
     
     
-    [popoverController setPopoverContentSize:CGSizeMake(300.0f, 300.0f)];
+    [popoverController setPopoverContentSize:myPopOver.view.frame.size];
     //[popoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     
     // Or use the following line to display it from a given rectangle
-    [popoverController presentPopoverFromRect:CGRectMake(824, 0, 200, 38) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    [popoverController presentPopoverFromRect:myPopOver.view.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
 -(void)searchBarTextDidEndEditing:(UISearchBar *)searchBar{

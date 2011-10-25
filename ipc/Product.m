@@ -25,7 +25,7 @@
 
 -(id) init
 {
-	if (self == [super init]) {
+	if (self = [super init]) {
 		_pid = nil;
 		_name = nil;
         _price = 0;
@@ -56,7 +56,7 @@
             types:(NSMutableDictionary*)c_types
        categories:(NSMutableDictionary*)c_categories
 {
-    if (self == [super init]) {
+    if (self = [super init]) {
         _pid = strId;
 		_name = strName;
         _price = c_price;

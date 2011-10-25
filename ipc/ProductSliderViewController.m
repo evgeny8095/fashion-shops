@@ -385,7 +385,7 @@
         if ([[button imageView] image] == NULL) {
             AsyncImageView *asyncImage = [[[AsyncImageView alloc] init] autorelease];
             
-            NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@t-%@", BASE_URL, PRODUCT_FOLDER, [product image]];
+            NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@%@t-%@", BASE_URL, RESOURCE_PATH, PRODUCT_FOLDER, [product image]];
             
             //NSLog(@"product image: %@", urlPath);
             

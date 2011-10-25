@@ -1,21 +1,39 @@
 //
-//  FilterOptionsViewController.m
+//  FilterDetailsViewController.m
 //  ipc
 //
-//  Created by Mahmood1 on 10/24/11.
+//  Created by Mahmood1 on 10/25/11.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "FilterOptionsViewController.h"
+#import "FilterDetailsViewController.h"
 
 
-@implementation FilterOptionsViewController
+@implementation FilterDetailsViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+    }
+    return self;
+}
+
+- (id)initWithArray:(NSArray*)array
+{
+    self = [super initWithNibName:nil bundle:nil];
+    if (self) {
+        optionArray = [array retain];
+    }
+    return self;
+}
+
+- (id)initWithDictionary:(NSDictionary*)dictionary
+{
+    self = [super initWithNibName:nil bundle:nil];
+    if (self) {
+        //custom
     }
     return self;
 }
@@ -39,11 +57,11 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    options = [[NSArray alloc] initWithObjects:@"Keyword", @"Types", @"Brands", @"Stores", @"Price", @"Sales", nil];
-    optionTable = [[UITableView alloc] initWithFrame:self.view.frame];
-    [optionTable setDelegate:self];
-    [optionTable setDataSource:self];
-    [self.view addSubview:optionTable];
+    [self.navigationController.navigationBar.backItem setTitle:@"ALL"];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.frame];
+    tableView.delegate = self;
+    tableView.dataSource = self;
+    [self.view addSubview:tableView];
 }
 
 - (void)viewDidUnload
@@ -65,13 +83,11 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [options count];
+    return [optionArray count];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    FilterOptionsViewController *filterDetail = [[FilterDetailsViewController alloc] initWithArray:options];
     
-    [self.navigationController pushViewController:filterDetail animated:YES];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -79,7 +95,7 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"optionrow"];
     }
-    cell.textLabel.text = [options objectAtIndex:indexPath.row];
+    cell.textLabel.text = [optionArray objectAtIndex:indexPath.row];
     return cell;
 }
 

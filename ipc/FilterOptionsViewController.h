@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FilterDetailsViewController.h"
 
 
-@interface FilterOptionsViewController : UIViewController {
-    
+@interface FilterOptionsViewController : UIViewController<UITableViewDelegate, UITableViewDataSource> {
+    UITableView *optionTable;
+    NSArray *options;
 }
+
+
 
 @end

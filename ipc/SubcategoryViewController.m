@@ -62,7 +62,7 @@
     [searchBar release];
     
     //banner
-    NSString *bannerURL = [NSString stringWithFormat:@"%@%@", BASE_URL, @"images/banners/sub_banner5.png"];
+    NSString *bannerURL = [NSString stringWithFormat:@"%@%@%@", BASE_URL, RESOURCE_PATH, @"images/banners/sub_banner5.png"];
     NSURL *bannerImageURL = [NSURL URLWithString:bannerURL];
     UIImage *bannerImage = [[UIImage alloc] initWithData:[[NSData dataWithContentsOfURL:bannerImageURL] autorelease]];
 //    if (bannerImage == nil) {
@@ -163,7 +163,7 @@
         
         AsyncImageView *asyncImage = [[[AsyncImageView alloc] init] autorelease];
         
-        NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@%@", BASE_URL, CATEGORIES_FOLDER, category.image];
+        NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@%@%@", BASE_URL, RESOURCE_PATH, CATEGORIES_FOLDER, category.image];
         NSURL* url = [NSURL URLWithString:urlPath];
         [urlPath release];
         

@@ -12,7 +12,7 @@
 @implementation TypeXMLHandler
 
 -(id) initWithTypeDict:(NSMutableDictionary *)typeDict andArray:(NSMutableArray *)typeArray{
-    if (self == [super init]) {
+    if (self = [super init]) {
         _typeDict = typeDict;
         _typeArray = typeArray;
         _count = [[NSNumber alloc] init];

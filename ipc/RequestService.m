@@ -15,7 +15,7 @@
 
 -(id) init
 {
-	if (self == [super init]) {
+	if (self = [super init]) {
         _isInfoNull = YES;
 	} 
 	return self;	
@@ -103,7 +103,7 @@
 
 -(void) gotResponse:(NSData*)data byRequest:(HttpRequest*)req
 {
-    NSString *response = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    //NSString *response = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     //NSLog(@"%@", response);
 }
 @end

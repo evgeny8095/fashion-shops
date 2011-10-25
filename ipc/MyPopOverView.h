@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FilterOptionsViewController.h"
 
 
-@interface MyPopOverView : UIViewController <UITableViewDelegate, UITableViewDataSource>{
-    IBOutlet UITableView *myTable;
-    NSArray *options;
+@interface MyPopOverView : UIViewController{
+    IBOutlet UINavigationController *navController;
 }
 
-@property (nonatomic, retain) IBOutlet UITableView *myTable;
+@property (nonatomic, retain) IBOutlet UINavigationController *navController;
 
 @end

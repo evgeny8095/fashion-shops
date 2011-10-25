@@ -11,7 +11,7 @@
 
 @implementation ProductXMLHandler
 -(id) initWithProductDict:(NSMutableDictionary *)productDict productArray:(NSMutableArray*)productArray andApplication:(ApplicationService *)AppSer{
-    if (self == [super init]) {
+    if (self = [super init]) {
         _productDict = productDict;
         _productArray = productArray;
         _typeDict = nil;

@@ -93,7 +93,7 @@
 {
     [super viewDidLoad];
 
-    NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@/%@", BASE_URL, PRODUCT_FOLDER, [_product image]];
+    NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@%@/%@", BASE_URL, RESOURCE_PATH, PRODUCT_FOLDER, [_product image]];
     
     NSURL *curl = [NSURL URLWithString:urlPath];
     [urlPath release];

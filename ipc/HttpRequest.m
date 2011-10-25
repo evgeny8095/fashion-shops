@@ -39,7 +39,7 @@
 
 -(id) initWithFinishTarget: (id)target andAction:(SEL)action
 {
-	if (self == [super init]) {
+	if (self = [super init]) {
 		_target = target;
 		_action = action;
 		_connection = nil;

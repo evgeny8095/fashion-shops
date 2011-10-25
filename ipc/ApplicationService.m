@@ -15,11 +15,11 @@
 #import "ProductXMLHandler.h"
 
 @implementation ApplicationService
-@synthesize delegate = _delegate, delegate2 = _delegate2, totalProduct = _totalProduct, startPosition = _startPosition, endPosition = _endPosition;
+@synthesize delegate = _delegate, totalProduct = _totalProduct, startPosition = _startPosition, endPosition = _endPosition, totalSalesProducts = _totalSalesProduct;
 
 -(id) init
 {
-	if (self == [super init]) {
+	if (self = [super init]) {
         _categoryDict = [[NSMutableDictionary alloc] init];
         _categoryForTypeArray = [[NSMutableArray alloc] init];
         _typeDict = [[NSMutableDictionary alloc] init];
@@ -434,6 +434,7 @@
 
 -(void) didParsedSalesProducts
 {
+    _totalSalesProduct = _totalProduct;
     [_delegate didFinishParsingSalesProduct:_salesProductArray withTotalProducts:_totalProduct fromPosition:_startPosition toPosition:_endPosition];
 }
 

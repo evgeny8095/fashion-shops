@@ -18,8 +18,12 @@
 #import "ipcAppDelegate.h"
 
 #define BASE_URL @"http://www.ongsoft.com/ipc/"
+//#define BASE_URL @"http://192.168.1.35/"
+#define RESOURCE_PATH @"sites/default/files/"
+//#define RESOURCE_PATH @"drupal7/sites/default/files/"
 #define CATEGORIES_FOLDER @"images/category/"
 #define PRODUCT_FOLDER @"images/product/"
+//#define CATEGORIES_URL @"http://www.ongsoft.com/ios/categories.php"
 #define CATEGORIES_URL @"http://www.ongsoft.com/ios/categories.php"
 #define TYPES_URL @"http://www.ongsoft.com/ios/typies.php"
 #define TYPIES_FOLDER @"images/type/"

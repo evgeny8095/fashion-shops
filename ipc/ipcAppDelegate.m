@@ -42,6 +42,8 @@
     [_appService loadBrands];
     [_appService loadStores];
     [_appService loadFeatureProductsList];
+    //[_appService loadProductsOnSalesFrom:0 to:1];
+    //[_appService setDelegate:self];
     _dataService = [[DataService alloc] init];
     _favService = [[FavouriteService alloc] init];
     [_favService loadFavouriteProducts];
@@ -51,7 +53,7 @@
     [self.window setBackgroundColor:[UIColor grayColor]];
     self.window.rootViewController = self.tabBarController;
     
-    [[[[[self tabBarController] tabBar] items] objectAtIndex:3] setBadgeValue:@"5"];
+    //[[[[[self tabBarController] tabBar] items] objectAtIndex:3] setBadgeValue:@"5"];
     
     [self.window makeKeyAndVisible];
     return YES;
@@ -101,6 +103,11 @@
     [_favService release];
     [super dealloc];
 }
+
+//- (void)didFinishParsingSalesProduct:(NSMutableArray *)c_productArray withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end
+//{
+//    [[[[[self tabBarController] tabBar] items] objectAtIndex:3] setBadgeValue:[NSString stringWithFormat:@"%i", total]];
+//}
 
 /*
 // Optional UITabBarControllerDelegate method.
