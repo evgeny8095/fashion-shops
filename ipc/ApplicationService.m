@@ -15,7 +15,7 @@
 #import "ProductXMLHandler.h"
 
 @implementation ApplicationService
-@synthesize delegate = _delegate, totalProduct = _totalProduct, startPosition = _startPosition, endPosition = _endPosition, totalSalesProducts = _totalSalesProduct;
+@synthesize delegate = _delegate, totalProduct = _totalProduct, startPosition = _startPosition, endPosition = _endPosition, totalSalesProducts = _totalSalesProduct, pagePosition = _pagePosition;
 
 -(id) init
 {
@@ -32,6 +32,8 @@
         _featureProductList = [[NSMutableArray alloc] init];
         _featureProductArray = [[NSMutableArray alloc] init];
         _salesProductArray = [[NSMutableArray alloc] init];
+        _filteredProductArray = [[NSMutableArray alloc] init];
+        NSLog(@"Link: %@", CATEGORIES_URL);
 	} 
 	return self;	
 }
@@ -125,8 +127,8 @@
 
 -(void) clearCategory
 {
-    [_categoryDict release];
-    _categoryDict = [[NSMutableDictionary alloc] init];
+    //[_categoryDict release];
+    //_categoryDict = [[NSMutableDictionary alloc] init];
     [_categoryForTypeDict release];
     _categoryForTypeDict = [[NSMutableDictionary alloc] init];
     [_categoryForTypeArray release];
@@ -163,6 +165,12 @@
     }
 }
 
+-(void) clearFilteredProducts
+{
+    [_filteredProductArray release];
+    _filteredProductArray = [[NSMutableArray alloc] init];
+}
+
 #pragma mark-
 #pragma mark loadTypes
 -(void) loadTypes{
@@ -196,25 +204,41 @@
 	[req release];
 }
 
--(void) loadCategoriesForType:(Type*)c_type
-{
-    HttpRequest* req = [[HttpRequest alloc] initWithFinishTarget:self 
-													   andAction:@selector(gotCategories: byRequest:)];
-	[req call:CATEGORIES_URL params:[NSDictionary dictionaryWithObject:[c_type tid] forKey:@"type"]];
-	[req release];
-}
-
 -(void)gotCategories: (NSData*)data byRequest:(HttpRequest*)req
 {
 	//NSLog(@"categories: %s", data.bytes);
-    CategoryXMLHandler* handler = [[CategoryXMLHandler alloc] initWithCategoryDict:_categoryDict andCategoryArray:_categoryForTypeArray];
+    CategoryXMLHandler* handler = [[CategoryXMLHandler alloc] initWithCategoryDict:_categoryDict andCategoryArray:nil];
     [handler setEndDocumentTarget:self andAction:@selector(didParsedCategory)];
 	NSXMLParser* parser = [[[NSXMLParser alloc] initWithData:data] autorelease];
 	parser.delegate = handler;
 	[parser parse];
 	[handler release];
 }
+
 -(void) didParsedCategory
+{
+}
+
+-(void) loadCategoriesForType:(Type*)c_type
+{
+    HttpRequest* req = [[HttpRequest alloc] initWithFinishTarget:self 
+													   andAction:@selector(gotCategoriesForType: byRequest:)];
+	[req call:CATEGORIES_URL params:[NSDictionary dictionaryWithObject:[c_type tid] forKey:@"type"]];
+	[req release];
+}
+
+-(void)gotCategoriesForType: (NSData*)data byRequest:(HttpRequest*)req
+{
+	//NSLog(@"categories: %s", data.bytes);
+    CategoryXMLHandler* handler = [[CategoryXMLHandler alloc] initWithCategoryDict:_categoryForTypeDict andCategoryArray:_categoryForTypeArray];
+    [handler setEndDocumentTarget:self andAction:@selector(didParsedCategoryForType)];
+	NSXMLParser* parser = [[[NSXMLParser alloc] initWithData:data] autorelease];
+	parser.delegate = handler;
+	[parser parse];
+	[handler release];
+}
+
+-(void) didParsedCategoryForType
 {
     [_delegate didFinishParsingCategory:_categoryDict andArray:_categoryForTypeArray];
 }
@@ -293,8 +317,8 @@
     NSMutableDictionary* dictionary = [[NSMutableDictionary alloc] init];
     [dictionary setObject:[c_type tid] forKey:@"type"];
     [dictionary setObject:[c_category cid] forKey:@"category"];
-    [dictionary setObject:[NSString stringWithFormat:@"%i", start] forKey:@"startPosition"];
-    [dictionary setObject:[NSString stringWithFormat:@"%i", end] forKey:@"endPosition"];
+    [dictionary setObject:[NSString stringWithFormat:@"%i", start] forKey:@"start"];
+    [dictionary setObject:[NSString stringWithFormat:@"%i", end] forKey:@"end"];
 	[req call:PRODUCT_URL params:dictionary];
     [dictionary release];
 	[req release];
@@ -322,8 +346,8 @@
 													   andAction:@selector(gotFavouriteProducts: byRequest:)];
     NSMutableDictionary* dictionary = [[NSMutableDictionary alloc] init];
     [dictionary setObject:ids forKey:@"ids"];
-    [dictionary setObject:[NSString stringWithFormat:@"%i", start] forKey:@"startPosition"];
-    [dictionary setObject:[NSString stringWithFormat:@"%i", end] forKey:@"endPosition"];
+    [dictionary setObject:[NSString stringWithFormat:@"%i", start] forKey:@"start"];
+    [dictionary setObject:[NSString stringWithFormat:@"%i", end] forKey:@"end"];
     [req call:PRODUCT_URL params:dictionary];
     [dictionary release];
 	[req release];
@@ -349,7 +373,11 @@
 {
     HttpRequest* req = [[HttpRequest alloc] initWithFinishTarget:self 
 													   andAction:@selector(gotFeatureProductsList: byRequest:)];
-	[req call:PRODUCT_URL params:[NSDictionary dictionaryWithObject:@"1" forKey:@"premium"]];
+    NSMutableDictionary* dictionary = [[NSMutableDictionary alloc] init];
+    [dictionary setObject:@"1" forKey:@"premium"];
+    [dictionary setObject:@"1" forKey:@"random"];
+	[req call:PRODUCT_URL params:dictionary];
+    [dictionary release];
 	[req release];
 }
 
@@ -369,23 +397,31 @@
     //empty function
 }
 
--(void) loadProductsOfFeatureShopFrom:(NSInteger)start to:(NSInteger)end
+-(void) loadProductsOfFeatureShopFrom:(NSInteger)start to:(NSInteger)end inPage:(NSInteger)page
 {
     HttpRequest* req = [[HttpRequest alloc] initWithFinishTarget:self 
 													   andAction:@selector(gotFeatureProducts: byRequest:)];
     NSMutableString* strIds = [[NSMutableString alloc] initWithString:@""];
     NSInteger count = [_featureProductList count];
-    for (NSInteger i = 0; i < count; i++) {
+    NSInteger trueEnd = end > count ? count-1 : end;
+    for (NSInteger i = start; i <= trueEnd; i++) {
         Product *product = [_featureProductList objectAtIndex:i];
-        if (i == count-1)
+        if (i == trueEnd)
             [strIds appendString:[NSString stringWithFormat:@"%@", [product pid]]];
         else
             [strIds appendString:[NSString stringWithFormat:@"%@,", [product pid]]];
     }
     NSMutableDictionary* dictionary = [[NSMutableDictionary alloc] init];
     [dictionary setObject:strIds forKey:@"ids"];
-    [dictionary setObject:[NSString stringWithFormat:@"%i", start] forKey:@"startPosition"];
-    [dictionary setObject:[NSString stringWithFormat:@"%i", end] forKey:@"endPosition"];
+    if (page == -1) {
+        [dictionary setObject:[NSString stringWithFormat:@"%i", start] forKey:@"start"];
+        [dictionary setObject:[NSString stringWithFormat:@"%i", end] forKey:@"end"];
+    }
+    else{
+        [dictionary setObject:@"0" forKey:@"start"];
+        [dictionary setObject:@"7" forKey:@"end"];
+        [dictionary setObject:[NSString stringWithFormat:@"%i", page] forKey:@"page"];
+    }
     [req call:PRODUCT_URL params:dictionary];
 	[req release];
     [dictionary release];
@@ -405,7 +441,7 @@
 
 -(void) didParsedFeatureProduct
 {
-    [_delegate didFinishParsingFavouriteProduct:_featureProductArray withTotalProducts:_totalProduct fromPosition:_startPosition toPosition:_endPosition];
+    [_delegate didFinishParsingFeatureProduct:_featureProductArray withTotalProducts:_totalProduct fromPosition:_startPosition toPosition:_endPosition inPage:_pagePosition];
 }
 
 -(void) loadProductsOnSalesFrom:(NSInteger)start to:(NSInteger)end
@@ -414,8 +450,8 @@
 													   andAction:@selector(gotSalesProducts: byRequest:)];
     NSMutableDictionary* dictionary = [[NSMutableDictionary alloc] init];
     [dictionary setObject:@"1" forKey:@"sale"];
-    [dictionary setObject:[NSString stringWithFormat:@"%i", start] forKey:@"startPosition"];
-    [dictionary setObject:[NSString stringWithFormat:@"%i", end] forKey:@"endPosition"];
+    [dictionary setObject:[NSString stringWithFormat:@"%i", start] forKey:@"start"];
+    [dictionary setObject:[NSString stringWithFormat:@"%i", end] forKey:@"end"];
     [req call:PRODUCT_URL params:dictionary];
     [dictionary release];
 	[req release];
@@ -440,6 +476,7 @@
 
 -(void) loadFilteredProductFrom:(NSInteger)start
                              to:(NSInteger)end
+                    hasKeywords:(NSString*)keywords
                        hasTypes:(NSString *)typies
                       hasBrands:(NSString *)brands
                        ofStores:(NSString *)stores
@@ -451,15 +488,22 @@
 													   andAction:@selector(gotFilteredProduct: byRequest:)];
     NSMutableDictionary* dictionary = [[NSMutableDictionary alloc] init];
     
-    [dictionary setObject:typies forKey:@"type"];
-    [dictionary setObject:brands forKey:@"brand"];
-    [dictionary setObject:stores forKey:@"store"];
-    [dictionary setObject:categories forKey:@"category"];
-    [dictionary setObject:topPrice forKey:@"topPrice"];
-    [dictionary setObject:bottomPrice forKey:@"bottomPrice"];
+    [dictionary setObject:keywords forKey:@"keywords"];
+    if (![typies isEqualToString:@""])
+        [dictionary setObject:typies forKey:@"type"];
+    if (![brands isEqualToString:@""])
+        [dictionary setObject:brands forKey:@"brand"];
+    if (![stores isEqualToString:@""])   
+        [dictionary setObject:stores forKey:@"store"];
+    if (![categories isEqualToString:@""])
+        [dictionary setObject:categories forKey:@"category"];
+    if (![topPrice isEqualToString:@""])
+        [dictionary setObject:topPrice forKey:@"topPrice"];
+    if (![bottomPrice isEqualToString:@""])
+        [dictionary setObject:bottomPrice forKey:@"botPrice"];
     
-    [dictionary setObject:[NSString stringWithFormat:@"%i", start] forKey:@"startPosition"];
-    [dictionary setObject:[NSString stringWithFormat:@"%i", end] forKey:@"endPosition"];
+    [dictionary setObject:[NSString stringWithFormat:@"%i", start] forKey:@"start"];
+    [dictionary setObject:[NSString stringWithFormat:@"%i", end] forKey:@"end"];
     [req call:PRODUCT_URL params:dictionary];
     [dictionary release];
 	[req release];

@@ -76,6 +76,8 @@
         [c_appSrv setStartPosition:startPosition];
         endPosition = [[attributeDict objectForKey:@"end"] intValue];
         [c_appSrv setEndPosition:endPosition];
+        pagePosition = [[attributeDict objectForKey:@"page"] intValue];
+        [c_appSrv setPagePosition:pagePosition];
     }
     if ([elementName isEqualToString:@"product"]) {
         _currentObject.pid = [attributeDict objectForKey:@"id"];

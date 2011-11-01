@@ -38,6 +38,13 @@
     NSString* loadFrom;
     NSString* ids;
     UILabel *infomationLabel;
+    NSString *searchString;
+    NSString *typeString;
+    NSString *brandString;
+    NSString *storeString;
+    NSString *categoryString;
+    NSString *topPrice;
+    NSString *botPrice;
 }
 
 @property (nonatomic, retain) NSMutableArray *buttons;
@@ -56,9 +63,10 @@
 - (id)initForFavoriteProducts:(NSString*)c_ids;
 - (id)initForFeatureProducts;
 - (id)initForSalesProducts;
+- (id)initForFilteredProductsWithKeywords:(NSString*)c_keywords TypeString:(NSString*)types BrandString:(NSString*)brands StoreString:(NSString*)stores CategoryString:(NSString*)categories hasTopPrice:(NSString*)c_topPrice andBotPrice:(NSString*)c_botPrice;
 - (IBAction)gotoProductDetails:(id)sender;
 - (void)filterProductList:(id)sender;
-- (void) didFinishParsing:(NSMutableArray*)c_productArray withTotalProduct:(NSInteger)total fromPostion:(NSInteger)start toPosition:(NSInteger)end;
+- (void) didFinishParsing:(NSMutableArray*)c_productArray withTotalProduct:(NSInteger)total fromPostion:(NSInteger)start toPosition:(NSInteger)end inPage:(NSInteger)page;
 - (void)loadPageWithProductsStartAt:(NSInteger)start EndAt:(NSInteger)end;
 
 @end

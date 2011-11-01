@@ -7,14 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ipcGlobal.h"
 
 
 @interface FilterDetailsViewController : UIViewController<UITableViewDelegate, UITableViewDataSource> {
     NSArray *optionArray;
     NSDictionary *optionDictionary;
+    NSMutableArray *convertedArray;
+    NSMutableArray *chossenArray;
 }
 
-- (id)initWithArray:(NSArray*)array;
-- (id)initWithDictionary:(NSDictionary*)dictionary;
+- (id)initWithArray:(NSArray*)array forArray:(NSMutableArray*)ref_array;
+- (id)initWithDictionary:(NSDictionary*)dictionary forArray:(NSMutableArray*)ref_array;
 
 @end

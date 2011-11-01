@@ -11,9 +11,13 @@
 
 
 @interface MyPopOverView : UIViewController{
-    IBOutlet UINavigationController *navController;
+    UINavigationController *navController;
+    NSMutableArray *filterTypes;
+    NSMutableArray *filterBrands;
+    NSMutableArray *filterStores;
+    NSMutableArray *filterCategories;
 }
 
-@property (nonatomic, retain) IBOutlet UINavigationController *navController;
+- (id)initWithFilterType:(NSMutableArray*)types Brand:(NSMutableArray*)brands Store:(NSMutableArray*)stores Categories:(NSMutableArray*)categories;
 
 @end

@@ -56,10 +56,10 @@
     
     [self.view setBackgroundColor:[UIColor blackColor]];
     //search ba
-    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
-    [searchBar setDelegate:self];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:searchBar];
-    [searchBar release];
+//    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
+//    [searchBar setDelegate:self];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:searchBar];
+//    [searchBar release];
     
     //banner
     NSString *bannerURL = [NSString stringWithFormat:@"%@%@%@", BASE_URL, RESOURCE_PATH, @"images/banners/sub_banner5.png"];

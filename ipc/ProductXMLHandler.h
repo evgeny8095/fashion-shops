@@ -15,6 +15,7 @@
     NSInteger totalProduct;
     NSInteger startPosition;
     NSInteger endPosition;
+    NSInteger pagePosition;
     NSMutableDictionary* _productDict;
     NSMutableArray* _productArray;
     NSMutableDictionary* _typeDict;

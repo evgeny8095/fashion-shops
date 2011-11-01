@@ -74,6 +74,23 @@
     return self;
 }
 
+-(id) initForFilteredProductsWithKeywords:(NSString*)c_keywords TypeString:(NSString *)types BrandString:(NSString *)brands StoreString:(NSString *)stores CategoryString:(NSString *)categories hasTopPrice:(NSString *)c_topPrice andBotPrice:(NSString *)c_botPrice
+{
+    self = [super initWithNibName:nil bundle:nil];
+    if (self)
+    {
+        loadFrom = [[NSString alloc] initWithString:@"filter"];
+        searchString = [c_keywords retain];
+        typeString = [types retain];
+        brandString = [brands retain];
+        storeString = [stores retain];
+        categoryString = [categories retain];
+        topPrice = [c_topPrice retain];
+        botPrice = [c_topPrice retain];
+    }
+    return self;
+}
+
 -(id) initWithProductArray:(NSMutableArray *)fproductArray
 {
     self = [super initWithNibName:nil bundle:nil];
@@ -118,9 +135,9 @@
     //self.navigationItem.title = title;
     
     //refine button
-    UIBarButtonItem *filterButton = [[ UIBarButtonItem alloc] initWithTitle:@"Show Option" style:UIBarButtonItemStylePlain target:self action:@selector(filterProductList:)];
-    self.navigationItem.rightBarButtonItem = filterButton;
-    [filterButton release];
+//    UIBarButtonItem *filterButton = [[ UIBarButtonItem alloc] initWithTitle:@"Show Option" style:UIBarButtonItemStylePlain target:self action:@selector(filterProductList:)];
+//    self.navigationItem.rightBarButtonItem = filterButton;
+//    [filterButton release];
     
 //    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 480, 44)];
 //    titleLabel.backgroundColor = [UIColor clearColor];
@@ -178,22 +195,24 @@
         return;
     NSInteger truePage = page + 1;
     
-    NSInteger loadingPage = truePage+1;
+    NSInteger nextPage = truePage + 1;
     NSNumber *loaded = [loadedPage objectForKey:[NSString stringWithFormat:@"%i", page+1]];
     NSInteger loadedIndicator = [loaded intValue];
     
-    if (loadedIndicator == 0 && loadingPage <= totalPages) {
-        NSLog(@"loading page: %i", loadingPage);
-        NSInteger start = (loadingPage)*8-8;
-        NSInteger end = (loadingPage)*8-1;
+    if (loadedIndicator == 0 && nextPage <= totalPages) {
+        NSLog(@"loading page: %i", nextPage);
+        NSInteger start = (nextPage)*8-8;
+        NSInteger end = (nextPage)*8-1;
         if (start < totalItem){
             APP_SERVICE(appSrv);
             if ([loadFrom isEqualToString:@"favourite2"])
                 [appSrv loadProductsForProductIds:ids from:start to:end];
             if ([loadFrom isEqualToString:@"feature"])
-                [appSrv loadProductsOfFeatureShopFrom:start to:end];
+                [appSrv loadProductsOfFeatureShopFrom:start to:end inPage:nextPage];
             if ([loadFrom isEqualToString:@"sales"])
                 [appSrv loadProductsOnSalesFrom:start to:end];
+            if ([loadFrom isEqualToString:@"filter"])
+                [appSrv loadFilteredProductFrom:start to:end hasKeywords:searchString hasTypes:typeString hasBrands:brandString ofStores:storeString inCategories:categoryString hasTopPrice:topPrice hasBottomPrice:botPrice];
             if ([loadFrom isEqualToString:@""])
                 [appSrv loadProductsForType:c_type forCatetory:c_category from:start to:end];
             [loadedPage setObject:[NSNumber numberWithInteger:1] forKey:[NSString stringWithFormat:@"%i", page+1]];
@@ -233,9 +252,16 @@
 
 #pragma mark -
 #pragma mark ApplicationServiceDelegate
--(void) didFinishParsing:(NSMutableArray*)c_productArray withTotalProduct:(NSInteger)total fromPostion:(NSInteger)start toPosition:(NSInteger)end
+-(void) didFinishParsing:(NSMutableArray*)c_productArray withTotalProduct:(NSInteger)total fromPostion:(NSInteger)start toPosition:(NSInteger)end inPage:(NSInteger)page
 {
-    if (start == 0) {
+    if (start == 0 && page == -1) {
+        NSInteger productTotal = total;
+        loadedPage = [[NSMutableDictionary alloc] init];
+        if ([loadFrom isEqualToString:@"feature"]) {
+            APP_SERVICE(appSrv);
+            productTotal = [[appSrv featureProductList] count];
+        }
+        totalPages = productTotal/8+1;        
         
         UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(162, 0, 700, 44)];
         UILabel *titleString = [[UILabel alloc] initWithFrame:CGRectMake(0, 5, 700, 20)];
@@ -248,21 +274,14 @@
         [infoString setTextAlignment:UITextAlignmentCenter];
         [infoString setTextColor:[UIColor whiteColor]];
         [infoString setBackgroundColor:[UIColor clearColor]];
-//        NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-//        [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
-//        NSString *formattedString = [formatter stringFromNumber:[NSNumber numberWithInteger:total]];
-        [infoString setText:[NSString stringWithFormat:@"%i sản phẩm", total]];
+        [infoString setText:[NSString stringWithFormat:@"%i sản phẩm", productTotal]];
         [infoString setFont:[UIFont fontWithName:@"helvetica" size:12]];
         [titleView addSubview:infoString];
         self.navigationItem.titleView = titleView;
         [titleString release];
         [infoString release];
-//        [formatter release];
-//        [formattedString release];
         [titleView release];
         
-        loadedPage = [[NSMutableDictionary alloc] init];
-        totalPages = total/8+1;
         for (NSInteger i = 0; i<totalPages; i++) {
             [loadedPage setObject:[NSNumber numberWithInteger:0] forKey:[NSString stringWithFormat:@"%i", i]];
         }
@@ -270,8 +289,9 @@
         _productArray = c_productArray;
         NSLog(@"Number of loaded product %i", [_productArray count]);
         
+        totalItem = productTotal;
         
-        totalItem = total;
+        NSLog(@"Total Products: %i", totalItem);
         
         //NSInteger c_numberProduct = [_productArray count];
         
@@ -347,28 +367,39 @@
         
         [self loadPageWithProductsStartAt:start EndAt:end];
     }else{
-        [self loadPageWithProductsStartAt:start EndAt:end];
+        if (page != -1) {
+            [self loadPageWithProductsStartAt:page*8-8 EndAt:page*8-1];
+        }
+        else{
+            [self loadPageWithProductsStartAt:start EndAt:end];
+        }
+        
     }
 }
 
 -(void) didFinishParsingProduct:(NSMutableArray *)c_productArray withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end
 {
-    [self didFinishParsing:c_productArray withTotalProduct:total fromPostion:start toPosition:end];
+    [self didFinishParsing:c_productArray withTotalProduct:total fromPostion:start toPosition:end inPage:-1];
 }
 
 -(void) didFinishParsingFavouriteProduct:(NSMutableArray *)c_productArray withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end
 {
-    [self didFinishParsing:c_productArray withTotalProduct:total fromPostion:start toPosition:end];
+    [self didFinishParsing:c_productArray withTotalProduct:total fromPostion:start toPosition:end inPage:-1];
 }
 
--(void) didFinishParsingFeatureProduct:(NSMutableArray *)c_productArray withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end
+-(void) didFinishParsingFeatureProduct:(NSMutableArray *)c_productArray withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end inPage:(NSInteger)page
 {
-    [self didFinishParsing:c_productArray withTotalProduct:total fromPostion:start toPosition:end];
+    [self didFinishParsing:c_productArray withTotalProduct:total fromPostion:start toPosition:end inPage:page];
 }
 
 -(void) didFinishParsingSalesProduct:(NSMutableArray *)c_productArray withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end
 {
-    [self didFinishParsing:c_productArray withTotalProduct:total fromPostion:start toPosition:end];
+    [self didFinishParsing:c_productArray withTotalProduct:total fromPostion:start toPosition:end inPage:-1];
+}
+
+-(void) didFinishParsingFilterProduct:(NSMutableArray *)c_productArray withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end
+{
+    [self didFinishParsing:c_productArray withTotalProduct:total fromPostion:start toPosition:end inPage:-1];
 }
 
 -(void) loadPageWithProductsStartAt:(NSInteger)start EndAt:(NSInteger)end

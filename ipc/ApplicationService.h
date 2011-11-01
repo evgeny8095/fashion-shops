@@ -16,7 +16,7 @@
 -(void) didFinishParsingCategory:(NSMutableDictionary*)categoryDict andArray:(NSMutableArray*)categoryArray;
 -(void) didFinishParsingProduct:(NSMutableArray *)c_productArray withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end;
 -(void) didFinishParsingFavouriteProduct:(NSMutableArray *)c_productArray withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end;
--(void) didFinishParsingFeatureProduct:(NSMutableArray *)c_productArray withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end;
+-(void) didFinishParsingFeatureProduct:(NSMutableArray *)c_productArray withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end inPage:(NSInteger)page;
 -(void) didFinishParsingSalesProduct:(NSMutableArray *)c_productArray withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end;
 -(void) didFinishParsingType:(NSMutableDictionary*)typeDict andArray:(NSMutableArray*)typeArray;
 -(void) didFinishParsingFilterProduct:(NSMutableArray*)c_productArray withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end;
@@ -41,6 +41,7 @@
     NSInteger _totalProduct;
     NSInteger _startPosition;
     NSInteger _endPosition;
+    NSInteger _pagePosition;
     NSInteger _totalSalesProduct;
 }
 
@@ -48,6 +49,7 @@
 @property (nonatomic,assign) NSInteger totalProduct;
 @property (nonatomic,assign) NSInteger startPosition;
 @property (nonatomic,assign) NSInteger endPosition;
+@property (nonatomic,assign) NSInteger pagePosition;
 @property (nonatomic,assign) NSInteger totalSalesProducts;
 
 -(NSMutableDictionary*) categoryDict;
@@ -69,22 +71,26 @@
 -(void) clearSalesProducts;
 -(void) clearFavouriteProduct;
 -(void) shuffleFeatureProductList;
+-(void) clearFilteredProducts;
 
 -(void) loadCategories;
--(void) loadCategoriesForType:(Type*)c_type;
--(void) gotCategories: (NSData*)data byRequest:(HttpRequest*)req;
+-(void) gotCategories:(NSData*)data byRequest:(HttpRequest*)req;
 -(void) didParsedCategory;
 
+-(void) loadCategoriesForType:(Type*)c_type;
+-(void) gotCategoriesForType:(NSData*)data byRequest:(HttpRequest*)req;
+-(void) didParsedCategoryForType;
+
 -(void) loadTypes;
--(void) gotTypes: (NSData*)data byRequest:(HttpRequest*)req;
+-(void) gotTypes:(NSData*)data byRequest:(HttpRequest*)req;
 -(void) didParsedType;
 
 -(void) loadStores;
--(void) gotStores: (NSData*)data byRequest:(HttpRequest*)req;
+-(void) gotStores:(NSData*)data byRequest:(HttpRequest*)req;
 -(void) didParsedStore;
 
 -(void) loadBrands;
--(void) gotBrands: (NSData*)data byRequest:(HttpRequest*)req;
+-(void) gotBrands:(NSData*)data byRequest:(HttpRequest*)req;
 -(void) didParsedBrand;
 
 -(void) loadProducts;
@@ -101,7 +107,7 @@
 -(void) gotFeatureProductsList:(NSData *)data byRequest:(HttpRequest *)req;
 -(void) didParsedFeatureProductsList;
 
--(void) loadProductsOfFeatureShopFrom:(NSInteger)start to:(NSInteger)end;
+-(void) loadProductsOfFeatureShopFrom:(NSInteger)start to:(NSInteger)end inPage:(NSInteger)page;
 -(void) gotFeatureProducts:(NSData*)data byRequest:(HttpRequest*)req;
 -(void) didParsedFeatureProduct;
 
@@ -109,7 +115,7 @@
 -(void) gotSalesProducts:(NSData*)data byRequest:(HttpRequest*)req;
 -(void) didParsedSalesProducts;
 
--(void) loadFilteredProductFrom:(NSInteger)start to:(NSInteger)end hasTypes:(NSString*)typies hasBrands:(NSString*)brands ofStores:(NSString*)stores inCategories:(NSString*)categories hasTopPrice:(NSString*)topPrice hasBottomPrice:(NSString*)bottomPrice;
+-(void) loadFilteredProductFrom:(NSInteger)start to:(NSInteger)end hasKeywords:(NSString*)keywords hasTypes:(NSString*)typies hasBrands:(NSString*)brands ofStores:(NSString*)stores inCategories:(NSString*)categories hasTopPrice:(NSString*)topPrice hasBottomPrice:(NSString*)bottomPrice;
 -(void) gotFilteredProduct:(NSData*)data byRequest:(HttpRequest*)req;
 -(void) didParsedFilteredProduct;
 

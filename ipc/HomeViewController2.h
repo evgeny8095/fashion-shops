@@ -12,12 +12,17 @@
 #import "ApplicationService.h"
 
 
-@interface HomeViewController2 : UIViewController <UINavigationControllerDelegate, UISearchBarDelegate, ApplicationServiceDelegate>{
+@interface HomeViewController2 : UIViewController <UINavigationControllerDelegate, UISearchBarDelegate, UIPopoverControllerDelegate, ApplicationServiceDelegate>{
     UIPopoverController *popoverController;
-    MyPopOverView *myPopOver;
+    MyPopOverView *filterPopOver;
     NSDictionary* _typeDict;
     NSArray* _typeArray;
     NSMutableArray* buttons;
+    UISearchBar *searchBar;
+    NSMutableArray *filterTypes;
+    NSMutableArray *filterBrands;
+    NSMutableArray *filterStores;
+    NSMutableArray *filterCategories;
 }
 
 @property (nonatomic, retain) IBOutlet UINavigationController *navController;
@@ -25,8 +30,8 @@
 @property (nonatomic, retain) IBOutlet UIImageView *imageView;
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, retain) UIPopoverController *popoverController;
-@property (nonatomic, retain) MyPopOverView *myPopOver;
+@property (nonatomic, retain) MyPopOverView *filterPopOver;
 
 - (void)flipForDuration:(NSTimeInterval)time withAnimation:(UIViewAnimationTransition)transition;
-
+- (void)didFinishSearchWithString:(NSString*)searchString;
 @end

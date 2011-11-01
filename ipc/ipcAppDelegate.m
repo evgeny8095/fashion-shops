@@ -41,6 +41,7 @@
     //[_appService loadTypes];
     [_appService loadBrands];
     [_appService loadStores];
+    [_appService loadCategories];
     [_appService loadFeatureProductsList];
     //[_appService loadProductsOnSalesFrom:0 to:1];
     //[_appService setDelegate:self];

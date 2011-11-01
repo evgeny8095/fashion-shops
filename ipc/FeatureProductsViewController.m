@@ -54,14 +54,14 @@
     
     [navController.navigationBar setBarStyle:UIBarStyleBlack];
     
-    APP_SERVICE(appSrvvv);
+    APP_SERVICE(appSrv);
     //NSDictionary *types = [appSrvvv typeDict];
     //NSDictionary *categories = [appSrvvv categoryDict];
-    [appSrvvv loadProductsOfFeatureShopFrom:0 to:15];
-    productArray = [appSrvvv featureProductArray];
+    [appSrv loadProductsOfFeatureShopFrom:0 to:15 inPage:-1];
+    productArray = [appSrv featureProductArray];
     
     ProductSliderViewController *productSliderViewController = [[ProductSliderViewController alloc] initForFeatureProducts];
-    [appSrvvv setDelegate:productSliderViewController];
+    [appSrv setDelegate:productSliderViewController];
     //[productSliderViewController.navigationController.navigationBar ];
     //productSliderViewController.c_type = c_type;
     //productSliderViewController.c_category = c_category;

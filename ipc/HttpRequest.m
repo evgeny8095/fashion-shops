@@ -64,6 +64,8 @@
 	//NSString* url = _method ? _url : [self generateGetURL];
     NSLog(@"querry: %@", finalURL);
 	NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:finalURL]];
+    //NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:finalURL]];
+    //[request setHTTPMethod:@"Post"];
 	
 	//_timestamp = [[NSDate date] retain];
 	_connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];

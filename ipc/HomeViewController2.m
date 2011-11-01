@@ -8,6 +8,8 @@
 
 #import "HomeViewController2.h"
 #import "SubcategoryViewController.h"
+#import "ProductSliderViewController.h"
+#import "FilterViewController.h"
 #import "CategoryXMLHandler.h"
 #import "asyncimageview.h"
 
@@ -18,7 +20,7 @@
 
 @implementation HomeViewController2
 
-@synthesize navController, navBar, myPopOver, popoverController, imageView, scrollView;
+@synthesize navController, navBar, filterPopOver, popoverController, imageView, scrollView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -46,6 +48,10 @@
 
 - (void)viewDidLoad
 {
+    filterTypes = [[NSMutableArray alloc] init];
+    filterBrands = [[NSMutableArray alloc] init];
+    filterStores = [[NSMutableArray alloc] init];
+    filterCategories =[[NSMutableArray alloc] init];
     [super viewDidLoad];
     APP_SERVICE(appSrv);
     [appSrv loadTypes];
@@ -178,6 +184,90 @@
     [UIView commitAnimations];
 }
 
+-(void) didFinishSearchWithString:(NSString *)searchString
+{
+    NSMutableString* typeString = [[NSMutableString alloc] initWithString:@""];
+    NSInteger count = [filterTypes count];
+    for (NSInteger i = 0; i < count; i++) {
+        if (i == count-1)
+            [typeString appendString:[NSString stringWithFormat:@"%@", [[filterTypes objectAtIndex:i] tid]]];
+        else
+            [typeString appendString:[NSString stringWithFormat:@"%@,", [[filterTypes objectAtIndex:i] tid]]];
+    }
+    NSMutableString* brandString = [[NSMutableString alloc] initWithString:@""];
+    count = [filterBrands count];
+    for (NSInteger i = 0; i < count; i++) {
+        if (i == count-1)
+            [brandString appendString:[NSString stringWithFormat:@"%@", [[filterBrands objectAtIndex:i] bid]]];
+        else
+            [brandString appendString:[NSString stringWithFormat:@"%@,", [[filterBrands objectAtIndex:i] bid]]];
+    }
+    NSMutableString* storeString = [[NSMutableString alloc] initWithString:@""];
+    count = [filterStores count];
+    for (NSInteger i = 0; i < count; i++) {
+        if (i == count-1)
+            [storeString appendString:[NSString stringWithFormat:@"%@", [[filterStores objectAtIndex:i] sid]]];
+        else
+            [storeString appendString:[NSString stringWithFormat:@"%@,", [[filterStores objectAtIndex:i] sid]]];
+    }
+    NSMutableString* categoryString = [[NSMutableString alloc] initWithString:@""];
+    count = [filterCategories count];
+    for (NSInteger i = 0; i < count; i++) {
+        if (i == count-1)
+            [categoryString appendString:[NSString stringWithFormat:@"%@", [[filterCategories objectAtIndex:i] cid]]];
+        else
+            [categoryString appendString:[NSString stringWithFormat:@"%@,", [[filterCategories objectAtIndex:i] cid]]];
+    }
+
+    [searchBar resignFirstResponder];
+    
+    
+    NSString *title = @"Kết Quả";
+    
+    navController = [[UINavigationController alloc] init];
+    navController.delegate=self;
+    
+    [navController.view setFrame:CGRectMake(0, 0, 1024, 748)];
+    
+    [navController.navigationBar setBarStyle:UIBarStyleBlack];
+    
+    APP_SERVICE(appSrvvv);
+    [appSrvvv clearFilteredProducts];
+    [appSrvvv loadFilteredProductFrom:0 to:15 hasKeywords:searchString hasTypes:typeString hasBrands:brandString ofStores:storeString inCategories:categoryString hasTopPrice:@"" hasBottomPrice:@""];
+    
+    ProductSliderViewController *productSliderViewController = [[ProductSliderViewController alloc] initForFilteredProductsWithKeywords:searchString TypeString:typeString BrandString:brandString StoreString:storeString CategoryString:categoryString hasTopPrice:@"" andBotPrice:@""];
+    [appSrvvv setDelegate:productSliderViewController];
+    //[productSliderViewController.navigationController.navigationBar ];
+    //productSliderViewController.c_type = c_type;
+    //productSliderViewController.c_category = c_category;
+    //productSliderViewController.type = _type;
+    //productSliderViewController.category = category;
+    //productSliderViewController.navigationItem.title = title;
+    productSliderViewController.title = title;
+    
+    [self.view addSubview:navController.view];
+    
+    [self.navController pushViewController:productSliderViewController animated:NO];
+    
+    
+    [productSliderViewController.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(goBack)]];
+    
+    [navController setDelegate:productSliderViewController];
+    
+    [self.view addSubview:navController.view];
+    
+    [self flipForDuration:0.75 withAnimation:UIViewAnimationTransitionFlipFromLeft];
+    
+    //    [UIView animateWithDuration:0.75 
+    //                     animations:^{
+    //                         
+    //                     }
+    //                     completion:^(BOOL finished) {
+    //                         [self.view addSubview:navController.view];
+    //                     }];
+    [productSliderViewController release];
+    
+}
 
 //- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
 //    NSLog(@"didshow");
@@ -198,10 +288,9 @@
     [self.view setBackgroundColor:[UIColor blackColor]];
     
     //search
-    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
+    searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 200, 0)];
     [searchBar setDelegate:self];
     navBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:searchBar];
-    [searchBar release];
     
     //type buttons
     NSInteger px = 0;
@@ -247,20 +336,35 @@
 }
 
 #pragma mark searchbar delegate
--(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar{
-    myPopOver = [[MyPopOverView alloc] initWithNibName:@"MyPopOverView" bundle:nil];
-    popoverController = [[UIPopoverController alloc] initWithContentViewController:myPopOver];
-    
-    
-    [popoverController setPopoverContentSize:myPopOver.view.frame.size];
-    //[popoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-    
-    // Or use the following line to display it from a given rectangle
-    [popoverController presentPopoverFromRect:myPopOver.view.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+-(void)searchBarTextDidBeginEditing:(UISearchBar *)aSearchBar{
+    if (filterPopOver == nil) {
+        filterPopOver = [[MyPopOverView alloc] initWithFilterType:filterTypes Brand:filterBrands Store:filterStores Categories:filterCategories];
+        popoverController = [[UIPopoverController alloc] initWithContentViewController:filterPopOver];
+        popoverController.passthroughViews = [NSArray arrayWithObject:aSearchBar];
+        popoverController.delegate = self;
+        [popoverController setPopoverContentSize:filterPopOver.view.frame.size];
+        [popoverController presentPopoverFromRect:aSearchBar.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    }
+    else
+       [popoverController presentPopoverFromRect:aSearchBar.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
--(void)searchBarTextDidEndEditing:(UISearchBar *)searchBar{
+- (void)searchBarSearchButtonClicked:(UISearchBar *)aSearchBar {
+    [self didFinishSearchWithString:[aSearchBar text]];
+}
+
+-(void)searchBarTextDidEndEditing:(UISearchBar *)aSearchBar{
     [popoverController dismissPopoverAnimated:YES];
+    //NSString *keywords = aSearchBar.text;
+    //NSLog(@"%@", keywords);
+    
+    [aSearchBar resignFirstResponder];
+}
+
+#pragma mark - PopoverViewController Delegate Methods
+-(void) popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
+{
+    [searchBar resignFirstResponder];
 }
 
 @end

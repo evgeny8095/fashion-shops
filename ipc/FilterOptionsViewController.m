@@ -15,7 +15,18 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        
+    }
+    return self;
+}
+
+- (id)initWithFilterType:(NSMutableArray*)c_types Brand:(NSMutableArray*)c_brands Store:(NSMutableArray*)c_stores Categories:(NSMutableArray*)c_categories
+{
+    if (self = [super initWithNibName:nil bundle:nil]) {
+        types = c_types;
+        brands = c_brands;
+        stores = c_stores;
+        categories = c_categories;
     }
     return self;
 }
@@ -39,7 +50,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    options = [[NSArray alloc] initWithObjects:@"Keyword", @"Types", @"Brands", @"Stores", @"Price", @"Sales", nil];
+    options = [[NSArray alloc] initWithObjects:@"Types", @"Categories", @"Brands", @"Stores", nil];
     optionTable = [[UITableView alloc] initWithFrame:self.view.frame];
     [optionTable setDelegate:self];
     [optionTable setDataSource:self];
@@ -69,9 +80,23 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    FilterOptionsViewController *filterDetail = [[FilterDetailsViewController alloc] initWithArray:options];
-    
-    [self.navigationController pushViewController:filterDetail animated:YES];
+    APP_SERVICE(appSrv);
+    if ([[options objectAtIndex:indexPath.row] isEqualToString:@"Types"]) {
+        FilterDetailsViewController *filterDetais = [[FilterDetailsViewController alloc] initWithArray:[appSrv typeArray] forArray:types];
+        [self.navigationController pushViewController:filterDetais animated:YES];
+    }
+    if ([[options objectAtIndex:indexPath.row] isEqualToString:@"Brands"]) {
+        FilterDetailsViewController *filterDetais = [[FilterDetailsViewController alloc] initWithDictionary:[appSrv brandDict] forArray:brands];
+        [self.navigationController pushViewController:filterDetais animated:YES];
+    }
+    if ([[options objectAtIndex:indexPath.row] isEqualToString:@"Stores"]) {
+        FilterDetailsViewController *filterDetais = [[FilterDetailsViewController alloc] initWithDictionary:[appSrv storeDict] forArray:stores];
+        [self.navigationController pushViewController:filterDetais animated:YES];
+    }
+    if ([[options objectAtIndex:indexPath.row] isEqualToString:@"Categories"]) {
+        FilterDetailsViewController *filterDetais = [[FilterDetailsViewController alloc] initWithDictionary:[appSrv categoryDict] forArray:categories];
+        [self.navigationController pushViewController:filterDetais animated:YES];
+    }
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -80,6 +105,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"optionrow"];
     }
     cell.textLabel.text = [options objectAtIndex:indexPath.row];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
 

@@ -10,8 +10,17 @@
 
 
 @implementation MyPopOverView
-@synthesize navController;
 
+- (id)initWithFilterType:(NSMutableArray*)types Brand:(NSMutableArray*)brands Store:(NSMutableArray*)stores Categories:(NSMutableArray*)categories
+{
+    if (self = [super initWithNibName:nil bundle:nil]) {
+        filterTypes = types;
+        filterBrands = brands;
+        filterStores = stores;
+        filterCategories = categories;
+    }
+    return self;
+}
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -26,10 +35,11 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-    FilterOptionsViewController *filterOptions = [[FilterOptionsViewController alloc] init];
-    [navController.view setFrame:filterOptions.view.frame];
-    [self.view setFrame:filterOptions.view.frame];
-    [navController presentModalViewController:filterOptions animated:NO];
+    FilterOptionsViewController *filterOptions = [[FilterOptionsViewController alloc] initWithFilterType:filterTypes Brand:filterBrands Store:filterStores Categories:filterCategories];
+    navController = [[UINavigationController alloc] initWithRootViewController:filterOptions];
+    [[navController navigationBar] setBarStyle:UIBarStyleBlack];
+    navController.navigationBar.topItem.title = @"Tùy Chọn";
+    navController.view.frame = self.view.frame;
     [self.view addSubview:navController.view];
 }
 

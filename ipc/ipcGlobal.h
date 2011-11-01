@@ -17,32 +17,24 @@
 #import "Product.h"
 #import "ipcAppDelegate.h"
 
-#define BASE_URL @"http://www.ongsoft.com/ipc/"
-//#define BASE_URL @"http://192.168.1.35/"
-#define RESOURCE_PATH @"sites/default/files/"
+#define BASE_URL @"http://www.ongsoft.com/"
+//#define BASE_URL @"http://192.168.1.48/"
+#define RESOURCE_PATH @"ipc/sites/default/files/"
 //#define RESOURCE_PATH @"drupal7/sites/default/files/"
 #define CATEGORIES_FOLDER @"images/category/"
 #define PRODUCT_FOLDER @"images/product/"
-//#define CATEGORIES_URL @"http://www.ongsoft.com/ios/categories.php"
-#define CATEGORIES_URL @"http://www.ongsoft.com/ios/categories.php"
-#define TYPES_URL @"http://www.ongsoft.com/ios/typies.php"
+#define CATEGORIES_URL [NSString stringWithFormat:@"%@ios/categories.php", BASE_URL]
+#define TYPES_URL [NSString stringWithFormat:@"%@ios/typies.php", BASE_URL]
 #define TYPIES_FOLDER @"images/type/"
-#define STORE_URL @"http://www.ongsoft.com/ios/stores.php"
-#define BRAND_URL @"http://www.ongsoft.com/ios/brands.php"
-#define PRODUCT_URL @"http://www.ongsoft.com/ios/products.php"
+#define STORE_URL [NSString stringWithFormat:@"%@ios/stores.php", BASE_URL]
+#define BRAND_URL [NSString stringWithFormat:@"%@ios/brands.php", BASE_URL]
+#define PRODUCT_URL [NSString stringWithFormat:@"%@ios/products.php", BASE_URL]
 #define REQUEST_PRODUCT_URL @"requestproducts.php"
 //#define FEATURE_PRODUCT_URL @"http://www.ongsoft.com/ios/products.php"
-//#define PRODUCT_URL @"http://www.ongsoft.com/ipc/xml/products.xml"
 
-#define FRUITS_URL @"http://www.themobilelife.com/tmp/fruits/1/fruits.xml"
-#define SET_FRUIT_URL @"http://www.themobilelife.com/tmp/fruits/1/setFruit.php"
-#define ADD_ENTRY_URL @"http://www.themobilelife.com/tmp/fruits/1/addEntry.php"
-#define REMOVE_ENTRY_URL @"http://www.themobilelife.com/tmp/fruits/1/removeEntry.php"
-#define ENTRIES_URL @"http://www.themobilelife.com/tmp/fruits/1/entries.xml"
-
-#define HTTP_REQUEST_STARTING_NOTIFICATION @"HttpRequestStartingNotification"
-#define HTTP_REQUEST_FINISHING_NOTIFICATION @"HttpRequestFinishingNotification"
-#define RELOAD_DATA_NOTIFICATION @"ReloadDataNotification"
+//#define HTTP_REQUEST_STARTING_NOTIFICATION @"HttpRequestStartingNotification"
+//#define HTTP_REQUEST_FINISHING_NOTIFICATION @"HttpRequestFinishingNotification"
+//#define RELOAD_DATA_NOTIFICATION @"ReloadDataNotification"
 
 #define APP_SERVICE(appSrv) ApplicationService* appSrv = [(ipcAppDelegate*)[[UIApplication sharedApplication] delegate] appService]
 #define DATA_SERVICE(dataSrv) DataService* dataSrv = [(ipcAppDelegate*)[[UIApplication sharedApplication] delegate] dataService]
