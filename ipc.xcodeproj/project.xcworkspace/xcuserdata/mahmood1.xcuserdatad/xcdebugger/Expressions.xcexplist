@@ -19,18 +19,26 @@
          </expressions>
       </StackState>
       <StackState
-         stackFrameDescription = "-[InfoCollectorViewController validateTextField]:InfoCollectorViewController.m">
+         stackFrameDescription = "-[RequestService saveUserInformation]:RequestService.m">
          <expressions>
             <expression
-               value = "[self isEmailValidated:[email text]]">
+               value = "_email">
             </expression>
          </expressions>
       </StackState>
       <StackState
-         stackFrameDescription = "-[ProductsDetailsSliderViewController initwithProduct:inPosition:withMode:]:ProductsDetailsSliderViewController.m">
+         stackFrameDescription = "-[ProductsDetailsSliderViewController buy:]:ProductsDetailsSliderViewController.m">
          <expressions>
             <expression
-               value = "c_product">
+               value = "[_product pid]">
+            </expression>
+         </expressions>
+      </StackState>
+      <StackState
+         stackFrameDescription = "-[InfoCollectorViewController validateTextField]:InfoCollectorViewController.m">
+         <expressions>
+            <expression
+               value = "[self isEmailValidated:[email text]]">
             </expression>
          </expressions>
       </StackState>
@@ -43,10 +51,10 @@
          </expressions>
       </StackState>
       <StackState
-         stackFrameDescription = "-[RequestService saveUserInformation]:RequestService.m">
+         stackFrameDescription = "-[ProductsDetailsSliderViewController initwithProduct:inPosition:withMode:]:ProductsDetailsSliderViewController.m">
          <expressions>
             <expression
-               value = "_email">
+               value = "c_product">
             </expression>
          </expressions>
       </StackState>

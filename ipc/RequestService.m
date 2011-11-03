@@ -28,24 +28,28 @@
 
 -(void) loadUserInformation
 {
+    NSError *error;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentPath = [paths objectAtIndex:0];
-    NSString *plistPath = [documentPath stringByAppendingFormat:@"User.plist"];
+    NSString *plistPath = [documentPath stringByAppendingPathComponent:@"User.plist"];
     if (![[NSFileManager defaultManager] fileExistsAtPath:plistPath])
     {
-        plistPath = [[NSBundle mainBundle] pathForResource:@"User" ofType:@"plist"];
+        NSString *bundle = [[NSBundle mainBundle] pathForResource:@"User" ofType:@"plist"];
+        [[NSFileManager defaultManager] copyItemAtPath:bundle toPath:plistPath error:&error];
     }
-    NSData *plistXML = [[NSFileManager defaultManager] contentsAtPath:plistPath];
-    NSString *errorDesc = nil;
-    NSPropertyListFormat format;
-    NSDictionary *temp = (NSDictionary*)[NSPropertyListSerialization propertyListFromData:plistXML mutabilityOption:NSPropertyListMutableContainersAndLeaves format:&format errorDescription:&errorDesc];
-    if (!temp) {
-        NSLog(@"Error reading plist: %@, format: %d", errorDesc, format);
-    }
+//    NSData *plistXML = [[NSFileManager defaultManager] contentsAtPath:plistPath];
+//    NSString *errorDesc = nil;
+//    NSPropertyListFormat format;
+//    NSDictionary *temp = (NSDictionary*)[NSPropertyListSerialization propertyListFromData:plistXML mutabilityOption:NSPropertyListMutableContainersAndLeaves format:&format errorDescription:&errorDesc];
+//    if (!temp) {
+//        NSLog(@"Error reading plist: %@, format: %d", errorDesc, format);
+//    }
+    
+    NSMutableDictionary *temp = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
     
     _information = [NSMutableDictionary dictionaryWithDictionary:[temp objectForKey:@"Information"]];
     if ([_information count] != 0) {
-        _fullName = [[NSString alloc] initWithString:[_information objectForKey:@"Fullname"]];;
+        _fullName = [[NSString alloc] initWithString:[_information objectForKey:@"Fullname"]];
         _phone = [[NSString alloc] initWithString:[_information objectForKey:@"Phone"]];
         _email = [[NSString alloc] initWithString:[_information objectForKey:@"Email"]];
     }
@@ -54,6 +58,7 @@
         _isInfoNull = YES;
     else
         _isInfoNull = NO;
+    [temp release];
 }
 
 - (void)saveUserInformation
@@ -61,9 +66,7 @@
     if (_isInfoNull) {
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *documentPath = [paths objectAtIndex:0];
-        NSString *plistPath = [documentPath stringByAppendingFormat:@"User.plist"];
-        
-        NSString *errorDesc = nil;
+        NSString *plistPath = [documentPath stringByAppendingPathComponent:@"User.plist"];
         
         NSMutableDictionary *information = [[NSMutableDictionary alloc] init];
         [information setObject:_fullName forKey:@"Fullname"];
@@ -72,16 +75,7 @@
         
         NSDictionary *plistDict = [NSDictionary dictionaryWithObject:information forKey:@"Information"];
         [information release];
-        NSData *plistData = [NSPropertyListSerialization dataFromPropertyList:plistDict format:NSPropertyListXMLFormat_v1_0 errorDescription:&errorDesc];
-        
-        if (plistData) {
-            [plistData writeToFile:plistPath atomically:YES];
-        }
-        else
-        {
-            NSLog(@"Error in save: %@", errorDesc);
-            [errorDesc release];
-        }
+        [plistDict writeToFile:plistPath atomically:YES];
         _isInfoNull = NO;
     }
 }
@@ -104,6 +98,8 @@
 -(void) gotResponse:(NSData*)data byRequest:(HttpRequest*)req
 {
     //NSString *response = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    //NSLog(@"%@", response);
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Thông Báo" message:@"Yêu cầu của quý khách đã được gửi thành công" delegate:nil cancelButtonTitle:@"Đóng" otherButtonTitles:nil];
+    [alertView show];
+    [alertView release];
 }
 @end

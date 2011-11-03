@@ -40,12 +40,14 @@
 
 -(void) loadFavouriteProducts
 {
+    NSError *error;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentPath = [paths objectAtIndex:0];
-    NSString *plistPath = [documentPath stringByAppendingFormat:@"Data.plist"];
+    NSString *plistPath = [documentPath stringByAppendingPathComponent:@"Favorite.plist"];
     if (![[NSFileManager defaultManager] fileExistsAtPath:plistPath])
     {
-        plistPath = [[NSBundle mainBundle] pathForResource:@"Data" ofType:@"plist"];
+        NSString *bundle = [[NSBundle mainBundle] pathForResource:@"Favorite" ofType:@"plist"];
+        [[NSFileManager defaultManager] copyItemAtPath:bundle toPath:plistPath error:&error];
     }
     NSData *plistXML = [[NSFileManager defaultManager] contentsAtPath:plistPath];
     NSString *errorDesc = nil;
@@ -55,7 +57,7 @@
         NSLog(@"Error reading plist: %@, format: %d", errorDesc, format);
     }
     
-    _favourite = [NSMutableDictionary dictionaryWithDictionary:[temp objectForKey:@"Favourite"]];
+    _favourite = [NSMutableDictionary dictionaryWithDictionary:[temp objectForKey:@"Favorite"]];
     if ([[_favourite objectForKey:@"Products"] count] != 0) {
         for (NSInteger i = 0; i < [[_favourite objectForKey:@"Products"] count]; i++)
         {
@@ -71,24 +73,12 @@
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentPath = [paths objectAtIndex:0];
-    NSString *plistPath = [documentPath stringByAppendingFormat:@"Data.plist"];
-    
-    NSString *errorDesc = nil;
+    NSString *plistPath = [documentPath stringByAppendingPathComponent:@"Favorite.plist"];
     NSArray *products = _favouriteProducts;
     NSDictionary *favourite = [NSDictionary dictionaryWithObject:products forKey:@"Products"];
     
-    NSDictionary *plistDict = [NSDictionary dictionaryWithObject:favourite forKey:@"Favourite"];
-    
-    NSData *plistData = [NSPropertyListSerialization dataFromPropertyList:plistDict format:NSPropertyListXMLFormat_v1_0 errorDescription:&errorDesc];
-    
-    if (plistData) {
-        [plistData writeToFile:plistPath atomically:YES];
-    }
-    else
-    {
-        NSLog(@"Error in save: %@", errorDesc);
-        [errorDesc release];
-    }
+    NSDictionary *plistDict = [NSDictionary dictionaryWithObject:favourite forKey:@"Favorite"];
+    [plistDict writeToFile:plistPath atomically:YES];
 }
 
 -(void) addFavouriteProduct:(NSInteger)pid

@@ -311,11 +311,13 @@
             [smallButton addTarget:self action:@selector(gotoProductDetails:) forControlEvents:UIControlEventTouchUpInside];
             [smallButton setTag:i];
             [smallButton setImageEdgeInsets:UIEdgeInsetsMake(padding, sidePadding, bottomPadding, sidePadding)];
+            //[smallButton setImage:DEFAULT_LOADING_IMAGE_PRODUCT forState:UIControlStateNormal];
+            [smallButton setBackgroundImage:DEFAULT_LOADING_IMAGE_PRODUCT forState:UIControlStateNormal];
             UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(sx, sy+287, 255, 20)];
             [label setTextAlignment:UITextAlignmentCenter];
             //[label setTextColor:[UIColor grayColor]];
             //[label setBackgroundColor:[UIColor redColor]];
-            [label setText:@"Loading"];
+            [label setText:@"Đang tải ..."];
             UILabel *secondLabel = [[UILabel alloc] initWithFrame:CGRectMake(sx, sy+307, 255, 20)];
             [secondLabel setTextAlignment:UITextAlignmentCenter];
             //[secondLabel setBackgroundColor:[UIColor blueColor]];

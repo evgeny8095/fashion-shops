@@ -49,6 +49,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{20, 78}, {223, 31}}</string>
 						<reference key="NSSuperview" ref="569159220"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="1022624305"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -80,6 +81,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{20, 39}, {223, 31}}</string>
 						<reference key="NSSuperview" ref="569159220"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="620211807"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -104,6 +106,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{20, 117}, {223, 31}}</string>
 						<reference key="NSSuperview" ref="569159220"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="380520915"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -126,20 +129,21 @@
 					<object class="IBUIButton" id="380520915">
 						<reference key="NSNextResponder" ref="569159220"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{37, 177}, {72, 37}}</string>
+						<string key="NSFrame">{{77, 155}, {108, 37}}</string>
 						<reference key="NSSuperview" ref="569159220"/>
-						<reference key="NSNextKeyView" ref="862989373"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<object class="NSFont" key="IBUIFont" id="490426485">
+						<object class="NSFont" key="IBUIFont">
 							<string key="NSName">Helvetica-Bold</string>
 							<double key="NSSize">15</double>
 							<int key="NSfFlags">16</int>
 						</object>
 						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">Gửi</string>
+						<string key="IBUINormalTitle">Lưu và Gửi</string>
 						<object class="NSColor" key="IBUIHighlightedTitleColor" id="207229059">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MQA</bytes>
@@ -148,43 +152,24 @@
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
-						<object class="NSColor" key="IBUINormalTitleShadowColor" id="78644433">
+						<object class="NSColor" key="IBUINormalTitleShadowColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MC41AA</bytes>
 						</object>
-					</object>
-					<object class="IBUIButton" id="862989373">
-						<reference key="NSNextResponder" ref="569159220"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{150, 177}, {72, 37}}</string>
-						<reference key="NSSuperview" ref="569159220"/>
-						<reference key="NSNextKeyView"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<int key="IBUIContentHorizontalAlignment">0</int>
-						<int key="IBUIContentVerticalAlignment">0</int>
-						<reference key="IBUIFont" ref="490426485"/>
-						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">Hủy</string>
-						<reference key="IBUIHighlightedTitleColor" ref="207229059"/>
-						<object class="NSColor" key="IBUINormalTitleColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
-						</object>
-						<reference key="IBUINormalTitleShadowColor" ref="78644433"/>
 					</object>
 					<object class="IBUILabel" id="345422361">
 						<reference key="NSNextResponder" ref="569159220"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{20, 5}, {222, 26}}</string>
 						<reference key="NSSuperview" ref="569159220"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="38730997"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">Điền thông tin cá nhân</string>
+						<string key="IBUIText">Thông tin cá nhân</string>
 						<object class="NSFont" key="IBUIFont">
 							<string key="NSName">Helvetica</string>
 							<double key="NSSize">17</double>
@@ -200,8 +185,9 @@
 						<int key="IBUITextAlignment">1</int>
 					</object>
 				</object>
-				<string key="NSFrameSize">{262.004, 225.98}</string>
+				<string key="NSFrameSize">{262.004, 200.972}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="345422361"/>
 				<reference key="IBUIBackgroundColor" ref="207229059"/>
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -280,9 +266,8 @@
 							<reference ref="620211807"/>
 							<reference ref="38730997"/>
 							<reference ref="1022624305"/>
-							<reference ref="380520915"/>
-							<reference ref="862989373"/>
 							<reference ref="345422361"/>
+							<reference ref="380520915"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -297,23 +282,18 @@
 						<reference key="parent" ref="569159220"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">11</int>
-						<reference key="object" ref="1022624305"/>
-						<reference key="parent" ref="569159220"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">12</int>
 						<reference key="object" ref="380520915"/>
 						<reference key="parent" ref="569159220"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">13</int>
-						<reference key="object" ref="862989373"/>
+						<int key="objectID">20</int>
+						<reference key="object" ref="345422361"/>
 						<reference key="parent" ref="569159220"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">20</int>
-						<reference key="object" ref="345422361"/>
+						<int key="objectID">11</int>
+						<reference key="object" ref="1022624305"/>
 						<reference key="parent" ref="569159220"/>
 					</object>
 				</object>
@@ -327,7 +307,6 @@
 					<string>10.IBPluginDependency</string>
 					<string>11.IBPluginDependency</string>
 					<string>12.IBPluginDependency</string>
-					<string>13.IBPluginDependency</string>
 					<string>20.IBPluginDependency</string>
 					<string>4.IBPluginDependency</string>
 					<string>9.IBPluginDependency</string>
@@ -336,7 +315,6 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>InfoCollectorViewController</string>
 					<string>UIResponder</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -359,7 +337,69 @@
 			<nil key="sourceID"/>
 			<int key="maxID">20</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<bool key="EncodedWithXMLCoder">YES</bool>
+				<object class="IBPartialClassDescription">
+					<string key="className">InfoCollectorViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">saveInfoOrSentRequest</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">saveInfoOrSentRequest</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">saveInfoOrSentRequest</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="outlets">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>email</string>
+							<string>fullName</string>
+							<string>phone</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UITextField</string>
+							<string>UITextField</string>
+							<string>UITextField</string>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>email</string>
+							<string>fullName</string>
+							<string>phone</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBToOneOutletInfo">
+								<string key="name">email</string>
+								<string key="candidateClassName">UITextField</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">fullName</string>
+								<string key="candidateClassName">UITextField</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">phone</string>
+								<string key="candidateClassName">UITextField</string>
+							</object>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/InfoCollectorViewController.h</string>
+					</object>
+				</object>
+			</object>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBIPadFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">

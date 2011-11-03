@@ -20,7 +20,7 @@
 
 @end
 
-@interface ProductsDetailsSliderViewController : UIViewController{
+@interface ProductsDetailsSliderViewController : UIViewController<InfoCollectorViewControllerDelegate,UIAlertViewDelegate>{
     NSString *imageStr;
     UIImage *image;
     UIButton *button;

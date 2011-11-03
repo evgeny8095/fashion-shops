@@ -57,7 +57,6 @@
     [appSrv loadTypes];
     [appSrv setDelegate:self];
     
-    
 //    _typeDict = [appSrv typeDict];
 //    _typeArray = [appSrv typeArray];
 //    // Do any additional setup after loading the view from its nib.

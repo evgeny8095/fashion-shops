@@ -61,17 +61,18 @@
 //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:searchBar];
 //    [searchBar release];
     
-    //banner
+    //top banner
+    AsyncImageView *asyncImage = [[[AsyncImageView alloc] init] autorelease];
     NSString *bannerURL = [NSString stringWithFormat:@"%@%@%@", BASE_URL, RESOURCE_PATH, @"images/banners/sub_banner5.png"];
     NSURL *bannerImageURL = [NSURL URLWithString:bannerURL];
-    UIImage *bannerImage = [[UIImage alloc] initWithData:[[NSData dataWithContentsOfURL:bannerImageURL] autorelease]];
+//    UIImage *bannerImage = [[UIImage alloc] initWithData:[[NSData dataWithContentsOfURL:bannerImageURL] autorelease]];
 //    if (bannerImage == nil) {
 //        [bannerImage release];
 //        bannerImage = [UIImage imageNamed:@"banner.jpg"];
 //    }
-    
-    [topButton setImage:bannerImage forState:UIControlStateNormal];
-    [bannerImage release];
+//    [topButton setImage:bannerImage forState:UIControlStateNormal];
+//    [bannerImage release];
+    [asyncImage loadImageFromURL:bannerImageURL forButton:topButton];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -178,6 +179,7 @@
         //UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(px, py, buttonWidth, buttonHeight)];
         [button setFrame:CGRectMake(px, py, buttonWidth, buttonHeight)];
         [button addTarget:self action:@selector(gotoSubCatalogue:) forControlEvents:UIControlEventTouchUpInside];
+        [button setImage:DEFAULT_LOADING_IMAGE_CATEGORY forState:UIControlStateNormal];
         
         //[button setImageEdgeInsets:UIEdgeInsetsMake(topPadding, sidePadding, sidePadding, sidePadding)];
         

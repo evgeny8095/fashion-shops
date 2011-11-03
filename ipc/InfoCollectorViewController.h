@@ -9,11 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "ipcGlobal.h"
 
+@protocol InfoCollectorViewControllerDelegate
+-(void) didSaveAndSentSuccessfuly;
+@end
 
 @interface InfoCollectorViewController : UIViewController {
-    
+    id<InfoCollectorViewControllerDelegate> _delegate;
 }
 
+@property (nonatomic,assign) id<InfoCollectorViewControllerDelegate> delegate;
 @property (nonatomic, retain) IBOutlet UITextField *fullName;
 @property (nonatomic, retain) IBOutlet UITextField *phone;
 @property (nonatomic, retain) IBOutlet UITextField *email;

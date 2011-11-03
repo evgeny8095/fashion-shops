@@ -330,18 +330,30 @@
 }
 
 - (void)buy:(id)sender{
-    REQ_DELEGATE(reqSrv);
+    REQ_SERVICE(reqSrv);
     [reqSrv setPid:[_product pid]];
     if ([reqSrv isInfoNull]) {
         infoCollectorViewController = [[InfoCollectorViewController alloc] initWithNibName:@"InfoCollectorViewController" bundle:nil];
         [infoCollectorViewController setPid:[_product pid]];
+        [infoCollectorViewController setDelegate:self];
         popoverController = [[UIPopoverController alloc] initWithContentViewController:infoCollectorViewController];
         [popoverController setPopoverContentSize:infoCollectorViewController.view.frame.size];
         [popoverController presentPopoverFromRect:((UIButton*)sender).frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     }
     else
     {
-        [reqSrv sentSingleProductRequest];
+        PUR_SERVICE(purSrv);
+        NSString *purString = [purSrv purchasedProductStringFormat];
+        NSRange range = [purString rangeOfString:[_product pid]];
+        NSLog(@"%@", [_product pid]);
+        if (range.length > 0) {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Thông Báo" message:@"Bạn đã từng mua sản phẩm này" delegate:self cancelButtonTitle:@"Đóng" otherButtonTitles:@"Mua lại", nil];
+            [alertView show];
+            [alertView release];
+        } else{
+            [purSrv addPurchasedProduct:[[_product pid] intValue]];
+            [reqSrv sentSingleProductRequest];
+        }
     }
 }
 
@@ -370,6 +382,25 @@
     
 	[data release];
 	data=nil;
+}
+
+#pragma mark - InfoCollector Delegate Methods
+-(void)didSaveAndSentSuccessfuly
+{
+    if (popoverController != nil) {
+        [popoverController dismissPopoverAnimated:YES];
+    }
+}
+
+#pragma mark - UIAlertView Delegate Methods
+-(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    if ([title isEqualToString:@"Mua lại"]) {
+        REQ_SERVICE(reqSrv);
+        [reqSrv setPid:[_product pid]];
+        [reqSrv sentSingleProductRequest];
+    }
 }
 
 @end

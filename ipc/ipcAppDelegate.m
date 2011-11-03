@@ -28,6 +28,10 @@
 {
     return _favService;
 }
+- (PurchaseService*) purService
+{
+    return _purService;
+}
 - (RequestService*) reqService
 {
     return _reqService;
@@ -48,6 +52,9 @@
     _dataService = [[DataService alloc] init];
     _favService = [[FavouriteService alloc] init];
     [_favService loadFavouriteProducts];
+    _purService = [[PurchaseService alloc] init];
+    [_purService loadPurchasedProducts];
+    
     _reqService = [[RequestService alloc] init];
     [_reqService loadUserInformation];
     
@@ -55,9 +62,15 @@
     self.window.rootViewController = self.tabBarController;
     
     //[[[[[self tabBarController] tabBar] items] objectAtIndex:3] setBadgeValue:@"5"];
+    //[[[[[self tabBarController] tabBar] items] objectAtIndex:4]];
     
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+- (void)ShowSetting
+{
+    NSLog(@"Show Setting View");
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

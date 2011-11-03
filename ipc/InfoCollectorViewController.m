@@ -10,7 +10,7 @@
 
 
 @implementation InfoCollectorViewController
-@synthesize fullName, phone, email, pid;
+@synthesize fullName, phone, email, pid, delegate = _delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -61,7 +61,6 @@
     Boolean flag = YES;
     if ([[fullName text] isEqualToString:@""]) {
         [fullName setPlaceholder:@"Họ và Tên đang bỏ trống"];
-        //[fullName setBorderStyle:UITextBorderStyleNone];
         [fullName setBackgroundColor:[UIColor colorWithRed:255 green:0 blue:0 alpha:0.1]];
         flag = NO;
     }
@@ -70,6 +69,7 @@
         flag = NO;
     }
     if (![self isEmailValidated:[email text]]){
+        [email setText:@""];
         [email setPlaceholder:@"Email không đúng định dạng"];
         flag = NO;
     }
@@ -80,7 +80,8 @@
 {
     if ([self validateTextField])
     {
-        REQ_DELEGATE(reqSrv);
+        REQ_SERVICE(reqSrv);
+        PUR_SERVICE(purSrv);
         NSString *fullNameString = [[NSString alloc] initWithString:[fullName text]];
         [reqSrv setFullName:fullNameString];
         [fullNameString release];
@@ -95,6 +96,8 @@
         
         [reqSrv saveUserInformation];
         [reqSrv sentSingleProductRequest];
+        [purSrv addPurchasedProduct:[[reqSrv pid] intValue]];
+        [_delegate didSaveAndSentSuccessfuly];
     }
 }
 -(BOOL) isEmailValidated:(NSString *)checkString
