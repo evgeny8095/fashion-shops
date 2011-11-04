@@ -5,11 +5,7 @@
 	<key>Favorite</key>
 	<dict>
 		<key>Products</key>
-		<array>
-			<string>1</string>
-			<string>2</string>
-			<string>3</string>
-		</array>
+		<array/>
 	</dict>
 </dict>
 </plist>

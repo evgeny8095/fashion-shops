@@ -95,9 +95,24 @@
     }
 }
 
--(void) removeAllPurchasedProducts
+-(void) clearAllPurchasedProducs
 {
+    NSError *error;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentPath = [paths objectAtIndex:0];
+    NSString *plistPath = [documentPath stringByAppendingPathComponent:@"Purchased.plist"];
     
+    if ([[NSFileManager defaultManager] fileExistsAtPath:plistPath])
+    {
+        [[NSFileManager defaultManager] removeItemAtPath:plistPath error:&error];
+//        [_purchased release];
+//        _purchased = nil;
+//        [_purchasedProducts release];
+//        _purchasedProducts = nil;
+        _purchased = [[NSMutableDictionary alloc] init];
+        _purchasedProducts = [[NSMutableArray alloc] init];
+        [self loadPurchasedProducts];
+    }
 }
 
 -(NSMutableString*) generatePurchasedString

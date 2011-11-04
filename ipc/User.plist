@@ -4,11 +4,11 @@
 <dict>
 	<key>Information</key>
 	<dict>
-		<key>Fullname</key>
-		<string>1</string>
-		<key>Phone</key>
-		<string>2</string>
 		<key>Email</key>
+		<string></string>
+		<key>Fullname</key>
+		<string></string>
+		<key>Phone</key>
 		<string></string>
 	</dict>
 </dict>

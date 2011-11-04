@@ -39,6 +39,11 @@
 		F289704A14317D3600F9F400 /* FavouriteService.m in Sources */ = {isa = PBXBuildFile; fileRef = F289704914317D3600F9F400 /* FavouriteService.m */; };
 		F289704F14317E7800F9F400 /* Favorite.plist in Resources */ = {isa = PBXBuildFile; fileRef = F289704E14317E7800F9F400 /* Favorite.plist */; };
 		F28990A21446D37200565791 /* style pad.png in Resources */ = {isa = PBXBuildFile; fileRef = F28990A11446D37200565791 /* style pad.png */; };
+		F289CCF114638F1E0009758B /* SettingMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F289CCF014638F1E0009758B /* SettingMasterViewController.m */; };
+		F289CCF614638F6D0009758B /* UserSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F289CCF414638F6D0009758B /* UserSettingViewController.m */; };
+		F289CCF714638F6D0009758B /* UserSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F289CCF514638F6D0009758B /* UserSettingViewController.xib */; };
+		F289CCFB14638FA40009758B /* FeatureSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F289CCF914638FA40009758B /* FeatureSettingViewController.m */; };
+		F289CCFC14638FA40009758B /* FeatureSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F289CCFA14638FA40009758B /* FeatureSettingViewController.xib */; };
 		F28C3917144C1EB10042285F /* heart1.png in Resources */ = {isa = PBXBuildFile; fileRef = F28C3915144C1EB10042285F /* heart1.png */; };
 		F28C3918144C1EB10042285F /* heart2.png in Resources */ = {isa = PBXBuildFile; fileRef = F28C3916144C1EB10042285F /* heart2.png */; };
 		F28C391B144C21AF0042285F /* sp silver1.png in Resources */ = {isa = PBXBuildFile; fileRef = F28C391A144C21AF0042285F /* sp silver1.png */; };
@@ -152,6 +157,14 @@
 		F289704914317D3600F9F400 /* FavouriteService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouriteService.m; sourceTree = "<group>"; };
 		F289704E14317E7800F9F400 /* Favorite.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Favorite.plist; sourceTree = "<group>"; };
 		F28990A11446D37200565791 /* style pad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "style pad.png"; sourceTree = "<group>"; };
+		F289CCEF14638F1E0009758B /* SettingMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingMasterViewController.h; sourceTree = "<group>"; };
+		F289CCF014638F1E0009758B /* SettingMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingMasterViewController.m; sourceTree = "<group>"; };
+		F289CCF314638F6D0009758B /* UserSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSettingViewController.h; sourceTree = "<group>"; };
+		F289CCF414638F6D0009758B /* UserSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSettingViewController.m; sourceTree = "<group>"; };
+		F289CCF514638F6D0009758B /* UserSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserSettingViewController.xib; sourceTree = "<group>"; };
+		F289CCF814638FA40009758B /* FeatureSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeatureSettingViewController.h; sourceTree = "<group>"; };
+		F289CCF914638FA40009758B /* FeatureSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeatureSettingViewController.m; sourceTree = "<group>"; };
+		F289CCFA14638FA40009758B /* FeatureSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeatureSettingViewController.xib; sourceTree = "<group>"; };
 		F28C3915144C1EB10042285F /* heart1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heart1.png; sourceTree = "<group>"; };
 		F28C3916144C1EB10042285F /* heart2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heart2.png; sourceTree = "<group>"; };
 		F28C391A144C21AF0042285F /* sp silver1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sp silver1.png"; sourceTree = "<group>"; };
@@ -352,6 +365,14 @@
 				F298BE8114623A0B00EBF871 /* SettingViewController.h */,
 				F298BE8214623A0B00EBF871 /* SettingViewController.m */,
 				F298BE8314623A0B00EBF871 /* SettingViewController.xib */,
+				F289CCEF14638F1E0009758B /* SettingMasterViewController.h */,
+				F289CCF014638F1E0009758B /* SettingMasterViewController.m */,
+				F289CCF314638F6D0009758B /* UserSettingViewController.h */,
+				F289CCF414638F6D0009758B /* UserSettingViewController.m */,
+				F289CCF514638F6D0009758B /* UserSettingViewController.xib */,
+				F289CCF814638FA40009758B /* FeatureSettingViewController.h */,
+				F289CCF914638FA40009758B /* FeatureSettingViewController.m */,
+				F289CCFA14638FA40009758B /* FeatureSettingViewController.xib */,
 				5AE7669213DE727800209326 /* images */,
 			);
 			path = ipc;
@@ -569,6 +590,8 @@
 				F298BE8514623A0B00EBF871 /* SettingViewController.xib in Resources */,
 				F298BE88146270FC00EBF871 /* loading_category.png in Resources */,
 				F298BE8B14629C7A00EBF871 /* loading_product.png in Resources */,
+				F289CCF714638F6D0009758B /* UserSettingViewController.xib in Resources */,
+				F289CCFC14638FA40009758B /* FeatureSettingViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -620,6 +643,9 @@
 				F29587911456987500DD96B9 /* HomeNavigationController.m in Sources */,
 				F28D0EDC1460DD39006C1793 /* PurchaseService.m in Sources */,
 				F298BE8414623A0B00EBF871 /* SettingViewController.m in Sources */,
+				F289CCF114638F1E0009758B /* SettingMasterViewController.m in Sources */,
+				F289CCF614638F6D0009758B /* UserSettingViewController.m in Sources */,
+				F289CCFB14638FA40009758B /* FeatureSettingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

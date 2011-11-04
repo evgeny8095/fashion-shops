@@ -5,9 +5,7 @@
 	<key>Purchased</key>
 	<dict>
 		<key>Products</key>
-		<array>
-			<string>1</string>
-		</array>
+		<array/>
 	</dict>
 </dict>
 </plist>

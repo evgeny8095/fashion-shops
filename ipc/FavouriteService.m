@@ -115,6 +115,26 @@
     }
 }
 
+-(void) clearAllFavoriteProducts
+{
+    NSError *error;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentPath = [paths objectAtIndex:0];
+    NSString *plistPath = [documentPath stringByAppendingPathComponent:@"Favorite.plist"];
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:plistPath])
+    {
+        [[NSFileManager defaultManager] removeItemAtPath:plistPath error:&error];
+//        [_favourite release];
+//        _favourite = nil;
+//        [_favouriteProducts release];
+//        _favouriteProducts = nil;
+        _favourite = [[NSMutableDictionary alloc] init];
+        _favouriteProducts = [[NSMutableArray alloc] init];
+        [self loadFavouriteProducts];
+    }
+}
+
 -(NSMutableString*) generateFavouriteString
 {
     

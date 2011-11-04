@@ -10,7 +10,9 @@
 
 
 @interface SettingViewController : UIViewController {
-    
+    UISplitViewController *splitViewController;
 }
+
+@property (nonatomic, retain) IBOutlet UISplitViewController *splitViewController;
 
 @end

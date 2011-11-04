@@ -21,6 +21,7 @@
 -(void) saveFavouriteProducts;
 -(void) addFavouriteProduct:(NSInteger)pid;
 -(void) removeFavouriteProduct:(NSInteger)pid;
+-(void) clearAllFavoriteProducts;
 -(NSString*) favouriteProductStringFormat;
 -(NSMutableString*) generateFavouriteString;
 

@@ -19,7 +19,7 @@
 -(void) loadPurchasedProducts;
 -(void) savePurchasedProducts;
 -(void) addPurchasedProduct:(NSInteger)pid;
--(void) removeAllPurchasedProducts;
+-(void) clearAllPurchasedProducs;
 -(NSString*) purchasedProductStringFormat;
 -(NSMutableString*) generatePurchasedString;
 
