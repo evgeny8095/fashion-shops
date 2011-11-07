@@ -17,6 +17,8 @@
 @property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
 @property (nonatomic, retain) IBOutlet UILabel *numberFav;
 @property (nonatomic, retain) IBOutlet UILabel *numberPur;
+@property (nonatomic, retain) IBOutlet UIButton *buttonFav;
+@property (nonatomic, retain) IBOutlet UIButton *buttonPur;
 
 -(IBAction) clearAllFavoriteProducts;
 -(IBAction) clearAllPurchasedProducts;

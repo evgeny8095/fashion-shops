@@ -11,13 +11,16 @@
 
 @implementation FeatureSettingViewController
 
-@synthesize toolbar, numberFav, numberPur;
+@synthesize toolbar, numberFav, numberPur, buttonFav, buttonPur;
 
 #pragma mark -
 #pragma mark View lifecycle
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [buttonFav setBackgroundImage:[[UIImage imageNamed:@"btn-black.png"] stretchableImageWithLeftCapWidth:10.0 topCapHeight:0.0] forState:UIControlStateNormal];
+    [buttonPur setBackgroundImage:[[UIImage imageNamed:@"btn-black.png"] stretchableImageWithLeftCapWidth:10.0 topCapHeight:0.0] forState:UIControlStateNormal];
+    
     NSMutableArray *items = [[self.toolbar items] mutableCopy];
     
     UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];

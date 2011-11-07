@@ -98,6 +98,13 @@
 -(void) gotResponse:(NSData*)data byRequest:(HttpRequest*)req
 {
     //NSString *response = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    for (UIWindow* window in [UIApplication sharedApplication].windows) {
+        NSArray* subviews = window.subviews;
+        if ([subviews count] > 0)
+            if ([[subviews objectAtIndex:0] isKindOfClass:[UIAlertView class]])
+                [(UIAlertView *)[subviews objectAtIndex:0] dismissWithClickedButtonIndex:[(UIAlertView *)[subviews objectAtIndex:0] cancelButtonIndex] animated:NO];
+    }
+    
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Thông Báo" message:@"Yêu cầu của quý khách đã được gửi thành công" delegate:nil cancelButtonTitle:@"Đóng" otherButtonTitles:nil];
     [alertView show];
     [alertView release];

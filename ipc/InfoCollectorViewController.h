@@ -22,6 +22,7 @@
 @property (nonatomic, retain) IBOutlet UITextField *phone;
 @property (nonatomic, retain) IBOutlet UITextField *email;
 @property (nonatomic, retain) NSString *pid;
+@property (nonatomic, retain) IBOutlet UIButton *button;
 
 -(BOOL) validateTextField;
 -(IBAction) saveInfoOrSentRequest;

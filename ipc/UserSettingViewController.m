@@ -13,13 +13,15 @@
 @implementation UserSettingViewController
 
 @synthesize toolbar;
-@synthesize fullName, phone, email;
+@synthesize fullName, phone, email, button;
 
 #pragma mark -
 #pragma mark View lifecycle
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [button setBackgroundImage:[[UIImage imageNamed:@"btn-black.png"] stretchableImageWithLeftCapWidth:10.0 topCapHeight:0.0] forState:UIControlStateNormal];
+    
     NSMutableArray *items = [[self.toolbar items] mutableCopy];
     
     UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];

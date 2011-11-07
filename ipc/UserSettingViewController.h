@@ -18,6 +18,7 @@
 @property (nonatomic, retain) IBOutlet UITextField *phone;
 @property (nonatomic, retain) IBOutlet UITextField *email;
 @property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
+@property (nonatomic, retain) IBOutlet UIButton *button;
 
 -(IBAction) changeUserInformation;
 -(BOOL) validateTextField;

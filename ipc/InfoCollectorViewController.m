@@ -10,7 +10,7 @@
 
 
 @implementation InfoCollectorViewController
-@synthesize fullName, phone, email, pid, delegate = _delegate;
+@synthesize fullName, phone, email, pid, button, delegate = _delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -39,7 +39,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    [button setBackgroundImage:[[UIImage imageNamed:@"btn-black.png"] stretchableImageWithLeftCapWidth:10.0 topCapHeight:0.0] forState:UIControlStateNormal];
 }
 
 - (void)viewDidUnload

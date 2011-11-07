@@ -20,7 +20,7 @@
 
 @implementation HomeViewController2
 
-@synthesize navController, navBar, filterPopOver, popoverController, imageView, scrollView;
+@synthesize filterPopOver, popoverController, imageView, scrollView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -134,12 +134,14 @@
     NSString *key = [NSString stringWithFormat:@"%i", typeId];
     Type *c_type = [_typeDict objectForKey:key];
     
-    navController = [[UINavigationController alloc] init];
-    navController.delegate=self;
+    [self.navigationController setDelegate:self];
     
-    [navController.view setFrame:CGRectMake(0, 0, 1024, 748)];
+    //navController = [[UINavigationController alloc] init];
+    //navController.delegate=self;
     
-    [navController.navigationBar setBarStyle:UIBarStyleBlack];
+    //[navController.view setFrame:CGRectMake(0, 0, 1024, 748)];
+    
+    //[navController.navigationBar setBarStyle:UIBarStyleBlack];
     
     SubcategoryViewController *subCategoryViewController = [[SubcategoryViewController alloc] init];
     APP_SERVICE(appSrv);
@@ -149,16 +151,20 @@
     
     subCategoryViewController.navigationItem.title = title;
     subCategoryViewController.type = typeId;
+    
+    [self.navigationController pushViewController:subCategoryViewController animated:YES];
+    [self.navigationController setDelegate:subCategoryViewController];
+    
     //subCategoryViewController.categoryDict = myCategoryDict;
     
-    [subCategoryViewController.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"HOME" style:UIBarButtonItemStylePlain target:self action:@selector(goBack)]];
+    //[subCategoryViewController.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"HOME" style:UIBarButtonItemStylePlain target:self action:@selector(goBack)]];
     
-    [navController pushViewController:subCategoryViewController animated:YES];
-    [navController setDelegate:subCategoryViewController];
+    //[navController pushViewController:subCategoryViewController animated:YES];
+    //[navController setDelegate:subCategoryViewController];
     
-    [self.view addSubview:navController.view];
+    //[self.view addSubview:navController.view];
     
-    [self flipForDuration:0.75 withAnimation:UIViewAnimationTransitionFlipFromLeft];
+    //[self flipForDuration:0.75 withAnimation:UIViewAnimationTransitionFlipFromLeft];
     
     //    [UIView animateWithDuration:0.75 
     //                     animations:^{
@@ -171,9 +177,7 @@
 }
 
 -(IBAction)goBack{
-    [navController.view removeFromSuperview];
-    [self flipForDuration:0.75 withAnimation:UIViewAnimationTransitionFlipFromRight];
-    [navController release];
+
 }
 
 - (void)flipForDuration:(NSTimeInterval)time withAnimation:(UIViewAnimationTransition)transition{
@@ -223,12 +227,13 @@
     
     NSString *title = @"Kết Quả";
     
-    navController = [[UINavigationController alloc] init];
-    navController.delegate=self;
+    //navController = [[UINavigationController alloc] init];
+    //navController.delegate=self;
+    [self.navigationController setDelegate:self];
     
-    [navController.view setFrame:CGRectMake(0, 0, 1024, 748)];
+    //[navController.view setFrame:CGRectMake(0, 0, 1024, 748)];
     
-    [navController.navigationBar setBarStyle:UIBarStyleBlack];
+    //[navController.navigationBar setBarStyle:UIBarStyleBlack];
     
     APP_SERVICE(appSrvvv);
     [appSrvvv clearFilteredProducts];
@@ -244,18 +249,19 @@
     //productSliderViewController.navigationItem.title = title;
     productSliderViewController.title = title;
     
-    [self.view addSubview:navController.view];
+    //[self.view addSubview:navController.view];
     
-    [self.navController pushViewController:productSliderViewController animated:NO];
+    //[self.navController pushViewController:productSliderViewController animated:NO];
+    [self.navigationController pushViewController:productSliderViewController animated:YES];
     
+    //[productSliderViewController.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(goBack)]];
     
-    [productSliderViewController.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(goBack)]];
+    //[navController setDelegate:productSliderViewController];
+    [self.navigationController setDelegate:productSliderViewController];
     
-    [navController setDelegate:productSliderViewController];
+    //[self.view addSubview:navController.view];
     
-    [self.view addSubview:navController.view];
-    
-    [self flipForDuration:0.75 withAnimation:UIViewAnimationTransitionFlipFromLeft];
+    //[self flipForDuration:0.75 withAnimation:UIViewAnimationTransitionFlipFromLeft];
     
     //    [UIView animateWithDuration:0.75 
     //                     animations:^{
@@ -289,7 +295,7 @@
     //search
     searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 200, 0)];
     [searchBar setDelegate:self];
-    navBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:searchBar];
+    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:searchBar]];
     
     //type buttons
     NSInteger px = 0;
@@ -336,16 +342,17 @@
 
 #pragma mark searchbar delegate
 -(void)searchBarTextDidBeginEditing:(UISearchBar *)aSearchBar{
+    NSLog(@"rect: x:%f y:%f w:%f h:%f", aSearchBar.frame.origin.x, aSearchBar.frame.origin.y, aSearchBar.frame.size.width, aSearchBar.frame.size.height);
     if (filterPopOver == nil) {
         filterPopOver = [[MyPopOverView alloc] initWithFilterType:filterTypes Brand:filterBrands Store:filterStores Categories:filterCategories];
         popoverController = [[UIPopoverController alloc] initWithContentViewController:filterPopOver];
         popoverController.passthroughViews = [NSArray arrayWithObject:aSearchBar];
         popoverController.delegate = self;
         [popoverController setPopoverContentSize:filterPopOver.view.frame.size];
-        [popoverController presentPopoverFromRect:aSearchBar.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        [popoverController presentPopoverFromRect:CGRectMake(817, 55, 200, 0) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     }
     else
-       [popoverController presentPopoverFromRect:aSearchBar.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+       [popoverController presentPopoverFromRect:CGRectMake(817, 55, 200, 0) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)aSearchBar {
