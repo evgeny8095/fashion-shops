@@ -38,7 +38,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    //[application setStatusBarHidden:YES];
     // Override point for customization after application launch.
     // Add the tab bar controller's current view as a subview of the window
     _appService = [[ApplicationService alloc] init];
@@ -65,7 +64,6 @@
     //[[[[[self tabBarController] tabBar] items] objectAtIndex:4]];
     
     [self.window makeKeyAndVisible];
-    //[application setStatusBarHidden:NO];
     return YES;
 }
 
