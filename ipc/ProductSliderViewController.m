@@ -206,9 +206,9 @@
         if (start < totalItem){
             APP_SERVICE(appSrv);
             if ([loadFrom isEqualToString:@"favourite2"])
-                [appSrv loadProductsForProductIds:ids from:start to:end];
+                [appSrv loadProductsForProductIds:ids from:start to:end forReceiver:self];
             if ([loadFrom isEqualToString:@"feature"])
-                [appSrv loadProductsOfFeatureShopFrom:start to:end inPage:nextPage];
+                [appSrv loadProductsOfFeatureShopFrom:start to:end inPage:nextPage forReceiver:self];
             if ([loadFrom isEqualToString:@"sales"])
                 [appSrv loadProductsOnSalesFrom:start to:end];
             if ([loadFrom isEqualToString:@"filter"])

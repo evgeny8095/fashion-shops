@@ -57,13 +57,14 @@
     favouriteProductsString = [favSrv favouriteProductStringFormat];
     
     if (favouriteProductsString != nil && ![favouriteProductsString isEqualToString:@""]) {
-        APP_SERVICE(appSrvvv);
+        APP_SERVICE(appSrv);
         //NSDictionary *types = [appSrvvv typeDict];
         //NSDictionary *categories = [appSrvvv categoryDict];
-        [appSrvvv loadProductsForProductIds:favouriteProductsString from:0 to:15];
+        
         
         ProductSliderViewController *productSliderViewController = [[ProductSliderViewController alloc] initForFavoriteProducts:favouriteProductsString];
-        [appSrvvv setDelegate:productSliderViewController];
+        [appSrv loadProductsForProductIds:favouriteProductsString from:0 to:15 forReceiver:productSliderViewController];
+        [appSrv setDelegate:productSliderViewController];
         //productSliderViewController.c_type = c_type;
         //productSliderViewController.c_category = c_category;
         //productSliderViewController.type = _type;

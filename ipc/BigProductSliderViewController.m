@@ -286,14 +286,9 @@
 -(void) checkFavProduct:(Product*)product
 {
     FAV_SERVICE(favSrv);
-    NSString *favString = [favSrv favouriteProductStringFormat];
-    NSRange range = [favString rangeOfString:[product pid]];
-    //NSLog(@"%@ for %@ : l:%i and r:%i", favString, [product pid], range.location, range.length);
-    if (range.length > 0) {
-        //[favSrv removeFavouriteProduct:[proString intValue]];
+    if ([[favSrv favouriteProducts] containsObject:[product pid]]) {
         self.navigationItem.rightBarButtonItem = favBarButton;
-    } else{
-        //[favSrv addFavouriteProduct:[proString intValue]];
+    }else{
         self.navigationItem.rightBarButtonItem = unFavBarButton;
     }
 }

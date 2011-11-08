@@ -233,7 +233,7 @@
     [buy setBackgroundImage:[[UIImage imageNamed:@"btn-red.png"] stretchableImageWithLeftCapWidth:10.0 topCapHeight:0.0] forState:UIControlStateNormal];
     //[buy addTarget:self action:@selector(gotoShop:) forControlEvents:UIControlEventTouchUpInside];
     [buy addTarget:self action:@selector(buy:) forControlEvents:UIControlEventTouchUpInside];
-    [buy setTitle:@"Buy" forState:UIControlStateNormal];
+    [buy setTitle:@"Mua" forState:UIControlStateNormal];
     [buy.titleLabel setFont:[UIFont fontWithName: @"Helvetica" size: 24]];
     [buy.titleLabel setFont:[UIFont boldSystemFontOfSize:24]];
     [self.view addSubview:buy];
@@ -343,14 +343,11 @@
     else
     {
         PUR_SERVICE(purSrv);
-        NSString *purString = [purSrv purchasedProductStringFormat];
-        NSRange range = [purString rangeOfString:[_product pid]];
-        NSLog(@"%@", [_product pid]);
-        if (range.length > 0) {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Thông Báo" message:@"Bạn đã từng mua sản phẩm này" delegate:self cancelButtonTitle:@"Đóng" otherButtonTitles:@"Mua lại", nil];
+        if ([[purSrv purchasedProducts] containsObject:[_product pid]]) {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Thông Báo" message:@"Quý khách đã từng mua sản phẩm này" delegate:self cancelButtonTitle:@"Đóng" otherButtonTitles:@"Mua lại", nil];
             [alertView show];
             [alertView release];
-        } else{
+        }else{
             [purSrv addPurchasedProduct:[[_product pid] intValue]];
             [reqSrv sentSingleProductRequest];
         }

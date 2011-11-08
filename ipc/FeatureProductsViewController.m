@@ -57,10 +57,10 @@
     APP_SERVICE(appSrv);
     //NSDictionary *types = [appSrvvv typeDict];
     //NSDictionary *categories = [appSrvvv categoryDict];
-    [appSrv loadProductsOfFeatureShopFrom:0 to:15 inPage:-1];
-    productArray = [appSrv featureProductArray];
     
     ProductSliderViewController *productSliderViewController = [[ProductSliderViewController alloc] initForFeatureProducts];
+    [appSrv loadProductsOfFeatureShopFrom:0 to:15 inPage:-1 forReceiver:productSliderViewController];
+    productArray = [appSrv featureProductArray];
     [appSrv setDelegate:productSliderViewController];
     //[productSliderViewController.navigationController.navigationBar ];
     //productSliderViewController.c_type = c_type;
@@ -68,7 +68,7 @@
     //productSliderViewController.type = _type;
     //productSliderViewController.category = category;
     //productSliderViewController.navigationItem.title = title;
-    productSliderViewController.title = @"FEATURE";
+    productSliderViewController.title = @"YÊU THÍCH";
     
     [self.view addSubview:navController.view];
     

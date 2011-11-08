@@ -19,10 +19,10 @@
          </expressions>
       </StackState>
       <StackState
-         stackFrameDescription = "-[RequestService saveUserInformation]:RequestService.m">
+         stackFrameDescription = "-[HomeViewController2 gotoCategory:]:HomeViewController2.m">
          <expressions>
             <expression
-               value = "_email">
+               value = "c_type.style">
             </expression>
          </expressions>
       </StackState>
@@ -35,10 +35,18 @@
          </expressions>
       </StackState>
       <StackState
-         stackFrameDescription = "-[HomeViewController2 gotoCategory:]:HomeViewController2.m">
+         stackFrameDescription = "-[RequestService saveUserInformation]:RequestService.m">
          <expressions>
             <expression
-               value = "c_type.style">
+               value = "_email">
+            </expression>
+         </expressions>
+      </StackState>
+      <StackState
+         stackFrameDescription = "-[ApplicationService didParsedFeatureProduct]:ApplicationService.m">
+         <expressions>
+            <expression
+               value = "currentReceiver">
             </expression>
          </expressions>
       </StackState>
@@ -55,6 +63,14 @@
          <expressions>
             <expression
                value = "0x4d52d90">
+            </expression>
+         </expressions>
+      </StackState>
+      <StackState
+         stackFrameDescription = "-[ApplicationService didParsedFeatureProduct]:(null)">
+         <expressions>
+            <expression
+               value = "currentReceiver">
             </expression>
          </expressions>
       </StackState>

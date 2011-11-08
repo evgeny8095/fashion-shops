@@ -40,7 +40,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.view setBackgroundColor:[UIColor redColor]];
+    [self.view setBackgroundColor:[UIColor blackColor]];
     [self.view setFrame:navigationController.view.frame];
     [self.view addSubview:navigationController.view];
     

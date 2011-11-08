@@ -13,6 +13,7 @@
 #import "StoreXMLHandler.h"
 #import "BrandXMLHandler.h"
 #import "ProductXMLHandler.h"
+#import "ProductSliderViewController.h"
 
 @implementation ApplicationService
 @synthesize delegate = _delegate, totalProduct = _totalProduct, startPosition = _startPosition, endPosition = _endPosition, totalSalesProducts = _totalSalesProduct, pagePosition = _pagePosition;
@@ -169,6 +170,14 @@
 {
     [_filteredProductArray release];
     _filteredProductArray = [[NSMutableArray alloc] init];
+}
+
+-(void) clearTypies
+{
+    [_typeDict release];
+    _typeDict = [[NSMutableDictionary alloc] init];
+    [_typeArray release];
+    _typeArray = [[NSMutableArray alloc] init];
 }
 
 #pragma mark-
@@ -342,8 +351,10 @@
     [_delegate didFinishParsingProduct:_productArray withTotalProducts:_totalProduct fromPosition:_startPosition toPosition:_endPosition];
 }
 
--(void) loadProductsForProductIds:(NSString *)ids from:(NSInteger)start to:(NSInteger)end
+-(void) loadProductsForProductIds:(NSString *)ids from:(NSInteger)start to:(NSInteger)end forReceiver:(NSObject *)receiver
 {
+    currentReceiver = receiver;
+    lastReceiver = [receiver retain];
     HttpRequest* req = [[HttpRequest alloc] initWithFinishTarget:self 
 													   andAction:@selector(gotFavouriteProducts: byRequest:)];
     NSMutableDictionary* dictionary = [[NSMutableDictionary alloc] init];
@@ -369,6 +380,11 @@
 -(void) didParsedFavouriteProduct
 {
     [_delegate didFinishParsingFavouriteProduct:_favoriteProductArray withTotalProducts:_totalProduct fromPosition:_startPosition toPosition:_endPosition];
+//    if (currentReceiver == lastReceiver) {
+//        [_delegate didFinishParsingFavouriteProduct:_favoriteProductArray withTotalProducts:_totalProduct fromPosition:_startPosition toPosition:_endPosition];
+//    }
+//    [lastReceiver release];
+//    lastReceiver = nil;
 }
 
 -(void) loadFeatureProductsList
@@ -399,8 +415,10 @@
     //empty function
 }
 
--(void) loadProductsOfFeatureShopFrom:(NSInteger)start to:(NSInteger)end inPage:(NSInteger)page
+-(void) loadProductsOfFeatureShopFrom:(NSInteger)start to:(NSInteger)end inPage:(NSInteger)page forReceiver:(NSObject *)receiver
 {
+    currentReceiver = receiver;
+    lastReceiver = [receiver retain];
     HttpRequest* req = [[HttpRequest alloc] initWithFinishTarget:self 
 													   andAction:@selector(gotFeatureProducts: byRequest:)];
     NSMutableString* strIds = [[NSMutableString alloc] initWithString:@""];
@@ -444,6 +462,11 @@
 -(void) didParsedFeatureProduct
 {
     [_delegate didFinishParsingFeatureProduct:_featureProductArray withTotalProducts:_totalProduct fromPosition:_startPosition toPosition:_endPosition inPage:_pagePosition];
+//    if (currentReceiver == lastReceiver) {
+//        [_delegate didFinishParsingFeatureProduct:_featureProductArray withTotalProducts:_totalProduct fromPosition:_startPosition toPosition:_endPosition inPage:_pagePosition];
+//    }
+//    [lastReceiver release];
+//    lastReceiver = nil;
 }
 
 -(void) loadProductsOnSalesFrom:(NSInteger)start to:(NSInteger)end

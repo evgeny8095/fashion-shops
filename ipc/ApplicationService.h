@@ -43,6 +43,8 @@
     NSInteger _endPosition;
     NSInteger _pagePosition;
     NSInteger _totalSalesProduct;
+    NSObject *currentReceiver;
+    NSObject *lastReceiver;
 }
 
 @property (nonatomic,assign) id<ApplicationServiceDelegate> delegate;
@@ -72,6 +74,7 @@
 -(void) clearFavouriteProduct;
 -(void) shuffleFeatureProductList;
 -(void) clearFilteredProducts;
+-(void) clearTypies;
 
 -(void) loadCategories;
 -(void) gotCategories:(NSData*)data byRequest:(HttpRequest*)req;
@@ -99,7 +102,7 @@
 -(void) gotProducts: (NSData*)data byRequest:(HttpRequest*)req;
 -(void) didParsedProduct;
 
--(void) loadProductsForProductIds:(NSString*)ids from:(NSInteger)start to:(NSInteger)end;
+-(void) loadProductsForProductIds:(NSString*)ids from:(NSInteger)start to:(NSInteger)end forReceiver:(NSObject*)receiver;
 -(void) gotFavouriteProducts: (NSData*)data byRequest:(HttpRequest*)req;
 -(void) didParsedFavouriteProduct;
 
@@ -107,7 +110,7 @@
 -(void) gotFeatureProductsList:(NSData *)data byRequest:(HttpRequest *)req;
 -(void) didParsedFeatureProductsList;
 
--(void) loadProductsOfFeatureShopFrom:(NSInteger)start to:(NSInteger)end inPage:(NSInteger)page;
+-(void) loadProductsOfFeatureShopFrom:(NSInteger)start to:(NSInteger)end inPage:(NSInteger)page forReceiver:(NSObject*)receiver;
 -(void) gotFeatureProducts:(NSData*)data byRequest:(HttpRequest*)req;
 -(void) didParsedFeatureProduct;
 
