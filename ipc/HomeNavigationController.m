@@ -41,6 +41,7 @@
 {
     [super viewDidLoad];
     [self.view setBackgroundColor:[UIColor redColor]];
+    [self.view setFrame:navigationController.view.frame];
     [self.view addSubview:navigationController.view];
     
     NSLog(@"%f:%f:%f:%f", self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
