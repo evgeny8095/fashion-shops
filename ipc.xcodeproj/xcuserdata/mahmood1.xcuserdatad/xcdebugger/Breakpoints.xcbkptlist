@@ -23,11 +23,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "ipc/ApplicationService.m"
-         timestampString = "341723484.229941"
+         timestampString = "342351985.150796"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "369"
-         endingLineNumber = "369"
+         startingLineNumber = "371"
+         endingLineNumber = "371"
          landmarkName = "-didParsedFavouriteProduct"
          landmarkType = "5">
       </FileBreakpoint>
@@ -79,11 +79,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "ipc/ApplicationService.m"
-         timestampString = "341809636.889903"
+         timestampString = "342351985.150796"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "489"
-         endingLineNumber = "489"
+         startingLineNumber = "491"
+         endingLineNumber = "491"
          landmarkName = "-loadFilteredProductFrom:to:hasKeywords:hasTypes:hasBrands:ofStores:inCategories:hasTopPrice:hasBottomPrice:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -93,11 +93,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "ipc/ApplicationService.m"
-         timestampString = "341809636.889903"
+         timestampString = "342351985.150796"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "525"
-         endingLineNumber = "525"
+         startingLineNumber = "527"
+         endingLineNumber = "527"
          landmarkName = "-didParsedFilteredProduct"
          landmarkType = "5">
       </FileBreakpoint>
@@ -107,11 +107,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "ipc/ApplicationService.m"
-         timestampString = "341723484.229941"
+         timestampString = "342351985.150796"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "348"
-         endingLineNumber = "348"
+         startingLineNumber = "350"
+         endingLineNumber = "350"
          landmarkName = "-loadProductsForProductIds:from:to:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -155,20 +155,6 @@
          startingLineNumber = "80"
          endingLineNumber = "80"
          landmarkName = "-afterElementStarting:withAttributes:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "ipc/ipcAppDelegate.m"
-         timestampString = "341986185.616519"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "65"
-         endingLineNumber = "65"
-         landmarkName = "-application:didFinishLaunchingWithOptions:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint

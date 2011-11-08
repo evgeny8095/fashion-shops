@@ -315,8 +315,10 @@
     HttpRequest* req = [[HttpRequest alloc] initWithFinishTarget:self 
 													   andAction:@selector(gotProducts: byRequest:)];
     NSMutableDictionary* dictionary = [[NSMutableDictionary alloc] init];
-    [dictionary setObject:[c_type tid] forKey:@"type"];
-    [dictionary setObject:[c_category cid] forKey:@"category"];
+    if (c_type != nil)
+        [dictionary setObject:[c_type tid] forKey:@"type"];
+    if (c_category != nil)
+        [dictionary setObject:[c_category cid] forKey:@"category"];
     [dictionary setObject:[NSString stringWithFormat:@"%i", start] forKey:@"start"];
     [dictionary setObject:[NSString stringWithFormat:@"%i", end] forKey:@"end"];
 	[req call:PRODUCT_URL params:dictionary];

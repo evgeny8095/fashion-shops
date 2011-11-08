@@ -30,7 +30,8 @@
 	}
     if ([elementName isEqualToString:@"name"]
         || [elementName isEqualToString:@"description"]
-        || [elementName isEqualToString:@"image"])
+        || [elementName isEqualToString:@"image"]
+        || [elementName isEqualToString:@"style"])
     {
         return _currentObject;
     }
@@ -56,15 +57,14 @@
         [_chars release];
         _chars = nil;
 	}
-    if ([elementName isEqualToString:@"name"]){
+    if ([elementName isEqualToString:@"name"])
         _currentObject.name = _chars;
-    }
-    if ([elementName isEqualToString:@"description"]) {
+    if ([elementName isEqualToString:@"description"])
         _currentObject.desc = _chars;
-    }
-    if ([elementName isEqualToString:@"image"]) {
+    if ([elementName isEqualToString:@"image"])
         _currentObject.image = _chars;
-    }
+    if ([elementName isEqualToString:@"style"])
+        _currentObject.style = [_chars intValue];
 }
 
 -(NSString*) getWrappedRootNode

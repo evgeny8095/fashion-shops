@@ -25,14 +25,11 @@
 
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
 
-@property (nonatomic, retain) IBOutlet UINavigationController *navController;
-
 -(ApplicationService*) appService;
 -(DataService*) dataService;
 -(FavouriteService*) favService;
 -(PurchaseService*) purService;
 -(RequestService*) reqService;
--(void)ShowSetting;
 
 
 @end

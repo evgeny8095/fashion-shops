@@ -35,6 +35,14 @@
          </expressions>
       </StackState>
       <StackState
+         stackFrameDescription = "-[HomeViewController2 gotoCategory:]:HomeViewController2.m">
+         <expressions>
+            <expression
+               value = "c_type.style">
+            </expression>
+         </expressions>
+      </StackState>
+      <StackState
          stackFrameDescription = "-[InfoCollectorViewController validateTextField]:InfoCollectorViewController.m">
          <expressions>
             <expression

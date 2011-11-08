@@ -48,6 +48,7 @@
 
 - (void)viewDidLoad
 {
+    [super viewDidLoad];
     filterTypes = [[NSMutableArray alloc] init];
     filterBrands = [[NSMutableArray alloc] init];
     filterStores = [[NSMutableArray alloc] init];
@@ -56,6 +57,8 @@
     APP_SERVICE(appSrv);
     [appSrv loadTypes];
     [appSrv setDelegate:self];
+    
+    //NSLog(@"%f:%f:%f:%f", self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
     
 //    _typeDict = [appSrv typeDict];
 //    _typeArray = [appSrv typeArray];
@@ -135,45 +138,37 @@
     Type *c_type = [_typeDict objectForKey:key];
     
     [self.navigationController setDelegate:self];
-    
-    //navController = [[UINavigationController alloc] init];
-    //navController.delegate=self;
-    
-    //[navController.view setFrame:CGRectMake(0, 0, 1024, 748)];
-    
-    //[navController.navigationBar setBarStyle:UIBarStyleBlack];
-    
-    SubcategoryViewController *subCategoryViewController = [[SubcategoryViewController alloc] init];
-    APP_SERVICE(appSrv);
-    [appSrv clearCategory];
-    [appSrv setDelegate:subCategoryViewController];
-    [appSrv loadCategoriesForType:c_type];
-    
-    subCategoryViewController.navigationItem.title = title;
-    subCategoryViewController.type = typeId;
-    
-    [self.navigationController pushViewController:subCategoryViewController animated:YES];
-    [self.navigationController setDelegate:subCategoryViewController];
-    
-    //subCategoryViewController.categoryDict = myCategoryDict;
-    
-    //[subCategoryViewController.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"HOME" style:UIBarButtonItemStylePlain target:self action:@selector(goBack)]];
-    
-    //[navController pushViewController:subCategoryViewController animated:YES];
-    //[navController setDelegate:subCategoryViewController];
-    
-    //[self.view addSubview:navController.view];
-    
-    //[self flipForDuration:0.75 withAnimation:UIViewAnimationTransitionFlipFromLeft];
-    
-    //    [UIView animateWithDuration:0.75 
-    //                     animations:^{
-    //                         
-    //                     }
-    //                     completion:^(BOOL finished) {
-    //                         [self.view addSubview:navController.view];
-    //                     }];
-    [subCategoryViewController release];
+    NSLog(@"%i", c_type.style);
+    if (c_type.style == 0) {
+        SubcategoryViewController *subCategoryViewController = [[SubcategoryViewController alloc] init];
+        APP_SERVICE(appSrv);
+        [appSrv clearCategory];
+        [appSrv setDelegate:subCategoryViewController];
+        [appSrv loadCategoriesForType:c_type];
+        
+        subCategoryViewController.navigationItem.title = title;
+        subCategoryViewController.type = typeId;
+        
+        [self.navigationController pushViewController:subCategoryViewController animated:YES];
+        [self.navigationController setDelegate:subCategoryViewController];
+        
+        [subCategoryViewController release];
+    }
+    if (c_type.style == 1) {
+        APP_SERVICE(appSrv);
+        [appSrv loadProductsForType:c_type forCatetory:nil from:0 to:15];
+        
+        ProductSliderViewController *productSliderViewController = [[ProductSliderViewController alloc] init];
+        [appSrv setDelegate:productSliderViewController];
+        productSliderViewController.c_type = c_type;
+        productSliderViewController.c_category = nil;
+        //productSliderViewController.navigationItem.title = [title uppercaseString];
+        productSliderViewController.title = [title uppercaseString];
+        
+        [self.navigationController pushViewController:productSliderViewController animated:YES];
+        
+        [productSliderViewController release];
+    }
 }
 
 -(IBAction)goBack{

@@ -58,30 +58,22 @@
         [_chars release];
         _chars = nil;
 	}
-    if ([elementName isEqualToString:@"name"]){
+    if ([elementName isEqualToString:@"name"])
         _currentObject.name = _chars;
-    }
-    if ([elementName isEqualToString:@"address"]) {
+    if ([elementName isEqualToString:@"address"])
         _currentObject.address = _chars;
-    }
-    if ([elementName isEqualToString:@"description"]) {
+    if ([elementName isEqualToString:@"description"])
         _currentObject.desc = _chars;
-    }
-    if ([elementName isEqualToString:@"logo"]) {
+    if ([elementName isEqualToString:@"logo"])
         _currentObject.logo = _chars;
-    }
-    if ([elementName isEqualToString:@"url"]) {
+    if ([elementName isEqualToString:@"url"])
         _currentObject.url = _chars;
-    }
-    if ([elementName isEqualToString:@"map"]) {
+    if ([elementName isEqualToString:@"map"])
         _currentObject.map = _chars;
-    }
-    if ([elementName isEqualToString:@"rating"]) {
+    if ([elementName isEqualToString:@"rating"])
         _currentObject.rating = [_chars intValue];
-    }
-    if ([elementName isEqualToString:@"phone"]) {
+    if ([elementName isEqualToString:@"phone"])
         _currentObject.phone = _chars;
-    }
     
 }
 

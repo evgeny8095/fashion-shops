@@ -22,12 +22,11 @@
     if ([elementName isEqualToString:@"brands"]){
         return _count;
     }
-    if ([elementName isEqualToString:@"brand"]) {
+    if ([elementName isEqualToString:@"brand"]){
 		_currentObject = [[Brand alloc] init];
 		return _currentObject;
 	}
-    if ([elementName isEqualToString:@"name"])
-    {
+    if ([elementName isEqualToString:@"name"]){
         return _currentObject;
     }
 	return nil;
@@ -51,9 +50,8 @@
         [_chars release];
         _chars = nil;
 	}
-    if ([elementName isEqualToString:@"name"]){
+    if ([elementName isEqualToString:@"name"])
         _currentObject.name = _chars;
-    }
 }
 
 -(NSString*) getWrappedRootNode

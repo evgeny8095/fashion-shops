@@ -62,6 +62,8 @@
 		F29198C0145510020043DF33 /* FilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F29198BE145510010043DF33 /* FilterViewController.xib */; };
 		F29198C514551AD00043DF33 /* FilterOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F29198C314551AC30043DF33 /* FilterOptionsViewController.m */; };
 		F29198C614551AD00043DF33 /* FilterOptionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F29198C414551AC60043DF33 /* FilterOptionsViewController.xib */; };
+		F291BAC414677DB9004AA07B /* HomeNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F291BAC214677DB8004AA07B /* HomeNavigationController.m */; };
+		F291BAC514677DB9004AA07B /* HomeNavigationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F291BAC314677DB8004AA07B /* HomeNavigationController.xib */; };
 		F29271A7145113B000CFDD9C /* RequestService.m in Sources */ = {isa = PBXBuildFile; fileRef = F29271A6145113B000CFDD9C /* RequestService.m */; };
 		F29271AA14514F8900CFDD9C /* User.plist in Resources */ = {isa = PBXBuildFile; fileRef = F29271A914514F8800CFDD9C /* User.plist */; };
 		F292922514501819001E6833 /* next.png in Resources */ = {isa = PBXBuildFile; fileRef = F292922314501819001E6833 /* next.png */; };
@@ -188,6 +190,10 @@
 		F29198C214551AC10043DF33 /* FilterOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterOptionsViewController.h; sourceTree = "<group>"; };
 		F29198C314551AC30043DF33 /* FilterOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterOptionsViewController.m; sourceTree = "<group>"; };
 		F29198C414551AC60043DF33 /* FilterOptionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilterOptionsViewController.xib; sourceTree = "<group>"; };
+		F291BAC114677DB8004AA07B /* HomeNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeNavigationController.h; sourceTree = "<group>"; };
+		F291BAC214677DB8004AA07B /* HomeNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeNavigationController.m; sourceTree = "<group>"; };
+		F291BAC314677DB8004AA07B /* HomeNavigationController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeNavigationController.xib; sourceTree = "<group>"; };
+		F291BAF81467D0E4004AA07B /* HomeViewController2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController2.h; sourceTree = "<group>"; };
 		F29271A5145113B000CFDD9C /* RequestService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestService.h; sourceTree = "<group>"; };
 		F29271A6145113B000CFDD9C /* RequestService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestService.m; sourceTree = "<group>"; };
 		F29271A914514F8800CFDD9C /* User.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = User.plist; sourceTree = "<group>"; };
@@ -199,7 +205,6 @@
 		F292922E145026F0001E6833 /* InfoCollectorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoCollectorViewController.h; sourceTree = "<group>"; };
 		F292922F145026F1001E6833 /* InfoCollectorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoCollectorViewController.m; sourceTree = "<group>"; };
 		F2929230145026F3001E6833 /* InfoCollectorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoCollectorViewController.xib; sourceTree = "<group>"; };
-		F2940257144D124800B0DD78 /* HomeViewController2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController2.h; sourceTree = "<group>"; };
 		F2940258144D124800B0DD78 /* HomeViewController2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController2.m; sourceTree = "<group>"; };
 		F2940259144D124800B0DD78 /* HomeViewController2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewController2.xib; sourceTree = "<group>"; };
 		F294025D144D15BB00B0DD78 /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
@@ -299,7 +304,7 @@
 		5A971E3E13DD6256008A19BE /* ipc */ = {
 			isa = PBXGroup;
 			children = (
-				F2B6493E143C4413001A3042 /* other */,
+				F2B6493E143C4413001A3042 /* other library */,
 				F289704D14317E3900F9F400 /* resource */,
 				F22BAC3A141620EC00E1A73C /* model */,
 				F2A050091418734700FD11F9 /* xml parser */,
@@ -312,7 +317,10 @@
 				5AF53EB913E63F5B0031E56C /* HomeViewController.h */,
 				5AF53EBA13E63F5B0031E56C /* HomeViewController.m */,
 				5AF53EBB13E63F5B0031E56C /* HomeViewController.xib */,
-				F2940257144D124800B0DD78 /* HomeViewController2.h */,
+				F291BAC114677DB8004AA07B /* HomeNavigationController.h */,
+				F291BAC214677DB8004AA07B /* HomeNavigationController.m */,
+				F291BAC314677DB8004AA07B /* HomeNavigationController.xib */,
+				F291BAF81467D0E4004AA07B /* HomeViewController2.h */,
 				F2940258144D124800B0DD78 /* HomeViewController2.m */,
 				F2940259144D124800B0DD78 /* HomeViewController2.xib */,
 				F299FDF614346AAE00A7F2C9 /* FeatureProductsViewController.h */,
@@ -477,7 +485,7 @@
 			name = services;
 			sourceTree = "<group>";
 		};
-		F2B6493E143C4413001A3042 /* other */ = {
+		F2B6493E143C4413001A3042 /* other library */ = {
 			isa = PBXGroup;
 			children = (
 				F2FF057E143C45AF00FAA9DE /* SSLineView.h */,
@@ -489,7 +497,7 @@
 				F2FF0588143C4B2F00FAA9DE /* SSDrawingUtilities.h */,
 				F2FF0589143C4B2F00FAA9DE /* SSDrawingUtilities.m */,
 			);
-			name = other;
+			name = "other library";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -587,6 +595,7 @@
 				F289CCF714638F6D0009758B /* UserSettingViewController.xib in Resources */,
 				F289CCFC14638FA40009758B /* FeatureSettingViewController.xib in Resources */,
 				F289CD061463EE290009758B /* btn-black.png in Resources */,
+				F291BAC514677DB9004AA07B /* HomeNavigationController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -640,6 +649,7 @@
 				F289CCF114638F1E0009758B /* SettingMasterViewController.m in Sources */,
 				F289CCF614638F6D0009758B /* UserSettingViewController.m in Sources */,
 				F289CCFB14638FA40009758B /* FeatureSettingViewController.m in Sources */,
+				F291BAC414677DB9004AA07B /* HomeNavigationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
