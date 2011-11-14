@@ -125,10 +125,10 @@
     if ([[NSFileManager defaultManager] fileExistsAtPath:plistPath])
     {
         [[NSFileManager defaultManager] removeItemAtPath:plistPath error:&error];
-//        [_favourite release];
-//        _favourite = nil;
-//        [_favouriteProducts release];
-//        _favouriteProducts = nil;
+        [_favourite release];
+        _favourite = nil;
+        [_favouriteProducts release];
+        _favouriteProducts = nil;
         _favourite = [[NSMutableDictionary alloc] init];
         _favouriteProducts = [[NSMutableArray alloc] init];
         [self loadFavouriteProducts];

@@ -71,6 +71,7 @@
   namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
 	if (_stop) return;
 	if ([elementName isEqualToString:[self getWrappedRootNode]]) {
+        [self afterElementEnding:elementName];
 		_stop = YES;
 		return;
 	}

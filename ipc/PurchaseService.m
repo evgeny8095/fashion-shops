@@ -105,10 +105,10 @@
     if ([[NSFileManager defaultManager] fileExistsAtPath:plistPath])
     {
         [[NSFileManager defaultManager] removeItemAtPath:plistPath error:&error];
-//        [_purchased release];
-//        _purchased = nil;
-//        [_purchasedProducts release];
-//        _purchasedProducts = nil;
+        [_purchased release];
+        _purchased = nil;
+        [_purchasedProducts release];
+        _purchasedProducts = nil;
         _purchased = [[NSMutableDictionary alloc] init];
         _purchasedProducts = [[NSMutableArray alloc] init];
         [self loadPurchasedProducts];

@@ -99,9 +99,10 @@
     }
     if (c_type.style == 1) {
         APP_SERVICE(appSrv);
-        [appSrv loadProductsForType:c_type forCatetory:nil from:0 to:15];
+        //[appSrv loadProductsForType:c_type forCatetory:nil from:0 to:15];
         
         ProductSliderViewController *productSliderViewController = [[ProductSliderViewController alloc] init];
+        [appSrv loadProductsForType:c_type forCatetory:nil from:0 to:7 inPage:1];
         [appSrv setDelegate:productSliderViewController];
         productSliderViewController.c_type = c_type;
         productSliderViewController.c_category = nil;
@@ -175,9 +176,10 @@
     
     APP_SERVICE(appSrvvv);
     [appSrvvv clearFilteredProducts];
-    [appSrvvv loadFilteredProductFrom:0 to:15 hasKeywords:searchString hasTypes:typeString hasBrands:brandString ofStores:storeString inCategories:categoryString hasTopPrice:@"" hasBottomPrice:@""];
     
     ProductSliderViewController *productSliderViewController = [[ProductSliderViewController alloc] initForFilteredProductsWithKeywords:searchString TypeString:typeString BrandString:brandString StoreString:storeString CategoryString:categoryString hasTopPrice:@"" andBotPrice:@""];
+    //[appSrvvv loadFilteredProductFrom:0 to:15 hasKeywords:searchString hasTypes:typeString hasBrands:brandString ofStores:storeString inCategories:categoryString hasTopPrice:@"" hasBottomPrice:@""];
+    [appSrvvv loadFilteredProductFrom:0 to:7 inPage:1 hasKeywords:searchString hasTypes:typeString hasBrands:brandString ofStores:storeString inCategories:categoryString hasTopPrice:@"" hasBottomPrice:@""];
     [appSrvvv setDelegate:productSliderViewController];
     //[productSliderViewController.navigationController.navigationBar ];
     //productSliderViewController.c_type = c_type;

@@ -206,15 +206,15 @@
         if (start < totalItem){
             APP_SERVICE(appSrv);
             if ([loadFrom isEqualToString:@"favourite2"])
-                [appSrv loadProductsForProductIds:ids from:start to:end forReceiver:self];
+                [appSrv loadProductsForProductIds:ids from:start to:end inPage:nextPage forReceiver:self];
             if ([loadFrom isEqualToString:@"feature"])
                 [appSrv loadProductsOfFeatureShopFrom:start to:end inPage:nextPage forReceiver:self];
             if ([loadFrom isEqualToString:@"sales"])
-                [appSrv loadProductsOnSalesFrom:start to:end];
+                [appSrv loadProductsOnSalesFrom:start to:end inPage:nextPage];
             if ([loadFrom isEqualToString:@"filter"])
-                [appSrv loadFilteredProductFrom:start to:end hasKeywords:searchString hasTypes:typeString hasBrands:brandString ofStores:storeString inCategories:categoryString hasTopPrice:topPrice hasBottomPrice:botPrice];
+                [appSrv loadFilteredProductFrom:start to:end inPage:nextPage hasKeywords:searchString hasTypes:typeString hasBrands:brandString ofStores:storeString inCategories:categoryString hasTopPrice:topPrice hasBottomPrice:botPrice];
             if ([loadFrom isEqualToString:@""])
-                [appSrv loadProductsForType:c_type forCatetory:c_category from:start to:end];
+                [appSrv loadProductsForType:c_type forCatetory:c_category from:start to:end inPage:nextPage];
             [loadedPage setObject:[NSNumber numberWithInteger:1] forKey:[NSString stringWithFormat:@"%i", page+1]];
         }        
     }
@@ -252,7 +252,7 @@
 
 #pragma mark -
 #pragma mark ApplicationServiceDelegate
--(void) didFinishParsing:(NSMutableArray*)c_productArray withTotalProduct:(NSInteger)total fromPostion:(NSInteger)start toPosition:(NSInteger)end inPage:(NSInteger)page
+-(void) didFinishParsing:(NSMutableArray*)c_productArray withPageDict:c_productPages withTotalProduct:(NSInteger)total fromPostion:(NSInteger)start toPosition:(NSInteger)end inPage:(NSInteger)page
 {
     if (start == 0 && page == -1) {
         NSInteger productTotal = total;
@@ -287,6 +287,7 @@
         }
         
         _productArray = c_productArray;
+        _productPages = c_productPages;
         NSLog(@"Number of loaded product %i", [_productArray count]);
         
         totalItem = productTotal;
@@ -311,16 +312,12 @@
             [smallButton addTarget:self action:@selector(gotoProductDetails:) forControlEvents:UIControlEventTouchUpInside];
             [smallButton setTag:i];
             [smallButton setImageEdgeInsets:UIEdgeInsetsMake(padding, sidePadding, bottomPadding, sidePadding)];
-            //[smallButton setImage:DEFAULT_LOADING_IMAGE_PRODUCT forState:UIControlStateNormal];
             [smallButton setBackgroundImage:DEFAULT_LOADING_IMAGE_PRODUCT forState:UIControlStateNormal];
             UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(sx, sy+287, 255, 20)];
             [label setTextAlignment:UITextAlignmentCenter];
-            //[label setTextColor:[UIColor grayColor]];
-            //[label setBackgroundColor:[UIColor redColor]];
             [label setText:@"Đang tải ..."];
             UILabel *secondLabel = [[UILabel alloc] initWithFrame:CGRectMake(sx, sy+307, 255, 20)];
             [secondLabel setTextAlignment:UITextAlignmentCenter];
-            //[secondLabel setBackgroundColor:[UIColor blueColor]];
             [secondLabel setTextColor:[UIColor grayColor]];
             [secondLabel setText:@""];
             sy = sy + 1 + smallImageWidth;
@@ -368,9 +365,122 @@
         [self loadScrollViewWithPage:1];
         
         [self loadPageWithProductsStartAt:start EndAt:end];
+    }else if (page == 1) {
+        NSInteger productTotal = total;
+        loadedPage = [[NSMutableDictionary alloc] init];
+        if ([loadFrom isEqualToString:@"feature"]) {
+            APP_SERVICE(appSrv);
+            productTotal = [[appSrv featureProductList] count];
+        }
+        totalPages = productTotal/8+1;        
+        
+        UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(162, 0, 700, 44)];
+        UILabel *titleString = [[UILabel alloc] initWithFrame:CGRectMake(0, 5, 700, 20)];
+        [titleString setTextAlignment:UITextAlignmentCenter];
+        [titleString setBackgroundColor:[UIColor clearColor]];
+        [titleString setTextColor:[UIColor whiteColor]];
+        [titleString setText:title];
+        [titleView addSubview:titleString];
+        UILabel *infoString = [[UILabel alloc] initWithFrame:CGRectMake(0, 25, 700, 14)];
+        [infoString setTextAlignment:UITextAlignmentCenter];
+        [infoString setTextColor:[UIColor whiteColor]];
+        [infoString setBackgroundColor:[UIColor clearColor]];
+        [infoString setText:[NSString stringWithFormat:@"%i sản phẩm", productTotal]];
+        [infoString setFont:[UIFont fontWithName:@"helvetica" size:12]];
+        [titleView addSubview:infoString];
+        self.navigationItem.titleView = titleView;
+        [titleString release];
+        [infoString release];
+        [titleView release];
+        
+        for (NSInteger i = 0; i<totalPages; i++) {
+            [loadedPage setObject:[NSNumber numberWithInteger:0] forKey:[NSString stringWithFormat:@"%i", i]];
+        }
+        
+        _productArray = c_productArray;
+        _productPages = c_productPages;
+        NSLog(@"Number of loaded product %i", [_productArray count]);
+        
+        totalItem = productTotal;
+        
+        NSLog(@"Total Products: %i", totalItem);
+        
+        //NSInteger c_numberProduct = [_productArray count];
+        
+        NSInteger sx = 0;
+        NSInteger sy = 0;
+        NSInteger smallSliderWidth;
+        NSInteger smallImageWidth = 327;
+        NSInteger smallImageHeight = 255;
+        
+        NSMutableArray *tempButtons = [[NSMutableArray alloc] init];
+        NSMutableArray *tempLabels = [[NSMutableArray alloc] init];
+        NSMutableArray *tempSecondLabels = [[NSMutableArray alloc] init];
+        for (NSInteger i = 0; i < totalItem; i++)
+        {
+            UIButton *smallButton = [[UIButton alloc] initWithFrame:CGRectMake(sx, sy, smallImageHeight, smallImageWidth)];
+            [smallButton setBackgroundColor:[UIColor whiteColor]];
+            [smallButton addTarget:self action:@selector(gotoProductDetails:) forControlEvents:UIControlEventTouchUpInside];
+            [smallButton setTag:i];
+            [smallButton setImageEdgeInsets:UIEdgeInsetsMake(padding, sidePadding, bottomPadding, sidePadding)];
+            [smallButton setBackgroundImage:DEFAULT_LOADING_IMAGE_PRODUCT forState:UIControlStateNormal];
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(sx, sy+287, 255, 20)];
+            [label setTextAlignment:UITextAlignmentCenter];
+            [label setText:@"Đang tải ..."];
+            UILabel *secondLabel = [[UILabel alloc] initWithFrame:CGRectMake(sx, sy+307, 255, 20)];
+            [secondLabel setTextAlignment:UITextAlignmentCenter];
+            [secondLabel setTextColor:[UIColor grayColor]];
+            [secondLabel setText:@""];
+            sy = sy + 1 + smallImageWidth;
+            if (sy > 600){
+                sy = 0;
+                sx = sx + smallImageHeight + 1;
+            }
+            [tempButtons addObject:smallButton];
+            [tempLabels addObject:label];
+            [tempSecondLabels addObject:secondLabel];
+            [smallButton release];
+            [label release];
+            [secondLabel release];
+        }
+        
+        self.buttons = tempButtons;
+        self.labels = tempLabels;
+        self.secondLabels = tempSecondLabels;
+        [tempButtons release];
+        [tempLabels release];
+        [tempSecondLabels release];
+        for(UIButton *button in buttons){
+            [productScrollView addSubview:button];
+        }
+        for(UILabel *label in labels){
+            [productScrollView addSubview:label];
+        }
+        for(UILabel *label in secondLabels){
+            [productScrollView addSubview:label];
+        }
+        
+        smallSliderWidth = (totalItem%8==0?totalItem/8:totalItem/8+1)*1024;
+        NSLog(@"scroll width: %i", smallSliderWidth);
+        productScrollView.pagingEnabled = YES;
+        productScrollView.contentSize = CGSizeMake(smallSliderWidth, 655);
+        productScrollView.backgroundColor = [UIColor grayColor];
+        productScrollView.showsHorizontalScrollIndicator = YES;
+        productScrollView.showsVerticalScrollIndicator = NO;
+        productScrollView.delegate=self;
+        
+        [self.view addSubview:productScrollView];
+        [loadedPage setObject:[NSNumber numberWithInteger:1] forKey:@"0"];
+        //[loadedPage setObject:[NSNumber numberWithInteger:1] forKey:@"1"];
+        //[self loadScrollViewWithPage:0];
+        //[self loadScrollViewWithPage:1];
+        
+        [self loadPageWithProductsForPage:page];
+        [self loadScrollViewWithPage:1];
     }else{
         if (page != -1) {
-            [self loadPageWithProductsStartAt:page*8-8 EndAt:page*8-1];
+            //[self loadPageWithProductsStartAt:page*8-8 EndAt:page*8-1];
+            [self loadPageWithProductsForPage:page];
         }
         else{
             [self loadPageWithProductsStartAt:start EndAt:end];
@@ -379,29 +489,29 @@
     }
 }
 
--(void) didFinishParsingProduct:(NSMutableArray *)c_productArray withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end
+-(void) didFinishParsingProduct:(NSMutableArray *)c_productArray withPageDict:(NSMutableDictionary *)c_productPages withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end inPage:(NSInteger)page
 {
-    [self didFinishParsing:c_productArray withTotalProduct:total fromPostion:start toPosition:end inPage:-1];
+    [self didFinishParsing:c_productArray withPageDict:c_productPages withTotalProduct:total fromPostion:start toPosition:end inPage:page];
 }
 
--(void) didFinishParsingFavouriteProduct:(NSMutableArray *)c_productArray withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end
+-(void) didFinishParsingFavouriteProduct:(NSMutableArray *)c_productArray withPageDict:c_productPages withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end inPage:(NSInteger)page
 {
-    [self didFinishParsing:c_productArray withTotalProduct:total fromPostion:start toPosition:end inPage:-1];
+    [self didFinishParsing:c_productArray withPageDict:c_productPages withTotalProduct:total fromPostion:start toPosition:end inPage:page];
 }
 
--(void) didFinishParsingFeatureProduct:(NSMutableArray *)c_productArray withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end inPage:(NSInteger)page
+-(void) didFinishParsingFeatureProduct:(NSMutableArray *)c_productArray withPageDict:c_productPages withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end inPage:(NSInteger)page
 {
-    [self didFinishParsing:c_productArray withTotalProduct:total fromPostion:start toPosition:end inPage:page];
+    [self didFinishParsing:c_productArray withPageDict:c_productPages withTotalProduct:total fromPostion:start toPosition:end inPage:page];
 }
 
--(void) didFinishParsingSalesProduct:(NSMutableArray *)c_productArray withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end
+-(void) didFinishParsingSalesProduct:(NSMutableArray *)c_productArray withPageDict:c_productPages withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end inPage:(NSInteger)page
 {
-    [self didFinishParsing:c_productArray withTotalProduct:total fromPostion:start toPosition:end inPage:-1];
+    [self didFinishParsing:c_productArray withPageDict:c_productPages withTotalProduct:total fromPostion:start toPosition:end inPage:page];
 }
 
--(void) didFinishParsingFilterProduct:(NSMutableArray *)c_productArray withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end
+-(void) didFinishParsingFilterProduct:(NSMutableArray *)c_productArray withPageDict:(NSMutableDictionary*)c_productPages withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end inPage:(NSInteger)page
 {
-    [self didFinishParsing:c_productArray withTotalProduct:total fromPostion:start toPosition:end inPage:-1];
+    [self didFinishParsing:c_productArray withPageDict:c_productPages withTotalProduct:total fromPostion:start toPosition:end inPage:page];
 }
 
 -(void) loadPageWithProductsStartAt:(NSInteger)start EndAt:(NSInteger)end
@@ -411,6 +521,57 @@
     [formatter setPositiveSuffix:@"₫"];
     for (NSInteger i = start; i <= (end > totalItem-1 ? totalItem-1 : end) ; i++) {
         Product *product = [_productArray objectAtIndex:i];
+        UIButton *button = [buttons objectAtIndex:i];
+        UILabel *label = [labels objectAtIndex:i];
+        UILabel *secondLabel = [secondLabels objectAtIndex:i];
+        //[button setTag:[[product pid] intValue]];
+        if ([[button imageView] image] == NULL) {
+            AsyncImageView *asyncImage = [[[AsyncImageView alloc] init] autorelease];
+            
+            NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@%@t-%@", BASE_URL, RESOURCE_PATH, PRODUCT_FOLDER, [product image]];
+            
+            //NSLog(@"product image: %@", urlPath);
+            
+            NSURL* url = [NSURL URLWithString:urlPath];
+            [urlPath release];
+            
+            [asyncImage loadImageFromURL:url forButton:button];
+        }
+        NSString *labelString = [[NSString alloc] initWithFormat:@"%@" ,[product name]];
+        [label setText:labelString];
+        [label setFont:[UIFont fontWithName:@"Helvetica" size:14]];
+        [labelString release];
+        
+        NSInteger currentPrice = 0;
+        if ([product discount]>0) {
+            currentPrice = [product price]*[product discount]/100;
+        }
+        
+        NSString *formattedPriceString = [formatter stringFromNumber:[NSNumber numberWithInteger:[product price]]];
+        NSString *secondLabelString;
+        if (currentPrice > 0) {
+            NSString *formattedCurrentPriceString = [formatter stringFromNumber:[NSNumber numberWithInteger:currentPrice]];
+            secondLabelString = [[NSString alloc] initWithFormat:@"(%@) - %@", formattedPriceString, formattedCurrentPriceString];
+        }
+        else
+            secondLabelString = [[NSString alloc] initWithFormat:@"%@ - %@", formattedPriceString, [[product store] name]];
+        [secondLabel setText:secondLabelString];
+        [secondLabel setFont:[UIFont fontWithName:@"Helvetica" size:12]];
+        [secondLabelString release];
+    }
+    [formatter release];
+}
+
+- (void)loadPageWithProductsForPage:(NSInteger)page
+{
+    NSInteger start = page*8-8;
+    NSInteger end = page*8-1;
+    NSArray *currentProducts = [_productPages objectForKey:[NSString stringWithFormat:@"%i", page]];
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    [formatter setPositiveFormat:@"###,###"];
+    [formatter setPositiveSuffix:@"₫"];
+    for (NSInteger i = start; i <= (end > totalItem-1 ? totalItem-1 : end) ; i++) {
+        Product *product = [currentProducts objectAtIndex:i-start];
         UIButton *button = [buttons objectAtIndex:i];
         UILabel *label = [labels objectAtIndex:i];
         UILabel *secondLabel = [secondLabels objectAtIndex:i];

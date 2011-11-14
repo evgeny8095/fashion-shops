@@ -30,7 +30,7 @@
     NSInteger _category;
     UIPopoverController *popoverController;
     MyPopOverView *myPopOver;
-    NSDictionary* _productDict;
+    NSDictionary* _productPages;
     NSMutableArray* _productArray;
     Type* c_type;
     Category* c_category;
@@ -66,7 +66,7 @@
 - (id)initForFilteredProductsWithKeywords:(NSString*)c_keywords TypeString:(NSString*)types BrandString:(NSString*)brands StoreString:(NSString*)stores CategoryString:(NSString*)categories hasTopPrice:(NSString*)c_topPrice andBotPrice:(NSString*)c_botPrice;
 - (IBAction)gotoProductDetails:(id)sender;
 - (void)filterProductList:(id)sender;
-- (void) didFinishParsing:(NSMutableArray*)c_productArray withTotalProduct:(NSInteger)total fromPostion:(NSInteger)start toPosition:(NSInteger)end inPage:(NSInteger)page;
+- (void) didFinishParsing:(NSMutableArray*)c_productArray withPageDict:c_productPages withTotalProduct:(NSInteger)total fromPostion:(NSInteger)start toPosition:(NSInteger)end inPage:(NSInteger)page;
 - (void)loadPageWithProductsStartAt:(NSInteger)start EndAt:(NSInteger)end;
-
+- (void)loadPageWithProductsForPage:(NSInteger)page;
 @end

@@ -24,6 +24,13 @@
 
 - (void)dealloc
 {
+    [popoverController release];
+    [myPopOver release];
+    [productArray release];
+    [navController release];
+    navController = nil;
+    [navBar release];
+    navBar = nil;
     [super dealloc];
 }
 
@@ -59,7 +66,9 @@
     //NSDictionary *categories = [appSrvvv categoryDict];
     
     ProductSliderViewController *productSliderViewController = [[ProductSliderViewController alloc] initForFeatureProducts];
-    [appSrv loadProductsOfFeatureShopFrom:0 to:15 inPage:-1 forReceiver:productSliderViewController];
+    //[appSrv loadProductsOfFeatureShopFrom:0 to:15 inPage:-1 forReceiver:productSliderViewController];
+    [appSrv loadProductsOfFeatureShopFrom:0 to:7 inPage:1 forReceiver:productSliderViewController];
+    //[appSrv loadProductsOfFeatureShopFrom:8 to:15 inPage:2 forReceiver:productSliderViewController];
     productArray = [appSrv featureProductArray];
     [appSrv setDelegate:productSliderViewController];
     //[productSliderViewController.navigationController.navigationBar ];

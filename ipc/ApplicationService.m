@@ -27,14 +27,22 @@
         _typeArray = [[NSMutableArray alloc] init];
         _storeDict = [[NSMutableDictionary alloc] init];
         _brandDict = [[NSMutableDictionary alloc] init];
-        _productDict = [[NSMutableDictionary alloc] init];
+        
+        _productPages = [[NSMutableDictionary alloc] init];
         _productArray = [[NSMutableArray alloc] init];
+        
         _favoriteProductArray = [[NSMutableArray alloc] init];
+        _favoriteProductPages = [[NSMutableDictionary alloc] init];
+        
         _featureProductList = [[NSMutableArray alloc] init];
         _featureProductArray = [[NSMutableArray alloc] init];
+        _featureProductPages = [[NSMutableDictionary alloc] init];
+        
         _salesProductArray = [[NSMutableArray alloc] init];
+        _salesProductPages = [[NSMutableDictionary alloc] init];
+        
         _filteredProductArray = [[NSMutableArray alloc] init];
-        NSLog(@"Link: %@", CATEGORIES_URL);
+        _filteredProductPages = [[NSMutableDictionary alloc] init];
 	} 
 	return self;	
 }
@@ -74,9 +82,9 @@
     return _brandDict;
 }
 
--(NSMutableDictionary*) productDict
+-(NSMutableDictionary*) productPages
 {
-    return _productDict;
+    return _productPages;
 }
 
 -(NSMutableArray*) productArray
@@ -117,7 +125,7 @@
     [_typeDict release];
     [_storeDict release];
     [_brandDict release];
-    [_productDict release];
+    [_productPages release];
     [_productArray release];
     [_favoriteProductArray release];
     [_featureProductArray release];
@@ -138,22 +146,29 @@
 
 -(void) clearProducts
 {
-    [_productDict release];
-    _productDict = [[NSMutableDictionary alloc] init];
+    [_productPages release];
+    _productPages = [[NSMutableDictionary alloc] init];
     [_productArray release];
     _productArray = [[NSMutableArray alloc] init];
+    for (NSInteger i = 0; i < 1000; i++) {
+        [_productArray addObject:[[Product alloc] init]];
+    }
 }
 
 -(void) clearSalesProducts
 {
     [_salesProductArray release];
     _salesProductArray = [[NSMutableArray alloc] init];
+    [_salesProductPages release];
+    _salesProductPages = [[NSMutableDictionary alloc] init];
 }
 
 -(void) clearFavouriteProduct
 {
     [_favoriteProductArray release];
     _favoriteProductArray = [[NSMutableArray alloc] init];
+    [_favoriteProductPages release];
+    _favoriteProductPages = [[NSMutableDictionary alloc] init];
 }
 
 -(void) shuffleFeatureProductList
@@ -170,6 +185,8 @@
 {
     [_filteredProductArray release];
     _filteredProductArray = [[NSMutableArray alloc] init];
+    [_filteredProductPages release];
+    _filteredProductPages = [[NSMutableDictionary alloc] init];
 }
 
 -(void) clearTypies
@@ -320,7 +337,8 @@
 	[req release];
 }
 
--(void) loadProductsForType:(Type*)c_type forCatetory:(Category*)c_category from:(NSInteger)start to:(NSInteger)end{
+-(void) loadProductsForType:(Type*)c_type forCatetory:(Category*)c_category from:(NSInteger)start to:(NSInteger)end inPage:(NSInteger)page
+{
     HttpRequest* req = [[HttpRequest alloc] initWithFinishTarget:self 
 													   andAction:@selector(gotProducts: byRequest:)];
     NSMutableDictionary* dictionary = [[NSMutableDictionary alloc] init];
@@ -330,6 +348,7 @@
         [dictionary setObject:[c_category cid] forKey:@"category"];
     [dictionary setObject:[NSString stringWithFormat:@"%i", start] forKey:@"start"];
     [dictionary setObject:[NSString stringWithFormat:@"%i", end] forKey:@"end"];
+    [dictionary setObject:[NSString stringWithFormat:@"%i", page] forKey:@"page"];
 	[req call:PRODUCT_URL params:dictionary];
     [dictionary release];
 	[req release];
@@ -338,7 +357,7 @@
 -(void)gotProducts:(NSData *)data byRequest:(HttpRequest *)req
 {
 	//NSLog(@"products: %s", data.bytes);
-    ProductXMLHandler* handler = [[ProductXMLHandler alloc] initWithProductDict:_productDict productArray:_productArray andApplication:(ApplicationService*)self];
+    ProductXMLHandler* handler = [[ProductXMLHandler alloc] initWithProductDict:_productPages productArray:_productArray andApplication:(ApplicationService*)self];
     [handler setEndDocumentTarget:self andAction:@selector(didParsedProduct)];
 	NSXMLParser* parser = [[[NSXMLParser alloc] initWithData:data] autorelease];
 	parser.delegate = handler;
@@ -348,19 +367,20 @@
 
 -(void) didParsedProduct
 {
-    [_delegate didFinishParsingProduct:_productArray withTotalProducts:_totalProduct fromPosition:_startPosition toPosition:_endPosition];
+    [_delegate didFinishParsingProduct:_productArray withPageDict:_productPages withTotalProducts:_totalProduct fromPosition:_startPosition toPosition:_endPosition inPage:_pagePosition];
 }
 
--(void) loadProductsForProductIds:(NSString *)ids from:(NSInteger)start to:(NSInteger)end forReceiver:(NSObject *)receiver
+-(void) loadProductsForProductIds:(NSString *)ids from:(NSInteger)start to:(NSInteger)end inPage:(NSInteger)page forReceiver:(id)receiver
 {
     currentReceiver = receiver;
-    lastReceiver = [receiver retain];
+    //lastReceiver = [receiver retain];
     HttpRequest* req = [[HttpRequest alloc] initWithFinishTarget:self 
 													   andAction:@selector(gotFavouriteProducts: byRequest:)];
     NSMutableDictionary* dictionary = [[NSMutableDictionary alloc] init];
     [dictionary setObject:ids forKey:@"ids"];
     [dictionary setObject:[NSString stringWithFormat:@"%i", start] forKey:@"start"];
     [dictionary setObject:[NSString stringWithFormat:@"%i", end] forKey:@"end"];
+    [dictionary setObject:[NSString stringWithFormat:@"%i", page] forKey:@"page"];
     [req call:PRODUCT_URL params:dictionary];
     [dictionary release];
 	[req release];
@@ -369,7 +389,7 @@
 -(void)gotFavouriteProducts:(NSData *)data byRequest:(HttpRequest *)req
 {
 	//NSLog(@"products: %s", data.bytes);
-    ProductXMLHandler* handler = [[ProductXMLHandler alloc] initWithProductDict:_productDict productArray:_favoriteProductArray andApplication:(ApplicationService*)self];
+    ProductXMLHandler* handler = [[ProductXMLHandler alloc] initWithProductDict:_favoriteProductPages productArray:_favoriteProductArray andApplication:(ApplicationService*)self];
     [handler setEndDocumentTarget:self andAction:@selector(didParsedFavouriteProduct)];
 	NSXMLParser* parser = [[[NSXMLParser alloc] initWithData:data] autorelease];
 	parser.delegate = handler;
@@ -379,12 +399,7 @@
 
 -(void) didParsedFavouriteProduct
 {
-    [_delegate didFinishParsingFavouriteProduct:_favoriteProductArray withTotalProducts:_totalProduct fromPosition:_startPosition toPosition:_endPosition];
-//    if (currentReceiver == lastReceiver) {
-//        [_delegate didFinishParsingFavouriteProduct:_favoriteProductArray withTotalProducts:_totalProduct fromPosition:_startPosition toPosition:_endPosition];
-//    }
-//    [lastReceiver release];
-//    lastReceiver = nil;
+    [_delegate didFinishParsingFavouriteProduct:_favoriteProductArray withPageDict:_favoriteProductPages withTotalProducts:_totalProduct fromPosition:_startPosition toPosition:_endPosition inPage:_pagePosition];
 }
 
 -(void) loadFeatureProductsList
@@ -402,7 +417,7 @@
 -(void)gotFeatureProductsList:(NSData *)data byRequest:(HttpRequest *)req
 {
 	//NSLog(@"products: %s", data.bytes);
-    ProductXMLHandler* handler = [[ProductXMLHandler alloc] initWithProductDict:_productDict productArray:_featureProductList andApplication:(ApplicationService*)self];
+    ProductXMLHandler* handler = [[ProductXMLHandler alloc] initWithProductDict:_productPages productArray:_featureProductList andApplication:(ApplicationService*)self];
     [handler setEndDocumentTarget:self andAction:@selector(didParsedFeatureProductsList)];
 	NSXMLParser* parser = [[[NSXMLParser alloc] initWithData:data] autorelease];
 	parser.delegate = handler;
@@ -415,10 +430,10 @@
     //empty function
 }
 
--(void) loadProductsOfFeatureShopFrom:(NSInteger)start to:(NSInteger)end inPage:(NSInteger)page forReceiver:(NSObject *)receiver
+-(void) loadProductsOfFeatureShopFrom:(NSInteger)start to:(NSInteger)end inPage:(NSInteger)page forReceiver:(id)receiver
 {
     currentReceiver = receiver;
-    lastReceiver = [receiver retain];
+    //lastReceiver = [receiver retain];
     HttpRequest* req = [[HttpRequest alloc] initWithFinishTarget:self 
 													   andAction:@selector(gotFeatureProducts: byRequest:)];
     NSMutableString* strIds = [[NSMutableString alloc] initWithString:@""];
@@ -451,7 +466,7 @@
 -(void) gotFeatureProducts: (NSData*)data byRequest:(HttpRequest*)req
 {
     //NSLog(@"products: %s", data.bytes);
-    ProductXMLHandler* handler = [[ProductXMLHandler alloc] initWithProductDict:_productDict productArray:_featureProductArray andApplication:(ApplicationService*)self];
+    ProductXMLHandler* handler = [[ProductXMLHandler alloc] initWithProductDict:_featureProductPages productArray:_featureProductArray andApplication:(ApplicationService*)self];
     [handler setEndDocumentTarget:self andAction:@selector(didParsedFeatureProduct)];
 	NSXMLParser* parser = [[[NSXMLParser alloc] initWithData:data] autorelease];
 	parser.delegate = handler;
@@ -461,15 +476,13 @@
 
 -(void) didParsedFeatureProduct
 {
-    [_delegate didFinishParsingFeatureProduct:_featureProductArray withTotalProducts:_totalProduct fromPosition:_startPosition toPosition:_endPosition inPage:_pagePosition];
-//    if (currentReceiver == lastReceiver) {
-//        [_delegate didFinishParsingFeatureProduct:_featureProductArray withTotalProducts:_totalProduct fromPosition:_startPosition toPosition:_endPosition inPage:_pagePosition];
-//    }
-//    [lastReceiver release];
-//    lastReceiver = nil;
+    if ([currentReceiver isKindOfClass:[ProductSliderViewController class]])
+        [_delegate didFinishParsingFeatureProduct:_featureProductArray withPageDict:_featureProductPages withTotalProducts:_totalProduct fromPosition:_startPosition toPosition:_endPosition inPage:_pagePosition];
+    else{}
+    //[currentReceiver release];
 }
 
--(void) loadProductsOnSalesFrom:(NSInteger)start to:(NSInteger)end
+-(void) loadProductsOnSalesFrom:(NSInteger)start to:(NSInteger)end inPage:(NSInteger)page
 {
     HttpRequest* req = [[HttpRequest alloc] initWithFinishTarget:self
 													   andAction:@selector(gotSalesProducts: byRequest:)];
@@ -477,6 +490,7 @@
     [dictionary setObject:@"1" forKey:@"sale"];
     [dictionary setObject:[NSString stringWithFormat:@"%i", start] forKey:@"start"];
     [dictionary setObject:[NSString stringWithFormat:@"%i", end] forKey:@"end"];
+    [dictionary setObject:[NSString stringWithFormat:@"%i", page] forKey:@"page"];
     [req call:PRODUCT_URL params:dictionary];
     [dictionary release];
 	[req release];
@@ -485,7 +499,7 @@
 -(void) gotSalesProducts:(NSData *)data byRequest:(HttpRequest *)req
 {
     //NSLog(@"products: %s", data.bytes);
-    ProductXMLHandler* handler = [[ProductXMLHandler alloc] initWithProductDict:_productDict productArray:_salesProductArray andApplication:(ApplicationService*)self];
+    ProductXMLHandler* handler = [[ProductXMLHandler alloc] initWithProductDict:_salesProductPages productArray:_salesProductArray andApplication:(ApplicationService*)self];
     [handler setEndDocumentTarget:self andAction:@selector(didParsedSalesProducts)];
 	NSXMLParser* parser = [[[NSXMLParser alloc] initWithData:data] autorelease];
 	parser.delegate = handler;
@@ -496,11 +510,12 @@
 -(void) didParsedSalesProducts
 {
     _totalSalesProduct = _totalProduct;
-    [_delegate didFinishParsingSalesProduct:_salesProductArray withTotalProducts:_totalProduct fromPosition:_startPosition toPosition:_endPosition];
+    [_delegate didFinishParsingSalesProduct:_salesProductArray withPageDict:_salesProductPages withTotalProducts:_totalProduct fromPosition:_startPosition toPosition:_endPosition inPage:_pagePosition];
 }
 
 -(void) loadFilteredProductFrom:(NSInteger)start
                              to:(NSInteger)end
+                         inPage:(NSInteger)page
                     hasKeywords:(NSString*)keywords
                        hasTypes:(NSString *)typies
                       hasBrands:(NSString *)brands
@@ -529,6 +544,7 @@
     
     [dictionary setObject:[NSString stringWithFormat:@"%i", start] forKey:@"start"];
     [dictionary setObject:[NSString stringWithFormat:@"%i", end] forKey:@"end"];
+    [dictionary setObject:[NSString stringWithFormat:@"%i", page] forKey:@"page"];
     [req call:PRODUCT_URL params:dictionary];
     [dictionary release];
 	[req release];
@@ -537,7 +553,7 @@
 -(void) gotFilteredProduct:(NSData *)data byRequest:(HttpRequest *)req
 {
     //NSLog(@"products: %s", data.bytes);
-    ProductXMLHandler* handler = [[ProductXMLHandler alloc] initWithProductDict:_productDict productArray:_filteredProductArray andApplication:(ApplicationService*)self];
+    ProductXMLHandler* handler = [[ProductXMLHandler alloc] initWithProductDict:_filteredProductPages productArray:_filteredProductArray andApplication:(ApplicationService*)self];
     [handler setEndDocumentTarget:self andAction:@selector(didParsedFilteredProduct)];
 	NSXMLParser* parser = [[[NSXMLParser alloc] initWithData:data] autorelease];
 	parser.delegate = handler;
@@ -547,7 +563,7 @@
 
 -(void) didParsedFilteredProduct
 {
-    [_delegate didFinishParsingFilterProduct:_filteredProductArray withTotalProducts:_totalProduct fromPosition:_startPosition toPosition:_endPosition];
+    [_delegate didFinishParsingFilterProduct:_filteredProductArray withPageDict:_filteredProductPages withTotalProducts:_totalProduct fromPosition:_startPosition toPosition:_endPosition inPage:_pagePosition];
 }
 
 @end

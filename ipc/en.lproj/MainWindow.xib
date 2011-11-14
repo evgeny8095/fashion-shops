@@ -60,7 +60,6 @@
 							<string key="NSResourceName">171-sun.png</string>
 						</object>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<reference key="IBUITabBar" ref="116321709"/>
 					</object>
 					<object class="NSArray" key="IBUIToolbarItems" id="0">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -84,7 +83,6 @@
 								<string key="NSResourceName">53-house.png</string>
 							</object>
 							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-							<reference key="IBUITabBar" ref="116321709"/>
 						</object>
 						<reference key="IBUIToolbarItems" ref="0"/>
 						<reference key="IBUIParentViewController" ref="395037606"/>
@@ -104,7 +102,6 @@
 								<string key="NSResourceName">28-star.png</string>
 							</object>
 							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-							<reference key="IBUITabBar" ref="116321709"/>
 						</object>
 						<reference key="IBUIToolbarItems" ref="0"/>
 						<reference key="IBUIParentViewController" ref="395037606"/>
@@ -124,7 +121,6 @@
 								<string key="NSResourceName">29-heart.png</string>
 							</object>
 							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-							<reference key="IBUITabBar" ref="116321709"/>
 						</object>
 						<reference key="IBUIToolbarItems" ref="0"/>
 						<reference key="IBUIParentViewController" ref="395037606"/>
@@ -145,7 +141,6 @@
 								<string key="NSResourceName">19-gear.png</string>
 							</object>
 							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-							<reference key="IBUITabBar" ref="116321709"/>
 						</object>
 						<reference key="IBUIToolbarItems" ref="0"/>
 						<reference key="IBUIParentViewController" ref="395037606"/>
@@ -161,9 +156,8 @@
 				<object class="IBUITabBar" key="IBUITabBar" id="116321709">
 					<reference key="NSNextResponder"/>
 					<int key="NSvFlags">266</int>
-					<string key="NSFrame">{{0, 719}, {1024, 49}}</string>
+					<string key="NSFrame">{{7.10543e-15, 719}, {1024, 49}}</string>
 					<reference key="NSSuperview"/>
-					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView"/>
 					<object class="NSColor" key="IBUIBackgroundColor">
 						<int key="NSColorSpace">3</int>
@@ -171,15 +165,6 @@
 					</object>
 					<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 					<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-					<object class="NSMutableArray" key="IBUIItems">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<reference ref="384755993"/>
-						<reference ref="481100180"/>
-						<reference ref="913957329"/>
-						<reference ref="987324218"/>
-						<reference ref="52619006"/>
-					</object>
-					<reference key="IBUISelectedItem" ref="987324218"/>
 				</object>
 			</object>
 			<object class="IBUIWindow" id="488766392">
@@ -187,7 +172,6 @@
 				<int key="NSvFlags">292</int>
 				<string key="NSFrameSize">{768, 1024}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>

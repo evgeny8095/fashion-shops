@@ -13,13 +13,13 @@
 @protocol ApplicationServiceDelegate
 
 @optional
--(void) didFinishParsingCategory:(NSMutableDictionary*)categoryDict andArray:(NSMutableArray*)categoryArray;
--(void) didFinishParsingProduct:(NSMutableArray *)c_productArray withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end;
--(void) didFinishParsingFavouriteProduct:(NSMutableArray *)c_productArray withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end;
--(void) didFinishParsingFeatureProduct:(NSMutableArray *)c_productArray withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end inPage:(NSInteger)page;
--(void) didFinishParsingSalesProduct:(NSMutableArray *)c_productArray withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end;
 -(void) didFinishParsingType:(NSMutableDictionary*)typeDict andArray:(NSMutableArray*)typeArray;
--(void) didFinishParsingFilterProduct:(NSMutableArray*)c_productArray withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end;
+-(void) didFinishParsingCategory:(NSMutableDictionary*)categoryDict andArray:(NSMutableArray*)categoryArray;
+-(void) didFinishParsingProduct:(NSMutableArray *)c_productArray withPageDict:(NSMutableDictionary *)c_productPages withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end inPage:(NSInteger)page;
+-(void) didFinishParsingFavouriteProduct:(NSMutableArray *)c_productArray withPageDict:(NSMutableDictionary *)c_productPages withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end inPage:(NSInteger)page;
+-(void) didFinishParsingFeatureProduct:(NSMutableArray *)c_productArray withPageDict:(NSMutableDictionary*)c_productPages withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end inPage:(NSInteger)page;
+-(void) didFinishParsingSalesProduct:(NSMutableArray *)c_productArray withPageDict:(NSMutableDictionary *)c_productPages withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end inPage:(NSInteger)page;
+-(void) didFinishParsingFilterProduct:(NSMutableArray*)c_productArray withPageDict:(NSMutableDictionary *)c_productPages withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end inPage:(NSInteger)page;
 @end
 
 @interface ApplicationService : NSObject {
@@ -30,21 +30,31 @@
     NSMutableArray* _typeArray;
     NSMutableDictionary* _storeDict;
     NSMutableDictionary* _brandDict;
-    NSMutableDictionary* _productDict;
+    
     NSMutableArray* _productArray;
+    NSMutableDictionary* _productPages;
+    
     NSMutableArray* _favoriteProductArray;
-    NSMutableArray* _featureProductArray;
+    NSMutableDictionary* _favoriteProductPages;
+    
     NSMutableArray* _featureProductList;
+    NSMutableArray* _featureProductArray;
+    NSMutableDictionary* _featureProductPages;
+    
     NSMutableArray* _salesProductArray;
+    NSMutableDictionary* _salesProductPages;
+    
     NSMutableArray* _filteredProductArray;
+    NSMutableDictionary* _filteredProductPages;
+    
 	id<ApplicationServiceDelegate> _delegate;
     NSInteger _totalProduct;
     NSInteger _startPosition;
     NSInteger _endPosition;
     NSInteger _pagePosition;
     NSInteger _totalSalesProduct;
-    NSObject *currentReceiver;
-    NSObject *lastReceiver;
+    id currentReceiver;
+    id lastReceiver;
 }
 
 @property (nonatomic,assign) id<ApplicationServiceDelegate> delegate;
@@ -61,7 +71,7 @@
 -(NSMutableArray*) typeArray;
 -(NSMutableDictionary*) storeDict;
 -(NSMutableDictionary*) brandDict;
--(NSMutableDictionary*) productDict;
+-(NSMutableDictionary*) productPages;
 -(NSMutableArray*) productArray;
 -(NSMutableArray*) favouriteProductArray;
 -(NSMutableArray*) featureProductArray;
@@ -98,11 +108,12 @@
 
 -(void) loadProducts;
 -(void) loadProductsForType:(Type*)c_type forCatetory:(Category*)c_category;
--(void) loadProductsForType:(Type*)c_type forCatetory:(Category*)c_category from:(NSInteger)start to:(NSInteger)end;
+
+-(void) loadProductsForType:(Type*)c_type forCatetory:(Category*)c_category from:(NSInteger)start to:(NSInteger)end inPage:(NSInteger)page;
 -(void) gotProducts: (NSData*)data byRequest:(HttpRequest*)req;
 -(void) didParsedProduct;
 
--(void) loadProductsForProductIds:(NSString*)ids from:(NSInteger)start to:(NSInteger)end forReceiver:(NSObject*)receiver;
+-(void) loadProductsForProductIds:(NSString*)ids from:(NSInteger)start to:(NSInteger)end inPage:(NSInteger)page forReceiver:(id)receiver;
 -(void) gotFavouriteProducts: (NSData*)data byRequest:(HttpRequest*)req;
 -(void) didParsedFavouriteProduct;
 
@@ -110,15 +121,15 @@
 -(void) gotFeatureProductsList:(NSData *)data byRequest:(HttpRequest *)req;
 -(void) didParsedFeatureProductsList;
 
--(void) loadProductsOfFeatureShopFrom:(NSInteger)start to:(NSInteger)end inPage:(NSInteger)page forReceiver:(NSObject*)receiver;
+-(void) loadProductsOfFeatureShopFrom:(NSInteger)start to:(NSInteger)end inPage:(NSInteger)page forReceiver:(id)receiver;
 -(void) gotFeatureProducts:(NSData*)data byRequest:(HttpRequest*)req;
 -(void) didParsedFeatureProduct;
 
--(void) loadProductsOnSalesFrom:(NSInteger)start to:(NSInteger)end;
+-(void) loadProductsOnSalesFrom:(NSInteger)start to:(NSInteger)end inPage:(NSInteger)page;
 -(void) gotSalesProducts:(NSData*)data byRequest:(HttpRequest*)req;
 -(void) didParsedSalesProducts;
 
--(void) loadFilteredProductFrom:(NSInteger)start to:(NSInteger)end hasKeywords:(NSString*)keywords hasTypes:(NSString*)typies hasBrands:(NSString*)brands ofStores:(NSString*)stores inCategories:(NSString*)categories hasTopPrice:(NSString*)topPrice hasBottomPrice:(NSString*)bottomPrice;
+-(void) loadFilteredProductFrom:(NSInteger)start to:(NSInteger)end inPage:(NSInteger)page hasKeywords:(NSString*)keywords hasTypes:(NSString*)typies hasBrands:(NSString*)brands ofStores:(NSString*)stores inCategories:(NSString*)categories hasTopPrice:(NSString*)topPrice hasBottomPrice:(NSString*)bottomPrice;
 -(void) gotFilteredProduct:(NSData*)data byRequest:(HttpRequest*)req;
 -(void) didParsedFilteredProduct;
 

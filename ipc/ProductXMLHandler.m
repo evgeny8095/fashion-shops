@@ -10,9 +10,9 @@
 
 
 @implementation ProductXMLHandler
--(id) initWithProductDict:(NSMutableDictionary *)productDict productArray:(NSMutableArray*)productArray andApplication:(ApplicationService *)AppSer{
+-(id) initWithProductDict:(NSMutableDictionary *)productPages productArray:(NSMutableArray*)productArray andApplication:(ApplicationService *)AppSer{
     if (self = [super init]) {
-        _productDict = productDict;
+        _productPages = productPages;
         _productArray = productArray;
         _typeDict = nil;
         _categoryDict = nil;
@@ -21,6 +21,7 @@
         c_storeDict = [AppSer storeDict];
         c_brandDict = [AppSer brandDict];
         c_appSrv = AppSer;
+        _currentProducts = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -85,9 +86,15 @@
 }
 
 -(void) afterElementEnding:(NSString *)elementName{
+    if ([elementName isEqualToString:@"products"]) {
+        if (pagePosition != -1) {
+            [_productPages setObject:_currentProducts forKey:[NSString stringWithFormat:@"%i", pagePosition]];
+            [_currentProducts release];
+        }
+    }
     if ([elementName isEqualToString:@"product"]) {
-        //[_productDict setObject:_currentObject forKey:_currentObject.pid];
         [_productArray addObject:_currentObject];
+        [_currentProducts addObject:_currentObject];
 		[_currentObject release];
 		_currentObject = nil;
         [_chars release];
@@ -95,7 +102,6 @@
 	}
     if ([elementName isEqualToString:@"name"]){
         _currentObject.name = _chars;
-        //NSLog(@"name: %@", _chars);
     }
     if ([elementName isEqualToString:@"price"]) {
         _currentObject.price = [_chars intValue];

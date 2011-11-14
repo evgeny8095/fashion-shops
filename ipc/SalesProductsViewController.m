@@ -67,9 +67,11 @@
     //Type* c_type = [types objectForKey:[NSString stringWithFormat:@"%i", _type]];
     //Category* c_category = [categories objectForKey:[NSString stringWithFormat:@"%i", category]];
     
-    [appSrvvv loadProductsOnSalesFrom:0 to:15];
+    
     
     ProductSliderViewController *productSliderViewController = [[ProductSliderViewController alloc] initForSalesProducts];
+    //[appSrvvv loadProductsOnSalesFrom:0 to:15];
+    [appSrvvv loadProductsOnSalesFrom:0 to:7 inPage:1];
     [appSrvvv setDelegate:productSliderViewController];
     //productSliderViewController.c_type = c_type;
     //productSliderViewController.c_category = c_category;
