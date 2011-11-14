@@ -53,7 +53,6 @@
     SSLineView *lineView;
     SSGradientView *gradientView;
     UIView *infoBar;
-    
     UIPopoverController *popoverController;
     InfoCollectorViewController *infoCollectorViewController;
 }

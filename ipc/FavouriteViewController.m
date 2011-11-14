@@ -71,7 +71,7 @@
         //productSliderViewController.type = _type;
         //productSliderViewController.category = category;
         //productSliderViewController.navigationItem.title = title;
-        productSliderViewController.title = @"FAVOURITE";
+        productSliderViewController.title = @"YÊU THÍCH";
         
         [self.view addSubview:navController.view];
         

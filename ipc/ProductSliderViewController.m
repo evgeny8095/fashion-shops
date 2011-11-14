@@ -166,11 +166,12 @@
 - (IBAction)gotoProductDetails:(id)sender{
     //NSString *title = ((UIButton *) sender).titleLabel.text;
     NSInteger page = ((UIButton *) sender).tag;
+    NSInteger index = page%8;
     
-    
-    BigProductSliderViewController *bigProductSliderViewController = [[BigProductSliderViewController alloc] initWithPage:page andProducts:_productArray withTotal:totalItem];
+    BigProductSliderViewController *bigProductSliderViewController = [[BigProductSliderViewController alloc] initWithPage:page andProducts:_productArray withProductPages:_productPages andIndexInPage:index withTotal:totalItem];
     bigProductSliderViewController.delegate = self;
-    bigProductSliderViewController.navigationItem.title = [[_productArray objectAtIndex:page] name];
+    //bigProductSliderViewController.navigationItem.title = [[_productArray objectAtIndex:page] name];
+    bigProductSliderViewController.navigationItem.title = [[[_productPages objectForKey:[NSString stringWithFormat:@"%i", page/8+1]] objectAtIndex:page%8] name];
     bigProductSliderViewController.type = _type;
     bigProductSliderViewController.category = _category;
     bigProductSliderViewController.item = page;
@@ -476,7 +477,7 @@
         //[self loadScrollViewWithPage:1];
         
         [self loadPageWithProductsForPage:page];
-        [self loadScrollViewWithPage:1];
+        [self loadScrollViewWithPage:0];
     }else{
         if (page != -1) {
             //[self loadPageWithProductsStartAt:page*8-8 EndAt:page*8-1];

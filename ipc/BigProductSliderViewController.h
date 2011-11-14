@@ -33,9 +33,12 @@
     NSInteger _category;
     NSInteger item;
     NSMutableArray* _productArray;
+    NSDictionary* _productPages;
+    NSInteger _index;
     UIBarButtonItem *favBarButton;
     UIBarButtonItem *unFavBarButton;
     UIView* infoBar;
+    NSMutableDictionary* loadedPage;
 }
 
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
@@ -49,7 +52,7 @@
 - (void)revealDetails:(id)sender;
 - (void)gotoDetails:(id)sender;
 - (IBAction)changePage:(id)sender;
-- (id)initWithPage:(int)page andProducts:(NSMutableArray*)products withTotal:(NSInteger)total;
+- (id)initWithPage:(int)page andProducts:(NSMutableArray *)products withProductPages:(NSDictionary*)pages andIndexInPage:(NSInteger)index withTotal:(NSInteger)total;
 - (void)favAction:(id)sender;
 - (void)unFavAction:(id)sender;
 - (void)checkFavProduct:(Product*)product;

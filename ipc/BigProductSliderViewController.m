@@ -27,14 +27,20 @@
     return self;
 }
 
-- (id)initWithPage:(int)page andProducts:(NSMutableArray *)products withTotal:(NSInteger)total
+- (id)initWithPage:(int)page andProducts:(NSMutableArray *)products withProductPages:(NSDictionary*)pages andIndexInPage:(NSInteger)index withTotal:(NSInteger)total
 {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
         cpage = page;
         viewMode = YES;
         _productArray = products;
+        _productPages = pages;
+        _index = index;
         numberOfPages = total;
+        loadedPage = [[NSMutableDictionary alloc] init];
+        for (NSInteger i = 0; i<numberOfPages; i++) {
+            [loadedPage setObject:[NSNumber numberWithInteger:0] forKey:[NSString stringWithFormat:@"%i", i]];
+        }
     }
     return self;
 }
@@ -48,13 +54,14 @@
 }
 
 - (void)dealloc{
-    [_productArray release];
+    //[_productArray release];
     [super dealloc];
 }
 
 - (void)favAction:(id)sender
 {
-    Product *product = [_productArray objectAtIndex:cpage];
+    //Product *product = [_productArray objectAtIndex:cpage];
+    Product *product = [[_productPages objectForKey:[NSString stringWithFormat:@"%i", cpage/8+1]] objectAtIndex:cpage%8];
     FAV_SERVICE(favSrv);
     [favSrv addFavouriteProduct:[[product pid] intValue]];
     [self checkFavProduct:product];
@@ -62,7 +69,8 @@
 
 - (void)unFavAction:(id)sender
 {
-    Product *product = [_productArray objectAtIndex:cpage];
+    //Product *product = [_productArray objectAtIndex:cpage];
+    Product *product = [[_productPages objectForKey:[NSString stringWithFormat:@"%i", cpage/8+1]] objectAtIndex:cpage%8];
     FAV_SERVICE(favSrv);
     [favSrv removeFavouriteProduct:[[product pid] intValue]];
     [self checkFavProduct:product];
@@ -155,7 +163,9 @@
     [numberOf setTextColor:[UIColor blackColor]];
     [infoBar addSubview:numberOf];
     [numberOf release];
-    [self changeInfoBarForProduct:[_productArray objectAtIndex:cpage] inPage:cpage inTotal:numberOfPages];
+    //[self changeInfoBarForProduct:[_productArray objectAtIndex:cpage] inPage:cpage inTotal:numberOfPages];
+    [self changeInfoBarForProduct:[[_productPages objectForKey:[NSString stringWithFormat:@"%i", cpage/8+1]] objectAtIndex:cpage%8] inPage:cpage inTotal:numberOfPages];
+    
     [self.view addSubview:infoBar];
 }
 
@@ -194,35 +204,48 @@
     if (page >= numberOfPages)
         return;
     
+    NSNumber *loaded = [loadedPage objectForKey:[NSString stringWithFormat:@"%i", page]];
+    NSInteger loadedIndicator = [loaded intValue];
+    
+    
     // replace the placeholder if necessary
     ProductsDetailsSliderViewController *controller = [viewControllers objectAtIndex:page];
-    if ((NSNull *)controller == [NSNull null])
-    {
-        controller = [[ProductsDetailsSliderViewController alloc] initwithProduct:[_productArray objectAtIndex:page] inPosition:page ofTotal:numberOfPages withMode:viewMode];
-        controller.type = _type;
-        controller.category = _category;
+    if (loadedIndicator == 0) {
+        if ((NSNull *)controller == [NSNull null])
+        {
+            //controller = [[ProductsDetailsSliderViewController alloc] initwithProduct:[_productArray objectAtIndex:page] inPosition:page ofTotal:numberOfPages withMode:viewMode];
+            controller = [[ProductsDetailsSliderViewController alloc] initwithProduct:[[_productPages objectForKey:[NSString stringWithFormat:@"%i", page/8+1]] objectAtIndex:page%8] inPosition:page ofTotal:numberOfPages withMode:viewMode];
+            controller.type = _type;
+            controller.category = _category;
+            
+            controller.delegate = self;
+            [viewControllers replaceObjectAtIndex:page withObject:controller];
+            //[controller release];
+        }else{
+            [controller changeViewMode:viewMode];
+        }
         
-        controller.delegate = self;
-        [viewControllers replaceObjectAtIndex:page withObject:controller];
-        //[controller release];
-    }else{
+        // add the controller's view to the scroll view
+        if (controller.view.superview == nil)
+        {
+            CGRect frame = scrollView.frame;
+            frame.origin.x = frame.size.width * page;
+            frame.origin.y = 0;
+            controller.view.frame = frame;
+            [scrollView addSubview:controller.view];
+        }
+        [loadedPage setObject:[NSNumber numberWithInteger:1] forKey:[NSString stringWithFormat:@"%i", page]];
+    }
+    else if ((NSNull *)controller != [NSNull null]){
         [controller changeViewMode:viewMode];
     }
-    
-    // add the controller's view to the scroll view
-    if (controller.view.superview == nil)
-    {
-        CGRect frame = scrollView.frame;
-        frame.origin.x = frame.size.width * page;
-        frame.origin.y = 0;
-        controller.view.frame = frame;
-        [scrollView addSubview:controller.view];
-    }
     if (cpage == page) {
-        [self checkFavProduct:[_productArray objectAtIndex:cpage]];
+        //[self checkFavProduct:[_productArray objectAtIndex:cpage]];
+        [self checkFavProduct:[[_productPages objectForKey:[NSString stringWithFormat:@"%i", cpage/8+1]] objectAtIndex:cpage%8]];
     }
     
-    [self changeInfoBarForProduct:[_productArray objectAtIndex:page] inPage:page inTotal:numberOfPages];
+    //[self changeInfoBarForProduct:[_productArray objectAtIndex:page] inPage:page inTotal:numberOfPages];
+    [self changeInfoBarForProduct:[[_productPages objectForKey:[NSString stringWithFormat:@"%i", cpage/8+1]] objectAtIndex:cpage%8] inPage:page inTotal:numberOfPages];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)sender
@@ -248,9 +271,11 @@
         [self loadScrollViewWithPage:page];
         [self loadScrollViewWithPage:page - 1];
         [self loadScrollViewWithPage:page + 1];
-        self.navigationItem.title = [[_productArray objectAtIndex:page] name];
+        //self.navigationItem.title = [[_productArray objectAtIndex:page] name];
+        self.navigationItem.title = [[[_productPages objectForKey:[NSString stringWithFormat:@"%i", page/8+1]] objectAtIndex:page%8] name];
         
-        [self changeInfoBarForProduct:[_productArray objectAtIndex:page] inPage:page inTotal:numberOfPages];
+        //[self changeInfoBarForProduct:[_productArray objectAtIndex:page] inPage:page inTotal:numberOfPages];
+        [self changeInfoBarForProduct:[[_productPages objectForKey:[NSString stringWithFormat:@"%i", page/8+1]] objectAtIndex:page%8] inPage:page inTotal:numberOfPages];
         
         cpage = page;
     }
