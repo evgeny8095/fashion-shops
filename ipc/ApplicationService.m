@@ -370,10 +370,8 @@
     [_delegate didFinishParsingProduct:_productArray withPageDict:_productPages withTotalProducts:_totalProduct fromPosition:_startPosition toPosition:_endPosition inPage:_pagePosition];
 }
 
--(void) loadProductsForProductIds:(NSString *)ids from:(NSInteger)start to:(NSInteger)end inPage:(NSInteger)page forReceiver:(id)receiver
+-(void) loadProductsForProductIds:(NSString *)ids from:(NSInteger)start to:(NSInteger)end inPage:(NSInteger)page
 {
-    currentReceiver = receiver;
-    //lastReceiver = [receiver retain];
     HttpRequest* req = [[HttpRequest alloc] initWithFinishTarget:self 
 													   andAction:@selector(gotFavouriteProducts: byRequest:)];
     NSMutableDictionary* dictionary = [[NSMutableDictionary alloc] init];
@@ -430,10 +428,8 @@
     //empty function
 }
 
--(void) loadProductsOfFeatureShopFrom:(NSInteger)start to:(NSInteger)end inPage:(NSInteger)page forReceiver:(id)receiver
+-(void) loadProductsOfFeatureShopFrom:(NSInteger)start to:(NSInteger)end inPage:(NSInteger)page
 {
-    currentReceiver = receiver;
-    //lastReceiver = [receiver retain];
     HttpRequest* req = [[HttpRequest alloc] initWithFinishTarget:self 
 													   andAction:@selector(gotFeatureProducts: byRequest:)];
     NSMutableString* strIds = [[NSMutableString alloc] initWithString:@""];
@@ -476,10 +472,7 @@
 
 -(void) didParsedFeatureProduct
 {
-    if ([currentReceiver isKindOfClass:[ProductSliderViewController class]])
-        [_delegate didFinishParsingFeatureProduct:_featureProductArray withPageDict:_featureProductPages withTotalProducts:_totalProduct fromPosition:_startPosition toPosition:_endPosition inPage:_pagePosition];
-    else{}
-    //[currentReceiver release];
+    [_delegate didFinishParsingFeatureProduct:_featureProductArray withPageDict:_featureProductPages withTotalProducts:_totalProduct fromPosition:_startPosition toPosition:_endPosition inPage:_pagePosition];
 }
 
 -(void) loadProductsOnSalesFrom:(NSInteger)start to:(NSInteger)end inPage:(NSInteger)page

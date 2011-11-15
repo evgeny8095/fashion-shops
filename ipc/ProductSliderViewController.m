@@ -168,18 +168,21 @@
     NSInteger page = ((UIButton *) sender).tag;
     NSInteger index = page%8;
     
-    BigProductSliderViewController *bigProductSliderViewController = [[BigProductSliderViewController alloc] initWithPage:page andProducts:_productArray withProductPages:_productPages andIndexInPage:index withTotal:totalItem];
-    bigProductSliderViewController.delegate = self;
-    //bigProductSliderViewController.navigationItem.title = [[_productArray objectAtIndex:page] name];
-    bigProductSliderViewController.navigationItem.title = [[[_productPages objectForKey:[NSString stringWithFormat:@"%i", page/8+1]] objectAtIndex:page%8] name];
-    bigProductSliderViewController.type = _type;
-    bigProductSliderViewController.category = _category;
-    bigProductSliderViewController.item = page;
-    //[bigProductSliderViewController.navigationItem.backBarButtonItem setTitle:@"ALL"];
-    
-    [self.navigationController pushViewController:bigProductSliderViewController animated:YES];
-    
-    [bigProductSliderViewController release];
+    Product *product = [_productPages objectForKey:[NSString stringWithFormat:@"%i", page/8+1]];
+    if (product != nil) {
+        BigProductSliderViewController *bigProductSliderViewController = [[BigProductSliderViewController alloc] initWithPage:page andProducts:_productArray withProductPages:_productPages andIndexInPage:index withTotal:totalItem];
+        bigProductSliderViewController.delegate = self;
+        //bigProductSliderViewController.navigationItem.title = [[_productArray objectAtIndex:page] name];
+        bigProductSliderViewController.navigationItem.title = [[[_productPages objectForKey:[NSString stringWithFormat:@"%i", page/8+1]] objectAtIndex:page%8] name];
+        bigProductSliderViewController.type = _type;
+        bigProductSliderViewController.category = _category;
+        bigProductSliderViewController.item = page;
+        //[bigProductSliderViewController.navigationItem.backBarButtonItem setTitle:@"ALL"];
+        
+        [self.navigationController pushViewController:bigProductSliderViewController animated:YES];
+        
+        [bigProductSliderViewController release];
+    }
 }
 
 #pragma mark Big....Delegate Method
@@ -207,9 +210,9 @@
         if (start < totalItem){
             APP_SERVICE(appSrv);
             if ([loadFrom isEqualToString:@"favourite2"])
-                [appSrv loadProductsForProductIds:ids from:start to:end inPage:nextPage forReceiver:self];
+                [appSrv loadProductsForProductIds:ids from:start to:end inPage:nextPage];
             if ([loadFrom isEqualToString:@"feature"])
-                [appSrv loadProductsOfFeatureShopFrom:start to:end inPage:nextPage forReceiver:self];
+                [appSrv loadProductsOfFeatureShopFrom:start to:end inPage:nextPage];
             if ([loadFrom isEqualToString:@"sales"])
                 [appSrv loadProductsOnSalesFrom:start to:end inPage:nextPage];
             if ([loadFrom isEqualToString:@"filter"])

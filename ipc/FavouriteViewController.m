@@ -64,7 +64,7 @@
         
         ProductSliderViewController *productSliderViewController = [[ProductSliderViewController alloc] initForFavoriteProducts:favouriteProductsString];
         //[appSrv loadProductsForProductIds:favouriteProductsString from:0 to:15 forReceiver:productSliderViewController];
-        [appSrv loadProductsForProductIds:favouriteProductsString from:0 to:7 inPage:1 forReceiver:productSliderViewController];
+        [appSrv loadProductsForProductIds:favouriteProductsString from:0 to:7 inPage:1];
         [appSrv setDelegate:productSliderViewController];
         //productSliderViewController.c_type = c_type;
         //productSliderViewController.c_category = c_category;

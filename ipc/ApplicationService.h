@@ -53,8 +53,6 @@
     NSInteger _endPosition;
     NSInteger _pagePosition;
     NSInteger _totalSalesProduct;
-    id currentReceiver;
-    id lastReceiver;
 }
 
 @property (nonatomic,assign) id<ApplicationServiceDelegate> delegate;
@@ -113,7 +111,7 @@
 -(void) gotProducts: (NSData*)data byRequest:(HttpRequest*)req;
 -(void) didParsedProduct;
 
--(void) loadProductsForProductIds:(NSString*)ids from:(NSInteger)start to:(NSInteger)end inPage:(NSInteger)page forReceiver:(id)receiver;
+-(void) loadProductsForProductIds:(NSString*)ids from:(NSInteger)start to:(NSInteger)end inPage:(NSInteger)page;
 -(void) gotFavouriteProducts: (NSData*)data byRequest:(HttpRequest*)req;
 -(void) didParsedFavouriteProduct;
 
@@ -121,7 +119,7 @@
 -(void) gotFeatureProductsList:(NSData *)data byRequest:(HttpRequest *)req;
 -(void) didParsedFeatureProductsList;
 
--(void) loadProductsOfFeatureShopFrom:(NSInteger)start to:(NSInteger)end inPage:(NSInteger)page forReceiver:(id)receiver;
+-(void) loadProductsOfFeatureShopFrom:(NSInteger)start to:(NSInteger)end inPage:(NSInteger)page;
 -(void) gotFeatureProducts:(NSData*)data byRequest:(HttpRequest*)req;
 -(void) didParsedFeatureProduct;
 

@@ -67,7 +67,7 @@
     
     ProductSliderViewController *productSliderViewController = [[ProductSliderViewController alloc] initForFeatureProducts];
     //[appSrv loadProductsOfFeatureShopFrom:0 to:15 inPage:-1 forReceiver:productSliderViewController];
-    [appSrv loadProductsOfFeatureShopFrom:0 to:7 inPage:1 forReceiver:productSliderViewController];
+    [appSrv loadProductsOfFeatureShopFrom:0 to:7 inPage:1];
     //[appSrv loadProductsOfFeatureShopFrom:8 to:15 inPage:2 forReceiver:productSliderViewController];
     productArray = [appSrv featureProductArray];
     [appSrv setDelegate:productSliderViewController];
