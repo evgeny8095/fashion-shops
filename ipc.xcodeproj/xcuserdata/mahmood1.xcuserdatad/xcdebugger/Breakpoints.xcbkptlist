@@ -23,11 +23,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "ipc/ApplicationService.m"
-         timestampString = "342705958.879153"
+         timestampString = "343108021.241523"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "402"
-         endingLineNumber = "402"
+         startingLineNumber = "410"
+         endingLineNumber = "410"
          landmarkName = "-didParsedFavouriteProduct"
          landmarkType = "5">
       </FileBreakpoint>
@@ -65,11 +65,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "ipc/ApplicationService.m"
-         timestampString = "342705958.879153"
+         timestampString = "343108021.241523"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "529"
-         endingLineNumber = "529"
+         startingLineNumber = "535"
+         endingLineNumber = "535"
          landmarkName = "-loadFilteredProductFrom:to:hasKeywords:hasTypes:hasBrands:ofStores:inCategories:hasTopPrice:hasBottomPrice:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -79,11 +79,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "ipc/ApplicationService.m"
-         timestampString = "342705958.879153"
+         timestampString = "343108021.241523"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "566"
-         endingLineNumber = "566"
+         startingLineNumber = "574"
+         endingLineNumber = "574"
          landmarkName = "-didParsedFilteredProduct"
          landmarkType = "5">
       </FileBreakpoint>
@@ -176,20 +176,6 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "ipc/ProductSliderViewController.m"
-         timestampString = "343016351.933309"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "214"
-         endingLineNumber = "214"
-         landmarkName = "-loadScrollViewWithPage:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
          filePath = "ipc/BaseXMLHandler.m"
          timestampString = "343015144.350317"
          startingColumnNumber = "9223372036854775807"
@@ -205,12 +191,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "ipc/ApplicationService.m"
-         timestampString = "343015241.311741"
+         timestampString = "343106548.562724"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "269"
-         endingLineNumber = "269"
-         landmarkName = "-didParsedCategoryForType"
+         startingLineNumber = "373"
+         endingLineNumber = "373"
+         landmarkName = "-didParsedProduct"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

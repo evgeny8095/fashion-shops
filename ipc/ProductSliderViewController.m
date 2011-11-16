@@ -37,8 +37,8 @@
 
 - (void)dealloc{
     [popoverController dismissPopoverAnimated:NO];
-    //APP_SERVICE(appSrv4);
-    //[appSrv4 clearProducts];
+    APP_SERVICE(appSrv);
+    [appSrv setViewIndex:-1];
     [super dealloc];
 }
 

@@ -52,7 +52,8 @@
 	[data release]; //don't need this any more, its in the UIImageView now
 	data=nil;
     
-    [cbutton setImage:image forState:UIControlStateNormal];
+    if ([cbutton isKindOfClass:[UIButton class]])
+        [cbutton setImage:image forState:UIControlStateNormal];
     //[delegate imageLoadedSuccess:self];
 }
 

@@ -45,12 +45,19 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+- (void)dealloc
+{
+    APP_SERVICE(appSrv);
+    [appSrv setViewIndex:-1];
+    [super dealloc];
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    //[self.navigationItem setHidesBackButton:YES animated:NO];
     [next setHidden:YES];
     [previous setHidden:YES];
     
@@ -75,11 +82,6 @@
     [asyncImage loadImageFromURL:bannerImageURL forButton:topButton];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-}
-
 - (void)viewDidUnload
 {
     [super viewDidUnload];
@@ -97,15 +99,17 @@
     NSString *title = ((UIButton *) sender).titleLabel.text;
     NSInteger category = ((UIButton *) sender).tag;
     
-    APP_SERVICE(appSrvvv);
-    NSDictionary *types = [appSrvvv typeDict];
-    NSDictionary *categories = [appSrvvv categoryDict];
+    APP_SERVICE(appSrv);
+    [appSrv setViewIndex:7];
+    [appSrv setHomeViewIndex:7];
+    NSDictionary *types = [appSrv typeDict];
+    NSDictionary *categories = [appSrv categoryDict];
     Type* c_type = [types objectForKey:[NSString stringWithFormat:@"%i", _type]];
     Category* c_category = [categories objectForKey:[NSString stringWithFormat:@"%i", category]];
     
     ProductSliderViewController *productSliderViewController = [[ProductSliderViewController alloc] init];
-    [appSrvvv loadProductsForType:c_type forCatetory:c_category from:0 to:7 inPage:1];
-    [appSrvvv setDelegate:productSliderViewController];
+    [appSrv loadProductsForType:c_type forCatetory:c_category from:0 to:7 inPage:1];
+    [appSrv setDelegate2:productSliderViewController];
     productSliderViewController.c_type = c_type;
     productSliderViewController.c_category = c_category;
     productSliderViewController.type = _type;
@@ -139,6 +143,7 @@
 #pragma mark appservice delegate
 -(void) didFinishParsingCategory:(NSMutableDictionary*)c_categoryDict andArray:(NSMutableArray *)c_categoryArray
 {
+    //[self.navigationItem setHidesBackButton:NO animated:YES];
     [loading stopAnimating];
     _categoryDict = c_categoryDict;
     _categoryArray = c_categoryArray;

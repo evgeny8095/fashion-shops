@@ -7,6 +7,11 @@
 //
 
 #import "ipcAppDelegate.h"
+#import "HomeNavigationController.h"
+#import "FeatureProductsViewController.h"
+#import "FavouriteViewController.h"
+#import "SalesProductsViewController.h"
+#import "SettingViewController.h"
 
 @implementation ipcAppDelegate
 
@@ -42,6 +47,7 @@
     // Add the tab bar controller's current view as a subview of the window
     //[application setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
     _appService = [[ApplicationService alloc] init];
+    [_appService setViewIndex:1.0];
     //[_appService loadTypes];
     [_appService loadBrands];
     [_appService loadStores];
@@ -114,17 +120,25 @@
     [super dealloc];
 }
 
-//- (void)didFinishParsingSalesProduct:(NSMutableArray *)c_productArray withTotalProducts:(NSInteger)total fromPosition:(NSInteger)start toPosition:(NSInteger)end
-//{
 //    [[[[[self tabBarController] tabBar] items] objectAtIndex:3] setBadgeValue:[NSString stringWithFormat:@"%i", total]];
 //}
 
-/*
+
 // Optional UITabBarControllerDelegate method.
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
 {
+    if ([viewController isKindOfClass:[HomeNavigationController class]]){
+        [_appService setViewIndex:[_appService homeViewIndex]];
+    }
+    if ([viewController isKindOfClass:[FeatureProductsViewController class]])
+        [_appService setViewIndex:2];
+    if ([viewController isKindOfClass:[FavouriteViewController class]])
+        [_appService setViewIndex:3];
+    if ([viewController isKindOfClass:[SalesProductsViewController class]])
+        [_appService setViewIndex:4];
+    if ([viewController isKindOfClass:[SettingViewController class]])
+        [_appService setViewIndex:5];
 }
-*/
 
 /*
 // Optional UITabBarControllerDelegate method.

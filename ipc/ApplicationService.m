@@ -16,7 +16,9 @@
 #import "ProductSliderViewController.h"
 
 @implementation ApplicationService
-@synthesize delegate = _delegate, totalProduct = _totalProduct, startPosition = _startPosition, endPosition = _endPosition, totalSalesProducts = _totalSalesProduct, pagePosition = _pagePosition;
+@synthesize delegate = _delegate, delegate2 = _delegate2, delegate3 = _delegate3, delegate4 = _delegate4;
+@synthesize totalProduct = _totalProduct, startPosition = _startPosition, endPosition = _endPosition, totalSalesProducts = _totalSalesProduct, pagePosition = _pagePosition;
+@synthesize viewIndex = _viewIndex, previousViewIndex = _previousViewIndex, homeViewIndex = _homeViewIndex;
 
 -(id) init
 {
@@ -218,7 +220,8 @@
 }
 -(void) didParsedType
 {
-    [_delegate didFinishParsingType:_typeDict andArray:_typeArray];
+    if (_viewIndex == 1)
+        [_delegate didFinishParsingType:_typeDict andArray:_typeArray];
 }
 
 #pragma mark -
@@ -266,7 +269,9 @@
 
 -(void) didParsedCategoryForType
 {
-    [_delegate didFinishParsingCategory:_categoryDict andArray:_categoryForTypeArray];
+    if (_viewIndex == 6) {
+        [_delegate didFinishParsingCategory:_categoryDict andArray:_categoryForTypeArray];
+    }
 }
 
 #pragma mark-
@@ -282,7 +287,7 @@
 {
 	//NSLog(@"stores: %s", data.bytes);
     StoreXMLHandler* handler = [[StoreXMLHandler alloc] initWithStoreDict:_storeDict];
-    //[handler setEndDocumentTarget:self andAction:@selector(didParsedStore)];
+    [handler setEndDocumentTarget:self andAction:@selector(didParsedStore)];
 	NSXMLParser* parser = [[[NSXMLParser alloc] initWithData:data] autorelease];
 	parser.delegate = handler;
 	[parser parse];
@@ -290,7 +295,6 @@
 }
 -(void) didParsedStore
 {
-    //end point
 }
 
 #pragma mark-
@@ -306,7 +310,7 @@
 {
 	//NSLog(@"brands: %s", data.bytes);
     BrandXMLHandler* handler = [[BrandXMLHandler alloc] initWithBrandDict:_brandDict];
-    //[handler setEndDocumentTarget:self andAction:@selector(didParsedBrand)];
+    [handler setEndDocumentTarget:self andAction:@selector(didParsedBrand)];
 	NSXMLParser* parser = [[[NSXMLParser alloc] initWithData:data] autorelease];
 	parser.delegate = handler;
 	[parser parse];
@@ -314,7 +318,6 @@
 }
 -(void) didParsedBrand
 {
-    //end point
 }
 
 #pragma mark-
@@ -367,7 +370,12 @@
 
 -(void) didParsedProduct
 {
-    [_delegate didFinishParsingProduct:_productArray withPageDict:_productPages withTotalProducts:_totalProduct fromPosition:_startPosition toPosition:_endPosition inPage:_pagePosition];
+    if (_viewIndex == 7) {
+        [_delegate2 didFinishParsingProduct:_productArray withPageDict:_productPages withTotalProducts:_totalProduct fromPosition:_startPosition toPosition:_endPosition inPage:_pagePosition];
+    }
+    if (_viewIndex == 9) {
+        [_delegate4 didFinishParsingProduct:_productArray withPageDict:_productPages withTotalProducts:_totalProduct fromPosition:_startPosition toPosition:_endPosition inPage:_pagePosition];
+    }
 }
 
 -(void) loadProductsForProductIds:(NSString *)ids from:(NSInteger)start to:(NSInteger)end inPage:(NSInteger)page
@@ -397,7 +405,9 @@
 
 -(void) didParsedFavouriteProduct
 {
-    [_delegate didFinishParsingFavouriteProduct:_favoriteProductArray withPageDict:_favoriteProductPages withTotalProducts:_totalProduct fromPosition:_startPosition toPosition:_endPosition inPage:_pagePosition];
+    if (_viewIndex == 3) {
+        [_delegate didFinishParsingFavouriteProduct:_favoriteProductArray withPageDict:_favoriteProductPages withTotalProducts:_totalProduct fromPosition:_startPosition toPosition:_endPosition inPage:_pagePosition];
+    }
 }
 
 -(void) loadFeatureProductsList
@@ -425,7 +435,6 @@
 
 -(void) didParsedFeatureProductsList
 {
-    //empty function
 }
 
 -(void) loadProductsOfFeatureShopFrom:(NSInteger)start to:(NSInteger)end inPage:(NSInteger)page
@@ -472,7 +481,9 @@
 
 -(void) didParsedFeatureProduct
 {
-    [_delegate didFinishParsingFeatureProduct:_featureProductArray withPageDict:_featureProductPages withTotalProducts:_totalProduct fromPosition:_startPosition toPosition:_endPosition inPage:_pagePosition];
+    if (_viewIndex == 2) {
+        [_delegate didFinishParsingFeatureProduct:_featureProductArray withPageDict:_featureProductPages withTotalProducts:_totalProduct fromPosition:_startPosition toPosition:_endPosition inPage:_pagePosition];
+    }
 }
 
 -(void) loadProductsOnSalesFrom:(NSInteger)start to:(NSInteger)end inPage:(NSInteger)page
@@ -502,8 +513,10 @@
 
 -(void) didParsedSalesProducts
 {
-    _totalSalesProduct = _totalProduct;
-    [_delegate didFinishParsingSalesProduct:_salesProductArray withPageDict:_salesProductPages withTotalProducts:_totalProduct fromPosition:_startPosition toPosition:_endPosition inPage:_pagePosition];
+    if (_viewIndex == 4) {
+        _totalSalesProduct = _totalProduct;
+        [_delegate didFinishParsingSalesProduct:_salesProductArray withPageDict:_salesProductPages withTotalProducts:_totalProduct fromPosition:_startPosition toPosition:_endPosition inPage:_pagePosition];
+    } 
 }
 
 -(void) loadFilteredProductFrom:(NSInteger)start
@@ -556,7 +569,9 @@
 
 -(void) didParsedFilteredProduct
 {
-    [_delegate didFinishParsingFilterProduct:_filteredProductArray withPageDict:_filteredProductPages withTotalProducts:_totalProduct fromPosition:_startPosition toPosition:_endPosition inPage:_pagePosition];
+    if (_viewIndex == 8) {
+        [_delegate3 didFinishParsingFilterProduct:_filteredProductArray withPageDict:_filteredProductPages withTotalProducts:_totalProduct fromPosition:_startPosition toPosition:_endPosition inPage:_pagePosition];
+    }
 }
 
 @end

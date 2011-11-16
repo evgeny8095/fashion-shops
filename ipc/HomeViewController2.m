@@ -55,9 +55,16 @@
     filterCategories =[[NSMutableArray alloc] init];
     [super viewDidLoad];
     APP_SERVICE(appSrv);
+    [appSrv setDelegate:self];
     [appSrv clearTypies];
     [appSrv loadTypes];
-    [appSrv setDelegate:self];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    APP_SERVICE(appSrv);
+    [appSrv setViewIndex:1];
 }
 
 - (void)viewDidUnload
@@ -85,6 +92,8 @@
     if (c_type.style == 0) {
         SubcategoryViewController *subCategoryViewController = [[SubcategoryViewController alloc] init];
         APP_SERVICE(appSrv);
+        [appSrv setViewIndex:6];
+        [appSrv setHomeViewIndex:6];
         [appSrv clearCategory];
         [appSrv setDelegate:subCategoryViewController];
         [appSrv loadCategoriesForType:c_type];
@@ -99,14 +108,13 @@
     }
     if (c_type.style == 1) {
         APP_SERVICE(appSrv);
-        //[appSrv loadProductsForType:c_type forCatetory:nil from:0 to:15];
-        
+        [appSrv setViewIndex:9];
+        [appSrv setHomeViewIndex:9];
         ProductSliderViewController *productSliderViewController = [[ProductSliderViewController alloc] init];
         [appSrv loadProductsForType:c_type forCatetory:nil from:0 to:7 inPage:1];
-        [appSrv setDelegate:productSliderViewController];
+        [appSrv setDelegate4:productSliderViewController];
         productSliderViewController.c_type = c_type;
         productSliderViewController.c_category = nil;
-        //productSliderViewController.navigationItem.title = [title uppercaseString];
         productSliderViewController.title = [title uppercaseString];
         
         [self.navigationController pushViewController:productSliderViewController animated:YES];
@@ -174,13 +182,15 @@
     
     //[navController.navigationBar setBarStyle:UIBarStyleBlack];
     
-    APP_SERVICE(appSrvvv);
-    [appSrvvv clearFilteredProducts];
+    APP_SERVICE(appSrv);
+    [appSrv setViewIndex:8];
+    [appSrv setHomeViewIndex:8];
+    [appSrv clearFilteredProducts];
     
     ProductSliderViewController *productSliderViewController = [[ProductSliderViewController alloc] initForFilteredProductsWithKeywords:searchString TypeString:typeString BrandString:brandString StoreString:storeString CategoryString:categoryString hasTopPrice:@"" andBotPrice:@""];
     //[appSrvvv loadFilteredProductFrom:0 to:15 hasKeywords:searchString hasTypes:typeString hasBrands:brandString ofStores:storeString inCategories:categoryString hasTopPrice:@"" hasBottomPrice:@""];
-    [appSrvvv loadFilteredProductFrom:0 to:7 inPage:1 hasKeywords:searchString hasTypes:typeString hasBrands:brandString ofStores:storeString inCategories:categoryString hasTopPrice:@"" hasBottomPrice:@""];
-    [appSrvvv setDelegate:productSliderViewController];
+    [appSrv loadFilteredProductFrom:0 to:7 inPage:1 hasKeywords:searchString hasTypes:typeString hasBrands:brandString ofStores:storeString inCategories:categoryString hasTopPrice:@"" hasBottomPrice:@""];
+    [appSrv setDelegate3:productSliderViewController];
     //[productSliderViewController.navigationController.navigationBar ];
     //productSliderViewController.c_type = c_type;
     //productSliderViewController.c_category = c_category;
@@ -215,12 +225,19 @@
 }
 
 //- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
-//    NSLog(@"didshow");
+//    if ([viewController isEqual:self]) {
+//        APP_SERVICE(appSrv);
+//        [appSrv setViewIndex:1.0];
+//    }
 //}
 
-//- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
-//    NSLog(@"didshow");
-//}
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
+    if ([viewController isEqual:self]) {
+        APP_SERVICE(appSrv);
+        [appSrv setViewIndex:1.0];
+    }
+}
+
 #pragma mark-
 #pragma mark Application Service for loading typies
 -(void)didFinishParsingType:(NSMutableDictionary *)typeDict andArray:(NSMutableArray *)typeArray

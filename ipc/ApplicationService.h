@@ -48,19 +48,31 @@
     NSMutableDictionary* _filteredProductPages;
     
 	id<ApplicationServiceDelegate> _delegate;
+    id<ApplicationServiceDelegate> _delegate2;
+    id<ApplicationServiceDelegate> _delegate3;
+    id<ApplicationServiceDelegate> _delegate4;
     NSInteger _totalProduct;
     NSInteger _startPosition;
     NSInteger _endPosition;
     NSInteger _pagePosition;
     NSInteger _totalSalesProduct;
+    NSInteger _viewIndex;
+    NSInteger _previousViewIndex;
+    NSInteger _homeViewIndex;
 }
 
 @property (nonatomic,assign) id<ApplicationServiceDelegate> delegate;
+@property (nonatomic,assign) id<ApplicationServiceDelegate> delegate2;
+@property (nonatomic,assign) id<ApplicationServiceDelegate> delegate3;
+@property (nonatomic,assign) id<ApplicationServiceDelegate> delegate4;
 @property (nonatomic,assign) NSInteger totalProduct;
 @property (nonatomic,assign) NSInteger startPosition;
 @property (nonatomic,assign) NSInteger endPosition;
 @property (nonatomic,assign) NSInteger pagePosition;
 @property (nonatomic,assign) NSInteger totalSalesProducts;
+@property (nonatomic, assign) NSInteger viewIndex;
+@property (nonatomic, assign) NSInteger previousViewIndex;
+@property (nonatomic, assign) NSInteger homeViewIndex;
 
 -(NSMutableDictionary*) categoryDict;
 -(NSMutableDictionary*) categoryForTypeDict;
