@@ -2,8 +2,8 @@
 //  PurchaseService.m
 //  ipc
 //
-//  Created by Mahmood1 on 11/2/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Created on 11/2/11.
+//  Copyright 2011 OngSoft. All rights reserved.
 //
 
 #import "PurchaseService.h"
@@ -97,27 +97,14 @@
 
 -(void) clearAllPurchasedProducs
 {
-    NSError *error;
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentPath = [paths objectAtIndex:0];
-    NSString *plistPath = [documentPath stringByAppendingPathComponent:@"Purchased.plist"];
-    
-    if ([[NSFileManager defaultManager] fileExistsAtPath:plistPath])
-    {
-        [[NSFileManager defaultManager] removeItemAtPath:plistPath error:&error];
-        [_purchased release];
-        _purchased = nil;
-        [_purchasedProducts release];
-        _purchasedProducts = nil;
-        _purchased = [[NSMutableDictionary alloc] init];
-        _purchasedProducts = [[NSMutableArray alloc] init];
-        [self loadPurchasedProducts];
-    }
+    [_purchasedProducts removeAllObjects];
+    _purchasedProductString = [self generatePurchasedString];
+    [self savePurchasedProducts];
 }
 
 -(NSMutableString*) generatePurchasedString
 {
-    NSMutableString* str = [[NSMutableString alloc] initWithString:@""];
+    NSMutableString* str = [NSMutableString stringWithFormat:@""];
     NSInteger count = [_purchasedProducts count];
     for (NSInteger i = 0; i < count; i++) {
         if (i == count-1)

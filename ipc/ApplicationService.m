@@ -3,7 +3,7 @@
 //  MyFruitsDiary
 //
 //  Created by Khoi Pham on 3/14/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011 OngSoft. All rights reserved.
 //
 
 #import "ApplicationService.h"
@@ -125,14 +125,24 @@
     [_categoryForTypeDict release];
     [_categoryForTypeArray release];
     [_typeDict release];
+    [_typeArray release];
     [_storeDict release];
     [_brandDict release];
     [_productPages release];
     [_productArray release];
+    
     [_favoriteProductArray release];
-    [_featureProductArray release];
+    [_favoriteProductPages release];
+    
     [_featureProductList release];
+    [_featureProductArray release];
+    [_featureProductPages release];
+    
     [_salesProductArray release];
+    [_salesProductPages release];
+    
+    [_filteredProductArray release];
+    [_filteredProductPages release];
     [super dealloc];
 }
 
@@ -152,9 +162,6 @@
     _productPages = [[NSMutableDictionary alloc] init];
     [_productArray release];
     _productArray = [[NSMutableArray alloc] init];
-    for (NSInteger i = 0; i < 1000; i++) {
-        [_productArray addObject:[[Product alloc] init]];
-    }
 }
 
 -(void) clearSalesProducts

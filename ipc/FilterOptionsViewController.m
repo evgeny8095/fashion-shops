@@ -2,8 +2,8 @@
 //  FilterOptionsViewController.m
 //  ipc
 //
-//  Created by Mahmood1 on 10/24/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Created on 10/24/11.
+//  Copyright 2011 OngSoft. All rights reserved.
 //
 
 #import "FilterOptionsViewController.h"
@@ -84,18 +84,22 @@
     if ([[options objectAtIndex:indexPath.row] isEqualToString:@"Types"]) {
         FilterDetailsViewController *filterDetais = [[FilterDetailsViewController alloc] initWithArray:[appSrv typeArray] forArray:types];
         [self.navigationController pushViewController:filterDetais animated:YES];
+        [filterDetais release];
     }
     if ([[options objectAtIndex:indexPath.row] isEqualToString:@"Brands"]) {
         FilterDetailsViewController *filterDetais = [[FilterDetailsViewController alloc] initWithDictionary:[appSrv brandDict] forArray:brands];
         [self.navigationController pushViewController:filterDetais animated:YES];
+        [filterDetais release];
     }
     if ([[options objectAtIndex:indexPath.row] isEqualToString:@"Stores"]) {
         FilterDetailsViewController *filterDetais = [[FilterDetailsViewController alloc] initWithDictionary:[appSrv storeDict] forArray:stores];
         [self.navigationController pushViewController:filterDetais animated:YES];
+        [filterDetais release];
     }
     if ([[options objectAtIndex:indexPath.row] isEqualToString:@"Categories"]) {
         FilterDetailsViewController *filterDetais = [[FilterDetailsViewController alloc] initWithDictionary:[appSrv categoryDict] forArray:categories];
         [self.navigationController pushViewController:filterDetais animated:YES];
+        [filterDetais release];
     }
 }
 

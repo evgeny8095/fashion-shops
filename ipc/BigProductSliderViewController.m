@@ -3,7 +3,7 @@
 //  ipc
 //
 //  Created by SaRy on 8/23/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011 OngSoft. All rights reserved.
 //
 
 #import "BigProductSliderViewController.h"
@@ -145,25 +145,19 @@
     [infoBar setAlpha:0.4];
     UILabel *priceAndStore = [[UILabel alloc] initWithFrame:CGRectMake(112, 0, 800, 35)];
     [priceAndStore setTag:1];
-//    NSString *priceAndStoreString = [[NSString alloc] initWithFormat:@"%@ - %@", formattedPriceString, [[_product store] name]];
-//    [priceAndStore setText:priceAndStoreString];
     [priceAndStore setTextAlignment:UITextAlignmentCenter];
     [priceAndStore setBackgroundColor:[UIColor clearColor]];
     [priceAndStore setTextColor:[UIColor blackColor]];
     [infoBar addSubview:priceAndStore];
     [priceAndStore release];
-//    [priceAndStoreString release];
     
     UILabel *numberOf = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 200, 35)];
     [numberOf setTag:2];
-//    NSString *numberOfString = [[NSString alloc] initWithFormat:@"%i of %i", cPosition+1, total];
-//    [numberOf setText:numberOfString];
     [numberOf setTextAlignment:UITextAlignmentLeft];
     [numberOf setBackgroundColor:[UIColor clearColor]];
     [numberOf setTextColor:[UIColor blackColor]];
     [infoBar addSubview:numberOf];
     [numberOf release];
-    //[self changeInfoBarForProduct:[_productArray objectAtIndex:cpage] inPage:cpage inTotal:numberOfPages];
     [self changeInfoBarForProduct:[[_productPages objectForKey:[NSString stringWithFormat:@"%i", cpage/8+1]] objectAtIndex:cpage%8] inPage:cpage inTotal:numberOfPages];
     
     [self.view addSubview:infoBar];
@@ -178,7 +172,6 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
     return YES;
 }
 
@@ -207,20 +200,17 @@
     NSNumber *loaded = [loadedPage objectForKey:[NSString stringWithFormat:@"%i", page]];
     NSInteger loadedIndicator = [loaded intValue];
     
-    
     // replace the placeholder if necessary
     ProductsDetailsSliderViewController *controller = [viewControllers objectAtIndex:page];
     if (loadedIndicator == 0) {
         if ((NSNull *)controller == [NSNull null])
         {
-            //controller = [[ProductsDetailsSliderViewController alloc] initwithProduct:[_productArray objectAtIndex:page] inPosition:page ofTotal:numberOfPages withMode:viewMode];
             controller = [[ProductsDetailsSliderViewController alloc] initwithProduct:[[_productPages objectForKey:[NSString stringWithFormat:@"%i", page/8+1]] objectAtIndex:page%8] inPosition:page ofTotal:numberOfPages withMode:viewMode];
             controller.type = _type;
             controller.category = _category;
             
             controller.delegate = self;
             [viewControllers replaceObjectAtIndex:page withObject:controller];
-            //[controller release];
         }else{
             [controller changeViewMode:viewMode];
         }

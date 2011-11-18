@@ -2,8 +2,8 @@
 //  FavouriteService.m
 //  ipc
 //
-//  Created by Mahmood1 on 9/27/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Created on 9/27/11.
+//  Copyright 2011 OngSoft. All rights reserved.
 //
 
 #import "FavouriteService.h"
@@ -117,28 +117,14 @@
 
 -(void) clearAllFavoriteProducts
 {
-    NSError *error;
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentPath = [paths objectAtIndex:0];
-    NSString *plistPath = [documentPath stringByAppendingPathComponent:@"Favorite.plist"];
-    
-    if ([[NSFileManager defaultManager] fileExistsAtPath:plistPath])
-    {
-        [[NSFileManager defaultManager] removeItemAtPath:plistPath error:&error];
-        [_favourite release];
-        _favourite = nil;
-        [_favouriteProducts release];
-        _favouriteProducts = nil;
-        _favourite = [[NSMutableDictionary alloc] init];
-        _favouriteProducts = [[NSMutableArray alloc] init];
-        [self loadFavouriteProducts];
-    }
+    [_favouriteProducts removeAllObjects];
+    _favouriteProductString = [self generateFavouriteString];
+    [self saveFavouriteProducts];
 }
 
 -(NSMutableString*) generateFavouriteString
 {
-    
-    NSMutableString* str = [[NSMutableString alloc] initWithString:@""];
+    NSMutableString* str = [NSMutableString stringWithFormat:@""];
     NSInteger count = [_favouriteProducts count];
     for (NSInteger i = 0; i < count; i++) {
         if (i == count-1)

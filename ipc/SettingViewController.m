@@ -2,8 +2,8 @@
 //  SettingViewController.m
 //  ipc
 //
-//  Created by Mahmood1 on 11/3/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Created on 11/3/11.
+//  Copyright 2011 OngSoft. All rights reserved.
 //
 
 #import "SettingViewController.h"
@@ -42,6 +42,12 @@
     [super viewDidLoad];
     [splitViewController.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     [self.view addSubview:splitViewController.view];
+}
+
+- (void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [splitViewController reloadInputViews];
 }
 
 - (void)viewDidUnload

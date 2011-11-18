@@ -2,8 +2,8 @@
 //  FilterDetailsViewController.m
 //  ipc
 //
-//  Created by Mahmood1 on 10/25/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Created on 10/25/11.
+//  Copyright 2011 OngSoft. All rights reserved.
 //
 
 #import "FilterDetailsViewController.h"
@@ -70,6 +70,7 @@
     tableView.delegate = self;
     tableView.dataSource = self;
     [self.view addSubview:tableView];
+    [tableView release];
 }
 
 - (void)viewDidUnload

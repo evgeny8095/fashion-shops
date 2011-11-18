@@ -2,8 +2,8 @@
 //  FavouriteViewController.h
 //  ipc
 //
-//  Created by Mahmood1 on 9/21/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Created on 9/21/11.
+//  Copyright 2011 OngSoft. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -17,6 +17,7 @@
     MyPopOverView *myPopOver;
     NSMutableArray *productArray;
     NSString* favouriteProductsString;
+    UILabel* noProductLabel;
 }
 
 @property (nonatomic, retain) IBOutlet UINavigationController *navController;

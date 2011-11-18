@@ -2,8 +2,8 @@
 //  FeatureProductsViewController.m
 //  ipc
 //
-//  Created by Mahmood1 on 9/29/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Created on 9/29/11.
+//  Copyright 2011 OngSoft. All rights reserved.
 //
 
 #import "FeatureProductsViewController.h"
@@ -62,21 +62,11 @@
     [navController.navigationBar setBarStyle:UIBarStyleBlack];
     
     APP_SERVICE(appSrv);
-    //NSDictionary *types = [appSrvvv typeDict];
-    //NSDictionary *categories = [appSrvvv categoryDict];
     
     ProductSliderViewController *productSliderViewController = [[ProductSliderViewController alloc] initForFeatureProducts];
-    //[appSrv loadProductsOfFeatureShopFrom:0 to:15 inPage:-1 forReceiver:productSliderViewController];
     [appSrv loadProductsOfFeatureShopFrom:0 to:7 inPage:1];
-    //[appSrv loadProductsOfFeatureShopFrom:8 to:15 inPage:2 forReceiver:productSliderViewController];
     productArray = [appSrv featureProductArray];
     [appSrv setDelegate:productSliderViewController];
-    //[productSliderViewController.navigationController.navigationBar ];
-    //productSliderViewController.c_type = c_type;
-    //productSliderViewController.c_category = c_category;
-    //productSliderViewController.type = _type;
-    //productSliderViewController.category = category;
-    //productSliderViewController.navigationItem.title = title;
     productSliderViewController.title = @"TIÊU BIỂU";
     
     [self.view addSubview:navController.view];
@@ -89,6 +79,7 @@
 - (void) viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
+    [navController.view removeFromSuperview];
     [navController release];
     navController = nil;
 }

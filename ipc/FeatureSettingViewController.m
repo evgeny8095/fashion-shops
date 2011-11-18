@@ -2,8 +2,8 @@
 //  FeatureSettingViewController.m
 //  ipc
 //
-//  Created by Mahmood1 on 11/4/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Created on 11/4/11.
+//  Copyright 2011 OngSoft. All rights reserved.
 //
 
 #import "FeatureSettingViewController.h"
@@ -59,17 +59,20 @@
 
 - (IBAction) clearAllFavoriteProducts
 {
-    FAV_SERVICE(favSrv);
-    [favSrv clearAllFavoriteProducts];
-    [numberFav setText:@"0"];
-    
+    if (![numberFav.text isEqualToString:@"0"]) {
+        FAV_SERVICE(favSrv);
+        [favSrv clearAllFavoriteProducts];
+        [numberFav setText:@"0"];
+    }
 }
 
 - (IBAction) clearAllPurchasedProducts
 {
-    PUR_SERVICE(purSrv);
-    [purSrv clearAllPurchasedProducs];
-    [numberPur setText:@"0"];
+    if (![numberPur.text isEqualToString:@"0"]) {
+        PUR_SERVICE(purSrv);
+        [purSrv clearAllPurchasedProducs];
+        [numberPur setText:@"0"];
+    }
 }
 
 #pragma mark -

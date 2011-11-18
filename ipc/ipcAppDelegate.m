@@ -3,7 +3,7 @@
 //  ipc
 //
 //  Created by SaRy on 7/25/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011 OngSoft. All rights reserved.
 //
 
 #import "ipcAppDelegate.h"
@@ -23,10 +23,6 @@
 - (ApplicationService*) appService
 {
     return _appService;
-}
-- (DataService*) dataService
-{
-    return _dataService;
 }
 - (FavouriteService*) favService
 {
@@ -48,14 +44,10 @@
     //[application setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
     _appService = [[ApplicationService alloc] init];
     [_appService setViewIndex:1.0];
-    //[_appService loadTypes];
     [_appService loadBrands];
     [_appService loadStores];
     [_appService loadCategories];
     [_appService loadFeatureProductsList];
-    //[_appService loadProductsOnSalesFrom:0 to:1];
-    //[_appService setDelegate:self];
-    _dataService = [[DataService alloc] init];
     _favService = [[FavouriteService alloc] init];
     [_favService loadFavouriteProducts];
     _purService = [[PurchaseService alloc] init];
@@ -66,9 +58,6 @@
     
     [self.window setBackgroundColor:[UIColor grayColor]];
     self.window.rootViewController = self.tabBarController;
-    
-    //[[[[[self tabBarController] tabBar] items] objectAtIndex:3] setBadgeValue:@"5"];
-    //[[[[[self tabBarController] tabBar] items] objectAtIndex:4]];
     
     [self.window makeKeyAndVisible];
     //[application setStatusBarHidden:NO withAnimation:UIStatusBarAnimationSlide];
@@ -107,7 +96,7 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    [_dataService applicationTerminate];
+
 }
 
 - (void)dealloc
@@ -115,8 +104,9 @@
     [_window release];
     [_tabBarController release];
     [_appService release];
-    [_dataService release];
     [_favService release];
+    [_purService release];
+    [_reqService release];
     [super dealloc];
 }
 

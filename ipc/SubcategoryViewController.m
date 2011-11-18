@@ -3,7 +3,7 @@
 //  ipc
 //
 //  Created by SaRy on 8/2/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011 OngSoft. All rights reserved.
 //
 
 #import "SubcategoryViewController.h"

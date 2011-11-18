@@ -2,8 +2,8 @@
 //  RequestService.m
 //  ipc
 //
-//  Created by Mahmood1 on 10/21/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Created on 10/21/11.
+//  Copyright 2011 OngSoft. All rights reserved.
 //
 
 #import "RequestService.h"
@@ -11,7 +11,7 @@
 
 
 @implementation RequestService
-@synthesize isInfoNull = _isInfoNull, fullName = _fullName, phone = _phone, email = _email, pid = _pid, cart = _cart;
+@synthesize isInfoNull = _isInfoNull, fullName = _fullName, phone = _phone, email = _email, pid = _pid;
 
 -(id) init
 {
@@ -23,6 +23,11 @@
 
 -(void)dealloc
 {
+    [_information release];
+    [_fullName release];
+    [_phone release];
+    [_email release];
+    [_pid release];
     [super dealloc];
 }
 
@@ -37,13 +42,6 @@
         NSString *bundle = [[NSBundle mainBundle] pathForResource:@"User" ofType:@"plist"];
         [[NSFileManager defaultManager] copyItemAtPath:bundle toPath:plistPath error:&error];
     }
-//    NSData *plistXML = [[NSFileManager defaultManager] contentsAtPath:plistPath];
-//    NSString *errorDesc = nil;
-//    NSPropertyListFormat format;
-//    NSDictionary *temp = (NSDictionary*)[NSPropertyListSerialization propertyListFromData:plistXML mutabilityOption:NSPropertyListMutableContainersAndLeaves format:&format errorDescription:&errorDesc];
-//    if (!temp) {
-//        NSLog(@"Error reading plist: %@, format: %d", errorDesc, format);
-//    }
     
     NSMutableDictionary *temp = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
     

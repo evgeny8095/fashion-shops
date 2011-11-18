@@ -2,8 +2,8 @@
 //  FavouriteViewController.m
 //  ipc
 //
-//  Created by Mahmood1 on 9/21/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Created on 9/21/11.
+//  Copyright 2011 OngSoft. All rights reserved.
 //
 
 #import "FavouriteViewController.h"
@@ -42,6 +42,15 @@
 {
     [super viewDidLoad];
     [self.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    noProductLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 500, 100)];
+    [noProductLabel setNumberOfLines:2];
+    [noProductLabel setTextAlignment:UITextAlignmentCenter];
+    [noProductLabel setText:@"Quý khách chưa có sản phẩm yêu thích."];
+    [noProductLabel setFont:[UIFont systemFontOfSize:40]];
+    [noProductLabel setCenter:CGPointMake(512, 355)];
+    [noProductLabel setHidden:YES];
+    [self.view addSubview:noProductLabel];
+    [noProductLabel release];
 }
 
 - (void) viewDidAppear:(BOOL)animated
@@ -58,49 +67,33 @@
     
     if (favouriteProductsString != nil && ![favouriteProductsString isEqualToString:@""]) {
         APP_SERVICE(appSrv);
-        //NSDictionary *types = [appSrvvv typeDict];
-        //NSDictionary *categories = [appSrvvv categoryDict];
-        
-        
         ProductSliderViewController *productSliderViewController = [[ProductSliderViewController alloc] initForFavoriteProducts:favouriteProductsString];
-        //[appSrv loadProductsForProductIds:favouriteProductsString from:0 to:15 forReceiver:productSliderViewController];
         [appSrv loadProductsForProductIds:favouriteProductsString from:0 to:7 inPage:1];
         [appSrv setDelegate:productSliderViewController];
-        //productSliderViewController.c_type = c_type;
-        //productSliderViewController.c_category = c_category;
-        //productSliderViewController.type = _type;
-        //productSliderViewController.category = category;
-        //productSliderViewController.navigationItem.title = title;
         productSliderViewController.title = @"YÊU THÍCH";
-        
         [self.view addSubview:navController.view];
-        
         [self.navController pushViewController:productSliderViewController animated:NO];
-        
+        [self.navController.view setHidden:NO];
         [productSliderViewController release];
-    }    
-
+    }
+    else{
+        [noProductLabel setHidden:NO];
+    }
 }
 
 -(void) viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
+    [navController popToRootViewControllerAnimated:NO];
+    [navController.view removeFromSuperview];
     [navController release];
     navController = nil;
     APP_SERVICE(appSrv);
     [appSrv clearFavouriteProduct];
 }
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
 	return YES;
 }
 

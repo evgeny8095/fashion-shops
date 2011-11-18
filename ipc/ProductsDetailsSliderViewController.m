@@ -3,7 +3,7 @@
 //  ipc
 //
 //  Created by SaRy on 8/23/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011 OngSoft. All rights reserved.
 //
 
 #import "ProductsDetailsSliderViewController.h"
@@ -258,8 +258,8 @@
     [numberOf setBackgroundColor:[UIColor clearColor]];
     [numberOf setTextColor:[UIColor grayColor]];
     [infoBar addSubview:numberOf];
-    
-    //[self.view addSubview:infoBar];
+    [numberOfString release];
+    [numberOf release];
 }
 
 - (void)viewDidUnload

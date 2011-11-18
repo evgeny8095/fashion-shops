@@ -2,8 +2,8 @@
 //  SalesProductsViewController.m
 //  ipc
 //
-//  Created by Mahmood1 on 9/30/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Created on 9/30/11.
+//  Copyright 2011 OngSoft. All rights reserved.
 //
 
 #import "SalesProductsViewController.h"
@@ -44,12 +44,15 @@
     [super viewDidLoad];
     [self.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
         
-    UILabel *underContruction = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 500, 100)];
-    [underContruction setText:@"Feature Under Contruction!"];
-    [underContruction setFont:[UIFont systemFontOfSize:40]];
-    [underContruction setCenter:CGPointMake(512, 355)];
-    //[self.view addSubview:underContruction];
-    [underContruction release];
+    noProductLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 500, 100)];
+    [noProductLabel setNumberOfLines:2];
+    [noProductLabel setTextAlignment:UITextAlignmentCenter];
+    [noProductLabel setText:@"Quý khách chưa có sản phẩm yêu thích."];
+    [noProductLabel setFont:[UIFont systemFontOfSize:40]];
+    [noProductLabel setCenter:CGPointMake(512, 355)];
+    [noProductLabel setHidden:YES];
+    [self.view addSubview:noProductLabel];
+    [noProductLabel release];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -93,6 +96,7 @@
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
+    [navController.view removeFromSuperview];
     [navController release];
     navController = nil;
 }

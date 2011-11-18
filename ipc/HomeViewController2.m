@@ -2,8 +2,8 @@
 //  HomeViewController2.m
 //  ipc
 //
-//  Created by Mahmood1 on 10/18/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Created on 10/18/11.
+//  Copyright 2011 OngSoft. All rights reserved.
 //
 
 #import "HomeViewController2.h"
@@ -33,6 +33,14 @@
 
 - (void)dealloc
 {
+    [searchBar release];
+    [popoverController release];
+    [filterPopOver release];;
+    [buttons release];
+    [filterTypes release];
+    [filterBrands release];
+    [filterStores release];
+    [filterCategories release];
     [super dealloc];
 }
 
@@ -171,16 +179,8 @@
 
     [searchBar resignFirstResponder];
     
-    
     NSString *title = @"Kết Quả";
-    
-    //navController = [[UINavigationController alloc] init];
-    //navController.delegate=self;
     [self.navigationController setDelegate:self];
-    
-    //[navController.view setFrame:CGRectMake(0, 0, 1024, 748)];
-    
-    //[navController.navigationBar setBarStyle:UIBarStyleBlack];
     
     APP_SERVICE(appSrv);
     [appSrv setViewIndex:8];
@@ -188,48 +188,17 @@
     [appSrv clearFilteredProducts];
     
     ProductSliderViewController *productSliderViewController = [[ProductSliderViewController alloc] initForFilteredProductsWithKeywords:searchString TypeString:typeString BrandString:brandString StoreString:storeString CategoryString:categoryString hasTopPrice:@"" andBotPrice:@""];
-    //[appSrvvv loadFilteredProductFrom:0 to:15 hasKeywords:searchString hasTypes:typeString hasBrands:brandString ofStores:storeString inCategories:categoryString hasTopPrice:@"" hasBottomPrice:@""];
     [appSrv loadFilteredProductFrom:0 to:7 inPage:1 hasKeywords:searchString hasTypes:typeString hasBrands:brandString ofStores:storeString inCategories:categoryString hasTopPrice:@"" hasBottomPrice:@""];
     [appSrv setDelegate3:productSliderViewController];
-    //[productSliderViewController.navigationController.navigationBar ];
-    //productSliderViewController.c_type = c_type;
-    //productSliderViewController.c_category = c_category;
-    //productSliderViewController.type = _type;
-    //productSliderViewController.category = category;
-    //productSliderViewController.navigationItem.title = title;
     productSliderViewController.title = title;
-    
-    //[self.view addSubview:navController.view];
-    
-    //[self.navController pushViewController:productSliderViewController animated:NO];
-    [self.navigationController pushViewController:productSliderViewController animated:YES];
-    
-    //[productSliderViewController.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(goBack)]];
-    
-    //[navController setDelegate:productSliderViewController];
     [self.navigationController setDelegate:productSliderViewController];
-    
-    //[self.view addSubview:navController.view];
-    
-    //[self flipForDuration:0.75 withAnimation:UIViewAnimationTransitionFlipFromLeft];
-    
-    //    [UIView animateWithDuration:0.75 
-    //                     animations:^{
-    //                         
-    //                     }
-    //                     completion:^(BOOL finished) {
-    //                         [self.view addSubview:navController.view];
-    //                     }];
+    [self.navigationController pushViewController:productSliderViewController animated:YES];
+    [storeString release];
+    [categoryString release];
+    [brandString release];
+    [typeString release];
     [productSliderViewController release];
-    
 }
-
-//- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
-//    if ([viewController isEqual:self]) {
-//        APP_SERVICE(appSrv);
-//        [appSrv setViewIndex:1.0];
-//    }
-//}
 
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
     if ([viewController isEqual:self]) {
@@ -252,7 +221,9 @@
     //search
     searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 200, 0)];
     [searchBar setDelegate:self];
-    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:searchBar]];
+    UIBarButtonItem *searchHolder = [[UIBarButtonItem alloc] initWithCustomView:searchBar];
+    [self.navigationItem setRightBarButtonItem:searchHolder];
+    [searchHolder release];
     
     //type buttons
     NSInteger px = 0;

@@ -3,7 +3,7 @@
 //  MyFruitsDiary
 //
 //  Created by Khoi Pham on 3/14/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011 OngSoft. All rights reserved.
 //
 #import <Foundation/Foundation.h>
 #import "HttpRequest.h"

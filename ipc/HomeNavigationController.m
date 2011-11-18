@@ -2,8 +2,8 @@
 //  HomeNavigationController.m
 //  ipc
 //
-//  Created by Mahmood1 on 11/7/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Created on 11/7/11.
+//  Copyright 2011 OngSoft. All rights reserved.
 //
 
 #import "HomeNavigationController.h"
@@ -24,6 +24,7 @@
 
 - (void)dealloc
 {
+    [navigationController release];
     [super dealloc];
 }
 
@@ -58,12 +59,6 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [navController viewWillAppear:animated];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

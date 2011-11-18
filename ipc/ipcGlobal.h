@@ -3,12 +3,11 @@
 //  ipc
 //
 //  Created by SaRy on 9/6/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011 OngSoft. All rights reserved.
 //
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 #import "ApplicationService.h"
-#import "DataService.h"
 #import "FavouriteService.h"
 #import "Type.h"
 #import "Category.h"

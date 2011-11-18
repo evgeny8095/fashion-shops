@@ -2,8 +2,8 @@
 //  SettingMasterViewController.h
 //  ipc
 //
-//  Created by Mahmood1 on 11/4/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Created on 11/4/11.
+//  Copyright 2011 OngSoft. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

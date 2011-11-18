@@ -41,6 +41,7 @@
     navController.navigationBar.topItem.title = @"Tùy Chọn";
     navController.view.frame = self.view.frame;
     [self.view addSubview:navController.view];
+    [filterOptions release];
 }
 
 

@@ -2,8 +2,8 @@
 //  StoreXMLHandler.m
 //  ipc
 //
-//  Created by Mahmood1 on 9/8/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Created on 9/8/11.
+//  Copyright 2011 OngSoft. All rights reserved.
 //
 
 #import "StoreXMLHandler.h"
@@ -84,6 +84,7 @@
 
 -(void) dealloc
 {
+    [_count release];
 	[super dealloc];
 }
 

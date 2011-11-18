@@ -2,8 +2,8 @@
 //  InfoCollectorViewController.m
 //  ipc
 //
-//  Created by Mahmood1 on 10/20/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Created on 10/20/11.
+//  Copyright 2011 OngSoft. All rights reserved.
 //
 
 #import "InfoCollectorViewController.h"

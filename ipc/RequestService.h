@@ -2,8 +2,8 @@
 //  RequestService.h
 //  ipc
 //
-//  Created by Mahmood1 on 10/21/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Created on 10/21/11.
+//  Copyright 2011 OngSoft. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -18,7 +18,6 @@
     NSString *_phone;
     NSString *_email;
     NSString *_pid;
-    NSMutableArray* _cart;
 }
 
 @property (nonatomic, assign) Boolean isInfoNull;
@@ -26,7 +25,6 @@
 @property (nonatomic, retain) NSString *phone;
 @property (nonatomic, retain) NSString *email;
 @property (nonatomic, retain) NSString *pid;
-@property (nonatomic, retain) NSMutableArray *cart;
 
 -(void) loadUserInformation;
 -(void) saveUserInformation;
