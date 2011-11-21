@@ -10,14 +10,16 @@
 #import "MyPopOverView.h"
 #import "FilterOptionsViewController.h"
 #import "ApplicationService.h"
+#import "asyncimageview.h"
 
 
-@interface HomeViewController2 : UIViewController <UINavigationControllerDelegate, UISearchBarDelegate, UIPopoverControllerDelegate, ApplicationServiceDelegate>{
+@interface HomeViewController2 : UIViewController <UINavigationControllerDelegate, UISearchBarDelegate, UIPopoverControllerDelegate, ApplicationServiceDelegate, AsyncImageViewDelegate>{
     UIPopoverController *popoverController;
     MyPopOverView *filterPopOver;
     NSDictionary* _typeDict;
     NSArray* _typeArray;
     NSMutableArray* buttons;
+    NSMutableArray* imageLoaders;
     UISearchBar *searchBar;
     NSMutableArray *filterTypes;
     NSMutableArray *filterBrands;

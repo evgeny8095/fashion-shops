@@ -23,6 +23,10 @@
 
 - (void)dealloc
 {
+    [fullName release];
+    [phone release];
+    [email release];
+    [button release];
     [super dealloc];
 }
 

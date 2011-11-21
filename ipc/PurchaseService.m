@@ -98,13 +98,14 @@
 -(void) clearAllPurchasedProducs
 {
     [_purchasedProducts removeAllObjects];
+    [_purchasedProductString release];
     _purchasedProductString = [self generatePurchasedString];
     [self savePurchasedProducts];
 }
 
 -(NSMutableString*) generatePurchasedString
 {
-    NSMutableString* str = [NSMutableString stringWithFormat:@""];
+    NSMutableString* str = [[NSMutableString alloc] initWithFormat:@""];
     NSInteger count = [_purchasedProducts count];
     for (NSInteger i = 0; i < count; i++) {
         if (i == count-1)

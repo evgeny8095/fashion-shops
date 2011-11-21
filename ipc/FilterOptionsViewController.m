@@ -33,6 +33,8 @@
 
 - (void)dealloc
 {
+    [optionTable release];
+    [options release];
     [super dealloc];
 }
 

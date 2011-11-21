@@ -15,6 +15,10 @@
 
 @interface InfoCollectorViewController : UIViewController {
     id<InfoCollectorViewControllerDelegate> _delegate;
+    IBOutlet UITextField *fullName;
+    IBOutlet UITextField *phone;
+    IBOutlet UITextField *email;
+    IBOutlet UIButton *button;
 }
 
 @property (nonatomic,assign) id<InfoCollectorViewControllerDelegate> delegate;

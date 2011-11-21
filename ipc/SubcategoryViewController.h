@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "MyPopOverView.h"
 #import "ipcGlobal.h"
+#import "asyncimageview.h"
 
-@interface SubcategoryViewController : UIViewController <UIScrollViewDelegate, UISearchBarDelegate, ApplicationServiceDelegate, UINavigationControllerDelegate>{
+@interface SubcategoryViewController : UIViewController <UIScrollViewDelegate, UISearchBarDelegate, ApplicationServiceDelegate, UINavigationControllerDelegate, AsyncImageViewDelegate>{
     NSInteger _type;
     UIPopoverController *popoverController;
     MyPopOverView *myPopOver;
@@ -22,6 +23,7 @@
     UIActivityIndicatorView* loading;
     NSDictionary* _typeDict;
     NSMutableArray *buttons;
+    NSMutableArray *imageLoaders;
 }
 
 @property (nonatomic, assign) NSInteger type;

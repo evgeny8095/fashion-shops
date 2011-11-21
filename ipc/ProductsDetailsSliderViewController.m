@@ -34,9 +34,7 @@
 {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
-        //UIImage *imagex = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:strImg]]];
         self.imageStr = [c_product image];
-        //[imagex release];
         self.name = [c_product name];
         self.price = [NSString stringWithFormat:@"%i",[c_product price]];
         self.desc = [c_product desc];
@@ -52,9 +50,7 @@
 - (id)initWithImage:(NSString *)strImg hasName:(NSString *)strName hasPrice:(NSString *)strPrice hasDesc:(NSString *)strDesc inPosition:(NSInteger)position withMode:(BOOL)cmode{
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
-        //UIImage *imagex = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:strImg]]];
-        self.imageStr = strImg;
-        //[imagex release];
+        self.imageStr = strImg;;
         self.name = strName;
         self.price = strPrice;
         self.desc = strDesc;
@@ -84,6 +80,31 @@
 
 - (void)dealloc{
     [_product release];
+    [imageStr release];
+    [image release];
+    [button release];
+    [name release];
+    [price release];
+    [desc release];
+    [descText release];
+    [buy release];
+    [like release];
+    [labelBrand release];
+    [labelStore release];
+    [labelName release];
+    [labelPrice release];
+    [labelDesc release];
+    [labelScreenShot release];
+    [backCover release];
+    [url release];
+    [connection release];
+    [data release];
+    [loadingView release];
+    [more release];
+    [lineView release];
+    [gradientView release];
+    [popoverController release];
+    [infoCollectorViewController release];
     [super dealloc];
 }
 
@@ -102,9 +123,6 @@
     
     //gradient backgound
     gradientView = [[SSGradientView alloc] initWithFrame:self.view.frame];
-	//gradientView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-	//gradientView.topBorderColor = [UIColor colorWithRed:0.558f green:0.599f blue:0.643f alpha:1.0f];
-	//gradientView.topInsetColor = [UIColor colorWithWhite:1.0f alpha:0.3f];
 	gradientView.colors = [NSArray arrayWithObjects:
 							[UIColor darkGrayColor],
 							[UIColor blackColor],
@@ -160,9 +178,19 @@
     [formatter setPositiveFormat:@"###,###"];
     [formatter setPositiveSuffix:@"₫"];
     
-    labelPrice = [[UILabel alloc] initWithFrame:CGRectMake(leftDetailsPadding+buttonWidth+10, 230, 150, 40)];
+    labelPrice = [[UILabel alloc] initWithFrame:CGRectMake(leftDetailsPadding+buttonWidth+10, 230, 360, 40)];
     [labelPrice setHidden:YES];
-    NSString *formattedPriceString = [formatter stringFromNumber:[NSNumber numberWithInteger:[_product price]]];
+
+    NSString *formattedPriceString;
+    if ([_product discount] > 0) {
+        NSInteger currentPrice = [_product price] - ([_product price]*[_product discount]/100);
+        NSString *currentPriceFormatted = [formatter stringFromNumber:[NSNumber numberWithInteger:currentPrice]];
+        NSString *priceFormatted = [formatter stringFromNumber:[NSNumber numberWithInteger:[_product price]]];
+        formattedPriceString = [NSString stringWithFormat:@"%@ (%@)", currentPriceFormatted, priceFormatted];
+    }else{
+        formattedPriceString = [formatter stringFromNumber:[NSNumber numberWithInteger:[_product price]]];
+    }
+    
     [labelPrice setText:[NSString stringWithFormat:@"%@", formattedPriceString]];
     [labelPrice setBackgroundColor:[UIColor clearColor]];
     [labelPrice setTextColor:[UIColor whiteColor]];
@@ -182,22 +210,17 @@
 	more.bottomBorderColor = [UIColor colorWithRed:0.428f green:0.479f blue:0.520f alpha:1.0f];
     [more setHidden:YES];
     SSLineView *moreLine = [[SSLineView alloc] initWithFrame:CGRectMake(0, 49, 400, 2)];
-    //[more addSubview:moreLine];
     [moreLine release];
     UIImageView *location = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 16, 16)];
     UIImage *marker = [UIImage imageNamed:@"07-map-marker.png"];
     [location setImage:marker];
-    //[marker release];
     [more addSubview:location];
     [location release];
-    //[self.view addSubview:more];
     lineView = [[SSLineView alloc] initWithFrame:CGRectMake(leftDetailsPadding, 300, 400, 2)];
-    //lineView = [[SSLineView alloc] initWithFrame:CGRectMake(leftDetailsPadding, 398, 400, 2)];
     [lineView setHidden:YES];
     [self.view addSubview:lineView];
     
     descText = [[UITextView alloc] initWithFrame:CGRectMake(leftDetailsPadding, 302, 430, 200)];
-    //descText = [[UITextView alloc] initWithFrame:CGRectMake(leftDetailsPadding, 400, 430, 80)];
     [descText setHidden:YES];
     [descText setText:[_product desc]];
     [descText setBackgroundColor:[UIColor clearColor]];
@@ -207,31 +230,9 @@
     [descText setScrollEnabled:YES];
     [self.view addSubview:descText];
     
-//    labelScreenShot = [[UILabel alloc] initWithFrame:CGRectMake(leftDetailsPadding, 510, 400, 40)];
-//    [labelScreenShot setHidden:YES];
-//    [labelScreenShot setText:@"More preview:"];
-//    
-    
-//    labelDesc = [[UILabel alloc] initWithFrame:CGRectMake(leftDetailsPadding, 400, 400, 40)];
-//    [labelDesc setText:desc];
-//    [labelDesc setHidden:YES];
-//    [self.view addSubview:labelDesc];
-    
-//    like = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-//    like.frame = CGRectMake(855+buttonWidth, 600, buttonWidth, buttonHeight);
-//    //[like setHidden:YES];
-//    [like addTarget:self action:@selector(addToFavourite) forControlEvents:UIControlEventTouchUpInside];
-//    [like setTitle:@"Like" forState:UIControlStateNormal];
-//    [like.titleLabel setFont:[UIFont fontWithName: @"Helvetica" size: 24]];
-//    [like.titleLabel setFont:[UIFont boldSystemFontOfSize:24]];
-//    [like setBackgroundColor:[UIColor redColor]];
-//    [self.view addSubview:like];
-    
     buy = [UIButton buttonWithType:UIButtonTypeCustom];
     buy.frame = CGRectMake(850, 600, buttonWidth, buttonHeight);
-    //UIImage *likeImage = [[UIImage imageNamed:@"btn-red.png"] stretchableImageWithLeftCapWidth:10.0 topCapHeight:0.0]
     [buy setBackgroundImage:[[UIImage imageNamed:@"btn-red.png"] stretchableImageWithLeftCapWidth:10.0 topCapHeight:0.0] forState:UIControlStateNormal];
-    //[buy addTarget:self action:@selector(gotoShop:) forControlEvents:UIControlEventTouchUpInside];
     [buy addTarget:self action:@selector(buy:) forControlEvents:UIControlEventTouchUpInside];
     [buy setTitle:@"Mua" forState:UIControlStateNormal];
     [buy.titleLabel setFont:[UIFont fontWithName: @"Helvetica" size: 24]];
@@ -239,27 +240,6 @@
     [self.view addSubview:buy];
     
     [self.view setBackgroundColor:[UIColor whiteColor]];
-    
-    infoBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1024, 35)];
-    [infoBar setBackgroundColor:[UIColor lightTextColor]];
-    UILabel *priceAndStore = [[UILabel alloc] initWithFrame:CGRectMake(112, 0, 800, 35)];
-    NSString *priceAndStoreString = [[NSString alloc] initWithFormat:@"%@ - %@", formattedPriceString, [[_product store] name]];
-    [priceAndStore setText:priceAndStoreString];
-    [priceAndStore setTextAlignment:UITextAlignmentCenter];
-    [priceAndStore setBackgroundColor:[UIColor clearColor]];
-    [priceAndStore setTextColor:[UIColor grayColor]];
-    [infoBar addSubview:priceAndStore];
-    [priceAndStore release];
-    [priceAndStoreString release];
-    UILabel *numberOf = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 200, 35)];
-    NSString *numberOfString = [[NSString alloc] initWithFormat:@"%i of %i", cPosition+1, total];
-    [numberOf setText:numberOfString];
-    [numberOf setTextAlignment:UITextAlignmentLeft];
-    [numberOf setBackgroundColor:[UIColor clearColor]];
-    [numberOf setTextColor:[UIColor grayColor]];
-    [infoBar addSubview:numberOf];
-    [numberOfString release];
-    [numberOf release];
 }
 
 - (void)viewDidUnload
@@ -321,12 +301,9 @@
     [labelPrice setHidden:cmode];
     [labelDesc setHidden:cmode];
     [descText setHidden:cmode];
-    //[like setHidden:cmode];
-    //[backCover setHidden:cmode];
     [lineView setHidden:cmode];
     [gradientView setHidden:cmode];
     [more setHidden:cmode];
-    [infoBar setHidden:!cmode];
 }
 
 - (void)buy:(id)sender{

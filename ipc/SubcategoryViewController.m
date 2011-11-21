@@ -11,13 +11,9 @@
 #import "WebViewController.h"
 #import "Category.h"
 
-//#define buttonHeight 195
-//#define buttonWidth 233.5
 #define buttonHeight 167.5
 #define buttonWidth 206
 #define buttonSpacing 40
-//#define topPadding 100
-//#define sidePadding 5
 #define topPadding 100
 #define sidePadding 5
 #define labelHeight 40
@@ -47,8 +43,19 @@
 
 - (void)dealloc
 {
+    for (AsyncImageView *loader in imageLoaders)
+        [loader setDelegate:nil];
+    [imageLoaders release];
+    
     APP_SERVICE(appSrv);
     [appSrv setViewIndex:-1];
+    
+    [popoverController release];
+    [myPopOver release];
+    [topButton release];
+    [subCategoryScrollView release];
+    [loading release];
+    [buttons release];
     [super dealloc];
 }
 
@@ -57,36 +64,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //[self.navigationItem setHidesBackButton:YES animated:NO];
     [next setHidden:YES];
     [previous setHidden:YES];
     
     [self.view setBackgroundColor:[UIColor blackColor]];
-    //search ba
-//    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
-//    [searchBar setDelegate:self];
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:searchBar];
-//    [searchBar release];
     
     //top banner
     AsyncImageView *asyncImage = [[[AsyncImageView alloc] init] autorelease];
+    [asyncImage setDelegate:self];
     NSString *bannerURL = [NSString stringWithFormat:@"%@%@%@", BASE_URL, RESOURCE_PATH, @"images/banners/sub_banner5.png"];
     NSURL *bannerImageURL = [NSURL URLWithString:bannerURL];
-//    UIImage *bannerImage = [[UIImage alloc] initWithData:[[NSData dataWithContentsOfURL:bannerImageURL] autorelease]];
-//    if (bannerImage == nil) {
-//        [bannerImage release];
-//        bannerImage = [UIImage imageNamed:@"banner.jpg"];
-//    }
-//    [topButton setImage:bannerImage forState:UIControlStateNormal];
-//    [bannerImage release];
-    [asyncImage loadImageFromURL:bannerImageURL forButton:topButton];
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+    //[asyncImage loadImageFromURL:bannerImageURL forButton:topButton];
+    [asyncImage loadImageFromURL:bannerImageURL forButtonIndex:-1];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -114,7 +103,6 @@
     productSliderViewController.c_category = c_category;
     productSliderViewController.type = _type;
     productSliderViewController.category = category;
-    //productSliderViewController.navigationItem.title = [title uppercaseString];
     productSliderViewController.title = [title uppercaseString];
     
     [self.navigationController pushViewController:productSliderViewController animated:YES];
@@ -143,7 +131,6 @@
 #pragma mark appservice delegate
 -(void) didFinishParsingCategory:(NSMutableDictionary*)c_categoryDict andArray:(NSMutableArray *)c_categoryArray
 {
-    //[self.navigationItem setHidesBackButton:NO animated:YES];
     [loading stopAnimating];
     _categoryDict = c_categoryDict;
     _categoryArray = c_categoryArray;
@@ -158,52 +145,46 @@
     NSInteger count = [_categoryArray count];
 
     buttons = [[NSMutableArray alloc] init];
+    imageLoaders = [[NSMutableArray alloc] init];
     for (NSUInteger i = 0; i < count; i++) {
         UIButton *button = [[UIButton alloc] init];
         [buttons addObject:button];
         [button release];
+        AsyncImageView *asyncImage = [[AsyncImageView alloc] init];
+        [imageLoaders addObject:asyncImage];
+        [asyncImage release];
     }
     
     for (NSUInteger i = 0; i < count; i++) {
         Category* category = [_categoryArray objectAtIndex:i];
         
-        AsyncImageView *asyncImage = [[[AsyncImageView alloc] init] autorelease];
-        
+        //AsyncImageView *asyncImage = [[[AsyncImageView alloc] init] autorelease];
+        AsyncImageView *asyncImage = [imageLoaders objectAtIndex:i];
+        [asyncImage setDelegate:self];
         NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@%@%@", BASE_URL, RESOURCE_PATH, CATEGORIES_FOLDER, category.image];
         NSURL* url = [NSURL URLWithString:urlPath];
         [urlPath release];
         
-        [asyncImage loadImageFromURL:url forButton:[buttons objectAtIndex:i]];
+        //[asyncImage loadImageFromURL:url forButton:[buttons objectAtIndex:i]];
+        [asyncImage loadImageFromURL:url forButtonIndex:i];
     }
     
     for (NSUInteger i = 0; i < count; i++) {
-        //Category* current = [_categoryDict objectForKey:key];
         Category* category = [_categoryArray objectAtIndex:i];
         UIButton* button = [buttons objectAtIndex:i];
-       // UIImage *image = [UIImage imageNamed:current.image];
-        //UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(px, py, buttonWidth, buttonHeight)];
         [button setFrame:CGRectMake(px, py, buttonWidth, buttonHeight)];
         [button addTarget:self action:@selector(gotoSubCatalogue:) forControlEvents:UIControlEventTouchUpInside];
         [button setImage:DEFAULT_LOADING_IMAGE_CATEGORY forState:UIControlStateNormal];
-        
-        //[button setImageEdgeInsets:UIEdgeInsetsMake(topPadding, sidePadding, sidePadding, sidePadding)];
-        
-        //[button setImage:image forState:normal];
-        //[button setImage:[images objectAtIndex:i] forState:UIControlStateNormal];
         [button setTag:[category.cid intValue]];
         [button setTitle:category.name forState:normal];
         [button setBackgroundColor:[UIColor blackColor]];
-        //[image release];
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(px, py, buttonWidth, labelHeight)];
         [label setText:[category.name uppercaseString]];
-        //[label setAlpha:0.7];
         [label setTextAlignment:UITextAlignmentCenter];
         [label setBackgroundColor:[UIColor clearColor]];
         [label setTextColor:[UIColor whiteColor]];
         [label setFont:[UIFont fontWithName: @"Helvetica" size: 24]];
         [subCategoryScrollView addSubview:button];
-        //[subCategoryScrollView addSubview:label];
-        //[button release];
         [label release];
         
         py = py + buttonSpacing + buttonHeight;
@@ -236,7 +217,6 @@
         [next setHidden:NO];
         [previous setHidden:YES];
     }
-   // NSInteger total = [_categoryArray count]%8 == 0?[_categoryArray count]/8:[_categoryArray count]/8+1;
     if (page == [_categoryArray count]/8) {
         [next setHidden:YES];
         [previous setHidden:NO];
@@ -256,6 +236,15 @@
         APP_SERVICE(appSrv);
         [appSrv clearProducts];
     }
+}
+
+#pragma mark - AsyncImageView delegate method
+-(void) didFinishLoadingImage:(UIImage *)image forButtonIndex:(NSInteger)index
+{
+    if (index == -1)
+        [topButton setImage:image forState:UIControlStateNormal];
+    else
+        [[buttons objectAtIndex:index] setImage:image forState:UIControlStateNormal];
 }
 
 @end

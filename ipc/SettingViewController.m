@@ -24,6 +24,7 @@
 
 - (void)dealloc
 {
+    [splitViewController release];
     [super dealloc];
 }
 

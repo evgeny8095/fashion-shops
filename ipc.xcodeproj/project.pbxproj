@@ -32,7 +32,6 @@
 		F238C846140C9F40007C83CD /* 19-gear.png in Resources */ = {isa = PBXBuildFile; fileRef = F238C845140C9F40007C83CD /* 19-gear.png */; };
 		F238C854140CD43F007C83CD /* MyPopOverView.m in Sources */ = {isa = PBXBuildFile; fileRef = F238C853140CD43F007C83CD /* MyPopOverView.m */; };
 		F238C856140CD73A007C83CD /* MyPopOverView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F238C855140CD73A007C83CD /* MyPopOverView.xib */; };
-		F26E7E2E142890F7007E803B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F26E7E2D142890F7007E803B /* CoreData.framework */; };
 		F289704A14317D3600F9F400 /* FavouriteService.m in Sources */ = {isa = PBXBuildFile; fileRef = F289704914317D3600F9F400 /* FavouriteService.m */; };
 		F289704F14317E7800F9F400 /* Favorite.plist in Resources */ = {isa = PBXBuildFile; fileRef = F289704E14317E7800F9F400 /* Favorite.plist */; };
 		F289CCF114638F1E0009758B /* SettingMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F289CCF014638F1E0009758B /* SettingMasterViewController.m */; };
@@ -43,7 +42,7 @@
 		F289CD061463EE290009758B /* btn-black.png in Resources */ = {isa = PBXBuildFile; fileRef = F289CD051463EE290009758B /* btn-black.png */; };
 		F28C3917144C1EB10042285F /* heart1.png in Resources */ = {isa = PBXBuildFile; fileRef = F28C3915144C1EB10042285F /* heart1.png */; };
 		F28C3918144C1EB10042285F /* heart2.png in Resources */ = {isa = PBXBuildFile; fileRef = F28C3916144C1EB10042285F /* heart2.png */; };
-		F28C391D144C21DB0042285F /* sp silver1.png in Resources */ = {isa = PBXBuildFile; fileRef = F28C391C144C21DB0042285F /* sp silver1.png */; };
+		F28C391D144C21DB0042285F /* StylePad.png in Resources */ = {isa = PBXBuildFile; fileRef = F28C391C144C21DB0042285F /* StylePad.png */; };
 		F28D0ED81460DCC3006C1793 /* Purchased.plist in Resources */ = {isa = PBXBuildFile; fileRef = F28D0ED71460DCC3006C1793 /* Purchased.plist */; };
 		F28D0EDC1460DD39006C1793 /* PurchaseService.m in Sources */ = {isa = PBXBuildFile; fileRef = F28D0EDB1460DD39006C1793 /* PurchaseService.m */; };
 		F28D817E1435A8150049BC10 /* SalesProductsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F28D817C1435A80B0049BC10 /* SalesProductsViewController.m */; };
@@ -103,7 +102,7 @@
 		5A6DBB171407A0E700B51DB9 /* BigProductSliderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BigProductSliderViewController.m; sourceTree = "<group>"; };
 		5A6DBB181407A0E700B51DB9 /* BigProductSliderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BigProductSliderViewController.xib; sourceTree = "<group>"; };
 		5A6DBB191407A0E700B51DB9 /* BigProductSliderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BigProductSliderViewController.h; sourceTree = "<group>"; };
-		5A971E3413DD6256008A19BE /* Style Pad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Style Pad.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5A971E3413DD6256008A19BE /* StylePad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StylePad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A971E3813DD6256008A19BE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5A971E3A13DD6256008A19BE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5A971E3C13DD6256008A19BE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -155,7 +154,7 @@
 		F289CD051463EE290009758B /* btn-black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-black.png"; sourceTree = "<group>"; };
 		F28C3915144C1EB10042285F /* heart1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heart1.png; sourceTree = "<group>"; };
 		F28C3916144C1EB10042285F /* heart2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heart2.png; sourceTree = "<group>"; };
-		F28C391C144C21DB0042285F /* sp silver1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sp silver1.png"; sourceTree = "<group>"; };
+		F28C391C144C21DB0042285F /* StylePad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StylePad.png; sourceTree = "<group>"; };
 		F28D0ED71460DCC3006C1793 /* Purchased.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Purchased.plist; sourceTree = "<group>"; };
 		F28D0EDA1460DD39006C1793 /* PurchaseService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurchaseService.h; sourceTree = "<group>"; };
 		F28D0EDB1460DD39006C1793 /* PurchaseService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurchaseService.m; sourceTree = "<group>"; };
@@ -239,7 +238,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F26E7E2E142890F7007E803B /* CoreData.framework in Frameworks */,
 				5A971E3913DD6256008A19BE /* UIKit.framework in Frameworks */,
 				5A971E3B13DD6256008A19BE /* Foundation.framework in Frameworks */,
 				5A971E3D13DD6256008A19BE /* CoreGraphics.framework in Frameworks */,
@@ -253,7 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				F292922B1450237E001E6833 /* Default-Landscape~ipad.png */,
-				F28C391C144C21DB0042285F /* sp silver1.png */,
+				F28C391C144C21DB0042285F /* StylePad.png */,
 				5A971E3E13DD6256008A19BE /* ipc */,
 				5A971E3713DD6256008A19BE /* Frameworks */,
 				5A971E3513DD6256008A19BE /* Products */,
@@ -263,7 +261,7 @@
 		5A971E3513DD6256008A19BE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5A971E3413DD6256008A19BE /* Style Pad.app */,
+				5A971E3413DD6256008A19BE /* StylePad.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -486,7 +484,7 @@
 			);
 			name = ipc;
 			productName = ipc;
-			productReference = 5A971E3413DD6256008A19BE /* Style Pad.app */;
+			productReference = 5A971E3413DD6256008A19BE /* StylePad.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -537,7 +535,7 @@
 				F2FF059C143D912600FAA9DE /* btn-red.png in Resources */,
 				F28C3917144C1EB10042285F /* heart1.png in Resources */,
 				F28C3918144C1EB10042285F /* heart2.png in Resources */,
-				F28C391D144C21DB0042285F /* sp silver1.png in Resources */,
+				F28C391D144C21DB0042285F /* StylePad.png in Resources */,
 				F294025B144D124800B0DD78 /* HomeViewController2.xib in Resources */,
 				F294025E144D15BB00B0DD78 /* home.png in Resources */,
 				F292922514501819001E6833 /* next.png in Resources */,
@@ -686,7 +684,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ipc/ipc-Prefix.pch";
 				INFOPLIST_FILE = "ipc/ipc-Info.plist";
-				PRODUCT_NAME = "Style Pad";
+				PRODUCT_NAME = StylePad;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -697,7 +695,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ipc/ipc-Prefix.pch";
 				INFOPLIST_FILE = "ipc/ipc-Info.plist";
-				PRODUCT_NAME = "Style Pad";
+				PRODUCT_NAME = StylePad;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

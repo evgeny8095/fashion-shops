@@ -33,6 +33,9 @@
 
 - (void)dealloc
 {
+    for (AsyncImageView *loader in imageLoaders)
+        [loader setDelegate:nil];
+    [imageLoaders release];
     [searchBar release];
     [popoverController release];
     [filterPopOver release];;
@@ -214,8 +217,6 @@
     _typeDict = typeDict;
     _typeArray = typeArray;
     
-    //[self.view setBackgroundColor:[UIColor grayColor]];
-    
     [self.view setBackgroundColor:[UIColor blackColor]];
     
     //search
@@ -228,27 +229,33 @@
     //type buttons
     NSInteger px = 0;
     NSInteger py = 0;
-    //NSInteger scrollWidth = 0;
     NSInteger count = [_typeArray count];
     
     buttons = [[NSMutableArray alloc] init];
+    imageLoaders = [[NSMutableArray alloc] init];
     for (NSUInteger i = 0; i < count; i++) {
         UIButton *button = [[UIButton alloc] init];
         [buttons addObject:button];
         [button release];
+        AsyncImageView *asyncImage = [[AsyncImageView alloc] init];
+        [imageLoaders addObject:asyncImage];
+        [asyncImage release];
     }
+    
     
     for (NSUInteger i = 0; i < count; i++) {
         Type* type = [_typeArray objectAtIndex:i];
         
-        AsyncImageView *asyncImage = [[[AsyncImageView alloc] init] autorelease];
-        
+        //AsyncImageView *asyncImage = [[[AsyncImageView alloc] init] autorelease];
+        AsyncImageView *asyncImage = [imageLoaders objectAtIndex:i];
+        [asyncImage setDelegate:self];
         NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@%@%@", BASE_URL, RESOURCE_PATH, TYPIES_FOLDER, type.image];
         NSURL* url = [NSURL URLWithString:urlPath];
         NSLog(@"type url: %@", urlPath);
         [urlPath release];
         
-        [asyncImage loadImageFromURL:url forButton:[buttons objectAtIndex:i]];
+        //[asyncImage loadImageFromURL:url forButton:[buttons objectAtIndex:i]];
+        [asyncImage loadImageFromURL:url forButtonIndex:i];
     }
     
     for (NSUInteger i = 0; i < count; i++) {
@@ -289,8 +296,6 @@
 
 -(void)searchBarTextDidEndEditing:(UISearchBar *)aSearchBar{
     [popoverController dismissPopoverAnimated:YES];
-    //NSString *keywords = aSearchBar.text;
-    //NSLog(@"%@", keywords);
     
     [aSearchBar resignFirstResponder];
 }
@@ -299,6 +304,12 @@
 -(void) popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
 {
     [searchBar resignFirstResponder];
+}
+
+#pragma mark - AsynImageView delegate method
+-(void) didFinishLoadingImage:(UIImage *)image forButtonIndex:(NSInteger)index
+{
+    [[buttons objectAtIndex:index] setImage:image forState:UIControlStateNormal];
 }
 
 @end

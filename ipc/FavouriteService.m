@@ -118,13 +118,14 @@
 -(void) clearAllFavoriteProducts
 {
     [_favouriteProducts removeAllObjects];
+    [_favouriteProductString release];
     _favouriteProductString = [self generateFavouriteString];
     [self saveFavouriteProducts];
 }
 
 -(NSMutableString*) generateFavouriteString
 {
-    NSMutableString* str = [NSMutableString stringWithFormat:@""];
+    NSMutableString* str = [[NSMutableString alloc] initWithFormat:@""];
     NSInteger count = [_favouriteProducts count];
     for (NSInteger i = 0; i < count; i++) {
         if (i == count-1)

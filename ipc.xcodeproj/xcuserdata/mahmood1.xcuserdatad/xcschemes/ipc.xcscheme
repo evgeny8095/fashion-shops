@@ -14,7 +14,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "5A971E3313DD6256008A19BE"
-               BuildableName = "Style Pad.app"
+               BuildableName = "StylePad.app"
                BlueprintName = "ipc"
                ReferencedContainer = "container:ipc.xcodeproj">
             </BuildableReference>
@@ -51,7 +51,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "5A971E3313DD6256008A19BE"
-            BuildableName = "Style Pad.app"
+            BuildableName = "StylePad.app"
             BlueprintName = "ipc"
             ReferencedContainer = "container:ipc.xcodeproj">
          </BuildableReference>
@@ -70,7 +70,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "5A971E3313DD6256008A19BE"
-            BuildableName = "Style Pad.app"
+            BuildableName = "StylePad.app"
             BlueprintName = "ipc"
             ReferencedContainer = "container:ipc.xcodeproj">
          </BuildableReference>

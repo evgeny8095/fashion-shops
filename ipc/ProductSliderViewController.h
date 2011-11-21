@@ -12,12 +12,13 @@
 #import "MyPopOverView.h"
 #import "ipcGlobal.h"
 
-@interface ProductSliderViewController : UIViewController <UIScrollViewDelegate, BigProductSliderViewControllerDelegate, UINavigationControllerDelegate, ApplicationServiceDelegate>{
+@interface ProductSliderViewController : UIViewController <UIScrollViewDelegate, BigProductSliderViewControllerDelegate, UINavigationControllerDelegate, ApplicationServiceDelegate, AsyncImageViewDelegate>{
     NSString *title;
     IBOutlet UIScrollView *productScrollView;
     NSInteger totalItem;
     NSInteger totalPages;
     NSMutableArray *buttons;
+    NSMutableArray *imageLoaders;
     NSMutableArray *labels;
     NSMutableArray *secondLabels;
     UIPageControl *pageControl;
@@ -45,11 +46,9 @@
     NSString *categoryString;
     NSString *topPrice;
     NSString *botPrice;
+    NSInteger viewIndex;
 }
 
-@property (nonatomic, retain) NSMutableArray *buttons;
-@property (nonatomic, retain) NSMutableArray *labels;
-@property (nonatomic, retain) NSMutableArray *secondLabels;
 @property (nonatomic, assign) NSInteger type;
 @property (nonatomic, assign) NSInteger category;
 @property (nonatomic, retain) UIPopoverController *popoverController;

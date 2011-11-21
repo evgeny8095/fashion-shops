@@ -41,7 +41,6 @@
 {
     // Override point for customization after application launch.
     // Add the tab bar controller's current view as a subview of the window
-    //[application setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
     _appService = [[ApplicationService alloc] init];
     [_appService setViewIndex:1.0];
     [_appService loadBrands];
@@ -60,7 +59,6 @@
     self.window.rootViewController = self.tabBarController;
     
     [self.window makeKeyAndVisible];
-    //[application setStatusBarHidden:NO withAnimation:UIStatusBarAnimationSlide];
     return YES;
 }
 

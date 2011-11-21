@@ -25,6 +25,9 @@
 
 - (void)dealloc
 {
+    [popoverController release];
+    [myPopOver release];
+    [productArray release];
     [super dealloc];
 }
 

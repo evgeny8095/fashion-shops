@@ -48,11 +48,9 @@
     Product* _product;
     NSInteger _type;
     NSInteger _category;
-    NSManagedObjectContext *managedObjectContext;
     SSGradientView *more;
     SSLineView *lineView;
     SSGradientView *gradientView;
-    UIView *infoBar;
     UIPopoverController *popoverController;
     InfoCollectorViewController *infoCollectorViewController;
 }

@@ -68,6 +68,7 @@
 
 
 - (void)dealloc {
+    [navController release];
     [super dealloc];
 }
 

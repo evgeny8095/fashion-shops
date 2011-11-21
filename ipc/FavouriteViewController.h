@@ -12,7 +12,6 @@
 
 
 @interface FavouriteViewController : UIViewController {
-    //NSManagedObjectContext *managedObjectContext;
     UIPopoverController *popoverController;
     MyPopOverView *myPopOver;
     NSMutableArray *productArray;

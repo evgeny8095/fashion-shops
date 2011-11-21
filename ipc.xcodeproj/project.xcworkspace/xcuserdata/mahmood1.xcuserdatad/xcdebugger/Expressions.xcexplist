@@ -35,18 +35,18 @@
          </expressions>
       </StackState>
       <StackState
-         stackFrameDescription = "-[RequestService saveUserInformation]:RequestService.m">
-         <expressions>
-            <expression
-               value = "_email">
-            </expression>
-         </expressions>
-      </StackState>
-      <StackState
          stackFrameDescription = "-[ApplicationService didParsedFeatureProduct]:ApplicationService.m">
          <expressions>
             <expression
                value = "currentReceiver">
+            </expression>
+         </expressions>
+      </StackState>
+      <StackState
+         stackFrameDescription = "-[RequestService saveUserInformation]:RequestService.m">
+         <expressions>
+            <expression
+               value = "_email">
             </expression>
          </expressions>
       </StackState>
@@ -71,6 +71,14 @@
          <expressions>
             <expression
                value = "currentReceiver">
+            </expression>
+         </expressions>
+      </StackState>
+      <StackState
+         stackFrameDescription = "-[AsyncImageView connectionDidFinishLoading:]:asyncimageview.m">
+         <expressions>
+            <expression
+               value = "[cbuttons count]">
             </expression>
          </expressions>
       </StackState>

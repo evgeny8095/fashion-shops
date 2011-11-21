@@ -42,6 +42,8 @@
 
 - (void)dealloc
 {
+    [popoverController release];
+    [myPopOver release];
     [super dealloc];
 }
 

@@ -111,6 +111,7 @@
 
 - (void)dealloc {
     [toolbar release];
+    [titleLabel release];
     [super dealloc];
 }	
 

@@ -65,22 +65,9 @@
     [navController.navigationBar setBarStyle:UIBarStyleBlack];
     
     APP_SERVICE(appSrvvv);
-    //NSDictionary *types = [appSrv typeDict];
-    //NSDictionary *categories = [appSrv categoryDict];
-    //Type* c_type = [types objectForKey:[NSString stringWithFormat:@"%i", _type]];
-    //Category* c_category = [categories objectForKey:[NSString stringWithFormat:@"%i", category]];
-    
-    
-    
     ProductSliderViewController *productSliderViewController = [[ProductSliderViewController alloc] initForSalesProducts];
-    //[appSrvvv loadProductsOnSalesFrom:0 to:15];
     [appSrvvv loadProductsOnSalesFrom:0 to:7 inPage:1];
     [appSrvvv setDelegate:productSliderViewController];
-    //productSliderViewController.c_type = c_type;
-    //productSliderViewController.c_category = c_category;
-    //productSliderViewController.type = _type;
-    //productSliderViewController.category = category;
-    //productSliderViewController.navigationItem.title = [title uppercaseString];
     productSliderViewController.title = @"GIẢM GIÁ";
     
     [self.view addSubview:navController.view];

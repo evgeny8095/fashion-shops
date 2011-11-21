@@ -22,7 +22,7 @@
 @end
 
 @implementation ProductSliderViewController
-@synthesize buttons, labels, secondLabels, type = _type, category = _category, myPopOver, popoverController, title, productScrollView;
+@synthesize type = _type, category = _category, myPopOver, popoverController, title, productScrollView;
 @synthesize c_type, c_category;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -31,14 +31,40 @@
     if (self) {
         // Custom initialization
         loadFrom = [[NSString alloc] initWithString:@""];
+        viewIndex = 7;
     }
     return self;
 }
 
 - (void)dealloc{
+    for (AsyncImageView *loader in imageLoaders)
+        [loader setDelegate:nil];
+    [imageLoaders release];
     [popoverController dismissPopoverAnimated:NO];
     APP_SERVICE(appSrv);
     [appSrv setViewIndex:-1];
+    
+    [title release];
+    [productScrollView release];
+    [buttons release];
+    [labels release];
+    labels = nil;
+    [secondLabels release];
+    secondLabels = nil;
+    [pageControl release];
+    [popoverController release];
+    [myPopOver release];
+    [loadedPage release];
+    [loadFrom release];
+    [infomationLabel release];
+    [searchString release];
+    [typeString release];
+    [brandString release];
+    [storeString release];
+    [categoryString release];
+    [topPrice release];
+    [botPrice release];
+    
     [super dealloc];
 }
 
@@ -49,6 +75,7 @@
         // Custom initialization
         ids = c_ids;
         loadFrom = [[NSString alloc] initWithString:@"favourite2"];
+        viewIndex = 3;
     }
     return self;
 }
@@ -59,6 +86,7 @@
     if (self) {
         // Custom initialization
         loadFrom = [[NSString alloc] initWithString:@"feature"];
+        viewIndex = 2;
     }
     return self;
 }
@@ -70,6 +98,7 @@
     {
         // Custom initialization
         loadFrom = [[NSString alloc] initWithString:@"sales"];
+        viewIndex = 4;
     }
     return self;
 }
@@ -87,6 +116,7 @@
         categoryString = [categories retain];
         topPrice = [c_topPrice retain];
         botPrice = [c_topPrice retain];
+        viewIndex = 8;
     }
     return self;
 }
@@ -98,6 +128,7 @@
         // Custom initialization
         _productArray = fproductArray;
         loadFrom = [[NSString alloc] initWithString:@"favourite"];
+        viewIndex = 3;
     }
     return self;
 }
@@ -132,22 +163,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    //self.navigationItem.title = title;
-    
-    //refine button
-//    UIBarButtonItem *filterButton = [[ UIBarButtonItem alloc] initWithTitle:@"Show Option" style:UIBarButtonItemStylePlain target:self action:@selector(filterProductList:)];
-//    self.navigationItem.rightBarButtonItem = filterButton;
-//    [filterButton release];
-    
-//    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 480, 44)];
-//    titleLabel.backgroundColor = [UIColor clearColor];
-//    titleLabel.numberOfLines = 2;
-//    titleLabel.font = [UIFont boldSystemFontOfSize:14.0f];
-//    titleLabel.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
-//    titleLabel.textAlignment = UITextAlignmentCenter;
-//    titleLabel.textColor = [UIColor whiteColor];
-//    titleLabel.text = self.title;
-//    self.navigationItem.titleView = titleLabel;
+
 }
 
 - (void)viewDidUnload
@@ -164,7 +180,6 @@
 }
 
 - (IBAction)gotoProductDetails:(id)sender{
-    //NSString *title = ((UIButton *) sender).titleLabel.text;
     NSInteger page = ((UIButton *) sender).tag;
     NSInteger index = page%8;
     
@@ -172,12 +187,10 @@
     if (product != nil) {
         BigProductSliderViewController *bigProductSliderViewController = [[BigProductSliderViewController alloc] initWithPage:page andProducts:_productArray withProductPages:_productPages andIndexInPage:index withTotal:totalItem];
         bigProductSliderViewController.delegate = self;
-        //bigProductSliderViewController.navigationItem.title = [[_productArray objectAtIndex:page] name];
         bigProductSliderViewController.navigationItem.title = [[[_productPages objectForKey:[NSString stringWithFormat:@"%i", page/8+1]] objectAtIndex:page%8] name];
         bigProductSliderViewController.type = _type;
         bigProductSliderViewController.category = _category;
         bigProductSliderViewController.item = page;
-        //[bigProductSliderViewController.navigationItem.backBarButtonItem setTitle:@"ALL"];
         
         [self.navigationController pushViewController:bigProductSliderViewController animated:YES];
         
@@ -306,6 +319,7 @@
         NSInteger smallImageWidth = 327;
         NSInteger smallImageHeight = 255;
         
+        imageLoaders = [[NSMutableArray alloc] init];
         NSMutableArray *tempButtons = [[NSMutableArray alloc] init];
         NSMutableArray *tempLabels = [[NSMutableArray alloc] init];
         NSMutableArray *tempSecondLabels = [[NSMutableArray alloc] init];
@@ -335,11 +349,14 @@
             [smallButton release];
             [label release];
             [secondLabel release];
+            AsyncImageView *asyncImage = [[AsyncImageView alloc] init];
+            [imageLoaders addObject:asyncImage];
+            [asyncImage release];
         }
         
-        self.buttons = tempButtons;
-        self.labels = tempLabels;
-        self.secondLabels = tempSecondLabels;
+        buttons = tempButtons;
+        labels = tempLabels;
+        secondLabels = tempSecondLabels;
         [tempButtons release];
         [tempLabels release];
         [tempSecondLabels release];
@@ -352,7 +369,6 @@
         for(UILabel *label in secondLabels){
             [productScrollView addSubview:label];
         }
-        
         smallSliderWidth = (totalItem%8==0?totalItem/8:totalItem/8+1)*1024;
         NSLog(@"scroll width: %i", smallSliderWidth);
         productScrollView.pagingEnabled = YES;
@@ -361,13 +377,11 @@
         productScrollView.showsHorizontalScrollIndicator = YES;
         productScrollView.showsVerticalScrollIndicator = NO;
         productScrollView.delegate=self;
-        
         [self.view addSubview:productScrollView];
         [loadedPage setObject:[NSNumber numberWithInteger:1] forKey:@"0"];
         [loadedPage setObject:[NSNumber numberWithInteger:1] forKey:@"1"];
         [self loadScrollViewWithPage:0];
         [self loadScrollViewWithPage:1];
-        
         [self loadPageWithProductsStartAt:start EndAt:end];
     }else if (page == 1) {
         NSInteger productTotal = total;
@@ -376,8 +390,7 @@
             APP_SERVICE(appSrv);
             productTotal = [[appSrv featureProductList] count];
         }
-        totalPages = productTotal/8+1;        
-        
+        totalPages = productTotal/8+1;
         UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(162, 0, 700, 44)];
         UILabel *titleString = [[UILabel alloc] initWithFrame:CGRectMake(0, 5, 700, 20)];
         [titleString setTextAlignment:UITextAlignmentCenter];
@@ -396,30 +409,24 @@
         [titleString release];
         [infoString release];
         [titleView release];
-        
         for (NSInteger i = 0; i<totalPages; i++) {
             [loadedPage setObject:[NSNumber numberWithInteger:0] forKey:[NSString stringWithFormat:@"%i", i]];
         }
-        
         _productArray = c_productArray;
         _productPages = c_productPages;
         NSLog(@"Number of loaded product %i", [_productArray count]);
-        
         totalItem = productTotal;
-        
         NSLog(@"Total Products: %i", totalItem);
-        
-        //NSInteger c_numberProduct = [_productArray count];
-        
         NSInteger sx = 0;
         NSInteger sy = 0;
         NSInteger smallSliderWidth;
         NSInteger smallImageWidth = 327;
         NSInteger smallImageHeight = 255;
         
-        NSMutableArray *tempButtons = [[NSMutableArray alloc] init];
-        NSMutableArray *tempLabels = [[NSMutableArray alloc] init];
-        NSMutableArray *tempSecondLabels = [[NSMutableArray alloc] init];
+        buttons = [[NSMutableArray alloc] init];
+        labels = [[NSMutableArray alloc] init];
+        secondLabels = [[NSMutableArray alloc] init];
+        imageLoaders = [[NSMutableArray alloc] init];
         for (NSInteger i = 0; i < totalItem; i++)
         {
             UIButton *smallButton = [[UIButton alloc] initWithFrame:CGRectMake(sx, sy, smallImageHeight, smallImageWidth)];
@@ -440,20 +447,16 @@
                 sy = 0;
                 sx = sx + smallImageHeight + 1;
             }
-            [tempButtons addObject:smallButton];
-            [tempLabels addObject:label];
-            [tempSecondLabels addObject:secondLabel];
+            [buttons addObject:smallButton];
+            [labels addObject:label];
+            [secondLabels addObject:secondLabel];
             [smallButton release];
             [label release];
             [secondLabel release];
+            AsyncImageView *asyncImage = [[AsyncImageView alloc] init];
+            [imageLoaders addObject:asyncImage];
+            [asyncImage release];
         }
-        
-        self.buttons = tempButtons;
-        self.labels = tempLabels;
-        self.secondLabels = tempSecondLabels;
-        [tempButtons release];
-        [tempLabels release];
-        [tempSecondLabels release];
         for(UIButton *button in buttons){
             [productScrollView addSubview:button];
         }
@@ -463,7 +466,6 @@
         for(UILabel *label in secondLabels){
             [productScrollView addSubview:label];
         }
-        
         smallSliderWidth = (totalItem%8==0?totalItem/8:totalItem/8+1)*1024;
         NSLog(@"scroll width: %i", smallSliderWidth);
         productScrollView.pagingEnabled = YES;
@@ -472,18 +474,12 @@
         productScrollView.showsHorizontalScrollIndicator = YES;
         productScrollView.showsVerticalScrollIndicator = NO;
         productScrollView.delegate=self;
-        
         [self.view addSubview:productScrollView];
         [loadedPage setObject:[NSNumber numberWithInteger:1] forKey:@"0"];
-        //[loadedPage setObject:[NSNumber numberWithInteger:1] forKey:@"1"];
-        //[self loadScrollViewWithPage:0];
-        //[self loadScrollViewWithPage:1];
-        
         [self loadPageWithProductsForPage:page];
         [self loadScrollViewWithPage:0];
     }else{
         if (page != -1) {
-            //[self loadPageWithProductsStartAt:page*8-8 EndAt:page*8-1];
             [self loadPageWithProductsForPage:page];
         }
         else{
@@ -528,18 +524,14 @@
         UIButton *button = [buttons objectAtIndex:i];
         UILabel *label = [labels objectAtIndex:i];
         UILabel *secondLabel = [secondLabels objectAtIndex:i];
-        //[button setTag:[[product pid] intValue]];
         if ([[button imageView] image] == NULL) {
-            AsyncImageView *asyncImage = [[[AsyncImageView alloc] init] autorelease];
-            
+            //AsyncImageView *asyncImage = [[[AsyncImageView alloc] init] autorelease];
+            AsyncImageView *asyncImage = [imageLoaders objectAtIndex:i];
+            [asyncImage setDelegate:self];
             NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@%@t-%@", BASE_URL, RESOURCE_PATH, PRODUCT_FOLDER, [product image]];
-            
-            //NSLog(@"product image: %@", urlPath);
-            
             NSURL* url = [NSURL URLWithString:urlPath];
             [urlPath release];
-            
-            [asyncImage loadImageFromURL:url forButton:button];
+            [asyncImage loadImageFromURL:url forButtonIndex:i];
         }
         NSString *labelString = [[NSString alloc] initWithFormat:@"%@" ,[product name]];
         [label setText:labelString];
@@ -548,7 +540,7 @@
         
         NSInteger currentPrice = 0;
         if ([product discount]>0) {
-            currentPrice = [product price]*[product discount]/100;
+            currentPrice = [product price] - ([product price]*[product discount]/100);
         }
         
         NSString *formattedPriceString = [formatter stringFromNumber:[NSNumber numberWithInteger:[product price]]];
@@ -581,8 +573,9 @@
         UILabel *secondLabel = [secondLabels objectAtIndex:i];
         //[button setTag:[[product pid] intValue]];
         if ([[button imageView] image] == NULL) {
-            AsyncImageView *asyncImage = [[[AsyncImageView alloc] init] autorelease];
-            
+            //AsyncImageView *asyncImage = [[[AsyncImageView alloc] init] autorelease];
+            AsyncImageView *asyncImage = [imageLoaders objectAtIndex:i];
+            [asyncImage setDelegate:self];
             NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@%@t-%@", BASE_URL, RESOURCE_PATH, PRODUCT_FOLDER, [product image]];
             
             //NSLog(@"product image: %@", urlPath);
@@ -590,7 +583,8 @@
             NSURL* url = [NSURL URLWithString:urlPath];
             [urlPath release];
             
-            [asyncImage loadImageFromURL:url forButton:button];
+            //[asyncImage loadImageFromURL:url forButton:button];
+            [asyncImage loadImageFromURL:url forButtonIndex:i];
         }
         NSString *labelString = [[NSString alloc] initWithFormat:@"%@" ,[product name]];
         [label setText:labelString];
@@ -615,6 +609,12 @@
         [secondLabelString release];
     }
     [formatter release];
+}
+
+#pragma mark - AsyncImageView delegate method
+-(void) didFinishLoadingImage:(UIImage *)image forButtonIndex:(NSInteger)index
+{
+    [[buttons objectAtIndex:index] setImage:image forState:UIControlStateNormal];
 }
 
 @end

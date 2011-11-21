@@ -8,6 +8,7 @@
 //
 
 #import "AsyncImageView.h"
+#import "ipcGlobal.h"
 
 
 // This class demonstrates how the URL loading system can be used to make a UIView subclass
@@ -16,6 +17,7 @@
 // are multiple images being downloaded and displayed all at the same time. 
 
 @implementation AsyncImageView
+@synthesize delegate = _delegate;
 
 - (void)dealloc {
 	[connection cancel]; //in case the URL is still downloading
@@ -24,8 +26,7 @@
     [super dealloc];
 }
 
-
-- (void)loadImageFromURL:(NSURL*)url forButton:(UIButton *)button{
+- (void)loadImageFromURL:(NSURL*)url forButton:(UIButton *)button {
 	if (connection!=nil) { [connection release]; } //in case we are downloading a 2nd image
 	if (data!=nil) { [data release]; }
 	cbutton = button;
@@ -34,6 +35,14 @@
 	//TODO error handling, what if connection is nil?
 }
 
+- (void)loadImageFromURL:(NSURL*)url forButtonIndex:(NSInteger)cindex {
+	if (connection!=nil) { [connection release]; } //in case we are downloading a 2nd image
+	if (data!=nil) { [data release]; }
+	index = cindex;
+	NSURLRequest* request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
+	connection = [[NSURLConnection alloc] initWithRequest:request delegate:self]; //notice how delegate set to self object
+	//TODO error handling, what if connection is nil?
+}
 
 //the URL connection calls this repeatedly as data arrives
 - (void)connection:(NSURLConnection *)theConnection didReceiveData:(NSData *)incrementalData {
@@ -52,9 +61,8 @@
 	[data release]; //don't need this any more, its in the UIImageView now
 	data=nil;
     
-    if ([cbutton isKindOfClass:[UIButton class]])
-        [cbutton setImage:image forState:UIControlStateNormal];
-    //[delegate imageLoadedSuccess:self];
+    if (_delegate != nil)
+        [_delegate didFinishLoadingImage:image forButtonIndex:index];
 }
 
 //just in case you want to get the image directly, here it is in subviews
