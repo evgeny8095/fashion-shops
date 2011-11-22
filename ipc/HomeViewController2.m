@@ -99,7 +99,6 @@
     Type *c_type = [_typeDict objectForKey:key];
     
     [self.navigationController setDelegate:self];
-    NSLog(@"%i", c_type.style);
     if (c_type.style == 0) {
         SubcategoryViewController *subCategoryViewController = [[SubcategoryViewController alloc] init];
         APP_SERVICE(appSrv);
@@ -246,15 +245,13 @@
     for (NSUInteger i = 0; i < count; i++) {
         Type* type = [_typeArray objectAtIndex:i];
         
-        //AsyncImageView *asyncImage = [[[AsyncImageView alloc] init] autorelease];
         AsyncImageView *asyncImage = [imageLoaders objectAtIndex:i];
         [asyncImage setDelegate:self];
         NSString *urlPath = [[NSString alloc] initWithFormat:@"%@%@%@%@", BASE_URL, RESOURCE_PATH, TYPIES_FOLDER, type.image];
         NSURL* url = [NSURL URLWithString:urlPath];
-        NSLog(@"type url: %@", urlPath);
+        //NSLog(@"type url: %@", urlPath);
         [urlPath release];
         
-        //[asyncImage loadImageFromURL:url forButton:[buttons objectAtIndex:i]];
         [asyncImage loadImageFromURL:url forButtonIndex:i];
     }
     
@@ -277,7 +274,7 @@
 
 #pragma mark searchbar delegate
 -(void)searchBarTextDidBeginEditing:(UISearchBar *)aSearchBar{
-    NSLog(@"rect: x:%f y:%f w:%f h:%f", aSearchBar.frame.origin.x, aSearchBar.frame.origin.y, aSearchBar.frame.size.width, aSearchBar.frame.size.height);
+    //NSLog(@"rect: x:%f y:%f w:%f h:%f", aSearchBar.frame.origin.x, aSearchBar.frame.origin.y, aSearchBar.frame.size.width, aSearchBar.frame.size.height);
     if (filterPopOver == nil) {
         filterPopOver = [[MyPopOverView alloc] initWithFilterType:filterTypes Brand:filterBrands Store:filterStores Categories:filterCategories];
         popoverController = [[UIPopoverController alloc] initWithContentViewController:filterPopOver];

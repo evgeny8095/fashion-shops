@@ -58,6 +58,9 @@
     [self.window setBackgroundColor:[UIColor grayColor]];
     self.window.rootViewController = self.tabBarController;
     
+    [self.tabBarController setSelectedIndex:4];
+    [self.tabBarController setSelectedIndex:0];
+    
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -128,11 +131,10 @@
         [_appService setViewIndex:5];
 }
 
-/*
 // Optional UITabBarControllerDelegate method.
 - (void)tabBarController:(UITabBarController *)tabBarController didEndCustomizingViewControllers:(NSArray *)viewControllers changed:(BOOL)changed
 {
+    NSLog(@"number of tab: %i", [viewControllers count]);
 }
-*/
 
 @end

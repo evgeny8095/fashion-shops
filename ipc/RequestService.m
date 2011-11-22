@@ -51,7 +51,7 @@
         _phone = [[NSString alloc] initWithString:[_information objectForKey:@"Phone"]];
         _email = [[NSString alloc] initWithString:[_information objectForKey:@"Email"]];
     }
-    NSLog(@"User info: %@,%@,%@", _fullName, _phone, _email);
+    //NSLog(@"User info: %@,%@,%@", _fullName, _phone, _email);
     if ([_fullName isEqualToString:@""] || _fullName == NULL || [_phone isEqualToString:@""] || _phone == NULL || [_email isEqualToString:@""] || _email == NULL)
         _isInfoNull = YES;
     else

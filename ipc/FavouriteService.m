@@ -64,7 +64,7 @@
             [_favouriteProducts addObject:[[_favourite objectForKey:@"Products"] objectAtIndex:i]];
         }
     }
-    NSLog(@"number of favourite product: %i", [_favouriteProducts count]);
+    //NSLog(@"number of favourite product: %i", [_favouriteProducts count]);
     [_favouriteProductString release];
     _favouriteProductString = [self generateFavouriteString];
 }

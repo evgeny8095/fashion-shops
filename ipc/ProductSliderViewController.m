@@ -217,7 +217,7 @@
     NSInteger loadedIndicator = [loaded intValue];
     
     if (loadedIndicator == 0 && nextPage <= totalPages) {
-        NSLog(@"loading page: %i", nextPage);
+        //NSLog(@"loading page: %i", nextPage);
         NSInteger start = (nextPage)*8-8;
         NSInteger end = (nextPage)*8-1;
         if (start < totalItem){
@@ -305,11 +305,11 @@
         
         _productArray = c_productArray;
         _productPages = c_productPages;
-        NSLog(@"Number of loaded product %i", [_productArray count]);
+        //NSLog(@"Number of loaded product %i", [_productArray count]);
         
         totalItem = productTotal;
         
-        NSLog(@"Total Products: %i", totalItem);
+        //NSLog(@"Total Products: %i", totalItem);
         
         //NSInteger c_numberProduct = [_productArray count];
         
@@ -370,7 +370,7 @@
             [productScrollView addSubview:label];
         }
         smallSliderWidth = (totalItem%8==0?totalItem/8:totalItem/8+1)*1024;
-        NSLog(@"scroll width: %i", smallSliderWidth);
+        //NSLog(@"scroll width: %i", smallSliderWidth);
         productScrollView.pagingEnabled = YES;
         productScrollView.contentSize = CGSizeMake(smallSliderWidth, 655);
         productScrollView.backgroundColor = [UIColor grayColor];
@@ -414,9 +414,9 @@
         }
         _productArray = c_productArray;
         _productPages = c_productPages;
-        NSLog(@"Number of loaded product %i", [_productArray count]);
+        //NSLog(@"Number of loaded product %i", [_productArray count]);
         totalItem = productTotal;
-        NSLog(@"Total Products: %i", totalItem);
+        //NSLog(@"Total Products: %i", totalItem);
         NSInteger sx = 0;
         NSInteger sy = 0;
         NSInteger smallSliderWidth;
@@ -467,7 +467,7 @@
             [productScrollView addSubview:label];
         }
         smallSliderWidth = (totalItem%8==0?totalItem/8:totalItem/8+1)*1024;
-        NSLog(@"scroll width: %i", smallSliderWidth);
+        //NSLog(@"scroll width: %i", smallSliderWidth);
         productScrollView.pagingEnabled = YES;
         productScrollView.contentSize = CGSizeMake(smallSliderWidth, 655);
         productScrollView.backgroundColor = [UIColor grayColor];

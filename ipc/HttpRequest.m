@@ -61,7 +61,7 @@
 	NSString* finalURL = [self generateGetURL:url];
 	
 	// make request
-    NSLog(@"querry: %@", finalURL);
+    //NSLog(@"querry: %@", finalURL);
 	NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:finalURL]];
 
 	_connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];

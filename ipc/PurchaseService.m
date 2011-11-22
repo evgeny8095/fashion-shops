@@ -64,7 +64,7 @@
             [_purchasedProducts addObject:[[_purchased objectForKey:@"Products"] objectAtIndex:i]];
         }
     }
-    NSLog(@"number of purchased product: %i", [_purchasedProducts count]);
+    //NSLog(@"number of purchased product: %i", [_purchasedProducts count]);
     [_purchasedProductString release];
     _purchasedProductString = [self generatePurchasedString];
 }

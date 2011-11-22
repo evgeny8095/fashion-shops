@@ -54,7 +54,7 @@
 		return 1.0f - (2.0f * top);
 	}
 		
-	NSLog(@"[SSGradientView] `gradientScale` is deprecated. Using `gradientScale` with more than one location is not supported.");
+	//NSLog(@"[SSGradientView] `gradientScale` is deprecated. Using `gradientScale` with more than one location is not supported.");
 	return 0.0f;	
 }
 
